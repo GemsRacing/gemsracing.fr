@@ -33,38 +33,11 @@
 <link rel="stylesheet" href="css/widgets-rounded.css?v=1">
 <link rel="stylesheet" href="css/rounded-final.css?v=2">
 <link rel="stylesheet" href="css/sponsor-download.css?v=2">
-  <link rel="stylesheet" href="css/pagehead-honeycomb.css?v=200">
+  <link rel="stylesheet" href="css/pagehead-honeycomb.css?v=201">
 
 
 
 
-<style id="association-logo-gems-style">
-.association-logo-gems {
-  padding: 28px 0 10px;
-  background: #f5f7fa;
-  text-align: center;
-}
-
-.association-logo-gems img {
-  display: block;
-  width: min(560px, 88vw);
-  height: auto;
-  max-height: 210px;
-  object-fit: contain;
-  margin: 0 auto;
-}
-
-@media (max-width: 700px) {
-  .association-logo-gems {
-    padding: 20px 0 6px;
-  }
-
-  .association-logo-gems img {
-    width: min(92vw, 420px);
-    max-height: 150px;
-  }
-}
-</style>
 <style id="gems-project-details-style">
 .gems-project-details {
   padding: 56px 0;
@@ -182,121 +155,89 @@
   ]
 }
 </script>
-<style id="association-partner-visual-style">
-.association-logo-gems {
-  padding: 28px 0 10px;
-  background: #f5f7fa;
-  text-align: center;
+<style id="association-logo-position-style">
+
+/* Le bandeau devient la zone de positionnement */
+.pagehead {
+  position: relative !important;
+  overflow: hidden !important;
 }
 
-.association-logo-gems img {
-  display: block;
-  width: min(560px, 88vw);
-  max-height: 210px;
-  height: auto;
-  object-fit: contain;
-  margin: 0 auto;
+/* Le logo reste à droite, sans prendre la place du texte */
+.pagehead .association-logo-gems {
+  position: absolute !important;
+  top: 50% !important;
+  right: 7% !important;
+  transform: translateY(-50%) !important;
+  width: 190px !important;
+  height: auto !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  background: transparent !important;
+  text-align: right !important;
+  z-index: 4 !important;
+  pointer-events: none !important;
 }
 
-.sponsor-download-box-enhanced {
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
-  margin: 52px auto 40px;
-  padding: 38px 24px 34px;
-  max-width: 1080px;
-  text-align: center;
-  background:
-    linear-gradient(
-      100deg,
-      #061a34 0%,
-      #0b315d 58%,
-      #1b6794 100%
-    ) !important;
-  border: 1px solid #f28c28;
-  border-radius: 20px;
-  box-shadow: 0 18px 42px rgba(4, 19, 41, 0.25);
+/* Taille réelle du logo */
+.pagehead .association-logo-gems img {
+  display: block !important;
+  width: 100% !important;
+  max-width: 190px !important;
+  max-height: 105px !important;
+  height: auto !important;
+  object-fit: contain !important;
+  margin: 0 0 0 auto !important;
+  opacity: 0.94 !important;
 }
 
-.sponsor-download-box-enhanced::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 52%;
-  z-index: -1;
-  opacity: 0.7;
-  pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='92' height='106' viewBox='0 0 92 106'%3E%3Cg fill='none' stroke='%23a8d1e7' stroke-width='1.35' opacity='.68'%3E%3Cpath d='M23 1 46 14v27L23 54 0 41V14Z'/%3E%3Cpath d='M69 1 92 14v27L69 54 46 41V14Z'/%3E%3Cpath d='M46 54 69 67v27L46 107 23 94V67Z'/%3E%3C/g%3E%3C/svg%3E");
-  background-repeat: repeat;
-  background-size: 92px 106px;
+/* Le texte reste bien dans la partie gauche */
+.pagehead .wrap {
+  position: relative !important;
+  z-index: 5 !important;
+  padding-right: 250px !important;
 }
 
-.sponsor-download-box-enhanced h2,
-.sponsor-download-box-enhanced p,
-.sponsor-download-box-enhanced a {
-  position: relative;
-  z-index: 2;
-}
-
-.sponsor-download-box-enhanced h2 {
-  margin-top: 0;
-  color: #ffffff;
-  font-size: clamp(1.5rem, 3vw, 2.2rem);
-}
-
-.sponsor-download-box-enhanced p {
-  color: #ffffff;
-  max-width: 760px;
-  margin: 12px auto 24px;
-  font-size: 1.08rem;
-}
-
-.sponsor-download-box-enhanced .sponsor-download-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 300px;
-  min-height: 58px;
-  padding: 15px 28px;
-  border-radius: 12px;
-  background: #f28c28;
-  color: #ffffff;
-  font-weight: 800;
-  font-size: 1.08rem;
-  text-decoration: none;
-  box-shadow: 0 8px 18px rgba(242, 140, 40, 0.35);
-  transition: transform 0.2s ease, background 0.2s ease;
-}
-
-.sponsor-download-box-enhanced .sponsor-download-button:hover {
-  background: #ff9f3d;
-  transform: translateY(-2px);
-}
-
-@media (max-width: 700px) {
-  .association-logo-gems img {
-    width: min(92vw, 420px);
-    max-height: 150px;
+/* Mobile : logo plus petit et toujours séparé du texte */
+@media (max-width: 800px) {
+  .pagehead .association-logo-gems {
+    right: 14px !important;
+    top: auto !important;
+    bottom: 12px !important;
+    transform: none !important;
+    width: 92px !important;
   }
 
-  .sponsor-download-box-enhanced {
-    margin: 34px 14px 28px;
-    padding: 28px 18px;
+  .pagehead .association-logo-gems img {
+    width: 92px !important;
+    max-width: 92px !important;
+    max-height: 58px !important;
   }
 
-  .sponsor-download-box-enhanced::before {
-    left: 34%;
-    opacity: 0.45;
-  }
-
-  .sponsor-download-box-enhanced .sponsor-download-button {
-    min-width: 0;
-    width: 100%;
-    font-size: 1rem;
+  .pagehead .wrap {
+    padding-right: 118px !important;
   }
 }
+
+/* Très petits écrans */
+@media (max-width: 420px) {
+  .pagehead .association-logo-gems {
+    right: 10px !important;
+    bottom: 9px !important;
+    width: 76px !important;
+  }
+
+  .pagehead .association-logo-gems img {
+    width: 76px !important;
+    max-width: 76px !important;
+    max-height: 48px !important;
+  }
+
+  .pagehead .wrap {
+    padding-right: 96px !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -329,7 +270,7 @@
       <h1>Association GEMS Karting Access</h1>
       <p>Soutenir la carrière d'un jeune pilote de talent</p>
     </div>
-  </section>
+  
 <section class="association-logo-gems" aria-label="Logo de l'association GEMS Karting Access">
   <div class="wrap">
     <img
@@ -338,6 +279,8 @@
       loading="lazy">
   </div>
 </section>
+</section>
+
 
   <section class="section">
     <div class="wrap">
