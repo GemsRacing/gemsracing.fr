@@ -1,0 +1,148 @@
+/* =========================================================
+   ASSOCIATION - BANDEAU PROPRE ET BLOC PROJET
+   ========================================================= */
+
+/* Neutraliser les anciens effets du bandeau */
+.pagehead::before,
+.pagehead::after,
+.pagehead h1::before,
+.pagehead h1::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* Bandeau association */
+.pagehead {
+  position: relative !important;
+  isolation: isolate !important;
+  overflow: hidden !important;
+  min-height: 245px !important;
+  background:
+    linear-gradient(
+      90deg,
+      #041329 0%,
+      #071d3c 48%,
+      #155d88 100%
+    ) !important;
+}
+
+/* Texte à gauche */
+.pagehead .wrap {
+  position: relative !important;
+  z-index: 2 !important;
+  width: min(1180px, calc(100% - 40px)) !important;
+  margin: 0 auto !important;
+  padding-right: 250px !important;
+}
+
+/* Nid d'abeille uniquement à droite */
+.pagehead {
+  background-image:
+    linear-gradient(
+      90deg,
+      rgba(4,19,41,1) 0%,
+      rgba(7,29,60,0.98) 48%,
+      rgba(21,93,136,0.88) 100%
+    ),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='92' height='106' viewBox='0 0 92 106'%3E%3Cg fill='none' stroke='%239bc9e4' stroke-width='1.2' opacity='.55'%3E%3Cpath d='M23 1 46 14v27L23 54 0 41V14Z'/%3E%3Cpath d='M69 1 92 14v27L69 54 46 41V14Z'/%3E%3Cpath d='M46 54 69 67v27L46 107 23 94V67Z'/%3E%3C/g%3E%3C/svg%3E') !important;
+  background-repeat: no-repeat, repeat !important;
+  background-position: center, right center !important;
+  background-size: cover, 92px 106px !important;
+}
+
+/* Logo compact dans la zone droite */
+.association-header-logo {
+  position: absolute !important;
+  top: 50% !important;
+  right: 38px !important;
+  z-index: 5 !important;
+  width: 180px !important;
+  height: 96px !important;
+  transform: translateY(-50%) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  background: transparent !important;
+}
+
+/* Image sans bande blanche */
+.association-header-logo img {
+  display: block !important;
+  width: 180px !important;
+  height: 96px !important;
+  object-fit: contain !important;
+  background: transparent !important;
+}
+
+/* Bloc complémentaire sombre : plus de texte blanc sur fond blanc */
+.gems-project-details {
+  padding: 56px 0 !important;
+  background:
+    linear-gradient(
+      90deg,
+      #061a34 0%,
+      #0b315d 100%
+    ) !important;
+  color: #ffffff !important;
+}
+
+.gems-project-details h2,
+.gems-project-details h3,
+.gems-project-details p {
+  color: #ffffff !important;
+}
+
+.gems-project-needs article {
+  background: #071b35 !important;
+  border: 1px solid rgba(242,140,40,0.75) !important;
+  color: #ffffff !important;
+}
+
+.gems-project-needs article h3,
+.gems-project-needs article p {
+  color: #ffffff !important;
+}
+
+/* Mobile */
+@media (max-width: 800px) {
+  .pagehead {
+    min-height: 220px !important;
+  }
+
+  .pagehead .wrap {
+    width: calc(100% - 32px) !important;
+    padding-right: 112px !important;
+  }
+
+  .association-header-logo {
+    right: 14px !important;
+    width: 86px !important;
+    height: 58px !important;
+  }
+
+  .association-header-logo img {
+    width: 86px !important;
+    height: 58px !important;
+  }
+
+  .gems-project-details {
+    padding: 38px 0 !important;
+  }
+}
+
+@media (max-width: 420px) {
+  .pagehead .wrap {
+    padding-right: 92px !important;
+  }
+
+  .association-header-logo {
+    right: 9px !important;
+    width: 70px !important;
+    height: 48px !important;
+  }
+
+  .association-header-logo img {
+    width: 70px !important;
+    height: 48px !important;
+  }
+}
