@@ -1,143 +1,113 @@
-const http = require("node:http");
-const fs = require("node:fs");
-const path = require("node:path");
-const url = require("node:url");
+require('dotenv').config(); // Charge les variables du fichier .env
 
-const ROOT = __dirname;
-const DATA_DIR = path.join(ROOT, "data");
-const DATA_FILE = path.join(DATA_DIR, "site-data.json");
+const http = require("http");
+const fs = require("fs");
+const path = require("path");
+
+// --- CONFIGURATION GITHUB ---
+// Le jeton est maintenant lu depuis le fichier .env (sécurisé)
+const GITHUB_TOKEN = process.env.GITHUB_TOKEN; 
+const REPO_OWNER = "GemsRacing";
+const REPO_NAME = "gemsracing.fr";
+const FILE_PATH = "data/site-data.json";
+
 const PORT = 5500;
+const DATA_FILE = path.join(__dirname, "data", "site-data.json");
 
-fs.mkdirSync(DATA_DIR, { recursive: true });
+async function pushToGithub(content) {
+    if (!GITHUB_TOKEN) {
+        console.error("Erreur: GITHUB_TOKEN n'est pas configuré dans le fichier .env");
+        return false;
+    }
 
-function readData() {
-  try {
-    return JSON.parse(fs.readFileSync(DATA_FILE, "utf8"));
-  } catch {
-    return {
-      stats: {},
-      news: {},
-      races: [],
-      gallery: [],
-      partners: []
-    };
-  }
-}
-
-function writeData(data) {
-  const temporary = DATA_FILE + ".tmp";
-  fs.writeFileSync(temporary, JSON.stringify(data, null, 2), "utf8");
-  fs.renameSync(temporary, DATA_FILE);
-}
-
-function sendJson(res, status, payload) {
-  res.writeHead(status, {
-    "Content-Type": "application/json; charset=utf-8",
-    "Cache-Control": "no-store",
-    "Access-Control-Allow-Origin": "*"
-  });
-  res.end(JSON.stringify(payload));
-}
-
-function contentType(filePath) {
-  const ext = path.extname(filePath).toLowerCase();
-
-  const types = {
-    ".html": "text/html; charset=utf-8",
-    ".css": "text/css; charset=utf-8",
-    ".js": "application/javascript; charset=utf-8",
-    ".json": "application/json; charset=utf-8",
-    ".jpg": "image/jpeg",
-    ".jpeg": "image/jpeg",
-    ".png": "image/png",
-    ".webp": "image/webp",
-    ".svg": "image/svg+xml",
-    ".pdf": "application/pdf",
-    ".ico": "image/x-icon"
-  };
-
-  return types[ext] || "application/octet-stream";
-}
-
-function safePath(requestPath) {
-  const decoded = decodeURIComponent(requestPath);
-  const normalized = path.normalize(decoded).replace(/^(\.\.[\/\\])+/, "");
-  return path.join(ROOT, normalized);
-}
-
-const server = http.createServer((req, res) => {
-  const parsed = url.parse(req.url, true);
-
-  if (req.method === "OPTIONS") {
-    res.writeHead(204, {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET,POST,OPTIONS",
-      "Access-Control-Allow-Headers": "Content-Type"
-    });
-    return res.end();
-  }
-
-  if (parsed.pathname === "/api/site-data" && req.method === "GET") {
-    return sendJson(res, 200, readData());
-  }
-
-  if (parsed.pathname === "/api/site-data" && req.method === "POST") {
-    let body = "";
-
-    req.on("data", chunk => {
-      body += chunk.toString();
-
-      if (body.length > 25 * 1024 * 1024) {
-        req.destroy();
-      }
-    });
-
-    req.on("end", () => {
-      try {
-        const data = JSON.parse(body);
-        writeData(data);
-        sendJson(res, 200, {
-          success: true,
-          message: "Données enregistrées"
+    const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${FILE_PATH}`;
+    
+    try {
+        // 1. Récupérer le SHA du fichier actuel (obligatoire pour GitHub)
+        const getFile = await fetch(url, {
+            headers: { "Authorization": `token ${GITHUB_TOKEN}` }
         });
-      } catch {
-        sendJson(res, 400, {
-          success: false,
-          message: "Données invalides"
+        const fileData = await getFile.json();
+        const sha = fileData.sha;
+
+        // 2. Envoyer la mise à jour
+        const response = await fetch(url, {
+            method: "PUT",
+            headers: {
+                "Authorization": `token ${GITHUB_TOKEN}`,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                message: "Mise à jour automatique via Intranet",
+                content: Buffer.from(content).toString("base64"),
+                sha: sha
+            })
         });
-      }
-    });
 
-    return;
-  }
+        return response.ok;
+    } catch (error) {
+        console.error("Erreur GitHub:", error);
+        return false;
+    }
+}
 
-  let requested = parsed.pathname === "/" ? "/index.html" : parsed.pathname;
-  const filePath = safePath(requested);
+const server = http.createServer(async (req, res) => {
+    // Gérer le CORS (pour que l'intranet puisse parler au serveur)
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
-  if (!filePath.startsWith(ROOT) || !fs.existsSync(filePath)) {
-    return sendJson(res, 404, {
-      error: "Fichier introuvable"
-    });
-  }
+    if (req.method === "OPTIONS") {
+        res.writeHead(204);
+        res.end();
+        return;
+    }
 
-  try {
-    const content = fs.readFileSync(filePath);
-    res.writeHead(200, {
-      "Content-Type": contentType(filePath),
-      "Cache-Control": "no-store"
-    });
-    res.end(content);
-  } catch {
-    sendJson(res, 500, {
-      error: "Erreur de lecture"
-    });
-  }
+    if (req.url === "/api/site-data" && req.method === "GET") {
+        fs.readFile(DATA_FILE, "utf8", (err, data) => {
+            res.writeHead(err ? 404 : 200, { "Content-Type": "application/json" });
+            res.end(data || JSON.stringify({}));
+        });
+    } 
+    else if (req.url === "/api/site-data" && req.method === "POST") {
+        let body = "";
+        req.on("data", chunk => { body += chunk.toString(); });
+        req.on("end", async () => {
+            // Sauvegarde locale
+            fs.writeFile(DATA_FILE, body, "utf8", async (err) => {
+                if (err) {
+                    res.writeHead(500);
+                    res.end("Erreur locale");
+                } else {
+                    // PUBLICATION AUTOMATIQUE SUR GITHUB
+                    console.log("Publication sur GitHub en cours...");
+                    const success = await pushToGithub(body);
+                    
+                    res.writeHead(success ? 200 : 207, { "Content-Type": "application/json" });
+                    res.end(JSON.stringify({ 
+                        success: true, 
+                        github: success 
+                    }));
+                    console.log(success ? "✅ Publié sur gemsracing.fr" : "⚠️ Sauvegardé localement mais échec GitHub");
+                }
+            });
+        });
+    }
+    else {
+        // Servir les fichiers statiques (intranet.html, etc.)
+        let filePath = path.join(__dirname, req.url === "/" ? "index.html" : req.url);
+        fs.readFile(filePath, (err, data) => {
+            if (err) {
+                res.writeHead(404);
+                res.end("Non trouvé");
+            } else {
+                res.end(data);
+            }
+        });
+    }
 });
 
-server.listen(PORT, "127.0.0.1", () => {
-  console.log("");
-  console.log("Serveur Gems Racing actif");
-  console.log("Site : http://127.0.0.1:" + PORT);
-  console.log("Intranet : http://127.0.0.1:" + PORT + "/intranet.html");
-  console.log("");
+server.listen(PORT, () => {
+    console.log(`🚀 Serveur Intranet Actif sur http://localhost:${PORT}`);
+    console.log(`👉 Gems peut modifier le site ici.`);
 });

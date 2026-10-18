@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Gems Racing | Pilote Karting SWS France</title>
-  <meta name="description" content="Gems Maréchal, jeune pilote de karting SWS en France. Découvrez ses résultats, ses victoires et son projet sportif.">
+  <title>Gems Racing | Pilote de karting SWS France</title>
+  <meta name="description" content="Découvrez Gems Maréchal, pilote de karting SWS entre Nantes, la Vendée et les Pays de la Loire. Résultats, actualités et projet sportif.">
 
   <link rel="stylesheet" href="css/style.css?v=restored">
   <link rel="stylesheet" href="css/gems-textures.css">
@@ -23,22 +23,41 @@
 <link rel="stylesheet" href="css/scoring-fix.css?v=1">
 
 
-<meta property="og:image" content="https://vic-buck-touch-figure.trycloudflare.com/galerie.html/assets/images/gems-social-preview.jpg?v=639278334427801685">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://vic-buck-touch-figure.trycloudflare.com/galerie.html/assets/images/gems-social-preview.jpg?v=639278334427801685">
 <link rel="stylesheet" href="css/footer-final.css?v=1">
 <link rel="stylesheet" href="css/latest-news.css?v=1">
 <link rel="stylesheet" href="css/widgets-rounded.css?v=1">
 <link rel="stylesheet" href="css/rounded-final.css?v=2">
 <link rel="stylesheet" href="css/scoring-circuit.css?v=1">
-  <link rel="stylesheet" href="css/home-racing-emojis.css?v=21"><script type="application/ld+json">
+  <link rel="stylesheet" href="css/home-racing-emojis.css?v=21">
+
+
+
+
+  <link rel="canonical" href="https://gemsracing.fr/">
+
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Gems Racing | Pilote de karting SWS France">
+  <meta property="og:description" content="Découvrez Gems Maréchal, pilote de karting SWS entre Nantes, la Vendée et les Pays de la Loire.">
+  <meta property="og:url" content="https://gemsracing.fr/">
+  <meta property="og:site_name" content="Gems Racing">
+  <meta property="og:image" content="https://gemsracing.fr/assets/images/gems-social-preview.jpg">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Gems Racing | Pilote de karting SWS France">
+  <meta name="twitter:description" content="Résultats, actualités et projet sportif de Gems Maréchal, pilote de karting SWS en France.">
+  <meta name="twitter:image" content="https://gemsracing.fr/assets/images/gems-social-preview.jpg">
+<script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Person",
+  "@id": "https://gemsracing.fr/#gems-marechal",
   "name": "Gems Maréchal",
   "alternateName": "Gems Racing",
+  "url": "https://gemsracing.fr/",
+  "image": "https://gemsracing.fr/assets/images/gems-portrait.jpg",
   "jobTitle": "Pilote de karting SWS",
-  "description": "Jeune pilote français engagé dans les compétitions de karting SWS.",
+  "description": "Gems Maréchal est un jeune pilote français engagé dans les compétitions de karting SWS.",
   "sport": "Karting",
   "nationality": "France",
   "homeLocation": {
@@ -60,6 +79,13 @@
       GEMS <span>KART RACING</span>
     </a>
 
+    <button
+      class="menu-toggle"
+      type="button"
+      aria-label="Ouvrir le menu"
+      aria-expanded="false">
+      ☰
+    </button>
     <nav class="menu">
       <a href="index.html" class="active">ACCUEIL</a>
       <a href="a-propos.html">À PROPOS</a>
@@ -115,7 +141,7 @@
                                     <div class="scoring-kart-track" aria-hidden="true">
 
         <span class="scoring-kart gems-kart scoring-kart-1">
-          <span class="kart-number" id="gems-kart-number">7</span>
+          <span class="kart-number" id="stat-victoires-kart">7</span>
           
         </span>
 
@@ -126,22 +152,22 @@
         <span class="scoring-track-flag">🏁</span>
       </div>
       <div class="stat">
-        <b>7</b>
+        <b id="stat-victoires-display">7</b>
         <small>VICTOIRES 2026</small>
       </div>
 
       <div class="stat">
-        <b>15</b>
+        <b id="stat-podiums-display">15</b>
         <small>PODIUMS 2026</small>
       </div>
 
       <div class="stat">
-        <b>57e</b>
+        <b id="stat-sws-display">57e</b>
         <small>SWS FRANCE</small>
       </div>
 
       <div class="stat">
-        <b>16 ans</b>
+        <b id="stat-age-display">16 ans</b>
         <small>ÂGE DU PILOTE</small>
       </div>
     </div>
@@ -159,18 +185,17 @@
       <div class="gems-news-content">
         <span class="gems-news-date">Saison 2026</span>
 
-        <h2 id="latest-news-title">
+        <h2 id="latest-news-title-display">
           Gems termine 3e sur 27 en 2T Rotax à Solokart
         </h2>
 
-        <p>
+        <p id="latest-news-summary-display">
           Une nouvelle performance solide pour Gems Maréchal.
           Retrouvez le débrief et les photos sur Instagram.
         </p>
       </div>
 
-      <a class="gems-news-button"
-         href="resultats.html">
+      <a class="gems-news-button" id="latest-news-link-display" href="resultats.html">
         VOIR LES RÉSULTATS
       </a>
 
@@ -405,7 +430,36 @@
 
 
 
-<script src="js/site-sync.js?v=13"></script>  <script src="js/scoring-kart-animation.js?v=15"></script>
+<script src="js/site-sync.js?v=14"></script>  <script src="js/scoring-kart-animation.js?v=15"></script>
+<script>
+/* GEMS_MOBILE_MENU_SCRIPT */
+document.addEventListener("DOMContentLoaded", function () {
+  const toggle = document.querySelector(".menu-toggle");
+  const menu = document.querySelector(".menu");
+
+  if (!toggle || !menu) return;
+
+  toggle.addEventListener("click", function () {
+    const isOpen = menu.classList.toggle("is-open");
+
+    toggle.setAttribute("aria-expanded", String(isOpen));
+    toggle.setAttribute(
+      "aria-label",
+      isOpen ? "Fermer le menu" : "Ouvrir le menu"
+    );
+    toggle.textContent = isOpen ? "✕" : "☰";
+  });
+
+  menu.querySelectorAll("a").forEach(function (link) {
+    link.addEventListener("click", function () {
+      menu.classList.remove("is-open");
+      toggle.setAttribute("aria-expanded", "false");
+      toggle.setAttribute("aria-label", "Ouvrir le menu");
+      toggle.textContent = "☰";
+    });
+  });
+});
+</script>
 </body>
 </html>
 

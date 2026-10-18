@@ -1,4 +1,6 @@
-backup_*/
+﻿backup_*/
 *.zip
 node_modules/
 cloudflared.exe
+
+.env

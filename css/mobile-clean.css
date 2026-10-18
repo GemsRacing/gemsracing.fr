@@ -1,4 +1,4 @@
-﻿/* =========================================
+/* =========================================
    GEMS RACING - RESPONSIVE MOBILE PROPRE (CORRIGÉ)
    ========================================= */
 
@@ -271,3 +271,66 @@ article,
   }
 }
 
+/* GEMS_RESPONSIVE_MENU_V1 */
+
+.menu-toggle {
+  display: none;
+}
+
+@media (max-width: 800px) {
+  .nav {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .menu-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    margin-left: auto;
+    border: 1px solid rgba(255,255,255,0.35);
+    border-radius: 8px;
+    background: transparent;
+    color: #ffffff;
+    font-size: 25px;
+    cursor: pointer;
+    flex: 0 0 auto;
+  }
+
+  .menu {
+    display: none;
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    flex-direction: column;
+    gap: 0;
+    padding: 12px;
+    background: #071b35;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 10px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+  }
+
+  .menu.is-open {
+    display: flex;
+  }
+
+  .menu a {
+    display: block;
+    width: 100%;
+    padding: 13px 12px;
+    text-align: left;
+    line-height: 1.2;
+  }
+
+  .nav > .btn {
+    display: none;
+  }
+}
