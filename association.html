@@ -323,6 +323,90 @@
 }
 
 </style>
+<style id="association-logo-position-style">
+
+/* Le bandeau devient la zone de positionnement */
+.pagehead {
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+/* Le logo reste à droite, sans prendre la place du texte */
+.pagehead .association-logo-gems {
+  position: absolute !important;
+  top: 50% !important;
+  right: 7% !important;
+  transform: translateY(-50%) !important;
+  width: 190px !important;
+  height: auto !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  background: transparent !important;
+  text-align: right !important;
+  z-index: 4 !important;
+  pointer-events: none !important;
+}
+
+/* Taille réelle du logo */
+.pagehead .association-logo-gems img {
+  display: block !important;
+  width: 100% !important;
+  max-width: 190px !important;
+  max-height: 105px !important;
+  height: auto !important;
+  object-fit: contain !important;
+  margin: 0 0 0 auto !important;
+  opacity: 0.94 !important;
+}
+
+/* Le texte reste bien dans la partie gauche */
+.pagehead .wrap {
+  position: relative !important;
+  z-index: 5 !important;
+  padding-right: 250px !important;
+}
+
+/* Mobile : logo plus petit et toujours séparé du texte */
+@media (max-width: 800px) {
+  .pagehead .association-logo-gems {
+    right: 14px !important;
+    top: auto !important;
+    bottom: 12px !important;
+    transform: none !important;
+    width: 92px !important;
+  }
+
+  .pagehead .association-logo-gems img {
+    width: 92px !important;
+    max-width: 92px !important;
+    max-height: 58px !important;
+  }
+
+  .pagehead .wrap {
+    padding-right: 118px !important;
+  }
+}
+
+/* Très petits écrans */
+@media (max-width: 420px) {
+  .pagehead .association-logo-gems {
+    right: 10px !important;
+    bottom: 9px !important;
+    width: 76px !important;
+  }
+
+  .pagehead .association-logo-gems img {
+    width: 76px !important;
+    max-width: 76px !important;
+    max-height: 48px !important;
+  }
+
+  .pagehead .wrap {
+    padding-right: 96px !important;
+  }
+}
+
+</style>
 </head>
 <body>
 <header class="top">
@@ -355,6 +439,8 @@
       <p>Soutenir la carrière d'un jeune pilote de talent</p>
     </div>
   
+
+
 
 
 <section class="association-logo-gems" aria-label="Logo de l'association GEMS Karting Access">
