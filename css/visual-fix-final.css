@@ -1,0 +1,65 @@
+﻿body { color: #f4f7fb !important; }
+.section, .section.dark, .pagehead, .hero, .card, .footer { color: #f4f7fb !important; }
+body::before, body::after { opacity: 0.10 !important; pointer-events: none !important; }
+h1, h2, h3, h4, h5, h6, .hero h1, .pagehead h1, .section h2, .section h3, .card h3 {
+  color: #ffffff !important; opacity: 1 !important; text-shadow: 0 2px 5px rgba(0,0,0,.65) !important; mix-blend-mode: normal !important;
+}
+.hero h1, .pagehead h1 { font-weight: 800 !important; letter-spacing: .5px !important; }
+.eyebrow { color: #f28c28 !important; font-weight: 700 !important; }
+.section h2::after, .pagehead h1::after {
+  content: "" !important; display: block !important; width: 74px !important; height: 4px !important;
+  margin-top: 14px !important; background: #f28c28 !important;
+}
+p, li, small, label, .card p, .section p, .pagehead p, .footer p, .footer small {
+  color: #f1f4f8 !important; opacity: 1 !important; text-shadow: 0 1px 3px rgba(0,0,0,.55) !important;
+}
+strong, b { color: #ffffff !important; font-weight: 700 !important; }
+em { color: #f7d2a8 !important; }
+a { color: #f28c28 !important; text-decoration-color: rgba(242, 140, 40, .55) !important; }
+a:hover, a:focus { color: #ffffff !important; }
+nav.menu a { color: #ffffff !important; text-decoration: none !important; }
+nav.menu a:hover, nav.menu a.active { color: #f28c28 !important; }
+.card, .section blockquote, .section div[style*="background"], .footer .wrap {
+  background-color: rgba(4, 19, 43, .78) !important; color: #f4f7fb !important; border-color: rgba(242, 140, 40, .55) !important;
+}
+.card { border: 1px solid rgba(255, 255, 255, .16) !important; box-shadow: 0 8px 22px rgba(0, 0, 0, .20) !important; }
+form label { color: #ffffff !important; }
+input, textarea, select {
+  width: 100% !important; color: #ffffff !important; background: #071b35 !important;
+  border: 1px solid rgba(255, 255, 255, .42) !important; border-radius: 0 !important; outline: none !important;
+}
+input:focus, textarea:focus, select:focus {
+  border-color: #f28c28 !important; box-shadow: 0 0 0 2px rgba(242, 140, 40, .22) !important;
+}
+input::placeholder, textarea::placeholder { color: #c7d0dc !important; opacity: 1 !important; }
+button, .btn {
+  color: #ffffff !important; background-color: #f28c28 !important; border: 1px solid #f28c28 !important; text-shadow: none !important;
+}
+button:hover, .btn:hover {
+  color: #071b35 !important; background-color: #ffffff !important; border-color: #ffffff !important;
+}
+.hero::before, .hero::after, .pagehead::before, .pagehead::after, .section::before, .section::after,
+.card::before, .card::after, main::before, main::after {
+  content: none !important; display: none !important; background: none !important; border: 0 !important;
+}
+.chevron, .arrow, .shape-chevron, .decorative-chevron, .speed-chevron, .hero-chevron, .section-chevron {
+  display: none !important; visibility: hidden !important;
+}
+.hero, .pagehead { position: relative !important; overflow: hidden !important; }
+.hero > .wrap, .pagehead > .wrap { position: relative !important; z-index: 2 !important; }
+.hero .wrap::after, .pagehead .wrap::after {
+  content: "" !important; display: block !important; width: 74px !important; height: 4px !important;
+  margin-top: 24px !important; background: #f28c28 !important;
+}
+@media (max-width: 800px) {
+  h1, .hero h1, .pagehead h1 { font-size: clamp(34px, 9vw, 58px) !important; line-height: 1.04 !important; overflow-wrap: break-word !important; }
+  h2, .section h2 { font-size: clamp(28px, 7vw, 42px) !important; line-height: 1.1 !important; }
+  p, li { font-size: 16px !important; line-height: 1.55 !important; }
+  .section, .pagehead, .hero { padding-left: 18px !important; padding-right: 18px !important; }
+  .card { padding: 20px !important; }
+}
+.stats { background-color: #ffffff !important; color: #181518 !important; }
+.stats .stat { color: #181518 !important; }
+.stats .stat b, .stats .stat small { color: #181518 !important; text-shadow: none !important; }
+.stats .stat small { opacity: 0.8 !important; }
+.stats .stat small span { color: inherit !important; }

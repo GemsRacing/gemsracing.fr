@@ -1,0 +1,82 @@
+﻿/* =========================================================
+   GEMS RACING - PARTENAIRES STATIQUES (page Contact)
+   ========================================================= */
+
+.gems-static-partners-section {
+  padding-top: 45px !important;
+  padding-bottom: 70px !important;
+  text-align: center !important;
+  background: #071b35 !important;
+}
+
+.gems-static-partners-section h2 {
+  margin-bottom: 10px !important;
+}
+
+.gems-static-partners-section .lead {
+  margin-bottom: 35px !important;
+}
+
+.gems-static-partners-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)) !important;
+  gap: 20px !important;
+  justify-items: center !important;
+  align-items: stretch !important;
+  max-width: 1000px !important;
+  margin: 0 auto !important;
+}
+
+.gems-partner-card-static {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 15px !important;
+  background: #ffffff !important;
+  border: 1px solid rgba(242, 140, 40, .4) !important;
+  text-decoration: none !important;
+  transition: all .2s ease !important;
+  min-height: 160px !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+}
+
+.gems-partner-card-static:hover {
+  border-color: #f28c28 !important;
+  transform: translateY(-3px) !important;
+  box-shadow: 0 6px 15px rgba(0,0,0,.2) !important;
+}
+
+.gems-partner-card-static img {
+  max-width: 140px !important;
+  max-height: 90px !important;
+  object-fit: contain !important;
+  margin: 0 auto 10px auto !important;
+}
+
+.gems-partner-name-static {
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  color: #071b35 !important;
+  text-transform: uppercase !important;
+  white-space: nowrap !important;
+}
+
+@media (max-width: 768px) {
+  .gems-static-partners-grid {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)) !important;
+    gap: 15px !important;
+  }
+  .gems-partner-card-static {
+    min-height: 130px !important;
+    padding: 10px !important;
+  }
+  .gems-partner-card-static img {
+    max-width: 100px !important;
+    max-height: 60px !important;
+  }
+  .gems-partner-name-static {
+    font-size: 12px !important;
+  }
+}

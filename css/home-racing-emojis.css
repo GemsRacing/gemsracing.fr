@@ -1,0 +1,320 @@
+/* =========================================================
+   COURSE SWS - VERSION FINALE NETTOYEE ET OPTIMISEE
+   Vitesse rapide, aucun halo, piste réhaussée, drapeau aligné, confettis localisés
+   ========================================================= */
+
+/* Suppression complète des halos et ombres sur tous les éléments pertinents */
+.scoring-kart-track,
+.scoring-kart-track::before,
+.scoring-kart,
+.gems-kart,
+.rival-kart,
+.kart-number,
+.kart-leader-label, /* par sécurité, même si retiré du HTML */
+.gems-winner-announcement,
+.gems-winner-announcement::before,
+.gems-winner-announcement::after,
+.winner-confetti-piece {
+  box-shadow: none !important;
+  filter: none !important;
+  text-shadow: none !important;
+  outline: none !important;
+}
+
+/* Suppression du label GEMS LEADER (déjà retiré du HTML mais par sécurité) */
+.kart-leader-label {
+  display: none !important;
+}
+
+/* Conteneur de la piste */
+.gems-home-stats,
+.gems-home-stats > .wrap {
+  position: relative !important;
+  overflow: visible !important;
+}
+
+.scoring-kart-track {
+  position: absolute !important;
+  left: 18px !important;
+  right: 18px !important;
+  top: -10px !important; /* Réhaussé */
+  height: 43px !important;
+  z-index: 20 !important;
+  overflow: visible !important; /* Permet aux confettis et message de sortir */
+  pointer-events: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Ligne orange de la piste (réhaussée) */
+.scoring-kart-track::before {
+  content: "" !important;
+  position: absolute !important;
+  left: 0 !important;
+  right: 0 !important;
+  top: 20px !important; /* Réhaussé pour être au-dessus des chiffres */
+  height: 2px !important;
+  background: #f28c28 !important;
+  box-shadow: none !important;
+}
+
+/* Karts compacts */
+.scoring-kart {
+  position: absolute !important;
+  left: 0 !important;
+  top: 0px !important; /* Ajusté avec la nouvelle position de la piste */
+  width: 32px !important;
+  height: 13px !important;
+  display: block !important;
+  border: 1px solid #ffffff !important;
+  border-radius: 5px 9px 3px 3px !important;
+  animation: none !important;
+  transform: none !important;
+  opacity: 1 !important;
+  z-index: 30 !important;
+}
+
+/* Cockpit */
+.scoring-kart::before {
+  content: "" !important;
+  position: absolute !important;
+  left: 8px !important;
+  top: -6px !important;
+  width: 11px !important;
+  height: 6px !important;
+  border: 1px solid #ffffff !important;
+  border-bottom: 0 !important;
+  border-radius: 6px 6px 0 0 !important;
+  background: #07192e !important;
+}
+
+/* Roues */
+.scoring-kart::after {
+  content: "" !important;
+  position: absolute !important;
+  left: 3px !important;
+  bottom: -5px !important;
+  width: 6px !important;
+  height: 6px !important;
+  border-radius: 50% !important;
+  background: #050505 !important;
+  box-shadow:
+    19px 0 0 #050505,
+    0 0 0 1px #ffffff,
+    19px 0 0 1px #ffffff !important;
+}
+
+/* Kart Gems bleu/orange */
+.gems-kart {
+  background: linear-gradient(
+    to bottom,
+    #f28c28 0%,
+    #f28c28 28%,
+    #0b5fa5 29%,
+    #147dcc 72%,
+    #f28c28 73%,
+    #d96f16 100%
+  ) !important;
+  border-color: #f28c28 !important; /* Bordure plus visible */
+}
+
+/* Concurrents */
+.rival-kart {
+  width: 27px !important;
+  height: 11px !important;
+  top: 5px !important; /* Ajusté avec la nouvelle position de la piste */
+  opacity: 0.68 !important;
+}
+
+.rival-kart-2 {
+  background: #687789 !important;
+}
+
+.rival-kart-3 {
+  background: #a94455 !important;
+}
+
+.rival-kart-4 {
+  background: #b08a2a !important;
+}
+
+/* Numéro de Gems */
+.kart-number {
+  position: absolute !important;
+  left: 11px !important;
+  top: 1px !important;
+  color: #ffffff !important;
+  font: 900 7px Arial, sans-serif !important;
+  z-index: 3 !important;
+}
+
+/* Drapeau : positionné sur la ligne */
+.scoring-track-flag {
+  position: absolute !important;
+  right: 4px !important;
+  top: 18px !important; /* Ajusté pour être sur la ligne orange */
+  z-index: 80 !important;
+  font-size: 21px !important;
+  line-height: 1 !important;
+  transform: none !important;
+  filter: none !important;
+  box-shadow: none !important;
+}
+
+/* Les statistiques restent visibles */
+.gems-home-stats .stat {
+  position: relative !important;
+  z-index: 100 !important;
+}
+
+/* ---------------------------------------------------------
+   Animation de victoire
+   --------------------------------------------------------- */
+
+.gems-winner-announcement {
+  position: fixed !important;
+  top: 92px !important;
+  left: 50% !important;
+  z-index: 99999 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 9px !important;
+  padding: 9px 18px !important;
+  border: 2px solid #f28c28 !important;
+  border-radius: 8px !important;
+  background: #07192e !important;
+  color: #ffffff !important;
+  font: 900 15px Arial, sans-serif !important;
+  white-space: nowrap !important;
+  pointer-events: none !important;
+  opacity: 0 !important;
+  transform: translate(-50%, -15px) !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+
+.gems-winner-announcement.visible {
+  animation: winnerAppear 1.8s ease-out forwards !important;
+}
+
+.gems-kart.winner-pulse {
+  animation: winnerPulse 0.65s ease-in-out 2 !important;
+}
+
+/* Conteneur des confettis, positionné à l'arrivée */
+.winner-confetti {
+  position: absolute !important; /* Changé de fixed à absolute pour être relatif à .scoring-kart-track */
+  right: 18px !important; /* Positionné à droite de la piste */
+  top: 18px !important; /* Alignée avec le drapeau */
+  width: 10px !important; /* Petite zone de départ */
+  height: 10px !important;
+  z-index: 90 !important;
+  display: block !important;
+  overflow: visible !important;
+  pointer-events: none !important;
+}
+
+/* Chaque confetti est visible dès le départ */
+.winner-confetti-piece {
+  position: absolute !important;
+  left: 0 !important;
+  top: 0 !important;
+  width: 6px !important;
+  height: 10px !important;
+  display: block !important;
+  opacity: 1 !important; /* Rendu visible */
+  visibility: visible !important;
+  background: var(--confetti-color) !important;
+  border-radius: 1px !important;
+  box-shadow: none !important;
+  filter: none !important;
+  animation: confettiFall 1.65s ease-out var(--confetti-delay) forwards !important;
+}
+
+@keyframes winnerAppear {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -15px) scale(0.85);
+  }
+
+  15% {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1.05);
+  }
+
+  75% {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -6px) scale(0.95);
+  }
+}
+
+@keyframes winnerPulse {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.18);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes confettiFall {
+  0% {
+    opacity: 1;
+    transform:
+      translate(0, 0) /* Départ du point 0,0 de .winner-confetti */
+      rotate(0deg);
+  }
+
+  100% {
+    opacity: 0;
+    transform:
+      translate(var(--confetti-x), var(--confetti-y)) /* Chute avec dispersion */
+      rotate(var(--confetti-rotate));
+  }
+}
+
+@media (max-width: 800px) {
+  .scoring-kart-track {
+    left: 10px !important;
+    right: 10px !important;
+    top: -10px !important;
+  }
+
+  .scoring-kart-track::before {
+    top: 20px !important;
+  }
+
+  .scoring-kart {
+    top: 0px !important;
+  }
+
+  .rival-kart {
+    top: 5px !important;
+  }
+
+  .scoring-track-flag {
+    right: 2px !important;
+    top: 18px !important; /* Ajusté pour mobile */
+  }
+
+  .gems-winner-announcement {
+    top: 75px !important;
+    font-size: 11px !important;
+    padding: 7px 11px !important;
+  }
+
+  .winner-confetti {
+    right: 13px !important;
+    top: 18px !important; /* Ajusté pour mobile */
+  }
+}

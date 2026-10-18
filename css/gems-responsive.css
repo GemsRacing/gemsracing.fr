@@ -1,0 +1,337 @@
+﻿/* =========================================
+   GEMS RACING - MOBILE + ANIMATIONS
+   ========================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Bouton hamburger */
+.gems-menu-toggle {
+  display: none;
+  width: 46px;
+  height: 42px;
+  padding: 8px;
+  border: 1px solid rgba(255,255,255,.45);
+  background: #071b35;
+  cursor: pointer;
+  position: relative;
+  z-index: 1001;
+}
+
+.gems-menu-toggle span {
+  display: block;
+  height: 3px;
+  margin: 5px 0;
+  background: #f28c28;
+  transition: transform .25s ease, opacity .25s ease;
+}
+
+.gems-menu-toggle.active span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.gems-menu-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.gems-menu-toggle.active span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* Décoration piste */
+.gems-motion-zone {
+  position: absolute;
+  right: 4%;
+  bottom: 10%;
+  width: 42%;
+  height: 180px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.gems-racing-track {
+  position: absolute;
+  right: 0;
+  bottom: 20px;
+  width: 100%;
+  height: 82px;
+  border: 5px solid rgba(255,255,255,.8);
+  border-left-color: transparent;
+  border-radius: 50%;
+  transform: rotate(-12deg);
+  box-shadow:
+    0 0 0 12px rgba(29,117,209,.45),
+    0 0 0 20px rgba(242,140,40,.65);
+}
+
+.gems-racing-track::after {
+  content: "";
+  position: absolute;
+  inset: 13px 22px;
+  border: 2px dashed rgba(255,255,255,.8);
+  border-left-color: transparent;
+  border-radius: 50%;
+}
+
+.gems-kart {
+  position: absolute;
+  left: 0;
+  bottom: 55px;
+  font-size: 42px;
+  filter: drop-shadow(0 7px 5px rgba(0,0,0,.45));
+  animation: gems-kart-lap 8s linear infinite;
+}
+
+.gems-speed-line {
+  position: absolute;
+  left: -10px;
+  bottom: 72px;
+  width: 90px;
+  height: 3px;
+  background: #f28c28;
+  box-shadow: 0 12px #1d75d1, 0 24px rgba(255,255,255,.65);
+  animation: gems-speed 1s ease-in-out infinite;
+}
+
+@keyframes gems-kart-lap {
+  0% {
+    left: 0;
+    transform: rotate(-5deg) scale(.9);
+  }
+  25% {
+    left: 36%;
+    transform: rotate(4deg) scale(1);
+  }
+  50% {
+    left: 72%;
+    transform: rotate(10deg) scale(1.05);
+  }
+  75% {
+    left: 42%;
+    transform: rotate(185deg) scale(1);
+  }
+  100% {
+    left: 0;
+    transform: rotate(355deg) scale(.9);
+  }
+}
+
+@keyframes gems-speed {
+  0%, 100% {
+    opacity: .25;
+    transform: scaleX(.6);
+  }
+  50% {
+    opacity: 1;
+    transform: scaleX(1.2);
+  }
+}
+
+/* Apparition douce des sections */
+.gems-reveal {
+  opacity: 0;
+  transform: translateY(25px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+
+.gems-reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Cartes avec effet léger */
+.card,
+.stat-card,
+.result-card,
+.partner-card,
+.event-card,
+article {
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+
+.card:hover,
+.stat-card:hover,
+.result-card:hover,
+.partner-card:hover,
+.event-card:hover,
+article:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 28px rgba(0,0,0,.20);
+}
+
+/* Mobile */
+@media (max-width: 800px) {
+  header {
+    min-height: 76px;
+    padding: 12px 18px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+  }
+
+  header nav,
+  header > nav,
+  .site-nav,
+  .main-nav {
+    position: absolute;
+    top: 76px;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    display: none !important;
+    padding: 18px;
+    background: rgba(4,17,36,.98);
+    border-top: 2px solid #f28c28;
+    box-shadow: 0 12px 28px rgba(0,0,0,.35);
+  }
+
+  header nav.gems-mobile-open,
+  header > nav.gems-mobile-open,
+  .site-nav.gems-mobile-open,
+  .main-nav.gems-mobile-open {
+    display: block !important;
+  }
+
+  header nav ul,
+  header > nav ul,
+  .site-nav ul,
+  .main-nav ul {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 4px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    list-style: none !important;
+  }
+
+  header nav li,
+  header > nav li,
+  .site-nav li,
+  .main-nav li {
+    width: 100% !important;
+  }
+
+  header nav a,
+  header > nav a,
+  .site-nav a,
+  .main-nav a {
+    display: block !important;
+    width: 100% !important;
+    padding: 13px 10px !important;
+    color: #fff !important;
+    text-align: left !important;
+  }
+
+  .gems-menu-toggle {
+    display: block;
+  }
+
+  .gems-motion-zone {
+    right: 2%;
+    bottom: 4%;
+    width: 82%;
+    height: 135px;
+    opacity: .8;
+  }
+
+  .hero,
+  .hero-section,
+  .home-hero,
+  .banner {
+    min-height: 650px !important;
+    padding: 80px 22px 150px !important;
+  }
+
+  .hero h1,
+  .hero h2,
+  .hero-title,
+  .hero-heading,
+  .home-hero h1,
+  .banner h1 {
+    max-width: 100% !important;
+    font-size: clamp(42px, 13vw, 76px) !important;
+    line-height: .95 !important;
+    letter-spacing: -1px !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  .hero p,
+  .hero-description,
+  .hero-text p,
+  .home-hero p,
+  .banner p {
+    max-width: 100% !important;
+    font-size: 17px !important;
+    line-height: 1.45 !important;
+  }
+
+  .hero-actions,
+  .hero-buttons,
+  .cta-group,
+  .button-group {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+  }
+
+  .hero-actions a,
+  .hero-buttons a,
+  .cta-group a,
+  .button-group a {
+    width: auto !important;
+    max-width: 100% !important;
+  }
+
+  .stats,
+  .stats-grid,
+  .statistics,
+  .cards-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 1px !important;
+  }
+
+  .stat-card,
+  .stats-card {
+    min-width: 0 !important;
+    padding: 18px 10px !important;
+  }
+
+  .stat-card strong,
+  .stats-card strong {
+    font-size: 30px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .stats,
+  .stats-grid,
+  .statistics,
+  .cards-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  .logo,
+  header img {
+    max-width: 145px !important;
+  }
+
+  .gems-motion-zone {
+    width: 92%;
+    right: -8%;
+  }
+}
+

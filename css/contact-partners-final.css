@@ -1,0 +1,133 @@
+﻿/* =========================================================
+   GEMS RACING - BANNIERE CONTACT FIXE
+   ========================================================= */
+
+.gems-contact-partners {
+  position: sticky !important;
+  top: var(--gems-header-height, 78px) !important;
+  z-index: 999 !important;
+  width: 100% !important;
+  min-height: 64px !important;
+  height: 64px !important;
+  margin: 0 !important;
+  padding: 7px 20px !important;
+  overflow: hidden !important;
+  background: #06172d !important;
+  border-bottom: 1px solid rgba(242,140,40,.45) !important;
+  box-shadow: 0 3px 10px rgba(0,0,0,.25) !important;
+  box-sizing: border-box !important;
+}
+
+.gems-contact-partners-title {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  height: 16px !important;
+  max-width: 1200px !important;
+  margin: 0 auto 5px !important;
+  color: #ffffff !important;
+  font-size: 11px !important;
+}
+
+.gems-contact-partners-title strong {
+  color: #f28c28 !important;
+  text-transform: uppercase !important;
+}
+
+.gems-contact-partners-title span {
+  color: #c9d3df !important;
+  font-size: 10px !important;
+}
+
+.gems-contact-partners-window {
+  max-width: 1200px !important;
+  height: 34px !important;
+  margin: 0 auto !important;
+  overflow: hidden !important;
+}
+
+.gems-contact-partners-track {
+  display: flex !important;
+  align-items: center !important;
+  gap: 9px !important;
+  width: max-content !important;
+  height: 34px !important;
+  animation: contactPartnersMove 30s linear infinite !important;
+}
+
+.gems-contact-partners-track:hover {
+  animation-play-state: paused !important;
+}
+
+.gems-contact-partners-track a {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  flex: 0 0 auto !important;
+  width: 125px !important;
+  height: 32px !important;
+  padding: 3px 7px !important;
+  background: #ffffff !important;
+  color: #071b35 !important;
+  border: 1px solid rgba(242,140,40,.45) !important;
+  box-sizing: border-box !important;
+  text-decoration: none !important;
+}
+
+.gems-contact-partners-track img {
+  width: 34px !important;
+  height: 25px !important;
+  object-fit: contain !important;
+}
+
+.gems-contact-partners-track span {
+  font-size: 10px !important;
+  font-weight: 800 !important;
+  white-space: nowrap !important;
+}
+
+@keyframes contactPartnersMove {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.contact-pagehead,
+.gems-contact-partners + main .pagehead {
+  margin-top: 0 !important;
+  padding-top: 36px !important;
+}
+
+@media (max-width: 700px) {
+  .gems-contact-partners {
+    height: 58px !important;
+    min-height: 58px !important;
+    padding: 5px 10px !important;
+  }
+
+  .gems-contact-partners-title {
+    height: 14px !important;
+    font-size: 9px !important;
+  }
+
+  .gems-contact-partners-window {
+    height: 30px !important;
+  }
+
+  .gems-contact-partners-track {
+    height: 30px !important;
+  }
+
+  .gems-contact-partners-track a {
+    width: 108px !important;
+    height: 28px !important;
+  }
+
+  .gems-contact-partners-track img {
+    width: 28px !important;
+    height: 21px !important;
+  }
+
+  .gems-contact-partners-track span {
+    font-size: 9px !important;
+  }
+}

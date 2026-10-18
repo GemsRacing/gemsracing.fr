@@ -1,0 +1,335 @@
+﻿/* =========================================
+   GEMS RACING - CORRECTION FINALE
+   ========================================= */
+
+/* Désactiver l'ancien mouvement du kart */
+.gems-kart {
+  animation: none !important;
+  transform: translateX(0) !important;
+  transition: transform .08s linear !important;
+}
+
+/* Zone de progression liée au scroll */
+.gems-scroll-progress {
+  position: absolute;
+  left: 6%;
+  right: 6%;
+  bottom: 28px;
+  height: 5px;
+  background: rgba(255,255,255,.25);
+  border-radius: 10px;
+  z-index: 5;
+}
+
+.gems-scroll-progress::before {
+  content: "";
+  display: block;
+  width: var(--gems-progress, 0%);
+  height: 100%;
+  background: linear-gradient(90deg, #f28c28, #1d75d1);
+  border-radius: 10px;
+  transition: width .08s linear;
+}
+
+.gems-scroll-kart {
+  position: absolute;
+  left: 0;
+  bottom: -22px;
+  font-size: 34px;
+  line-height: 1;
+  transform: translateX(var(--gems-kart-x, 0%));
+  transition: transform .08s linear;
+  filter: drop-shadow(0 5px 4px rgba(0,0,0,.45));
+  z-index: 6;
+}
+
+/* Le kart reste orienté vers l'avant */
+.gems-scroll-kart,
+.gems-scroll-kart span {
+  transform-origin: center;
+}
+
+/* Piste décorative */
+.gems-scroll-progress::after {
+  content: "";
+  position: absolute;
+  inset: -7px 0;
+  border-top: 1px dashed rgba(255,255,255,.65);
+  border-bottom: 1px dashed rgba(255,255,255,.25);
+  pointer-events: none;
+}
+
+/* Hero */
+.hero,
+.hero-section,
+.home-hero,
+.banner {
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.hero-content,
+.hero-inner,
+.hero-copy,
+.hero-text,
+.banner-content,
+.home-hero-content {
+  position: relative;
+  z-index: 10 !important;
+  text-align: left !important;
+  align-items: flex-start !important;
+  justify-content: flex-start !important;
+  margin-left: 0 !important;
+  margin-right: auto !important;
+}
+
+/* Gros titre */
+.hero h1,
+.hero h2,
+.hero-title,
+.hero-heading,
+.home-hero h1,
+.banner h1 {
+  text-align: left !important;
+  margin-left: 0 !important;
+  margin-right: auto !important;
+  max-width: 900px !important;
+}
+
+/* Boutons correctement alignés */
+.hero-actions,
+.hero-buttons,
+.cta-group,
+.button-group,
+.hero .buttons {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: flex-start !important;
+  align-items: center !important;
+  gap: 12px !important;
+  margin-left: 0 !important;
+}
+
+/* On évite que les boutons s'étirent */
+.hero-actions a,
+.hero-buttons a,
+.cta-group a,
+.button-group a,
+.hero button,
+.hero .btn {
+  flex: 0 0 auto !important;
+  width: auto !important;
+  min-width: 190px;
+  text-align: center !important;
+}
+
+/* Chevron propre */
+.hero a::after,
+.cta a::after,
+.button-group a::after {
+  display: inline-block;
+  margin-left: 8px;
+  position: static !important;
+  transform: none !important;
+}
+
+/* Ne pas afficher de chevron sur les boutons sans classe */
+.hero a:not(.with-arrow)::after,
+.cta a:not(.with-arrow)::after {
+  content: none !important;
+}
+
+/* Boutons */
+.hero a,
+.cta a,
+button,
+.btn {
+  position: relative;
+  overflow: hidden;
+  z-index: 2;
+  transition: transform .25s ease, box-shadow .25s ease !important;
+}
+
+.hero a:hover,
+.cta a:hover,
+button:hover,
+.btn:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 8px 18px rgba(0,0,0,.28) !important;
+}
+
+/* Motif nid d'abeille uniquement dans les boutons */
+.hero a::before,
+.cta a::before,
+button::before,
+.btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: .24;
+  pointer-events: none;
+  background-image:
+    linear-gradient(30deg, transparent 43%, rgba(255,255,255,.9) 44%, transparent 46%),
+    linear-gradient(150deg, transparent 43%, rgba(255,255,255,.9) 44%, transparent 46%);
+  background-size: 20px 34px;
+  z-index: -1;
+}
+
+/* Menu hamburger */
+.gems-menu-toggle {
+  display: none;
+  position: relative;
+  z-index: 1005;
+  width: 46px;
+  height: 42px;
+  padding: 7px;
+  border: 1px solid rgba(255,255,255,.7);
+  background: #071b35 !important;
+  cursor: pointer;
+}
+
+.gems-menu-toggle span {
+  display: block;
+  height: 3px;
+  margin: 5px 0;
+  background: #f28c28;
+  transition: .25s ease;
+}
+
+.gems-menu-toggle.active span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.gems-menu-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.gems-menu-toggle.active span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* Mobile */
+@media (max-width: 800px) {
+  header {
+    position: relative !important;
+    min-height: 78px !important;
+    padding: 12px 16px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+  }
+
+  .gems-menu-toggle {
+    display: block !important;
+    margin-left: auto !important;
+  }
+
+  header nav,
+  header > nav,
+  .site-nav,
+  .main-nav {
+    position: absolute !important;
+    top: 78px !important;
+    left: 0 !important;
+    right: 0 !important;
+    display: none !important;
+    background: #06172d !important;
+    border-top: 2px solid #f28c28 !important;
+    padding: 12px 18px !important;
+    z-index: 1000 !important;
+  }
+
+  header nav.gems-mobile-open,
+  header > nav.gems-mobile-open,
+  .site-nav.gems-mobile-open,
+  .main-nav.gems-mobile-open {
+    display: block !important;
+  }
+
+  header nav ul,
+  header > nav ul,
+  .site-nav ul,
+  .main-nav ul {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  header nav li,
+  header > nav li,
+  .site-nav li,
+  .main-nav li {
+    width: 100% !important;
+  }
+
+  header nav a,
+  header > nav a,
+  .site-nav a,
+  .main-nav a {
+    display: block !important;
+    width: 100% !important;
+    padding: 13px 8px !important;
+    text-align: left !important;
+    color: #fff !important;
+  }
+
+  .hero,
+  .hero-section,
+  .home-hero,
+  .banner {
+    min-height: 680px !important;
+    padding: 70px 22px 130px !important;
+  }
+
+  .hero h1,
+  .hero h2,
+  .hero-title,
+  .hero-heading,
+  .home-hero h1,
+  .banner h1 {
+    font-size: clamp(42px, 12vw, 72px) !important;
+    line-height: .95 !important;
+    overflow-wrap: normal !important;
+    word-break: normal !important;
+  }
+
+  .hero-actions,
+  .hero-buttons,
+  .cta-group,
+  .button-group,
+  .hero .buttons {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+
+  .hero-actions a,
+  .hero-buttons a,
+  .cta-group a,
+  .button-group a {
+    min-width: 210px !important;
+  }
+
+  .gems-scroll-progress {
+    left: 8%;
+    right: 8%;
+    bottom: 22px;
+  }
+
+  .gems-scroll-kart {
+    font-size: 29px;
+    bottom: -19px;
+  }
+}
+
+/* Désactivation temporaire des animations kart */
+.gems-motion-zone,
+.gems-racing-track,
+.gems-kart,
+.gems-speed-line,
+.gems-scroll-progress,
+.gems-scroll-kart {
+  display: none !important;
+}
+

@@ -1,0 +1,177 @@
+﻿/* =========================================================
+   ACCUEIL FINAL - VERSION SIMPLE ET STABLE
+   ========================================================= */
+
+.gems-home-hero {
+  min-height: 500px !important;
+  height: auto !important;
+  padding: 38px 0 !important;
+  overflow: visible !important;
+}
+
+.gems-home-layout {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) minmax(360px, .78fr) !important;
+  gap: 38px !important;
+  align-items: center !important;
+}
+
+.gems-home-content h1 {
+  margin: 12px 0 20px !important;
+  font-size: clamp(42px, 4.5vw, 68px) !important;
+  line-height: 1.04 !important;
+  color: #ffffff !important;
+}
+
+.gems-home-content h1 span {
+  color: #f28c28 !important;
+}
+
+.gems-home-content p {
+  max-width: 620px !important;
+  color: #ffffff !important;
+  font-size: 17px !important;
+  line-height: 1.5 !important;
+}
+
+.gems-home-visual img {
+  display: block !important;
+  width: 100% !important;
+  max-width: 520px !important;
+  height: 430px !important;
+  margin: auto !important;
+  object-fit: cover !important;
+  object-position: center top !important;
+  border: 3px solid #f28c28 !important;
+  box-shadow: 0 10px 24px rgba(0,0,0,.35) !important;
+}
+
+/* Scoring */
+.gems-home-stats {
+  display: block !important;
+  min-height: 118px !important;
+  padding: 0 !important;
+  background: #ffffff !important;
+}
+
+.gems-home-stats > .wrap {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  align-items: center !important;
+  min-height: 118px !important;
+}
+
+.gems-home-stats .stat {
+  padding: 12px 10px !important;
+  text-align: center !important;
+  color: #071b35 !important;
+}
+
+.gems-home-stats .stat b {
+  display: block !important;
+  color: #071b35 !important;
+  font-size: 31px !important;
+  line-height: 1 !important;
+}
+
+.gems-home-stats .stat small {
+  display: block !important;
+  margin-top: 9px !important;
+  color: #071b35 !important;
+  font-size: 11px !important;
+  font-weight: 800 !important;
+}
+
+/* Partenaires accueil */
+.gems-home-partners {
+  padding: 52px 0 !important;
+  background: #071b35 !important;
+}
+
+.gems-home-partners h2,
+.gems-home-partners p {
+  text-align: center !important;
+}
+
+.gems-home-partners h2 {
+  color: #ffffff !important;
+}
+
+.gems-home-partners p {
+  color: #dce5ef !important;
+}
+
+.gems-home-partners-grid {
+  display: grid !important;
+  grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+  gap: 14px !important;
+  margin-top: 28px !important;
+}
+
+.gems-home-partner {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 135px !important;
+  padding: 12px !important;
+  background: #ffffff !important;
+  border: 2px solid rgba(242,140,40,.65) !important;
+  text-decoration: none !important;
+}
+
+.gems-home-partner img {
+  width: 110px !important;
+  height: 70px !important;
+  object-fit: contain !important;
+}
+
+.gems-home-partner span {
+  margin-top: 8px !important;
+  color: #071b35 !important;
+  font-size: 12px !important;
+  font-weight: 800 !important;
+  white-space: nowrap !important;
+}
+
+@media (max-width: 900px) {
+  .gems-home-layout {
+    grid-template-columns: 1fr !important;
+  }
+
+  .gems-home-visual img {
+    max-width: 520px !important;
+  }
+
+  .gems-home-partners-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .gems-home-hero {
+    padding: 30px 18px !important;
+  }
+
+  .gems-home-content h1 {
+    font-size: clamp(36px, 10vw, 58px) !important;
+  }
+
+  .gems-home-visual img {
+    height: 320px !important;
+  }
+
+  .gems-home-stats {
+    padding: 14px 8px !important;
+  }
+
+  .gems-home-stats > .wrap {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    min-height: 0 !important;
+    gap: 10px !important;
+  }
+
+  .gems-home-partners-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}

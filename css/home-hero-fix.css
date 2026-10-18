@@ -1,0 +1,69 @@
+﻿/* =========================================================
+   GEMS RACING - CORRECTION HAUTEUR ACCUEIL
+   ========================================================= */
+
+@media (min-width: 801px) {
+  .hero {
+    min-height: calc(100vh - var(--gems-header-height) - 125px) !important;
+    height: auto !important; /* Permet au hero de s'adapter au contenu */
+    max-height: none !important; /* Supprime la limite de hauteur */
+    padding: 42px 0 42px !important;
+    overflow: visible !important; /* Assure que le contenu n'est pas coupé */
+  }
+
+  .hero > .wrap {
+    height: auto !important; /* S'adapte à la hauteur du contenu */
+    min-height: 470px !important;
+    align-items: center !important;
+  }
+
+  .hero .wrap > h1 {
+    font-size: clamp(42px, 4.7vw, 70px) !important;
+    line-height: 1.02 !important;
+    white-space: normal !important;
+    overflow: visible !important;
+  }
+
+  .hero .wrap > p {
+    font-size: 17px !important;
+    line-height: 1.5 !important;
+    overflow: visible !important;
+  }
+
+  .hero .wrap > .gems-home-photo {
+    height: auto !important; /* S'adapte à la proportion de l'image */
+    max-height: 470px !important; /* Limite pour ne pas prendre trop de place */
+    object-fit: contain !important; /* Affiche l'image entière */
+    object-position: center center !important;
+  }
+}
+
+@media (max-width: 800px) {
+  .hero {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    padding: 34px 18px 30px !important;
+    overflow: visible !important;
+  }
+
+  .hero .wrap > h1 {
+    font-size: clamp(35px, 10vw, 58px) !important;
+    line-height: 1.03 !important;
+    white-space: normal !important;
+    overflow: visible !important;
+  }
+
+  .hero .wrap > p {
+    font-size: 16px !important;
+    line-height: 1.5 !important;
+    overflow: visible !important;
+  }
+
+  .hero .wrap > .gems-home-photo {
+    height: auto !important;
+    max-height: 320px !important;
+    object-fit: contain !important;
+    object-position: center center !important;
+  }
+}

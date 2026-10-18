@@ -1,0 +1,11 @@
+﻿.gems-home-photo {
+  border: 3px solid #f28c28 !important; /* Restaurer le cadre */
+  box-shadow: 0 10px 25px rgba(0,0,0,.35) !important;
+}
+.gems-profile-photo {
+  border: 3px solid #f28c28 !important; /* Restaurer le cadre */
+  box-shadow: 0 12px 30px rgba(0,0,0,.35) !important;
+}
+.gems-gallery-item {
+  border: 2px solid rgba(242, 140, 40, .75) !important; /* Restaurer le cadre */
+}

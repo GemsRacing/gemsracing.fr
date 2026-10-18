@@ -1,0 +1,107 @@
+/* =========================================================
+   GEMS RACING - ARRONDIS FINAUX
+   ========================================================= */
+
+/* Boutons */
+.btn,
+.gems-news-button,
+button {
+  border-radius: 8px !important;
+}
+
+/* Photo principale de l'accueil */
+.gems-home-visual,
+.gems-home-visual img {
+  border-radius: 18px !important;
+  overflow: hidden !important;
+}
+
+/* Bloc hero */
+.gems-home-hero {
+  overflow: hidden !important;
+}
+
+/* Scoring */
+.gems-home-stats,
+.gems-home-stats > .wrap,
+.gems-home-stats .stat {
+  border-radius: 12px !important;
+}
+
+/* Actualité */
+.gems-latest-news,
+.gems-news-box {
+  border-radius: 14px !important;
+  overflow: hidden !important;
+}
+
+/* Cartes accueil */
+.gems-home-cards .card,
+.gems-home-cards article {
+  border-radius: 14px !important;
+  overflow: hidden !important;
+}
+
+/* Partenaires */
+.gems-partner-card {
+  border-radius: 14px !important;
+  overflow: hidden !important;
+}
+
+/* Galerie */
+.gems-gallery-item,
+.gems-gallery-item img {
+  border-radius: 12px !important;
+  overflow: hidden !important;
+}
+
+/* En-tête et bouton partenaire */
+.top,
+.top .wrap,
+.top .btn {
+  border-radius: 0 !important;
+}
+
+.top .btn {
+  border-radius: 8px !important;
+}
+
+/* Images générales dans les blocs */
+.card img,
+.gems-news-box img,
+.gems-partner-card img {
+  border-radius: 8px !important;
+}
+
+/* Footer */
+.footer {
+  overflow: hidden !important;
+}
+
+@media (max-width: 700px) {
+  .gems-home-visual,
+  .gems-home-visual img {
+    border-radius: 14px !important;
+  }
+
+  .gems-home-cards .card,
+  .gems-news-box,
+  .gems-partner-card {
+    border-radius: 12px !important;
+  }
+}
+/* =========================================================
+   CORRECTION FINALE - ARRONDIS MANQUANTS
+   ========================================================= */
+
+/* Photo de Gems sur la page À Propos */
+.gems-about-visual img.gems-profile-photo {
+  border-radius: 18px !important;
+  overflow: hidden !important;
+}
+
+/* Cartes sur les pages Résultats et Association */
+.section .grid .card {
+  border-radius: 14px !important;
+  overflow: hidden !important;
+}

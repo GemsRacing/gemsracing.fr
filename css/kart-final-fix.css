@@ -1,0 +1,122 @@
+/* =========================================================
+   CORRECTION FINALE DE LA PISTE
+   ========================================================= */
+
+/* Suppression de tous les halos */
+.scoring-kart-track,
+.scoring-kart-track::before,
+.scoring-kart,
+.gems-kart,
+.rival-kart {
+  box-shadow: none !important;
+  filter: none !important;
+  text-shadow: none !important;
+}
+
+/* Ligne de piste propre */
+.scoring-kart-track::before {
+  content: "" !important;
+  background: #f28c28 !important;
+  opacity: 1 !important;
+  height: 2px !important;
+}
+
+/* Le conteneur garde les karts mais ne coupe pas la victoire */
+.scoring-kart-track {
+  overflow: visible !important;
+}
+
+/* Message global de victoire */
+.gems-winner-announcement {
+  position: fixed !important;
+  top: 92px !important;
+  left: 50% !important;
+  z-index: 99999 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 9px !important;
+  padding: 10px 20px !important;
+  border: 2px solid #f28c28 !important;
+  border-radius: 999px !important;
+  background: #07192e !important;
+  color: #ffffff !important;
+  font: 900 16px Arial, sans-serif !important;
+  letter-spacing: 0.5px !important;
+  white-space: nowrap !important;
+  pointer-events: none !important;
+  opacity: 0 !important;
+  transform: translate(-50%, -20px) scale(0.8) !important;
+}
+
+.gems-winner-announcement.visible {
+  animation: gemsWinnerAnnouncement 2.2s ease-out forwards !important;
+}
+
+.gems-winner-announcement .winner-trophy,
+.gems-winner-announcement .winner-flag {
+  font-size: 23px !important;
+  line-height: 1 !important;
+}
+
+.gems-kart.winner-pulse {
+  animation: gemsKartWinnerPulse 0.85s ease-in-out 2 !important;
+  z-index: 9999 !important;
+}
+
+@keyframes gemsWinnerAnnouncement {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -20px) scale(0.8);
+  }
+
+  15% {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1.05);
+  }
+
+  30% {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1);
+  }
+
+  78% {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -8px) scale(0.95);
+  }
+}
+
+@keyframes gemsKartWinnerPulse {
+  0% {
+    transform: scale(1);
+  }
+
+  35% {
+    transform: scale(1.18);
+  }
+
+  70% {
+    transform: scale(0.96);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 800px) {
+  .gems-winner-announcement {
+    top: 75px !important;
+    padding: 8px 12px !important;
+    font-size: 11px !important;
+  }
+
+  .gems-winner-announcement .winner-trophy,
+  .gems-winner-announcement .winner-flag {
+    font-size: 17px !important;
+  }
+}
