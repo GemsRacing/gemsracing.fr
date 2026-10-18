@@ -34,12 +34,17 @@
 <link rel="stylesheet" href="css/widgets-rounded.css?v=1">
 <link rel="stylesheet" href="css/rounded-final.css?v=2">
 <link rel="stylesheet" href="css/scoring-circuit.css?v=1">
-    <link rel="canonical" href="https://gemsracing.fr/galerie.html">
+
+
+
+
+<link rel="stylesheet" href="css/pagehead-reference-fix.css?v=1">
+  <link rel="canonical" href="https://gemsracing.fr/galerie.html">
 
   <meta property="og:locale" content="fr_FR">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Galerie Photos Karting SWS France | Gems Racing Nantes, Vendée">
-  <meta property="og:description" content="Découvrez les photos de Gems Maréchal en course, dans les paddocks et sur les circuits de karting en France. Basé à Nantes, en Vendée et Pays de la Loire.">
+  <meta property="og:description" content="Découvrez les photos de Gems Maréchal en course et sur les circuits de karting en France.">
   <meta property="og:url" content="https://gemsracing.fr/galerie.html">
   <meta property="og:site_name" content="Gems Racing">
   <meta property="og:image" content="https://gemsracing.fr/assets/images/gems-social-preview.jpg">
@@ -51,47 +56,25 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "ImageGallery",
-      "@id": "https://gemsracing.fr/galerie.html#gallery",
-      "url": "https://gemsracing.fr/galerie.html",
-      "name": "Galerie Photos Karting SWS France | Gems Racing",
-      "description": "Photos des courses de karting de Gems Maréchal en SWS France.",
-      "about": {
-        "@id": "https://gemsracing.fr/#gems-marechal"
-      },
-      "image": [
-        "https://gemsracing.fr/assets/images/gems-course-01.jpg",
-        "https://gemsracing.fr/assets/images/gems-paddock.jpg"
-        // Ajouter d'autres images représentatives ici
-      ]
-    },
-    {
-      "@type": "Athlete",
-      "@id": "https://gemsracing.fr/#gems-marechal",
-      "name": "Gems Maréchal",
-      "alternateName": "Gems Racing",
-      "jobTitle": "Pilote de karting SWS",
-      "description": "Jeune pilote de karting SWS français basé à Nantes, Vendée et Pays de la Loire.",
-      "sport": "Karting",
-      "nationality": "France",
-      "homeLocation": {
-        "@type": "Place",
-        "name": "Nantes, Vendée et Pays de la Loire"
-      },
-      "url": "https://gemsracing.fr/a-propos.html",
-      "image": "https://gemsracing.fr/assets/images/gems-portrait.jpg",
-      "sameAs": [
-        "https://www.instagram.com/gems.kartracing/",
-        "https://www.sodiwseries.com/fr-fr/drivers/marechal-gems-168448.html"
-      ]
-    }
-  ]
+  "@type": "ImageGallery",
+  "@id": "https://gemsracing.fr/galerie.html#gallery",
+  "url": "https://gemsracing.fr/galerie.html",
+  "name": "Galerie Photos Karting SWS France | Gems Racing",
+  "description": "Photos des courses de karting de Gems Maréchal en SWS France.",
+  "image": [
+    "https://gemsracing.fr/assets/images/gems-course-01.jpg",
+    "https://gemsracing.fr/assets/images/gems-paddock.jpg"
+  ],
+  "about": {
+    "@type": "Person",
+    "name": "Gems Maréchal",
+    "url": "https://gemsracing.fr/a-propos.html"
+  }
 }
 </script>
+  <link rel="stylesheet" href="css/gallery-header-final.css?v=1">
 </head>
-<body>
+<body class="pagehead-reference-fix" class="gallery-reference-page">
 
 <header class="top">
   <div class="wrap nav">
@@ -323,7 +306,7 @@
 
 
 
-<script src="js/site-sync.js?v=19"></script>
+<script src="js/site-sync.js?v=20"></script>
 <script>
 /* GEMS_MOBILE_MENU_SCRIPT */
 document.addEventListener("DOMContentLoaded", function () {

@@ -1,0 +1,56 @@
+body.gallery-reference-page .pagehead {
+  position: relative !important;
+  isolation: isolate !important;
+  overflow: hidden !important;
+  min-height: 245px !important;
+  background:
+    linear-gradient(
+      90deg,
+      #041329 0%,
+      #071d3c 48%,
+      #155d88 100%
+    ) !important;
+}
+
+body.gallery-reference-page .pagehead::before {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 0 0 52% !important;
+  z-index: 1 !important;
+  opacity: .72 !important;
+  pointer-events: none !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='92' height='106' viewBox='0 0 92 106'%3E%3Cg fill='none' stroke='%2399c8e5' stroke-width='1.35' opacity='.62'%3E%3Cpath d='M23 1 46 14v27L23 54 0 41V14Z'/%3E%3Cpath d='M69 1 92 14v27L69 54 46 41V14Z'/%3E%3Cpath d='M46 54 69 67v27L46 107 23 94V67Z'/%3E%3C/g%3E%3C/svg%3E") !important;
+  background-repeat: repeat !important;
+  background-size: 92px 106px !important;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 58%, #000 100%) !important;
+  mask-image: linear-gradient(to right, transparent 0%, #000 58%, #000 100%) !important;
+}
+
+body.gallery-reference-page .pagehead::after,
+body.gallery-reference-page .pagehead h1::before,
+body.gallery-reference-page .pagehead h1::after {
+  content: none !important;
+  display: none !important;
+}
+
+body.gallery-reference-page .pagehead .wrap {
+  position: relative !important;
+  z-index: 3 !important;
+  padding-right: 30% !important;
+}
+
+@media (max-width: 800px) {
+  body.gallery-reference-page .pagehead {
+    min-height: 220px !important;
+  }
+
+  body.gallery-reference-page .pagehead::before {
+    inset: 0 0 0 42% !important;
+    background-size: 72px 83px !important;
+    opacity: .48 !important;
+  }
+
+  body.gallery-reference-page .pagehead .wrap {
+    padding-right: 18% !important;
+  }
+}
