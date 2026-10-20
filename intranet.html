@@ -88,14 +88,41 @@
       <section id="tab-races" class="tab-content" hidden>
         <div class="intra-card">
           <h2>📅 Agenda & Résultats</h2>
-          <div class="intra-grid-3">
+                    <div class="intra-grid-3">
             <div class="intra-field"><label>Date</label><input type="date" id="race-date"></div>
+            <div class="intra-field"><label>Heure</label><input type="time" id="race-time"></div>
+            <div class="intra-field"><label>Nom course</label><input type="text" id="race-name"></div>
+          </div>
+          <div class="intra-grid-2">
+            <div class="intra-field"><label>Circuit</label><input type="text" id="race-circuit"></div>
+            <div class="intra-field"><label>Ville</label><input type="text" id="race-city" placeholder="Ex: Vienne"></div>
+          </div>
+          <div class="intra-grid-3">
+            <div class="intra-field"><label>Catégorie</label><input type="text" id="race-category" placeholder="Ex: 2T Rotax"></div>
+            <div class="intra-field"><label>Pilotes</label><input type="number" id="race-pilots" placeholder="Ex: 27"></div>
+            <div class="intra-field"><label>Position Départ</label><input type="text" id="race-start-position" placeholder="Ex: P5"></div>
+          </div>
+          <div class="intra-grid-2">
+            <div class="intra-field"><label>Résultat</label><input type="text" id="race-result" placeholder="Ex: 1er / 30"></div>
+            <div class="intra-field"><label>Meilleur Tour</label><input type="text" id="race-best-lap" placeholder="Ex: 58.345"></div>
+          </div>
+          <div class="intra-field"><label>Commentaire / Résumé</label><textarea id="race-comment" rows="3"></textarea></div>
+          <div class="intra-field">
+            <label>Statut</label>
+            <select id="race-status">
+              <option value="Programmé">Programmé</option>
+              <option value="Terminé">Terminé</option>
+              <option value="Annulé">Annulé</option>
+            </select>
+          </div>
+          <div class="intra-field"><label>Lien du débrief</label><input type="text" id="race-link" placeholder="Lien Instagram ou site"></div>
+          <!-- Le champ photo de la course sera géré plus tard via un upload de fichier dédié -->
             <div class="intra-field"><label>Nom course</label><input type="text" id="race-name"></div>
             <div class="intra-field"><label>Circuit</label><input type="text" id="race-circuit"></div>
           </div>
           <div class="intra-grid-2">
             <div class="intra-field"><label>Résultat</label><input type="text" id="race-result" placeholder="Ex: 1er / 30"></div>
-            <div class="intra-field"><label>Photo de la course</label><input type="file" id="race-image" accept="image/*"></div>
+            <!-- Photo de la course gérée plus tard -->
           </div>
           <div class="intra-grid-3">
             <div class="intra-field"><label>Ville</label><input type="text" id="race-city" placeholder="Ex: Vienne"></div>
@@ -130,12 +157,20 @@
           <div id="partners-list" style="margin-top:20px;"></div>
         </div>
       </section>
-    </main>
+          <section id="tab-tickets" class="tab-content" hidden>
+        <div class="intra-card">
+          <h2>🎫 Messages reçus</h2>
+          <div id="tickets-list"></div>
+        </div>
+      </section>
+</main>
   </div>
   <div id="toast" class="intra-toast" style="display:none; position:fixed; bottom:20px; right:20px; background:#2ecc71; color:white; padding:10px 20px; border-radius:5px;">✅ Enregistré !</div>
   <script src="js/intranet.js"></script>
 </body>
 </html>
+
+
 
 
 
