@@ -85,10 +85,10 @@
         </div>
       </section>
 
-      <section id="tab-races" class="tab-content" hidden>
+            <section id="tab-races" class="tab-content" hidden>
         <div class="intra-card">
           <h2>📅 Agenda & Résultats</h2>
-                    <div class="intra-grid-3">
+          <div class="intra-grid-3">
             <div class="intra-field"><label>Date</label><input type="date" id="race-date"></div>
             <div class="intra-field"><label>Heure</label><input type="time" id="race-time"></div>
             <div class="intra-field"><label>Nom course</label><input type="text" id="race-name"></div>
@@ -116,26 +116,6 @@
             </select>
           </div>
           <div class="intra-field"><label>Lien du débrief</label><input type="text" id="race-link" placeholder="Lien Instagram ou site"></div>
-          <!-- Le champ photo de la course sera géré plus tard via un upload de fichier dédié -->
-            <div class="intra-field"><label>Nom course</label><input type="text" id="race-name"></div>
-            <div class="intra-field"><label>Circuit</label><input type="text" id="race-circuit"></div>
-          </div>
-          <div class="intra-grid-2">
-            <div class="intra-field"><label>Résultat</label><input type="text" id="race-result" placeholder="Ex: 1er / 30"></div>
-            <!-- Photo de la course gérée plus tard -->
-          </div>
-          <div class="intra-grid-3">
-            <div class="intra-field"><label>Ville</label><input type="text" id="race-city" placeholder="Ex: Vienne"></div>
-            <div class="intra-field">
-              <label>Statut</label>
-              <select id="race-status">
-                <option value="Programmé">Programmé</option>
-                <option value="Terminé">Terminé</option>
-                <option value="Annulé">Annulé</option>
-              </select>
-            </div>
-            <div class="intra-field"><label>Lien du débrief</label><input type="text" id="race-link" placeholder="Lien Instagram ou site"></div>
-          </div>
           <button class="btn-primary" onclick="addRace()">➕ AJOUTER LA COURSE</button>
           <div id="races-list" style="margin-top:20px;"></div>
         </div>
@@ -169,6 +149,7 @@
   <script src="js/intranet.js"></script>
 </body>
 </html>
+
 
 
 
