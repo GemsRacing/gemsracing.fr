@@ -121,7 +121,11 @@
             <input type="text" id="partner-name" placeholder="Nom">
             <input type="text" id="partner-url" placeholder="Lien">
           </div>
-          <input type="file" id="partner-logo-file" accept="image/*" style="margin-top:10px;">
+          <div class="partner-logo-preview-area" style="margin-top:10px; display:flex; align-items:center; gap:10px; background:rgba(255,255,255,0.05); padding:8px; border-radius:5px;">
+    <img id="partner-logo-preview-img" src="" alt="Aperçu logo" style="height:40px; max-width:60px; object-fit:contain; background:rgba(0,0,0,0.5); padding:3px; border-radius:3px;">
+    <input type="text" id="partner-logo-preview" placeholder="URL du logo existant (base64 ou URL)" style="flex-grow:1; font-size:12px;">
+</div>
+<input type="file" id="partner-logo-file" accept="image/*" style="margin-top:10px;">
           <button class="btn-primary" onclick="addPartner()" style="margin-top:10px;">➕ AJOUTER</button>
           <div id="partners-list" style="margin-top:20px;"></div>
         </div>
@@ -132,5 +136,6 @@
   <script src="js/intranet.js"></script>
 </body>
 </html>
+
 
 
