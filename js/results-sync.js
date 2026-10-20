@@ -1,4 +1,4 @@
-(function () {
+﻿(function () {
   function escapeHtml(value) {
     return String(value ?? "")
       .replace(/&/g, "&amp;")
@@ -10,17 +10,17 @@
 
   async function loadResultsData() {
     try {
-      const response = await fetch("/api/site-data", {
+      const response = await fetch("/api/data", {
         cache: "no-store"
       });
 
       if (!response.ok) {
-        throw new Error("Impossible de charger les données.");
+        throw new Error("Impossible de charger les donnÃ©es.");
       }
 
       return await response.json();
     } catch (error) {
-      console.error("Erreur de chargement des résultats :", error);
+      console.error("Erreur de chargement des rÃ©sultats :", error);
       return {
         news: {},
         newsArchive: [],
@@ -39,19 +39,19 @@
           news.image
             ? `<img
                  src="${escapeHtml(news.image)}"
-                 alt="${escapeHtml(news.imageAlt || news.title || "Actualité Gems Racing")}"
+                 alt="${escapeHtml(news.imageAlt || news.title || "ActualitÃ© Gems Racing")}"
                  loading="lazy">`
             : ""
         }
 
-        <h4>${escapeHtml(news.title || "Actualité Gems Racing")}</h4>
+        <h4>${escapeHtml(news.title || "ActualitÃ© Gems Racing")}</h4>
 
         <p>${escapeHtml(news.summary || "")}</p>
 
         ${
           news.link
             ? `<a class="btn" href="${escapeHtml(news.link)}">
-                 ${escapeHtml(news.button || "VOIR L’ACTUALITÉ")}
+                 ${escapeHtml(news.button || "VOIR Lâ€™ACTUALITÃ‰")}
                </a>`
             : ""
         }
@@ -91,8 +91,8 @@
       if (moreButton) {
         moreButton.hidden = archives.length <= 2;
         moreButton.textContent = expanded
-          ? "RÉDUIRE"
-          : "VOIR PLUS D’ACTUALITÉS";
+          ? "RÃ‰DUIRE"
+          : "VOIR PLUS Dâ€™ACTUALITÃ‰S";
       }
     }
 
@@ -110,19 +110,19 @@
     return `
       <article class="public-race-card">
         <div class="public-race-date">
-          ${escapeHtml(race.date || "Date à venir")}
+          ${escapeHtml(race.date || "Date Ã  venir")}
         </div>
 
         <h4>${escapeHtml(race.name || "Course")}</h4>
 
         <p>
           ${escapeHtml(race.circuit || "")}
-          ${race.city ? ` · ${escapeHtml(race.city)}` : ""}
+          ${race.city ? ` Â· ${escapeHtml(race.city)}` : ""}
         </p>
 
         <p class="public-race-status">
-          <strong>${escapeHtml(race.status || "Programmé")}</strong>
-          ${race.result ? ` · ${escapeHtml(race.result)}` : ""}
+          <strong>${escapeHtml(race.status || "ProgrammÃ©")}</strong>
+          ${race.result ? ` Â· ${escapeHtml(race.result)}` : ""}
         </p>
 
         ${
@@ -131,7 +131,7 @@
                  href="${escapeHtml(race.link)}"
                  target="_blank"
                  rel="noopener noreferrer">
-                 Voir le débrief
+                 Voir le dÃ©brief
                </a>`
             : ""
         }
@@ -163,7 +163,7 @@
 
     latestContainer.innerHTML = latestRace
       ? raceHtml(latestRace)
-      : "<p>Aucune course enregistrée.</p>";
+      : "<p>Aucune course enregistrÃ©e.</p>";
 
     function drawArchives() {
       const visibleArchives = expanded
@@ -177,7 +177,7 @@
       if (moreButton) {
         moreButton.hidden = archives.length <= 2;
         moreButton.textContent = expanded
-          ? "RÉDUIRE"
+          ? "RÃ‰DUIRE"
           : "VOIR PLUS DE COURSES";
       }
     }

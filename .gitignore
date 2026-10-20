@@ -4,3 +4,8 @@ node_modules/
 cloudflared.exe
 
 .env
+
+backup-*/
+intranet-*.html
+js/intranet-backup-*.js
+js/intranet-casse.js
