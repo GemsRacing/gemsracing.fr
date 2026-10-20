@@ -60,9 +60,9 @@
   }
 
   function renderNews(data) {
-    const latestContainer = document.getElementById("latest-news-content");
+    const latestContainer = document.getElementById("results-latest-news-content");
     const archivesContainer = document.getElementById("news-archives");
-    const moreButton = document.getElementById("news-more-button");
+    const moreButton = document.getElementById("results-news-more-button");
 
     if (!latestContainer || !archivesContainer) return;
 
@@ -140,9 +140,9 @@
   }
 
   function renderRaces(data) {
-    const latestContainer = document.getElementById("public-races-list");
+    const latestContainer = document.getElementById("results-public-races-list");
     const archivesContainer = document.getElementById("race-archives");
-    const moreButton = document.getElementById("races-more-button");
+    const moreButton = document.getElementById("results-races-more-button");
 
     if (!latestContainer || !archivesContainer) return;
 
@@ -199,3 +199,4 @@
     renderRaces(data);
   });
 })();
+
