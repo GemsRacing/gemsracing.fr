@@ -731,6 +731,40 @@
             }
         });
     });
-})();
+    // Menu hamburger mobile
+    document.addEventListener("DOMContentLoaded", function () {
+        const mobileToggle = document.getElementById("mobile-menu-toggle");
+        const mobileSidebar = document.querySelector(".intra-sidebar");
+
+        if (!mobileToggle || !mobileSidebar) return;
+
+        mobileToggle.addEventListener("click", function () {
+            const isOpen = mobileSidebar.classList.toggle("is-open");
+            document.body.classList.toggle("mobile-menu-open", isOpen);
+            mobileToggle.setAttribute("aria-expanded", String(isOpen));
+            mobileToggle.textContent = isOpen ? "✕" : "☰";
+        });
+
+        // Fermer le menu si on clique sur un élément du menu
+        mobileSidebar.querySelectorAll(".intra-nav-item").forEach(item => {
+            item.addEventListener("click", function () {
+                mobileSidebar.classList.remove("is-open");
+                document.body.classList.remove("mobile-menu-open");
+                mobileToggle.setAttribute("aria-expanded", "false");
+                mobileToggle.textContent = "☰";
+            });
+        });
+
+        // Fermer le menu si on clique en dehors (clic sur le contenu principal)
+        document.querySelector("main.intra-content").addEventListener("click", function (event) {
+            if (mobileSidebar.classList.contains("is-open")) {
+                mobileSidebar.classList.remove("is-open");
+                document.body.classList.remove("mobile-menu-open");
+                mobileToggle.setAttribute("aria-expanded", "false");
+                mobileToggle.textContent = "☰";
+            }
+        });
+    });})();
+
 
 

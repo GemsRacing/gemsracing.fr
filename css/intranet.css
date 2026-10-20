@@ -465,12 +465,13 @@ body {
     .photo-admin-grid { grid-template-columns: 1fr 1fr !important; gap: 10px; }
 }
 
-/* ============================================================
-   MENU HAMBURGER MOBILE — INTRANET
+/*/* ============================================================
+   MENU HAMBURGER MOBILE — INTRANET (FIX FINAL)
    ============================================================ */
 
+/* Style du bouton hamburger */
 .mobile-menu-toggle {
-    display: none;
+    display: none; /* Caché par défaut sur grand écran */
     background: transparent;
     color: #f28c28;
     border: 1px solid #f28c28;
@@ -479,6 +480,160 @@ body {
     min-height: 40px;
     font-size: 22px;
     cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    line-height: 1; /* Pour centrer le symbole */
+    z-index: 1001; /* Au-dessus des autres éléments */
+}
+
+/* Styles spécifiques pour les écrans plus petits (mobile/tablette) */
+@media (max-width: 820px) {
+    body {
+        overflow-x: hidden; /* Empêche tout défilement horizontal */
+    }
+
+    /* Header sur mobile */
+    .intra-header {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-between; /* Pour espacer logo et bouton */
+        flex-wrap: wrap; /* Permet aux éléments de passer à la ligne */
+        gap: 10px;
+        padding: 12px;
+    }
+
+    .intra-header .intra-logo {
+        flex: 1 1 auto; /* Prend l'espace disponible */
+        width: auto;
+        text-align: left;
+        font-size: 17px;
+    }
+
+    .mobile-menu-toggle {
+        display: inline-flex; /* Affiché sur mobile */
+        order: 2; /* Positionne le bouton après le logo */
+    }
+
+    /* Boutons "Ouvrir le site", "Enregistrer" et "Déconnexion" */
+    .intra-header .btn-secondary,
+    .intra-header .btn-primary {
+        width: 100%; /* Prend toute la largeur */
+        margin-left: 0 !important;
+        justify-content: center;
+        min-height: 42px;
+        order: 3; /* Positionne sous le logo et le bouton menu */
+    }
+
+    /* Conteneur principal */
+    .intra-container {
+        display: block; /* Important pour que le sidebar puisse se positionner en fixed */
+        position: relative;
+        width: 100%;
+        overflow: hidden; /* Cache le contenu quand le menu est ouvert */
+    }
+
+    /* Barre latérale (menu) */
+    .intra-sidebar {
+        position: fixed; /* Fixé à l'écran */
+        z-index: 1000;
+        top: 0;
+        left: 0;
+        width: min(82vw, 310px); /* Largeur du panneau latéral */
+        height: 100vh; /* Prend toute la hauteur de l'écran */
+        padding-top: 70px; /* Espace pour le header */
+        background: #051326; /* Couleur de fond */
+        transform: translateX(-105%); /* Caché par défaut */
+        transition: transform 0.25s ease; /* Animation fluide */
+        overflow-y: auto; /* Permet le défilement si le contenu est long */
+        box-shadow: 8px 0 25px rgba(0,0,0,0.45);
+        border-right: none; /* Pas de bordure à droite */
+        border-bottom: none; /* Pas de bordure en bas */
+        display: flex; /* Pour les éléments du menu */
+        flex-direction: column; /* Menu vertical */
+    }
+
+    .intra-sidebar.is-open {
+        transform: translateX(0); /* Le panneau s'ouvre */
+    }
+
+    /* Éléments du menu latéral */
+    .intra-nav-item {
+        display: flex;
+        width: 100%;
+        box-sizing: border-box;
+        border-left: 4px solid transparent;
+        border-bottom: 0; /* Pas de bordure en bas */
+        padding: 15px 20px;
+        text-align: left;
+        justify-content: flex-start;
+        font-size: 14px;
+    }
+
+    .intra-nav-item.active,
+    .intra-nav-item:hover {
+        border-left-color: #f28c28;
+        border-bottom-color: transparent;
+    }
+
+    /* Contenu principal */
+    .intra-content {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        padding: 14px 10px 30px;
+    }
+
+    /* Empêche le défilement du contenu derrière le menu ouvert */
+    body.mobile-menu-open {
+        overflow: hidden;
+    }
+
+    /* Grilles et champs sur mobile */
+    .intra-grid-2,
+    .intra-grid-3,
+    .intra-grid-4 {
+        grid-template-columns: 1fr; /* Une seule colonne */
+        gap: 10px;
+    }
+    .intra-field input, .intra-field textarea, .intra-field select {
+        font-size: 16px; /* Agrandit le texte des champs */
+    }
+    .photo-admin-grid {
+        grid-template-columns: repeat(2, 1fr) !important; /* 2 colonnes pour la galerie */
+    }
+    .list-item-actions, .partner-actions {
+        grid-template-columns: 1fr; /* Boutons en colonne */
+    }
+
+    /* Numéro d'urgence plus grand */
+    .intra-card-warning .card-warning-phone a {
+        font-size: 23px;
+        padding: 14px 8px;
+        width: 100%;
+        display: block;
+        text-align: center;
+        border: 1px solid #f28c28;
+        border-radius: 8px;
+        margin-top: 10px;
+        box-sizing: border-box;
+    }
+}
+
+/* Ajustements pour très petits écrans (ex: iPhone SE) */
+@media (max-width: 480px) {
+    .intra-header .intra-logo {
+        font-size: 15px !important;
+    }
+    .intra-sidebar {
+        width: 90vw; /* Un peu plus large sur les très petits écrans */
+    }
+    .photo-admin-grid {
+        grid-template-columns: 1fr !important; /* 1 colonne pour la galerie */
+    }
+    .intra-card-warning .card-warning-phone a {
+        font-size: 21px;
+    }
 }
 
 @media (max-width: 820px) {
@@ -584,4 +739,5 @@ body {
         grid-template-columns: 1fr;
     }
 }
+
 
