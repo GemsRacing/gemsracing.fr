@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gems Racing | Intranet</title>
+  <link rel="icon" type="image/png" href="assets/images/favicon-gems.png?v=5">
+  <link rel="stylesheet" href="css/intranet.css">
+  <style>
+    /* Style de la page de connexion */
+    #login-overlay { position: fixed; inset: 0; background: #020b17; z-index: 9999; display: flex; align-items: center; justify-content: center; }
+    .login-card { background: #071b35; padding: 40px; border-radius: 16px; border: 2px solid #f28c28; width: 100%; max-width: 400px; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+    .login-card h1 { color: #f28c28; margin-bottom: 25px; font-size: 24px; }
+    .login-card input { width: 100%; padding: 12px; background: #020b17; border: 1px solid #333; color: #fff; border-radius: 8px; margin-bottom: 20px; text-align: center; font-size: 18px; }
+  </style>
+<style>
+.password-field {
+  display: flex;
+  gap: 8px;
+  align-items: stretch;
+  margin-bottom: 20px;
+}
+
+.password-field input {
+  flex: 1;
+  margin-bottom: 0 !important;
+}
+
+.password-toggle {
+  border: 1px solid #f28c28;
+  background: transparent;
+  color: #f28c28;
+  border-radius: 8px;
+  padding: 0 12px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.password-toggle:hover {
+  background: #f28c28;
+  color: #071b35;
+}
+</style>
+  <link rel="stylesheet" href="css/pagehead-honeycomb.css?v=200">
+</head>
+<body class="is-locked">
+
+  <div id="login-overlay">
+    <div class="login-card">
+      <img src="assets/images/favicon-gems.png" style="width:60px; margin-bottom:15px;">
+      <h1>GEMS RACING ADMINISTRATION</h1>
+      <div class="password-field">
+  <input
+    type="password"
+    id="pass-input"
+    placeholder="Mot de passe"
+    autocomplete="current-password">
+
+  <button
+    type="button"
+    id="toggle-password"
+    class="password-toggle">
+    Afficher
+  </button>
+</div>
+      <button class="btn-primary" onclick="checkPass()" style="width:100%">SE CONNECTER</button>
+    </div>
+  </div>
+
+  <header class="intra-header">
+    <div class="intra-logo">GEMS <span>RACING INTRANET</span></div>
+    <button class="btn-primary" onclick="saveAllData()">💾 ENREGISTRER & PUBLIER</button>      <button
+        type="button"
+        class="btn-secondary"
+        onclick="logoutIntranet()"
+        style="margin-left:10px;">
+        🔒 SE DÉCONNECTER
+      </button>
+  </header>
+
+  <div class="intra-container">
+    <nav class="intra-sidebar">
+      <div class="intra-nav-item active" onclick="showTab('scoring', this)">📊 Scoring</div>
+      <div class="intra-nav-item" onclick="showTab('news', this)">📰 Actus & Historique</div>
+      <div class="intra-nav-item" onclick="showTab('gallery', this)">🖼️ Galerie</div>
+      <div class="intra-nav-item" onclick="showTab('races', this)">📅 Agenda Courses</div>
+      <div class="intra-nav-item" onclick="showTab('partners', this)">🤝 Partenaires</div>
+    </nav>
+
+    <main class="intra-content">
+
+      <section id="tab-scoring" class="tab-content">
+        <div class="intra-card">
+          <h2>📊 Statistiques Actuelles</h2>
+          <div class="intra-grid-4">
+            <div class="intra-field"><label>Victoires</label><input type="text" id="stat-victoires"></div>
+            <div class="intra-field"><label>Podiums</label><input type="text" id="stat-podiums"></div>
+            <div class="intra-field"><label>SWS France</label><input type="text" id="stat-sws"></div>
+            <div class="intra-field"><label>Âge</label><input type="text" id="stat-age"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="tab-news" class="tab-content" hidden>
+        <div class="intra-card">
+          <h2>📰 Ajouter une Actualité</h2>
+          <div class="intra-field"><label>Titre</label><input type="text" id="news-title"></div>
+          <div class="intra-field"><label>Résumé</label><textarea id="news-summary" rows="3"></textarea></div>
+          <div class="intra-grid-2">
+            <div class="intra-field"><label>Lien (Insta/Site)</label><input type="text" id="news-link"></div>
+            <div class="intra-field"><label>Texte Bouton</label><input type="text" id="news-button" value="VOIR LE DÉBRIEF"></div>
+          </div>
+          <button class="btn-primary" onclick="addNews()">➕ PUBLIER L'ACTUALITÉ</button>
+          <hr style="margin:25px 0; opacity:0.1;">
+          <div id="news-list-admin"></div>
+        </div>
+      </section>
+
+      <section id="tab-gallery" class="tab-content" hidden>
+        <div class="intra-card">
+          <h2>🖼️ Galerie Photos</h2>
+          <div class="import-box">
+             <input type="file" id="gallery-file" accept="image/*">
+             <input type="text" id="gallery-caption" placeholder="Légende">
+             <button class="btn-primary" onclick="addGalleryPhoto()">➕ AJOUTER</button>
+          </div>
+          <div class="photo-admin-grid" id="gallery-grid"></div>
+        </div>
+      </section>
+
+      <section id="tab-races" class="tab-content" hidden>
+        <div class="intra-card">
+          <h2>📅 Agenda & Résultats</h2>
+          <div class="intra-grid-3">
+            <div class="intra-field"><label>Date</label><input type="date" id="race-date"></div>
+            <div class="intra-field"><label>Nom course</label><input type="text" id="race-name"></div>
+            <div class="intra-field"><label>Circuit</label><input type="text" id="race-circuit"></div>
+          </div>
+          <div class="intra-grid-2">
+            <div class="intra-field"><label>Résultat</label><input type="text" id="race-result" placeholder="Ex: 1er / 30"></div>
+            <div class="intra-field"><label>Photo de la course</label><input type="file" id="race-image" accept="image/*"></div>
+          </div>
+                    <div class="intra-grid-3">
+            <div class="intra-field">
+              <label>Ville</label>
+              <input type="text" id="race-city" placeholder="Ex: Vienne">
+            </div>
+
+            <div class="intra-field">
+              <label>Statut</label>
+              <select id="race-status">
+                <option value="Programmé">Programmé</option>
+                <option value="Terminé">Terminé</option>
+                <option value="Annulé">Annulé</option>
+              </select>
+            </div>
+
+            <div class="intra-field">
+              <label>Lien du débrief</label>
+              <input type="text" id="race-link" placeholder="Lien Instagram ou site">
+            </div>
+          </div>
+          <button class="btn-primary" onclick="addRace()">➕ AJOUTER LA COURSE</button>
+          <div id="races-list" style="margin-top:20px;"></div>
+        </div>
+      </section>
+
+      <section id="tab-partners" class="tab-content" hidden>
+        <div class="intra-card">
+          <h2>🤝 Partenaires</h2>
+          <div class="intra-grid-2">
+            <input type="text" id="partner-name" placeholder="Nom">
+            <input type="text" id="partner-url" placeholder="Lien">
+          </div>
+          <input type="file" id="partner-logo-file" accept="image/*" style="margin-top:10px;">
+          <button class="btn-primary" onclick="addPartner()" style="margin-top:10px;">➕ AJOUTER</button>
+          <div id="partners-list" style="margin-top:20px;"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="toast" class="intra-toast">✅ Enregistré !</div>
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="js/intranet.js?v=32"></script>
+</body>
+</html>

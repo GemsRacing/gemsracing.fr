@@ -1,0 +1,417 @@
+﻿<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>GEMS Karting Access | Association sportive</title>
+  <meta name="description" content="Découvrez GEMS Karting Access, une association dédiée au soutien du projet sportif et automobile de Gems Maréchal.">
+
+  <style>
+    :root {
+      --navy: #061a34;
+      --navy2: #0b315d;
+      --orange: #f28c28;
+      --orange-light: #ffad56;
+      --white: #ffffff;
+      --muted: rgba(255,255,255,.78);
+      --card: rgba(4,19,41,.88);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--white);
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        linear-gradient(135deg, rgba(6,26,52,.98), rgba(11,49,93,.97)),
+        repeating-linear-gradient(
+          60deg,
+          rgba(255,255,255,.035) 0,
+          rgba(255,255,255,.035) 1px,
+          transparent 1px,
+          transparent 28px
+        );
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(4,19,41,.96);
+      border-bottom: 1px solid rgba(242,140,40,.45);
+      backdrop-filter: blur(10px);
+    }
+
+    .nav {
+      width: min(1180px, 92%);
+      min-height: 72px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      color: var(--orange);
+      font-size: 1.1rem;
+      font-weight: 900;
+      font-style: italic;
+      letter-spacing: .04em;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 18px;
+      font-size: .9rem;
+      font-weight: 700;
+    }
+
+    .nav-links a {
+      color: var(--white);
+      text-decoration: none;
+      opacity: .88;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--orange-light);
+      opacity: 1;
+    }
+
+    .hero {
+      width: min(1180px, 92%);
+      margin: auto;
+      padding: 86px 0 62px;
+      text-align: center;
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--orange-light);
+      font-weight: 800;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      font-size: .82rem;
+    }
+
+    h1,
+    h2 {
+      margin: 0;
+      font-style: italic;
+      text-transform: uppercase;
+      line-height: 1.08;
+    }
+
+    h1 {
+      color: var(--orange);
+      font-size: clamp(2.3rem, 6vw, 5rem);
+    }
+
+    .hero-lead {
+      max-width: 760px;
+      margin: 24px auto 0;
+      color: var(--muted);
+      font-size: clamp(1.05rem, 2vw, 1.3rem);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 14px;
+      margin-top: 30px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 13px 22px;
+      border: 1px solid var(--orange);
+      border-radius: 8px;
+      background: var(--orange);
+      color: var(--white);
+      font-weight: 900;
+      text-decoration: none;
+      transition: .2s ease;
+    }
+
+    .btn:hover {
+      background: var(--orange-light);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--orange-light);
+    }
+
+    .btn-outline:hover {
+      background: rgba(242,140,40,.14);
+    }
+
+    .content {
+      width: min(1080px, 92%);
+      margin: auto;
+      padding-bottom: 72px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .card {
+      padding: 30px;
+      background: var(--card);
+      border: 1px solid rgba(242,140,40,.42);
+      border-radius: 16px;
+      box-shadow: 0 18px 45px rgba(0,0,0,.22);
+    }
+
+    .card-wide {
+      grid-column: 1 / -1;
+    }
+
+    h2 {
+      margin-bottom: 16px;
+      color: var(--orange);
+      font-size: clamp(1.45rem, 3vw, 2.2rem);
+    }
+
+    h3 {
+      margin: 0 0 8px;
+      color: var(--orange-light);
+      font-size: 1.12rem;
+    }
+
+    p {
+      margin: 0 0 14px;
+      color: var(--muted);
+    }
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+
+    .values {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .value {
+      padding: 16px 10px;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: 10px;
+      color: var(--white);
+      font-weight: 800;
+    }
+
+    .support-list {
+      display: grid;
+      gap: 12px;
+      margin: 18px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .support-list li {
+      padding: 14px 16px;
+      border-left: 4px solid var(--orange);
+      background: rgba(255,255,255,.055);
+      color: var(--muted);
+    }
+
+    .contact-box {
+      text-align: center;
+      background:
+        linear-gradient(135deg, rgba(242,140,40,.18), rgba(4,19,41,.92));
+    }
+
+    .site-footer {
+      padding: 28px 20px;
+      text-align: center;
+      border-top: 1px solid rgba(242,140,40,.35);
+      color: rgba(255,255,255,.62);
+      font-size: .9rem;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 8px;
+    }
+
+    .footer-links a {
+      color: var(--orange-light);
+      text-decoration: none;
+    }
+
+    @media (max-width: 760px) {
+      .nav {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 18px 0;
+      }
+
+      .nav-links {
+        justify-content: flex-start;
+        gap: 12px;
+      }
+
+      .hero {
+        padding-top: 62px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .card-wide {
+        grid-column: auto;
+      }
+
+      .values {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-header">
+    <nav class="nav" aria-label="Navigation principale">
+      <a class="brand" href="index.html">GEMS KART RACING</a>
+
+      <div class="nav-links">
+        <a href="index.html">Accueil</a>
+        <a href="a-propos.html">À propos</a>
+        <a href="resultats.html">Résultats</a>
+        <a class="active" href="association.html">Association</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <p class="eyebrow">Un projet sportif, une association, une ambition</p>
+      <h1>GEMS Karting Access</h1>
+      <p class="hero-lead">
+        Une association pensée pour accompagner le développement du projet sportif
+        de Gems Maréchal et favoriser l'accès à la pratique du karting.
+      </p>
+
+      <div class="hero-actions">
+        <a class="btn" href="contact.html">Devenir partenaire</a>
+        <a class="btn btn-outline" href="a-propos.html">Découvrir Gems</a>
+      </div>
+    </section>
+
+    <section class="content">
+      <div class="grid">
+        <article class="card card-wide">
+          <h2>Notre vocation</h2>
+          <p>
+            GEMS Karting Access accompagne un jeune pilote passionné dans la
+            construction de son parcours sportif et automobile.
+          </p>
+          <p>
+            L'association a pour objectif de contribuer au développement du projet,
+            de soutenir sa progression et de créer des opportunités autour du
+            karting, de la transmission et de l'engagement sportif.
+          </p>
+        </article>
+
+        <article class="card">
+          <h2>Un projet porté par la passion</h2>
+          <p>
+            Gems Maréchal pratique le karting avec ambition, détermination et
+            l'envie de progresser course après course.
+          </p>
+          <p>
+            À travers l'association, le projet bénéficie d'un cadre plus lisible
+            pour mobiliser les partenaires, valoriser les actions menées et
+            construire la suite de son parcours.
+          </p>
+        </article>
+
+        <article class="card">
+          <h2>Nos valeurs</h2>
+          <p>
+            Le projet repose sur des valeurs essentielles, sur la piste comme en
+            dehors.
+          </p>
+
+          <div class="values">
+            <div class="value">Passion</div>
+            <div class="value">Respect</div>
+            <div class="value">Humilité</div>
+            <div class="value">Rigueur</div>
+            <div class="value">Ambition</div>
+            <div class="value">Engagement</div>
+          </div>
+        </article>
+
+        <article class="card card-wide">
+          <h2>Comment soutenir le projet ?</h2>
+          <p>
+            Les entreprises, professionnels et particuliers qui souhaitent
+            accompagner Gems peuvent prendre contact avec l'association afin
+            d'étudier une collaboration adaptée.
+          </p>
+
+          <ul class="support-list">
+            <li><strong>Partenariat :</strong> associer l'image de votre entreprise à un projet sportif jeune et ambitieux.</li>
+            <li><strong>Visibilité :</strong> présence sur les supports de communication, les réseaux sociaux et les événements.</li>
+            <li><strong>Accompagnement :</strong> contribuer à la progression sportive et aux prochaines échéances.</li>
+            <li><strong>Relais du projet :</strong> partager les actualités et aider à faire connaître la démarche.</li>
+          </ul>
+        </article>
+
+        <article class="card contact-box card-wide">
+          <h2>Vous souhaitez nous accompagner ?</h2>
+          <p>
+            Pour toute demande concernant l'association, un partenariat ou le
+            projet sportif de Gems, utilisez le formulaire de contact.
+          </p>
+          <a class="btn" href="contact.html">Nous contacter</a>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div>GEMS KART RACING — GEMS Karting Access</div>
+
+    <div class="footer-links">
+      <a href="index.html">Accueil</a>
+      <a href="resultats.html">Résultats</a>
+      <a href="contact.html">Contact</a>
+      <a href="https://www.instagram.com/gems.kartracing/" target="_blank" rel="noopener">Instagram</a>
+    </div>
+  </footer>
+</body>
+</html>

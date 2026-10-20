@@ -1,113 +1,79 @@
-require('dotenv').config(); // Charge les variables du fichier .env
-
-const http = require("http");
-const fs = require("fs");
-const path = require("path");
-
-// --- CONFIGURATION GITHUB ---
-// Le jeton est maintenant lu depuis le fichier .env (sécurisé)
-const GITHUB_TOKEN = process.env.GITHUB_TOKEN; 
-const REPO_OWNER = "GemsRacing";
-const REPO_NAME = "gemsracing.fr";
-const FILE_PATH = "data/site-data.json";
+﻿const http = require('http');
+const fs = require('fs');
+const path = require('path');
 
 const PORT = 5500;
-const DATA_FILE = path.join(__dirname, "data", "site-data.json");
+const DATA_FILE = path.join(__dirname, 'data', 'site-data.json');
 
-async function pushToGithub(content) {
-    if (!GITHUB_TOKEN) {
-        console.error("Erreur: GITHUB_TOKEN n'est pas configuré dans le fichier .env");
-        return false;
-    }
+const server = http.createServer((req, res) => {
+    // 1. Nettoyer l'URL (enlever les paramètres comme ?v=33)
+    const cleanUrl = req.url.split('?')[0];
 
-    const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${FILE_PATH}`;
-    
-    try {
-        // 1. Récupérer le SHA du fichier actuel (obligatoire pour GitHub)
-        const getFile = await fetch(url, {
-            headers: { "Authorization": `token ${GITHUB_TOKEN}` }
-        });
-        const fileData = await getFile.json();
-        const sha = fileData.sha;
-
-        // 2. Envoyer la mise à jour
-        const response = await fetch(url, {
-            method: "PUT",
-            headers: {
-                "Authorization": `token ${GITHUB_TOKEN}`,
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                message: "Mise à jour automatique via Intranet",
-                content: Buffer.from(content).toString("base64"),
-                sha: sha
-            })
-        });
-
-        return response.ok;
-    } catch (error) {
-        console.error("Erreur GitHub:", error);
-        return false;
-    }
-}
-
-const server = http.createServer(async (req, res) => {
-    // Gérer le CORS (pour que l'intranet puisse parler au serveur)
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-
-    if (req.method === "OPTIONS") {
-        res.writeHead(204);
-        res.end();
-        return;
-    }
-
-    if (req.url === "/api/site-data" && req.method === "GET") {
-        fs.readFile(DATA_FILE, "utf8", (err, data) => {
-            res.writeHead(err ? 404 : 200, { "Content-Type": "application/json" });
-            res.end(data || JSON.stringify({}));
-        });
-    } 
-    else if (req.url === "/api/site-data" && req.method === "POST") {
-        let body = "";
-        req.on("data", chunk => { body += chunk.toString(); });
-        req.on("end", async () => {
-            // Sauvegarde locale
-            fs.writeFile(DATA_FILE, body, "utf8", async (err) => {
-                if (err) {
-                    res.writeHead(500);
-                    res.end("Erreur locale");
-                } else {
-                    // PUBLICATION AUTOMATIQUE SUR GITHUB
-                    console.log("Publication sur GitHub en cours...");
-                    const success = await pushToGithub(body);
-                    
-                    res.writeHead(success ? 200 : 207, { "Content-Type": "application/json" });
-                    res.end(JSON.stringify({ 
-                        success: true, 
-                        github: success 
-                    }));
-                    console.log(success ? "✅ Publié sur gemsracing.fr" : "⚠️ Sauvegardé localement mais échec GitHub");
-                }
+    // 2. Gérer l'API (Lecture/Écriture des données)
+    if (cleanUrl === '/api/site-data') {
+        if (req.method === 'GET') {
+            fs.readFile(DATA_FILE, 'utf8', (err, data) => {
+                res.writeHead(err ? 500 : 200, { 'Content-Type': 'application/json; charset=utf-8', 'Access-Control-Allow-Origin': '*' });
+                res.end(data || JSON.stringify({}));
             });
-        });
+            return;
+        }
+        if (req.method === 'POST') {
+            let body = '';
+            req.on('data', chunk => { body += chunk.toString(); });
+            req.on('end', () => {
+                fs.writeFile(DATA_FILE, body, (err) => {
+                    res.writeHead(err ? 500 : 200, { 'Content-Type': 'application/json; charset=utf-8', 'Access-Control-Allow-Origin': '*' });
+                    res.end(JSON.stringify({ success: !err }));
+                });
+            });
+            return;
+        }
     }
-    else {
-        // Servir les fichiers statiques (intranet.html, etc.)
-        let filePath = path.join(__dirname, req.url === "/" ? "index.html" : req.url);
-        fs.readFile(filePath, (err, data) => {
-            if (err) {
-                res.writeHead(404);
-                res.end("Non trouvé");
+
+    // 3. Servir les fichiers statiques (HTML, JS, CSS, Images)
+    let filePath = path.join(__dirname, cleanUrl === '/' ? 'index.html' : cleanUrl);
+    const ext = path.extname(filePath).toLowerCase();
+    
+    const mimeTypes = {
+        '.html': 'text/html; charset=utf-8',
+        '.js': 'text/javascript; charset=utf-8',
+        '.css': 'text/css; charset=utf-8',
+        '.json': 'application/json; charset=utf-8',
+        '.png': 'image/png',
+        '.jpg': 'image/jpeg',
+        '.jpeg': 'image/jpeg',
+        '.webp': 'image/webp',
+        '.gif': 'image/gif',
+        '.svg': 'image/svg+xml',
+        '.pdf': 'application/pdf'
+    };
+
+    const contentType = mimeTypes[ext] || 'application/octet-stream';
+
+    fs.readFile(filePath, (error, content) => {
+        if (error) {
+            if (error.code === 'ENOENT') {
+                res.writeHead(404, { 'Content-Type': 'text/html; charset=utf-8' });
+                res.end('<h1>404 - Fichier non trouvé</h1>', 'utf-8');
             } else {
-                res.end(data);
+                res.writeHead(500);
+                res.end('Erreur serveur: ' + error.code);
             }
-        });
-    }
+        } else {
+            res.writeHead(200, { 
+                'Content-Type': contentType,
+                'Access-Control-Allow-Origin': '*' 
+            });
+            res.end(content, 'utf-8');
+        }
+    });
 });
 
 server.listen(PORT, () => {
-    console.log(`🚀 Serveur Intranet Actif sur http://localhost:${PORT}`);
-    console.log(`👉 Gems peut modifier le site ici.`);
+    console.log(`
+🚀 Serveur GEMS RACING actif sur http://localhost:${PORT}`);
+    console.log(`📂 Dossier : ${__dirname}`);
+    console.log(`👉 Ouvre l'intranet ici : http://localhost:${PORT}/intranet.html
+`);
 });
