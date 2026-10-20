@@ -31,7 +31,13 @@
   </div>
 
   <header class="intra-header">
-    <div class="intra-logo">GEMS <span>RACING INTRANET</span></div><a href="index.html" class="btn-secondary" style="margin-left:20px; text-decoration:none; font-size:12px;">🌐 VOIR LE SITE</a>
+    <div class="intra-logo">GEMS <span>RACING INTRANET</span></div><a href="https://gemsracing.fr/"
+   class="btn-secondary"
+   style="margin-left:20px; text-decoration:none; font-size:12px; padding:10px 14px; border:1px solid #f28c28; color:#f28c28; border-radius:6px;"
+   target="_blank"
+   rel="noopener noreferrer">
+   🌐 OUVRIR LE SITE
+</a>
     <button class="btn-primary" onclick="saveAllData()">💾 ENREGISTRER & PUBLIER</button>
     <button type="button" class="btn-secondary" onclick="logoutIntranet()" style="margin-left:10px;">🔒 SE DÉCONNECTER</button>
   </header>
@@ -39,7 +45,7 @@
   <div class="intra-container">
     <nav class="intra-sidebar">
       <div class="intra-nav-item active" onclick="showTab('scoring', this)">📊 Scoring</div>
-      <div class="intra-nav-item" onclick="showTab('news', this)">📰 Actus & Historique</div>
+      <div class="intra-nav-item" onclick="showTab('news', this)">📰 Actus</div>
       <div class="intra-nav-item" onclick="showTab('gallery', this)">🖼️ Galerie</div>
       <div class="intra-nav-item" onclick="showTab('races', this)">📅 Agenda Courses</div>
       <div class="intra-nav-item" onclick="showTab('partners', this)">🤝 Partenaires</div>
@@ -149,8 +155,14 @@
         <div class="intra-card">
           <h2>⚙️ Paramètres & Support</h2>
           <div style="background:rgba(231, 76, 60, 0.1); border:1px solid #e74c3c; padding:15px; border-radius:8px; margin-bottom:20px;">
-            <h3 style="color:#e74c3c; margin-top:0;">🚨 Contact Urgence Technique (Gems uniquement)</h3>
-            <p>En cas de bug majeur sur le site ou l'intranet : <b>06 25 68 16 66</b></p>
+            <h3 style="color:#e74c3c; margin-top:0;">🚨 Contact Urgence Technique</h3>
+            <p>
+  En cas de bug majeur sur le site ou l'intranet :
+  <a href="tel:+33625681666"
+     style="color:#f28c28; font-weight:800; text-decoration:none;">
+     📞 06 25 68 16 66
+  </a>
+</p>
           </div>
           
           <div class="intra-grid-2">
@@ -158,6 +170,14 @@
               <h3>📄 Informations Légales</h3>
               <p><small>Propriétaire : Association GEMS Karting Access
 Hébergement : Vercel Inc.
+<p>
+  <a href="https://gemsracing.fr/mentions-legales.html"
+     target="_blank"
+     rel="noopener noreferrer"
+     style="color:#f28c28;">
+     📄 Consulter les mentions légales
+  </a>
+</p>
 Base de données : JSONBin.io</small></p>
             </div>
             <div>
@@ -174,6 +194,7 @@ Année : 2026</small></p>
   <script src="js/intranet.js"></script>
 </body>
 </html>
+
 
 
 
