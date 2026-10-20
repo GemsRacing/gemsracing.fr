@@ -9,7 +9,8 @@
         news: {},
         gallery: [],
         races: [],
-        partners: []
+        partners: [],
+        tickets: [] // Ajout pour le système de messages
     };
 
     let editingNewsIndex = null;
@@ -53,20 +54,63 @@
             news: data?.news || {},
             gallery: Array.isArray(data?.gallery) ? data.gallery : [],
             races: Array.isArray(data?.races) ? data.races : [],
-            partners: Array.isArray(data?.partners) ? data.partners : []
+            partners: Array.isArray(data?.partners) ? data.partners : [],
+            tickets: Array.isArray(data?.tickets) ? data.tickets : [] // Normalisation pour les tickets
         };
     }
 
     async function readImage(file) {
         return new Promise((resolve, reject) => {
-            if (!file) { resolve(""); return; }
+            if (!file) {
+                resolve("");
+                return;
+            }
+
             if (!file.type || !file.type.startsWith("image/")) {
                 reject(new Error("Le fichier sélectionné n'est pas une image."));
                 return;
             }
+
             const reader = new FileReader();
-            reader.onload = () => resolve(reader.result);
-            reader.onerror = () => reject(new Error("Impossible de lire l'image."));
+
+            reader.onload = () => {
+                const image = new Image();
+
+                image.onload = () => {
+                    const maxSize = 1400; // Largeur/hauteur max pour la compression
+                    const ratio = Math.min(
+                        1,
+                        maxSize / Math.max(image.width, image.height)
+                    );
+
+                    const canvas = document.createElement("canvas");
+                    canvas.width = Math.max(1, Math.round(image.width * ratio));
+                    canvas.height = Math.max(1, Math.round(image.height * ratio));
+
+                    const context = canvas.getContext("2d");
+                    context.drawImage(
+                        image,
+                        0,
+                        0,
+                        canvas.width,
+                        canvas.height
+                    );
+
+                    // Compression JPEG à 75 % pour réduire la taille envoyée
+                    resolve(canvas.toDataURL("image/jpeg", 0.75));
+                };
+
+                image.onerror = () => {
+                    reject(new Error("Impossible de traiter l'image."));
+                };
+
+                image.src = reader.result;
+            };
+
+            reader.onerror = () => {
+                reject(new Error("Impossible de lire l'image."));
+            };
+
             reader.readAsDataURL(file);
         });
     }
@@ -103,12 +147,15 @@
                 body: JSON.stringify(window.gemsData)
             });
 
+            const responseText = await response.text(); // Get raw response text for better error info
+
             if (response.ok) {
                 toast("✅ PUBLIÉ AVEC SUCCÈS !");
                 renderAll(); // Re-render to show saved state
             } else {
                 sessionStorage.removeItem("gems_admin_token");
-                alert("❌ Erreur : Clé de sécurité (Token) invalide ou problème de serveur.");
+                console.error("Erreur API :", response.status, responseText);
+                alert("❌ Erreur serveur " + response.status + " : " + responseText);
                 toast("Erreur de publication", "#e74c3c");
             }
         } catch (error) {
@@ -117,6 +164,9 @@
             toast("Erreur réseau", "#e74c3c");
         }
     }
+
+    // Alias utilisé par le bouton ENREGISTRER & PUBLIER dans intranet.html
+    window.saveAllData = saveData;
 
     // --- AUTHENTICATION & NAVIGATION ---
     window.checkPass = function () {
@@ -366,14 +416,19 @@
                     <div class="list-item-main">
                         <strong>${escapeHtml(race.name || "Course sans nom")}</strong>
                         <small>
-                            ${escapeHtml(race.date || "")}
-                            · ${escapeHtml(race.circuit || "")}
-                            · ${escapeHtml(race.city || "")}
+                            ${escapeHtml(race.date || "")} ${race.time ? ` à ${escapeHtml(race.time)}` : ''}
+                            · ${escapeHtml(race.circuit || "")} (${escapeHtml(race.city || "")})
+                            ${race.category ? ` · Cat: ${escapeHtml(race.category)}` : ''}
+                            ${race.pilots ? ` · ${escapeHtml(race.pilots)} pilotes` : ''}
+                            ${race.startPosition ? ` · Départ: ${escapeHtml(race.startPosition)}` : ''}
+                            ${race.bestLap ? ` · Meilleur tour: ${escapeHtml(race.bestLap)}` : ''}
                         </small>
                         <small>
                             Statut : ${escapeHtml(race.status || "")}
-                            · Résultat : ${escapeHtml(race.result || "")}
+                            ${race.result ? ` · Résultat : ${escapeHtml(race.result)}` : ''}
                         </small>
+                        ${race.comment ? `<p>${escapeHtml(race.comment)}</p>` : ''}
+                        ${race.link ? `<a href="${escapeHtml(race.link)}" target="_blank">Voir le débrief</a>` : ''}
                     </div>
                     <div class="list-item-actions">
                         <button type="button" class="btn-primary" onclick="window.editRace(${index})">✏️ Modifier</button>
@@ -387,11 +442,17 @@
     window.addRace = async function () {
         const race = {
             date: value("race-date"),
+            time: value("race-time"),
             name: value("race-name") || "Course sans nom",
             circuit: value("race-circuit"),
             result: value("race-result"),
             city: value("race-city"),
             status: document.getElementById("race-status").value || "Programmé",
+            category: value("race-category"),
+            pilots: value("race-pilots"),
+            startPosition: value("race-start-position"),
+            bestLap: value("race-best-lap"),
+            comment: value("race-comment"),
             link: value("race-link")
         };
 
@@ -412,11 +473,17 @@
         editingRaceIndex = index;
         const race = window.gemsData.races[index];
         setValue("race-date", race.date);
+        setValue("race-time", race.time);
         setValue("race-name", race.name);
         setValue("race-circuit", race.circuit);
         setValue("race-result", race.result);
         setValue("race-city", race.city);
         document.getElementById("race-status").value = race.status;
+        setValue("race-category", race.category);
+        setValue("race-pilots", race.pilots);
+        setValue("race-startPosition", race.startPosition); // Correction ici
+        setValue("race-bestLap", race.bestLap); // Correction ici
+        setValue("race-comment", race.comment);
         setValue("race-link", race.link);
         window.renderRaces(); // Re-render to show editing state
     };
@@ -431,12 +498,18 @@
 
     function resetRaceForm() {
         setValue("race-date", "");
+        setValue("race-time", "");
         setValue("race-name", "");
         setValue("race-circuit", "");
         setValue("race-result", "");
         setValue("race-city", "");
         setValue("race-link", "");
         document.getElementById("race-status").value = "Programmé";
+        setValue("race-category", "");
+        setValue("race-pilots", "");
+        setValue("race-start-position", "");
+        setValue("race-best-lap", "");
+        setValue("race-comment", "");
         editingRaceIndex = null;
     }
 
@@ -537,26 +610,73 @@
         editingPartnerIndex = null;
     }
 
+    // --- MESSAGES / TICKETS MANAGEMENT ---
+    // Cette section sera entièrement complétée lorsque l'API dédiée sera mise en place.
+    window.renderTickets = function() {
+        const list = document.getElementById("tickets-list");
+        if (!list) return;
+        const tickets = window.gemsData.tickets || [];
+
+        if (!tickets.length) {
+            list.innerHTML = "<p>Aucun message reçu.</p>";
+            return;
+        }
+
+        list.innerHTML = tickets.map((ticket, index) => `
+            <div class="list-item ${ticket.status === 'Nouveau' ? 'is-new' : ''}" style="margin-bottom:10px; border-left:${ticket.status === 'Nouveau' ? '4px solid #f28c28' : 'none'}; padding-left:${ticket.status === 'Nouveau' ? '16px' : '20px'};">
+                <div class="list-item-main">
+                    <strong>${escapeHtml(ticket.subject || "Sans sujet")}</strong>
+                    <small>${escapeHtml(ticket.name || "Anonyme")} (${escapeHtml(ticket.email || "")})</small>
+                    <small>Type: ${escapeHtml(ticket.contactType || "")} | Statut: <b>${escapeHtml(ticket.status || "Nouveau")}</b></small>
+                    <p style="margin-top:5px;">${escapeHtml(ticket.message || "")}</p>
+                    <small style="color:rgba(255,255,255,0.5);">Reçu le ${escapeHtml(ticket.date || "")} à ${escapeHtml(ticket.time || "")}</small>
+                </div>
+                <div class="list-item-actions" style="flex-direction:column; gap:5px;">
+                    <button type="button" class="btn-primary" onclick="window.markTicketAsRead(${index})">👁 Lu</button>
+                    <a href="mailto:${escapeHtml(ticket.email)}?subject=RE: ${escapeHtml(ticket.subject)}" target="_blank" class="btn-primary">📧 Répondre</a>
+                    <button type="button" class="btn-danger" onclick="window.deleteTicket(${index})">🗑 Supprimer</button>
+                </div>
+            </div>
+        `).join("");
+    };
+
+    window.markTicketAsRead = async function(index) {
+        if (!window.gemsData.tickets[index]) return;
+        window.gemsData.tickets[index].status = "Lu";
+        await saveData();
+        toast("✅ Message marqué comme lu !");
+    };
+
+    window.deleteTicket = async function(index) {
+        if (!confirm("Supprimer ce message ?")) return;
+        window.gemsData.tickets.splice(index, 1);
+        await saveData();
+        toast("✅ Message supprimé !");
+    };
+
+
+    // --- GLOBAL RENDER & INIT ---
     function renderAll() {
-        const stats = window.gemsData.stats || {};
-        const news = window.gemsData.news || {};
+        // Stats
+        setValue("stat-victoires", window.gemsData.stats.victoires);
+        setValue("stat-podiums", window.gemsData.stats.podiums);
+        setValue("stat-sws", window.gemsData.stats.sws);
+        setValue("stat-age", window.gemsData.stats.age);
 
-        setValue("stat-victoires", stats.victoires);
-        setValue("stat-podiums", stats.podiums);
-        setValue("stat-sws", stats.sws);
-        setValue("stat-age", stats.age);
+        // News
+        setValue("news-title", window.gemsData.news.title);
+        setValue("news-summary", window.gemsData.news.summary);
+        setValue("news-link", window.gemsData.news.link);
+        setValue("news-button", window.gemsData.news.button);
 
-        setValue("news-title", news.title);
-        setValue("news-summary", news.summary);
-        setValue("news-link", news.link);
-        setValue("news-button", news.button);
-
+        // Render lists
         window.renderNews();
         window.renderGallery();
         window.renderRaces();
         window.renderPartners();
+        window.renderTickets(); // Render tickets
     }
-    // --- INITIALIZATION ---
+
     document.addEventListener("DOMContentLoaded", async function () {
         const toggle = document.getElementById("toggle-password");
         const password = document.getElementById("pass-input");
@@ -567,6 +687,13 @@
                 password.type = visible ? "password" : "text";
                 toggle.textContent = visible ? "Masquer" : "Afficher";
             });
+            // Connexion avec la touche Entrée
+            password.addEventListener("keypress", function(event) {
+                if (event.key === "Enter") {
+                    event.preventDefault();
+                    window.checkPass();
+                }
+            });
         }
 
         if (sessionStorage.getItem(AUTH_KEY) === "true") {
@@ -575,7 +702,9 @@
         }
 
         await loadData();
-        window.showTab("scoring", document.querySelector(".intra-nav-item.active"));
+        // Set initial tab to "scoring" if no active item, otherwise use active item
+        const activeTabItem = document.querySelector(".intra-nav-item.active");
+        window.showTab("scoring", activeTabItem || document.querySelector(".intra-nav-item[onclick*='scoring']"));
     });
 })();
 
