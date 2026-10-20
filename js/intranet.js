@@ -537,6 +537,25 @@
         editingPartnerIndex = null;
     }
 
+    function renderAll() {
+        const stats = window.gemsData.stats || {};
+        const news = window.gemsData.news || {};
+
+        setValue("stat-victoires", stats.victoires);
+        setValue("stat-podiums", stats.podiums);
+        setValue("stat-sws", stats.sws);
+        setValue("stat-age", stats.age);
+
+        setValue("news-title", news.title);
+        setValue("news-summary", news.summary);
+        setValue("news-link", news.link);
+        setValue("news-button", news.button);
+
+        window.renderNews();
+        window.renderGallery();
+        window.renderRaces();
+        window.renderPartners();
+    }
     // --- INITIALIZATION ---
     document.addEventListener("DOMContentLoaded", async function () {
         const toggle = document.getElementById("toggle-password");
@@ -559,3 +578,4 @@
         window.showTab("scoring", document.querySelector(".intra-nav-item.active"));
     });
 })();
+
