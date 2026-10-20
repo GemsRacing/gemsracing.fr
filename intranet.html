@@ -31,7 +31,15 @@
   </div>
 
   <header class="intra-header">
-    <div class="intra-logo">GEMS <span>RACING INTRANET</span></div><a href="https://gemsracing.fr/"
+    <div class="intra-logo">GEMS <span>RACING INTRANET</span></div>
+<button
+    type="button"
+    id="mobile-menu-toggle"
+    class="mobile-menu-toggle"
+    aria-label="Ouvrir le menu"
+    aria-expanded="false">
+    ☰
+</button><a href="https://gemsracing.fr/"
    class="btn-secondary"
    style="margin-left:20px; text-decoration:none; font-size:12px; padding:10px 14px; border:1px solid #f28c28; color:#f28c28; border-radius:6px;"
    target="_blank"
@@ -50,7 +58,7 @@
       <div class="intra-nav-item" onclick="showTab('races', this)">📅 Agenda Courses</div>
       <div class="intra-nav-item" onclick="showTab('partners', this)">🤝 Partenaires</div>
       <div class="intra-nav-item" onclick="showTab('tickets', this)">🎫 Messages</div>
-      <div class="intra-nav-item" onclick="showTab('settings', this)">⚙️ Paramètres</div>
+      <div class="intra-nav-item" onclick="showTab('info', this)">ℹ️ Infos & Support</div>
     </nav>
 
     <main class="intra-content">
@@ -151,9 +159,9 @@
           <div id="tickets-list"></div>
         </div>
       </section>
-      <section id="tab-settings" class="tab-content" hidden>
+      <section id="tab-info" class="tab-content" hidden>
         <div class="intra-card">
-          <h2>⚙️ Paramètres</h2>
+          <h2>ℹ️ Infos & Support</h2>
           <div class="intra-card-warning" style="margin-bottom:20px;">
             <h3 class="card-warning-title">🚨 Contact Urgence Technique</h3>
             <p class="card-warning-text">En cas de bug majeur sur le site ou l'intranet :</p>
@@ -193,6 +201,7 @@ Année : 2026</small></p>
   <script src="js/intranet.js"></script>
 </body>
 </html>
+
 
 
 

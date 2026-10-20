@@ -706,5 +706,31 @@
         const activeTabItem = document.querySelector(".intra-nav-item.active");
         window.showTab("scoring", activeTabItem || document.querySelector(".intra-nav-item[onclick*='scoring']"));
     });
+
+    // Menu hamburger mobile
+    document.addEventListener("DOMContentLoaded", function () {
+        const mobileToggle = document.getElementById("mobile-menu-toggle");
+        const mobileSidebar = document.querySelector(".intra-sidebar");
+
+        if (!mobileToggle || !mobileSidebar) return;
+
+        mobileToggle.addEventListener("click", function () {
+            const isOpen = mobileSidebar.classList.toggle("is-open");
+
+            document.body.classList.toggle("mobile-menu-open", isOpen);
+            mobileToggle.setAttribute("aria-expanded", String(isOpen));
+            mobileToggle.textContent = isOpen ? "✕" : "☰";
+        });
+
+        mobileSidebar.addEventListener("click", function (event) {
+            if (event.target.closest(".intra-nav-item")) {
+                mobileSidebar.classList.remove("is-open");
+                document.body.classList.remove("mobile-menu-open");
+                mobileToggle.setAttribute("aria-expanded", "false");
+                mobileToggle.textContent = "☰";
+            }
+        });
+    });
 })();
+
 
