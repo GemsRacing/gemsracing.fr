@@ -10,7 +10,11 @@
         document.getElementById("stat-victoires-kart").textContent = v;
         document.getElementById("stat-podiums-display").textContent = data.stats.podiums || "0";
         document.getElementById("stat-sws-display").textContent = data.stats.sws || "-";
-        document.getElementById("stat-age-display").textContent = data.stats.age + " ans";
+        
+        // On enlève "ans" du JSON s'il y est déjà pour éviter le doublon
+        let age = data.stats.age || "0";
+        age = age.toString().replace(" ans", "").replace("ans", "");
+        document.getElementById("stat-age-display").textContent = age + " ans";
 
         // Mise à jour de l'actualité
         if (data.news && data.news.title) {
