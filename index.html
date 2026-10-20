@@ -81,12 +81,12 @@
       type="button"
       aria-label="Ouvrir le menu"
       aria-expanded="false">
-      â˜°
+      ☰
     </button>
     <nav class="menu">
       <a href="index.html" class="active">ACCUEIL</a>
-      <a href="a-propos.html">Ã€ PROPOS</a>
-      <a href="resultats.html">RÃ‰SULTATS &amp; ACTUS</a>
+      <a href="a-propos.html">À PROPOS</a>
+      <a href="resultats.html">RÉSULTATS &amp; ACTUS</a>
       <a href="association.html">ASSOCIATION</a>
       <a href="contact.html">CONTACT &amp; SPONSORS</a>
       <a href="galerie.html">GALERIE</a>
@@ -103,7 +103,7 @@
 
       <div class="gems-home-content">
         <div class="eyebrow">
-          PILOTE DE KARTING Â· PROJET SPORTIF Â· NANTES / VENDÃ‰E
+          PILOTE DE KARTING · PROJET SPORTIF · NANTES / VENDÉE
         </div>
 
         <h1>
@@ -165,7 +165,7 @@
 
       <div class="stat">
         <b id="stat-age-display">16 ans</b>
-        <small>Ã‚GE DU PILOTE</small>
+        <small>ÂGE DU PILOTE</small>
       </div>
     </div>
   
@@ -193,7 +193,7 @@
       </div>
 
       <a class="gems-news-button" id="latest-news-link-display" href="resultats.html">
-        VOIR LES RÃ‰SULTATS
+        VOIR LES RÉSULTATS
       </a>
 
     </div>
@@ -211,18 +211,18 @@
             DÃ©couvrez le parcours, les dÃ©buts et les ambitions de Gems.
           </p>
           <a class="btn blue" href="a-propos.html">
-            DÃ‰COUVRIR SON PARCOURS
+            DÉCOUVRIR SON PARCOURS
           </a>
         </article>
 
         <article class="card">
-          <div class="eyebrow">RÃ‰SULTATS 2026</div>
-          <h3>7 victoires Â· 15 podiums</h3>
+          <div class="eyebrow">RÉSULTATS 2026</div>
+          <h3>7 victoires · 15 podiums</h3>
           <p>
             Retrouvez les rÃ©sultats et les actualitÃ©s de la saison.
           </p>
           <a class="btn blue" href="resultats.html">
-            VOIR LES RÃ‰SULTATS
+            VOIR LES RÉSULTATS
           </a>
         </article>
 
@@ -347,7 +347,7 @@
 </section>
 
 
-<!-- Script menu externe retire pour eviter doublon -->
+<script src="js/menu-clean.js"></script>
 <script src="js/sticky-header.js"></script>
 
 <footer class="footer">
@@ -362,7 +362,7 @@
         </div>
 
         <p class="footer-slogan">
-          Passion Â· Ambition Â· Combatif
+          Passion · Ambition · Combatif
         </p>
       </div>
 
@@ -371,7 +371,7 @@
 
         <ul class="footer-links">
           <li><a href="index.html">Accueil</a></li>
-          <li><a href="a-propos.html">Ã€ propos de Gems</a></li>
+          <li><a href="a-propos.html">À propos de Gems</a></li>
           <li><a href="resultats.html">RÃ©sultats &amp; actualitÃ©s</a></li>
           <li><a href="association.html">Association</a></li>
           <li><a href="contact.html">Devenir partenaire</a></li>
@@ -428,37 +428,10 @@
 
 
 <script src="js/site-sync.js?v=15"></script>  <script src="js/scoring-kart-animation.js?v=15"></script>
-<script>
-/* GEMS_MOBILE_MENU_SCRIPT */
-document.addEventListener("DOMContentLoaded", function () {
-  const toggle = document.querySelector(".menu-toggle");
-  const menu = document.querySelector(".menu");
-
-  if (!toggle || !menu) return;
-
-  toggle.addEventListener("click", function () {
-    const isOpen = menu.classList.toggle("is-open");
-
-    toggle.setAttribute("aria-expanded", String(isOpen));
-    toggle.setAttribute(
-      "aria-label",
-      isOpen ? "Fermer le menu" : "Ouvrir le menu"
-    );
-    toggle.textContent = isOpen ? "âœ•" : "â˜°";
-  });
-
-  menu.querySelectorAll("a").forEach(function (link) {
-    link.addEventListener("click", function () {
-      menu.classList.remove("is-open");
-      toggle.setAttribute("aria-expanded", "false");
-      toggle.setAttribute("aria-label", "Ouvrir le menu");
-      toggle.textContent = "â˜°";
-    });
-  });
-});
-</script>
+<!-- GEMS_MOBILE_MENU_SCRIPT retire pour eviter doublon et conflit -->
 </body>
 </html>
+
 
 
 
