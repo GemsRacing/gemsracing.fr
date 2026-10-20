@@ -1,4 +1,4 @@
-(function () {
+﻿(function () {
   "use strict";
 
   window.renderPublicData = function(data) {
@@ -22,7 +22,7 @@
     });
 
     if (document.getElementById("latest-news-title-display")) {
-        document.getElementById("latest-news-title-display").textContent = news.title || "Aucune actualité récente";
+        document.getElementById("latest-news-title-display").textContent = news.title || "Aucune actualitÃ© rÃ©cente";
     }
     if (document.getElementById("latest-news-summary-display")) {
         document.getElementById("latest-news-summary-display").textContent = news.summary || "";
@@ -30,7 +30,7 @@
     const newsLink = document.getElementById("latest-news-link-display");
     if (newsLink) newsLink.href = news.link || "resultats.html";
 
-    // --- Page Résultats ---
+    // --- Page RÃ©sultats ---
     const resStatsIds = {
         "stat-victoires-display": stats.victoires,
         "stat-podiums-display": stats.podiums,
@@ -55,7 +55,7 @@
                 <div class="list-item-main">
                     <strong>${r.name || "Course"}</strong>
 
-                    <small>${r.date} · ${r.circuit} · ${r.result}</small>
+                    <small>${r.date} Â· ${r.circuit} Â· ${r.result}</small>
                 </div>
             </div>`).join("");
     }
