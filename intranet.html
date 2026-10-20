@@ -199,8 +199,46 @@ Année : 2026</small></p>
   </div>
   <div id="toast" class="intra-toast" style="display:none; position:fixed; bottom:20px; right:20px; background:#2ecc71; color:white; padding:10px 20px; border-radius:5px;">✅ Enregistré !</div>
   <script src="js/intranet.js"></script>
+<script>
+/* GEMS_HAMBURGER_INLINE_FIX */
+document.addEventListener("DOMContentLoaded", function () {
+    const toggle = document.getElementById("mobile-menu-toggle");
+    const sidebar = document.querySelector(".intra-sidebar");
+
+    if (!toggle || !sidebar) {
+        console.warn("Menu hamburger introuvable.");
+        return;
+    }
+
+    toggle.addEventListener("click", function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        const opened = sidebar.classList.toggle("is-open");
+
+        document.body.classList.toggle("mobile-menu-open", opened);
+        toggle.setAttribute("aria-expanded", String(opened));
+        toggle.setAttribute(
+            "aria-label",
+            opened ? "Fermer le menu" : "Ouvrir le menu"
+        );
+        toggle.textContent = opened ? "✕" : "☰";
+    });
+
+    sidebar.querySelectorAll(".intra-nav-item").forEach(function (item) {
+        item.addEventListener("click", function () {
+            sidebar.classList.remove("is-open");
+            document.body.classList.remove("mobile-menu-open");
+            toggle.setAttribute("aria-expanded", "false");
+            toggle.setAttribute("aria-label", "Ouvrir le menu");
+            toggle.textContent = "☰";
+        });
+    });
+});
+</script>
 </body>
 </html>
+
 
 
 
