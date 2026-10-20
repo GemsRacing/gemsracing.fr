@@ -118,6 +118,8 @@
         }
     }
 
+    // Alias utilisé par le bouton ENREGISTRER & PUBLIER dans intranet.html
+    window.saveAllData = saveData;
     // --- AUTHENTICATION & NAVIGATION ---
     window.checkPass = function () {
         const input = document.getElementById("pass-input");
@@ -577,5 +579,24 @@
         await loadData();
         window.showTab("scoring", document.querySelector(".intra-nav-item.active"));
     });
+
+    // Connexion avec la touche Entrée
+    document.addEventListener("keydown", function (event) {
+        const passwordInput = document.getElementById("pass-input");
+
+        if (
+            event.key === "Enter" &&
+            passwordInput &&
+            document.activeElement === passwordInput
+        ) {
+            event.preventDefault();
+
+            if (typeof window.checkPass === "function") {
+                window.checkPass();
+            }
+        }
+    });
 })();
+
+
 
