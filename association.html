@@ -88,15 +88,8 @@
   </script>
 
   <style>
-    .association-pagehead {
-      overflow: hidden;
-    }
-
-    .association-pagehead .wrap {
-      position: relative;
-      z-index: 2;
-    }
-
+    .association-pagehead { overflow: hidden; }
+    .association-pagehead .wrap { position: relative; z-index: 2; }
     .association-pagehead-inner {
       min-height: 250px;
       display: grid;
@@ -104,20 +97,9 @@
       align-items: center;
       gap: 34px;
     }
-
-    .association-pagehead-copy {
-      text-align: left;
-      max-width: 720px;
-    }
-
-    .association-pagehead-copy h1 {
-      margin-bottom: 12px;
-    }
-
-    .association-pagehead-copy p {
-      margin: 0 0 22px;
-    }
-
+    .association-pagehead-copy { text-align: left; max-width: 720px; }
+    .association-pagehead-copy h1 { margin-bottom: 12px; }
+    .association-pagehead-copy p { margin: 0 0 22px; }
     .association-pagehead-visual {
       display: flex;
       align-items: center;
@@ -125,7 +107,6 @@
       min-height: 190px;
       transform: translateX(38px);
     }
-
     .association-page-logo {
       display: block;
       width: min(290px, 100%);
@@ -134,55 +115,30 @@
       margin: 0 auto;
       filter: drop-shadow(0 10px 20px rgba(0,0,0,.35));
     }
-
-    .association-page .association-intro h2::after {
-      content: none !important;
-      display: none !important;
-    }
-
-    .association-page .association-intro h2 {
-      margin-bottom: 20px;
-    }
-
+    .association-page .association-intro h2::after { content: none !important; display: none !important; }
+    .association-page .association-intro h2 { margin-bottom: 20px; }
     .sponsor-download-button {
       display: inline-flex;
       align-items: center;
       gap: 9px;
       margin-top: 4px;
     }
-
-    .association-intro {
-      max-width: 900px;
-      margin: 0 auto 34px;
-      text-align: center;
-    }
-
-    .association-intro h2 {
-      margin-bottom: 14px;
-    }
-
+    .association-intro { max-width: 900px; margin: 0 auto 34px; text-align: center; }
+    .association-intro h2 { margin-bottom: 14px; }
     .association-cards {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 24px;
       margin-top: 30px;
     }
-
-    .association-card {
-      padding: 28px;
-    }
-
-    .association-card-wide {
-      grid-column: 1 / -1;
-    }
-
+    .association-card { padding: 28px; }
+    .association-card-wide { grid-column: 1 / -1; }
     .association-values {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
       margin-top: 18px;
     }
-
     .association-value {
       padding: 9px 15px;
       border: 1px solid rgba(242,140,40,.55);
@@ -190,28 +146,18 @@
       color: #f28c28;
       font-weight: 800;
     }
-
     .association-actions {
       display: grid;
       gap: 12px;
       margin-top: 18px;
     }
-
     .association-action {
       padding: 14px 16px;
       border-left: 4px solid #f28c28;
       background: rgba(255,255,255,.06);
     }
-
-    .association-action strong {
-      color: #f28c28;
-    }
-
-    .association-cta {
-      margin-top: 34px;
-      text-align: center;
-    }
-
+    .association-action strong { color: #f28c28; }
+    .association-cta { margin-top: 34px; text-align: center; }
     @media (max-width: 760px) {
       .association-pagehead-inner {
         min-height: auto;
@@ -219,30 +165,11 @@
         text-align: center;
         gap: 16px;
       }
-
-      .association-pagehead-copy {
-        text-align: center;
-        max-width: none;
-      }
-
-      .association-pagehead-visual {
-        order: -1;
-        min-height: 130px;
-        transform: none;
-      }
-
-      .association-page-logo {
-        width: min(230px, 70vw);
-        max-height: 135px;
-      }
-
-      .association-cards {
-        grid-template-columns: 1fr;
-      }
-
-      .association-card-wide {
-        grid-column: auto;
-      }
+      .association-pagehead-copy { text-align: center; max-width: none; }
+      .association-pagehead-visual { order: -1; min-height: 130px; transform: none; }
+      .association-page-logo { width: min(230px, 70vw); max-height: 135px; }
+      .association-cards { grid-template-columns: 1fr; }
+      .association-card-wide { grid-column: auto; }
     }
   </style>
 </head>
@@ -251,18 +178,8 @@
 
 <header class="top">
   <div class="wrap nav">
-    <a class="logo" href="index.html">
-      GEMS <span>KART RACING</span>
-    </a>
-
-    <button
-      class="menu-toggle"
-      type="button"
-      aria-label="Ouvrir le menu"
-      aria-expanded="false">
-      ☰
-    </button>
-
+    <a class="logo" href="index.html">GEMS <span>KART RACING</span></a>
+    <button class="menu-toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false">☰</button>
     <nav class="menu">
       <a href="index.html">ACCUEIL</a>
       <a href="a-propos.html">À PROPOS</a>
@@ -272,7 +189,6 @@
       <a href="contact.html">CONTACT &amp; SPONSORS</a>
       <a href="galerie.html">GALERIE</a>
     </nav>
-
     <a class="btn" href="contact.html">DEVENIR PARTENAIRE</a>
   </div>
 </header>
@@ -282,27 +198,13 @@
     <div class="wrap association-pagehead-inner">
       <div class="association-pagehead-copy">
         <h1>GEMS Karting Access</h1>
-        <p>
-          Une association au service d'un projet sportif et automobile ambitieux
-        </p>
-        <a
-          class="btn sponsor-download-button"
-          href="assets/documents/dossier-sponsoring-gems.pdf"
-          download
-          type="application/pdf"
-          title="Télécharger le dossier de partenariat GEMS Racing (PDF)">
-          TÉLÉCHARGER LE DOSSIER PARTENAIRE
+        <p>Une structure associative au service d'un projet sportif de haut niveau en karting de compétition</p>
+        <a class="btn sponsor-download-button" href="assets/documents/dossier-sponsoring-gems.pdf" download type="application/pdf" title="Télécharger le dossier de partenariat GEMS Racing (PDF)">
+          TÉLÉCHARGER LE DOSSIER PARTENAIRE (PDF)
         </a>
       </div>
-
       <div class="association-pagehead-visual">
-        <img
-          class="association-page-logo"
-          src="assets/images/logo-gems-karting-access.webp"
-          alt="Logo officiel de l'association GEMS Karting Access"
-          width="290"
-          height="180"
-          fetchpriority="high">
+        <img class="association-page-logo" src="assets/images/logo-gems-karting-access.webp" alt="Logo officiel de l'association GEMS Karting Access" width="290" height="180" fetchpriority="high">
       </div>
     </div>
   </section>
@@ -310,44 +212,28 @@
   <section class="section">
     <div class="wrap">
       <div class="association-intro">
-        <h2>Accompagner une passion, construire un avenir</h2>
-        <p>
-          GEMS Karting Access accompagne le projet sportif de
-          <strong>Gems Maréchal</strong>, jeune pilote de karting passionné par
-          le sport automobile et déterminé à progresser course après course.
-        </p>
-        <p>
-          L'association permet de structurer le projet, de développer les
-          partenariats et de créer un cadre professionnel autour de sa pratique
-          sportive.
-        </p>
+        <h2>Structurer l'ambition, fédérer les énergies</h2>
+        <p>Fondée sous le régime de la loi 1901, l'association <strong>GEMS Karting Access</strong> a pour mission d'encadrer, de financer et de professionnaliser la trajectoire sportive du pilote <strong>Gems Maréchal</strong>. Dans un sport mécanique où le talent individuel doit impérativement s'appuyer sur une rigueur logistique et budgétaire constante, notre structure offre aux entreprises et mécènes un cadre juridique clair et sécurisé pour s'engager dans le sport automobile.</p>
+        <p>L'association garantit une transparence totale sur l'affectation des fonds collectés, consacrés à 100 % à la performance sur la piste et à la sécurité du pilote, dans le respect des valeurs d'humilité et de persévérance chères à notre équipe.</p>
       </div>
 
       <div class="association-cards">
         <article class="card association-card">
-          <h3>Notre objectif</h3>
-          <p>
-            L'objectif de GEMS Karting Access est de favoriser l'accès à la
-            pratique du karting et d'aider Gems à poursuivre son évolution
-            sportive dans les meilleures conditions.
-          </p>
-          <p>
-            L'association soutient notamment la participation aux courses, la
-            préparation du projet et la mise en relation avec des entreprises
-            souhaitant s'engager aux côtés d'un jeune pilote.
-          </p>
+          <h3>Nos missions concrètes</h3>
+          <p>La pratique du karting de haut niveau en championnat <strong>Sodi World Series (SWS Sprint)</strong> et l'entraînement sur kart 2T Rotax exigent des investissements matériels et opérationnels réguliers :</p>
+          <ul style="margin: 10px 0 14px 18px; line-height: 1.6; color: rgba(255,255,255,0.85);">
+            <li><strong>Inscriptions aux compétitions :</strong> Financement des droits d'engagement sur le calendrier officiel SWS (environ 50 courses par saison).</li>
+            <li><strong>Consommables &amp; Entretien :</strong> Achat de pneumatiques de compétition, essence spéciale, pièces d'usure et révisions moteur.</li>
+            <li><strong>Déplacements &amp; Logistique :</strong> Prise en charge des transports sur les circuits régionaux et nationaux (Le Mans, Jovikart Le Bignon, Solokart Plessé, Laval).</li>
+            <li><strong>Sécurité du pilote :</strong> Équipements homologués CIK-FIA (combinaison ignifugée, protège-côtes en carbone, casque et minerve).</li>
+          </ul>
+          <p>Consultez l'impact direct de ce soutien sur les <a href="resultats.html" style="color:#f28c28; font-weight:700;">résultats et victoires de Gems en 2026</a>.</p>
         </article>
 
         <article class="card association-card">
-          <h3>Un projet humain</h3>
-          <p>
-            Derrière chaque course, il y a du travail, des déplacements, de la
-            préparation et une équipe mobilisée autour du pilote.
-          </p>
-          <p>
-            L'association valorise également les notions de respect, d'humilité,
-            de rigueur et d'engagement, sur la piste comme en dehors.
-          </p>
+          <h3>Un projet humain et formateur</h3>
+          <p>Au-delà du chronomètre, GEMS Karting Access accompagne un jeune athlète dans sa construction personnelle et professionnelle. En combinant ses études en Bac Pro Maintenance Automobile au lycée Saint-François d'Assise et ses week-ends de compétition, Gems incarne un modèle d'engagement sérieux et méthodique.</p>
+          <p>Pour en savoir plus sur son histoire et ses débuts, découvrez la <a href="a-propos.html" style="color:#f28c28; font-weight:700;">biographie complète de Gems Maréchal</a>.</p>
           <div class="association-values">
             <span class="association-value">Passion</span>
             <span class="association-value">Ambition</span>
@@ -359,42 +245,32 @@
         </article>
 
         <article class="card association-card association-card-wide">
-          <h3>Comment soutenir l'association ?</h3>
-          <p>
-            Les entreprises, professionnels et particuliers qui souhaitent
-            accompagner le projet peuvent prendre contact avec l'équipe Gems
-            Racing afin d'étudier une collaboration adaptée.
-          </p>
+          <h3>Les formules d'engagement pour les partenaires</h3>
+          <p>Que vous soyez une entreprise locale des Pays de la Loire, un groupe national ou un particulier passionné de sport mécanique, l'association propose des collaborations sur mesure :</p>
           <div class="association-actions">
             <div class="association-action">
-              <strong>Partenariat :</strong>
-              associer votre image à un jeune pilote et à un projet sportif
-              construit avec sérieux.
+              <strong>Sponsoring commercial :</strong>
+              Visibilité de votre marque sur la combinaison, le casque, les supports de paddock, les réseaux sociaux officiels (<a href="https://www.instagram.com/gems.kartracing/" target="_blank" rel="noopener noreferrer" style="color:#f28c28;">@gems.kartracing</a>) et le site internet officiel.
             </div>
             <div class="association-action">
-              <strong>Visibilité :</strong>
-              présence sur les supports de communication, les réseaux sociaux,
-              les événements et les équipements selon le partenariat défini.
+              <strong>Mécénat sportif (Loi 1901) :</strong>
+              Soutien financier défiscalisé permettant de valoriser votre engagement sociétal (RSE) en soutenant l'émancipation d'un jeune espoir régional du sport automobile.
             </div>
             <div class="association-action">
-              <strong>Accompagnement :</strong>
-              contribuer aux frais liés aux courses, aux déplacements et à la
-              progression sportive.
+              <strong>Relations publiques &amp; Événements :</strong>
+              Possibilité d'organiser des baptêmes de piste, des rencontres avec le pilote ou des animations de karting pour vos collaborateurs et clients VIP.
             </div>
             <div class="association-action">
-              <strong>Relais du projet :</strong>
-              partager les actualités de Gems et faire connaître son parcours.
+              <strong>Relais de visibilité :</strong>
+              Mise en avant de votre partenariat dans nos communiqués presse et nos débriefs de course vidéo.
             </div>
           </div>
         </article>
 
         <article class="card association-card association-card-wide association-cta">
-          <h3>Vous souhaitez devenir partenaire ?</h3>
-          <p>
-            Contactez l'équipe Gems Racing pour recevoir les informations
-            concernant le projet et les possibilités de partenariat.
-          </p>
-          <a class="btn" href="contact.html">CONTACTER L'ÉQUIPE</a>
+          <h3>Rejoignez l'équipe Gems Racing</h3>
+          <p>Vous souhaitez associer l'image de votre entreprise aux valeurs de combativité et d'excellence du sport mécanique ?</p>
+          <a class="btn" href="contact.html">CONTACTER LE BUREAU DE L'ASSOCIATION</a>
         </article>
       </div>
 
@@ -420,10 +296,7 @@
 <section class="gems-partners-section" id="partenaires">
   <div class="wrap">
     <h2>Partenaires officiels</h2>
-    <p class="gems-partners-intro">
-      Ils accompagnent Gems dans son projet sportif.
-    </p>
-
+    <p class="gems-partners-intro">Ils accompagnent Gems dans son projet sportif.</p>
     <div class="gems-partners-container">
       <div class="gems-partners-track">
         <a class="gems-partner-card" href="https://www.vrtueux.fr/" target="_blank" rel="noopener noreferrer">
@@ -447,7 +320,6 @@
           <span class="gems-partner-name">Arrière-Cour</span>
         </a>
       </div>
-
       <div class="gems-partners-track">
         <a class="gems-partner-card" href="https://www.vrtueux.fr/" target="_blank" rel="noopener noreferrer">
           <img src="assets/partners/vrtueux.webp" alt="VRtueux" width="100" height="60" loading="lazy">
@@ -478,52 +350,31 @@
   <div class="wrap">
     <div class="footer-main">
       <div class="footer-brand">
-        <div class="logo">
-          GEMS
-          <span>KART RACING</span>
-        </div>
-        <p class="footer-slogan">
-          Passion · Ambition · Combatif
-        </p>
+        <div class="logo">GEMS <span>KART RACING</span></div>
+        <p class="footer-slogan">Passion · Ambition · Combatif</p>
       </div>
-
       <div class="footer-navigation">
         <h3 class="footer-title">Navigation</h3>
         <ul class="footer-links">
           <li><a href="index.html">Accueil</a></li>
           <li><a href="a-propos.html">À propos de Gems</a></li>
           <li><a href="resultats.html">Résultats &amp; actualités</a></li>
-          <li><a href="association.html">Association</a></li>
+          <li><a href="association.html" class="active">Association</a></li>
           <li><a href="faq.html">FAQ</a></li>
           <li><a href="contact.html">Devenir partenaire</a></li>
           <li><a href="intranet.html">Intranet</a></li>
         </ul>
       </div>
-
       <div class="footer-contact">
         <h3 class="footer-title">Contact</h3>
-        <p class="footer-social">
-          <a href="https://www.instagram.com/gems.kartracing/" target="_blank" rel="noopener noreferrer">
-            Instagram @gems.kartracing
-          </a>
-        </p>
-        <p class="footer-social">
-          <a href="contact.html">Contacter l'équipe Gems Racing</a>
-        </p>
-        <p class="footer-social">
-          <a href="mentions-legales.html">Mentions légales</a>
-        </p>
+        <p class="footer-social"><a href="https://www.instagram.com/gems.kartracing/" target="_blank" rel="noopener noreferrer">Instagram @gems.kartracing</a></p>
+        <p class="footer-social"><a href="contact.html">Contacter l'équipe Gems Racing</a></p>
+        <p class="footer-social"><a href="mentions-legales.html">Mentions légales</a></p>
       </div>
     </div>
-
     <div class="footer-bottom">
       <p>© 2026 Gems Racing — Association GEMS Karting Access.</p>
-      <p class="footer-developer">
-        Site développé par
-        <a href="https://www.vrtueux.fr/" target="_blank" rel="noopener noreferrer">
-          VRtueux
-        </a>
-      </p>
+      <p class="footer-developer">Site développé par <a href="https://www.vrtueux.fr/" target="_blank" rel="noopener noreferrer">VRtueux</a></p>
     </div>
   </div>
 </footer>
