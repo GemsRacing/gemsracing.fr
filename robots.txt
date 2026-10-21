@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
+Disallow: /intranet.html
+Disallow: /api/
 
-Sitemap: https://www.gemsracing.fr/sitemap.xml
+# Emplacement du sitemap officiel
+Sitemap: https://gemsracing.fr/sitemap.xml
