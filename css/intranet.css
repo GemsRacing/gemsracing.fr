@@ -1,4 +1,4 @@
-﻿/* INTRANET GEMS RACING */
+/* INTRANET GEMS RACING */
 * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
 body { background: #040f1e; color: #ffffff; min-height: 100vh; display: flex; flex-direction: column; }
 
@@ -741,3 +741,21 @@ body {
 }
 
 
+
+/* Fix responsive header mobile intranet */
+@media (max-width: 768px) {
+  .intra-header {
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 10px 14px;
+  }
+  .intra-header .btn-primary {
+    font-size: 12px;
+    padding: 8px 12px;
+  }
+  .intra-header .btn-secondary {
+    font-size: 11px;
+    padding: 7px 10px;
+    margin-left: 0 !important;
+  }
+}
