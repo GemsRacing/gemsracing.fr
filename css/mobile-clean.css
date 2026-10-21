@@ -1,224 +1,46 @@
 ﻿/* ============================================================
-   MOBILE CLEAN - GEMS RACING (FIX FINAL)
-   Styles pour le menu hamburger et la responsivité du site public.
-   Ce fichier remplace le contenu existant pour éviter les conflits.
+   GEMS RACING - CSS MOBILE SEULEMENT
+   S'applique UNIQUEMENT sous 820px de largeur
    ============================================================ */
 
-/* Styles de base pour le header et la navigation */
-header.top .wrap.nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 15px 20px;
-    position: relative;
-    z-index: 100; /* Assure que le header reste au-dessus */
-}
-
-/* Bouton du menu hamburger */
-.menu-toggle {
-    display: none; /* Caché par défaut sur grand écran */
-    background: transparent;
-    border: 1px solid #f28c28;
-    color: #f28c28;
-    font-size: 22px;
-    width: 44px;
-    height: 40px;
-    border-radius: 6px;
-    cursor: pointer;
-    align-items: center;
-    justify-content: center;
-    line-height: 1;
-    z-index: 1002; /* Au-dessus du menu */
-}
-
-/* Menu de navigation (par défaut caché sur mobile) */
-header.top nav.menu {
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    top: 100%; /* Juste en dessous du header */
-    left: 0;
-    right: 0;
-    width: 100%;
-    background: #071b35; /* Couleur de fond du menu */
-    border-top: 1px solid rgba(255,255,255,0.1);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-    z-index: 1001; /* Au-dessus du contenu */
-    padding: 15px 0;
-}
-
-/* Liens du menu */
-header.top nav.menu a {
-    color: #ffffff;
-    padding: 12px 20px;
-    font-size: 14px;
-    font-weight: 700;
-    text-decoration: none;
-    display: block; /* Chaque lien prend sa propre ligne */
-    transition: background-color 0.2s ease;
-}
-
-header.top nav.menu a:hover,
-header.top nav.menu a.active {
-    background: rgba(242, 140, 40, 0.2);
-    color: #f28c28;
-}
-
-/* Bouton "DEVENIR PARTENAIRE" dans le header (caché sur mobile par défaut) */
-header.top > .wrap.nav > a.btn {
-    display: none;
-}
-
-/* Lorsque le menu est ouvert */
-header.top nav.menu.is-open {
-    display: flex; /* Affiche le menu */
-}
-
-
-/* Styles pour les écrans mobiles (max-width: 820px) */
 @media (max-width: 820px) {
-    body {
-        overflow-x: hidden; /* Empêche le défilement horizontal */
+    header.top .menu-toggle {
+        display: inline-flex !important;
+        background: transparent !important;
+        border: 1px solid #f28c28 !important;
+        color: #f28c28 !important;
+        font-size: 22px !important;
+        padding: 5px 10px !important;
+        border-radius: 6px !important;
+        cursor: pointer !important;
     }
 
-    /* Afficher le bouton hamburger */
-    .menu-toggle {
-        display: inline-flex;
+    header.top nav.menu {
+        display: none !important;
+        position: absolute !important;
+        top: 100% !important;
+        left: 0 !important;
+        right: 0 !important;
+        background: #071b35 !important;
+        flex-direction: column !important;
+        padding: 15px 0 !important;
+        z-index: 1000 !important;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.7) !important;
     }
 
-    /* Cacher le bouton "DEVENIR PARTENAIRE" dans le header */
-    header.top > .wrap.nav > a.btn {
-        display: none;
+    header.top nav.menu.is-open {
+        display: flex !important;
     }
 
-    /* Assurer que le logo et le bouton menu sont bien espacés */
-    header.top .logo {
-        flex-grow: 1;
-    }
-
-    /* Ajuster la taille du logo sur mobile si nécessaire */
-    header.top .logo span {
-        font-size: 14px; /* Exemple d'ajustement */
-    }
-
-    /* Ajuster les marges et padding généraux */
-    main {
-        padding: 0 10px; /* Réduire le padding horizontal sur mobile */
-    }
-
-    .wrap {
-        padding: 0; /* Supprimer le padding du wrap pour plus d'espace */
-    }
-
-    /* Correction des statistiques */
-    .gems-home-stats .wrap {
-        grid-template-columns: repeat(2, 1fr); /* 2 colonnes par défaut */
-        gap: 15px;
-        padding: 20px 15px;
-    }
-    .gems-home-stats .stat {
-        text-align: center;
-    }
-    .gems-home-stats .scoring-kart-track {
-        grid-column: 1 / -1; /* Prend toute la largeur */
-        margin-bottom: 20px;
-    }
-
-    /* Correction des cartes (Mon histoire, Résultats, Partenariat) */
-    .gems-home-cards .grid.three {
-        grid-template-columns: 1fr; /* Une seule colonne sur mobile */
-        gap: 20px;
-        padding: 0 15px;
-    }
-    .gems-home-cards .card {
-        padding: 20px;
-    }
-
-    /* Correction de la section Derniere actualite */
-    .gems-latest-news .gems-news-box {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 20px 15px;
-    }
-    .gems-latest-news .gems-news-content {
-        margin-left: 0;
-        margin-top: 15px;
-    }
-    .gems-latest-news .gems-news-button {
-        width: 100%;
-        text-align: center;
-        margin-top: 20px;
-    }
-
-    /* Section Partenaires */
-    .gems-partners-section .wrap {
-        padding: 0 10px;
-    }
-
-    /* Footer */
-    footer.footer .wrap {
-        padding: 20px 15px;
-    }
-    .footer-main {
-        flex-direction: column;
-        gap: 30px;
-    }
-    .footer-navigation, .footer-contact {
-        width: 100%;
-        text-align: center;
-    }
-    .footer-links {
-        list-style: none;
-        padding: 0;
-    }
-    .footer-links li a {
-        padding: 5px 0;
-        display: block;
-    }
-    .footer-bottom {
-        flex-direction: column;
-        text-align: center;
-        gap: 10px;
-    }
-}
-
-/* Ajustements pour très petits écrans (ex: iPhone SE) */
-@media (max-width: 480px) {
-    header.top .logo {
-        font-size: 15px !important;
-    }
-    header.top .logo span {
-        font-size: 12px !important;
-    }
-    .menu-toggle {
-        width: 38px !important;
-        height: 36px !important;
-        font-size: 20px !important;
-    }
     header.top nav.menu a {
-        font-size: 13px !important;
-        padding: 10px 15px !important;
+        display: block !important;
+        padding: 12px 20px !important;
+        color: #ffffff !important;
+        font-weight: 700 !important;
+        text-decoration: none !important;
     }
-    .gems-home-hero h1 {
-        font-size: 30px !important;
-    }
-    .gems-home-hero h1 span {
-        font-size: 20px !important;
-    }
-    .gems-home-hero p {
-        font-size: 14px !important;
-    }
-    .gems-home-stats .wrap {
-        grid-template-columns: 1fr !important; /* Une seule colonne pour les stats */
-    }
-    .gems-partners-track {
-        animation-duration: 12s !important; /* Encore plus rapide */
-    }
-    .gems-partner-card {
-        width: 100px !important;
-    }
-    .gems-partner-card img {
-        width: 70px !important;
-        height: 45px !important;
+
+    header.top > .wrap.nav > a.btn {
+        display: none !important;
     }
 }
