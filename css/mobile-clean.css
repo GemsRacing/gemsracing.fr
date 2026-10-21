@@ -120,3 +120,108 @@
         display: none !important;
     }
 }
+
+/* ============================================================
+   DESIGN MOBILE BANNIÈRES (PAGEHEAD) & BOUTONS PREMIUM
+   ============================================================ */
+@media (max-width: 820px) {
+    .pagehead,
+    .association-pagehead {
+        padding: 38px 18px 30px !important;
+        text-align: center !important;
+    }
+
+    .pagehead .wrap,
+    .association-pagehead-inner {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        gap: 14px !important;
+    }
+
+    .association-pagehead-copy {
+        text-align: center !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+    }
+
+    .pagehead h1,
+    .association-pagehead-copy h1 {
+        font-size: 26px !important;
+        line-height: 1.22 !important;
+        letter-spacing: 0.5px !important;
+        margin: 0 0 10px 0 !important;
+        text-align: center !important;
+    }
+
+    .pagehead p,
+    .association-pagehead-copy p {
+        font-size: 14px !important;
+        line-height: 1.5 !important;
+        color: rgba(255, 255, 255, 0.82) !important;
+        max-width: 360px !important;
+        margin: 0 auto 16px !important;
+        text-align: center !important;
+    }
+
+    /* Supprime le trait orange orphelin en bas à gauche */
+    .pagehead h1::after,
+    .pagehead p::after,
+    .pagehead::after,
+    .association-pagehead-copy::after,
+    .association-pagehead-copy h1::after {
+        display: none !important;
+        content: none !important;
+    }
+
+    /* Logo Association respirant et élégant sous forme de badge arrondi */
+    .association-pagehead-visual {
+        order: -1 !important;
+        min-height: auto !important;
+        margin: 0 auto 18px !important;
+        transform: none !important;
+        display: flex !important;
+        justify-content: center !important;
+    }
+
+    .association-page-logo {
+        width: min(200px, 58vw) !important;
+        max-height: 100px !important;
+        border-radius: 14px !important;
+        padding: 10px 16px !important;
+        background: #ffffff !important;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.15) !important;
+        object-fit: contain !important;
+        display: block !important;
+        margin: 0 auto !important;
+    }
+
+    /* Bouton moderne en format pilule galbé (fini le pavé orange brut) */
+    .sponsor-download-button,
+    .pagehead .btn {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: auto !important;
+        min-width: 240px !important;
+        max-width: 92% !important;
+        margin: 12px auto 0 !important;
+        padding: 14px 24px !important;
+        border-radius: 50px !important;
+        background: linear-gradient(135deg, #ff9838 0%, #f28c28 100%) !important;
+        color: #071b35 !important;
+        font-weight: 800 !important;
+        font-size: 13px !important;
+        letter-spacing: 0.6px !important;
+        border: none !important;
+        box-shadow: 0 8px 20px rgba(242, 140, 40, 0.38) !important;
+        text-decoration: none !important;
+        transition: transform 0.2s ease !important;
+    }
+
+    .sponsor-download-button:active,
+    .pagehead .btn:active {
+        transform: scale(0.98) !important;
+    }
+}
