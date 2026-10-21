@@ -227,3 +227,50 @@ header.top nav.menu.is-open {
         height: 45px !important;
     }
 }
+
+/* FIX MENU MOBILE DEFINITIF */
+@media (max-width: 820px) {
+    header.top .wrap.nav {
+        position: relative !important;
+        z-index: 1000 !important;
+    }
+
+    header.top .menu-toggle {
+        display: inline-flex !important;
+        position: relative !important;
+        z-index: 1100 !important;
+        align-items: center !important;
+        justify-content: center !important;
+        cursor: pointer !important;
+    }
+
+    header.top nav.menu {
+        display: none !important;
+        position: absolute !important;
+        top: 100% !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        flex-direction: column !important;
+        background: #071b35 !important;
+        z-index: 1050 !important;
+        padding: 15px 0 !important;
+        box-shadow: 0 12px 25px rgba(0,0,0,0.55) !important;
+    }
+
+    header.top nav.menu.is-open {
+        display: flex !important;
+    }
+
+    header.top nav.menu a {
+        display: block !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        padding: 14px 20px !important;
+    }
+
+    .gems-partners-section .gems-partner-card img {
+        filter: none !important;
+        grayscale: 0 !important;
+    }
+}
