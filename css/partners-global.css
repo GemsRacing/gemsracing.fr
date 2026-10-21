@@ -115,3 +115,12 @@
         height: 40px;
     }
 }
+
+/* CORRECTION FINALE : LOGOS PARTENAIRES EN COULEUR */
+.gems-partners-section .gems-partner-card img,
+.gems-partner-card img {
+    filter: none !important;
+    -webkit-filter: none !important;
+    opacity: 1 !important;
+    mix-blend-mode: normal !important;
+}

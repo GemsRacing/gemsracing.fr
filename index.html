@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="fr">
 <head>
   <meta charset="utf-8">
@@ -428,36 +428,9 @@
 
 
 <script src="js/site-sync.js?v=15"></script>  <script src="js/scoring-kart-animation.js?v=15"></script>
-<script>
-/* GEMS_MOBILE_MENU_SCRIPT */
-document.addEventListener("DOMContentLoaded", function () {
-  const toggle = document.querySelector(".menu-toggle");
-  const menu = document.querySelector(".menu");
 
-  if (!toggle || !menu) return;
-
-  toggle.addEventListener("click", function () {
-    const isOpen = menu.classList.toggle("is-open");
-
-    toggle.setAttribute("aria-expanded", String(isOpen));
-    toggle.setAttribute(
-      "aria-label",
-      isOpen ? "Fermer le menu" : "Ouvrir le menu"
-    );
-    toggle.textContent = isOpen ? "✕" : "☰";
-  });
-
-  menu.querySelectorAll("a").forEach(function (link) {
-    link.addEventListener("click", function () {
-      menu.classList.remove("is-open");
-      toggle.setAttribute("aria-expanded", "false");
-      toggle.setAttribute("aria-label", "Ouvrir le menu");
-      toggle.textContent = "☰";
-    });
-  });
-});
-</script>
 </body>
 </html>
+
 
 
