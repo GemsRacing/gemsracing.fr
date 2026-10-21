@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="fr">
 <head>
   <meta charset="utf-8">
@@ -153,9 +153,39 @@
           <div id="partners-list" style="margin-top:20px;"></div>
         </div>
       </section>
-          <section id="tab-tickets" class="tab-content" hidden>
+                <section id="tab-tickets" class="tab-content" hidden>
         <div class="intra-card">
-          <h2>🎫 Messages reçus</h2>
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:20px;">
+            <h2 style="margin:0;">🎫 Messages reçus</h2>
+            <button type="button" class="btn-secondary" onclick="window.toggleManualTicketBox()" style="font-size:12px; padding:8px 14px; border:1px solid #f28c28; color:#f28c28; background:transparent; border-radius:6px; cursor:pointer;">➕ Noter un message manuel</button>
+          </div>
+
+          <div id="manual-ticket-box" style="display:none; background:#020b17; padding:20px; border-radius:10px; border:1px solid rgba(242,140,40,0.4); margin-bottom:25px;">
+            <h3 style="margin-top:0; color:#f28c28; font-size:15px;">Consigner un message (Appel, WhatsApp, Instagram)</h3>
+            <div class="intra-grid-3">
+              <div class="intra-field"><label>Nom / Entreprise</label><input type="text" id="manual-ticket-name" placeholder="Ex: Jean Dupont (Entreprise XYZ)"></div>
+              <div class="intra-field"><label>Email</label><input type="email" id="manual-ticket-email" placeholder="contact@exemple.fr"></div>
+              <div class="intra-field"><label>Téléphone</label><input type="tel" id="manual-ticket-phone" placeholder="06 .. .. .. .."></div>
+            </div>
+            <div class="intra-grid-2">
+              <div class="intra-field"><label>Objet / Sujet</label><input type="text" id="manual-ticket-subject" placeholder="Ex: Proposition sponsoring"></div>
+              <div class="intra-field"><label>Canal / Type</label>
+                <select id="manual-ticket-type">
+                  <option value="Sponsoring">Sponsoring / Partenariat</option>
+                  <option value="Appel téléphonique">Appel téléphonique</option>
+                  <option value="Instagram / WhatsApp">Instagram / WhatsApp</option>
+                  <option value="Presse">Presse / Média</option>
+                  <option value="Autre">Autre</option>
+                </select>
+              </div>
+            </div>
+            <div class="intra-field"><label>Message / Notes</label><textarea id="manual-ticket-message" rows="3" placeholder="Résumé de l'échange..."></textarea></div>
+            <div style="display:flex; gap:10px; margin-top:10px;">
+              <button type="button" class="btn-primary" onclick="window.addManualTicket()">💾 ENREGISTRER LE MESSAGE</button>
+              <button type="button" class="btn-secondary" onclick="window.toggleManualTicketBox()">ANNULER</button>
+            </div>
+          </div>
+
           <div id="tickets-list"></div>
         </div>
       </section>

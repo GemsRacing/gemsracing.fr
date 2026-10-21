@@ -378,5 +378,28 @@
 <script src="js/menu-clean.js?v=m6"></script>
 <script src="js/sticky-header.js"></script>
 <script src="js/site-sync.js?v=18"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const form = document.querySelector(".gems-contact-form");
+  if (!form) return;
+
+  form.addEventListener("submit", function() {
+    try {
+      const name = form.querySelector('[name="name"]')?.value || form.querySelector('input[type="text"]')?.value || "";
+      const email = form.querySelector('[name="email"]')?.value || form.querySelector('input[type="email"]')?.value || "";
+      const phone = form.querySelector('[name="phone"]')?.value || form.querySelector('input[type="tel"]')?.value || "";
+      const subject = form.querySelector('[name="subject"]')?.value || "Prise de contact site web";
+      const contactType = form.querySelector('[name="type"]')?.value || "Partenariat / Sponsoring";
+      const message = form.querySelector("textarea")?.value || "";
+
+      fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, phone, subject, contactType, message })
+      }).catch(err => console.warn("Envoi ticket intranet :", err));
+    } catch(e) {}
+  });
+});
+</script>
 </body>
 </html>

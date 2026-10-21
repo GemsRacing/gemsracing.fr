@@ -1,4 +1,4 @@
-﻿(function () {
+(function () {
     "use strict";
 
     const AUTH_KEY = "gems_auth_v2";
@@ -610,52 +610,151 @@
         editingPartnerIndex = null;
     }
 
-    // --- MESSAGES / TICKETS MANAGEMENT ---
-    // Cette section sera entièrement complétée lorsque l'API dédiée sera mise en place.
-    window.renderTickets = function() {
-        const list = document.getElementById("tickets-list");
-        if (!list) return;
-        const tickets = window.gemsData.tickets || [];
+          // --- MESSAGES / TICKETS MANAGEMENT (AMÉLIORÉ) ---
+      window.renderTickets = function() {
+          const list = document.getElementById("tickets-list");
+          const badge = document.getElementById("intra-badge-tickets");
+          const tickets = window.gemsData.tickets || [];
 
-        if (!tickets.length) {
-            list.innerHTML = "<p>Aucun message reçu.</p>";
-            return;
-        }
+          // Mise à jour du badge de notification
+          const newCount = tickets.filter(t => t.status === "Nouveau").length;
+          if (badge) {
+              if (newCount > 0) {
+                  badge.textContent = newCount;
+                  badge.style.display = "inline-block";
+              } else {
+                  badge.style.display = "none";
+              }
+          }
 
-        list.innerHTML = tickets.map((ticket, index) => `
-            <div class="list-item ${ticket.status === 'Nouveau' ? 'is-new' : ''}" style="margin-bottom:10px; border-left:${ticket.status === 'Nouveau' ? '4px solid #f28c28' : 'none'}; padding-left:${ticket.status === 'Nouveau' ? '16px' : '20px'};">
-                <div class="list-item-main">
-                    <strong>${escapeHtml(ticket.subject || "Sans sujet")}</strong>
-                    <small>${escapeHtml(ticket.name || "Anonyme")} (${escapeHtml(ticket.email || "")})</small>
-                    <small>Type: ${escapeHtml(ticket.contactType || "")} | Statut: <b>${escapeHtml(ticket.status || "Nouveau")}</b></small>
-                    <p style="margin-top:5px;">${escapeHtml(ticket.message || "")}</p>
-                    <small style="color:rgba(255,255,255,0.5);">Reçu le ${escapeHtml(ticket.date || "")} à ${escapeHtml(ticket.time || "")}</small>
-                </div>
-                <div class="list-item-actions" style="flex-direction:column; gap:5px;">
-                    <button type="button" class="btn-primary" onclick="window.markTicketAsRead(${index})">👁 Lu</button>
-                    <a href="mailto:${escapeHtml(ticket.email)}?subject=RE: ${escapeHtml(ticket.subject)}" target="_blank" class="btn-primary">📧 Répondre</a>
-                    <button type="button" class="btn-danger" onclick="window.deleteTicket(${index})">🗑 Supprimer</button>
-                </div>
-            </div>
-        `).join("");
-    };
+          if (!list) return;
 
-    window.markTicketAsRead = async function(index) {
-        if (!window.gemsData.tickets[index]) return;
-        window.gemsData.tickets[index].status = "Lu";
-        await saveData();
-        toast("✅ Message marqué comme lu !");
-    };
+          if (!tickets.length) {
+              list.innerHTML = "<p style='color:rgba(255,255,255,0.6); text-align:center; padding:30px;'>Aucun message reçu pour le moment.</p>";
+              return;
+          }
 
-    window.deleteTicket = async function(index) {
-        if (!confirm("Supprimer ce message ?")) return;
-        window.gemsData.tickets.splice(index, 1);
-        await saveData();
-        toast("✅ Message supprimé !");
-    };
+          list.innerHTML = tickets.map((ticket, index) => {
+              const isNew = ticket.status === "Nouveau";
+              const borderStyle = isNew ? "border-left: 4px solid #f28c28;" : "border-left: 4px solid rgba(255,255,255,0.2);";
+              const bgStyle = isNew ? "background: rgba(242, 140, 40, 0.05);" : "background: rgba(255, 255, 255, 0.02);";
+              const statusBadge = isNew
+                  ? `<span style="background:#f28c28; color:#071b35; font-size:11px; font-weight:800; padding:3px 8px; border-radius:10px;">NOUVEAU</span>`
+                  : `<span style="background:rgba(255,255,255,0.15); color:#fff; font-size:11px; font-weight:600; padding:3px 8px; border-radius:10px;">LU</span>`;
 
+              const mailtoLink = ticket.email ? `<a href="mailto:${encodeURIComponent(ticket.email)}?subject=Re: ${encodeURIComponent(ticket.subject || 'Votre message Gems Racing')}" class="btn-secondary" style="text-decoration:none; font-size:12px; padding:6px 12px; display:inline-flex; align-items:center; gap:4px; border:1px solid rgba(255,255,255,0.2); border-radius:6px; color:#fff;">✉️ Répondre</a>` : '';
+              const telLink = ticket.phone ? `<a href="tel:${encodeURIComponent(ticket.phone)}" class="btn-secondary" style="text-decoration:none; font-size:12px; padding:6px 12px; display:inline-flex; align-items:center; gap:4px; border:1px solid rgba(255,255,255,0.2); border-radius:6px; color:#fff;">📞 Appeler</a>` : '';
 
-    // --- GLOBAL RENDER & INIT ---
+              return `
+              <div class="ticket-card" style="margin-bottom:14px; padding:18px; border-radius:10px; border:1px solid rgba(255,255,255,0.08); ${borderStyle} ${bgStyle}">
+                  <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:10px;">
+                      <div>
+                          <strong style="font-size:16px; color:#fff;">${escapeHtml(ticket.subject || "Sans sujet")}</strong>
+                          <div style="margin-top:4px; color:rgba(255,255,255,0.8); font-size:13px;">
+                              De : <b>${escapeHtml(ticket.name || "Visiteur")}</b> 
+                              ${ticket.email ? `· <span style="color:#f28c28;">${escapeHtml(ticket.email)}</span>` : ''}
+                              ${ticket.phone ? `· Tél : <span>${escapeHtml(ticket.phone)}</span>` : ''}
+                          </div>
+                          <div style="margin-top:2px; font-size:12px; color:rgba(255,255,255,0.5);">
+                              Type : ${escapeHtml(ticket.contactType || "Général")} · Reçu le ${escapeHtml(ticket.date || "")} à ${escapeHtml(ticket.time || "")}
+                          </div>
+                      </div>
+                      <div>${statusBadge}</div>
+                  </div>
+
+                  <div style="margin-top:12px; padding:12px; background:rgba(0,0,0,0.3); border-radius:8px; color:rgba(255,255,255,0.9); font-size:14px; line-height:1.5; white-space:pre-wrap;">${escapeHtml(ticket.message || "Aucun contenu")}</div>
+
+                  <div style="margin-top:14px; display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
+                      ${mailtoLink}
+                      ${telLink}
+                      ${isNew 
+                          ? `<button type="button" class="btn-primary" style="font-size:12px; padding:6px 12px;" onclick="window.markTicketAsRead(${index})">👁 Marquer comme lu</button>`
+                          : `<button type="button" class="btn-secondary" style="font-size:12px; padding:6px 12px; border:1px solid rgba(255,255,255,0.2); background:transparent; color:#fff; border-radius:6px;" onclick="window.markTicketAsNew(${index})">Marquer comme non lu</button>`
+                      }
+                      <button type="button" class="btn-danger" style="font-size:12px; padding:6px 12px; margin-left:auto; background:#e74c3c; color:#fff; border:none; border-radius:6px; cursor:pointer;" onclick="window.deleteTicket(${index})">🗑 Supprimer</button>
+                  </div>
+              </div>
+              `;
+          }).join("");
+      };
+
+      window.markTicketAsRead = async function(index) {
+          if (!window.gemsData.tickets[index]) return;
+          window.gemsData.tickets[index].status = "Lu";
+          window.renderTickets();
+          await saveData();
+          toast("✅ Message marqué comme lu !");
+      };
+
+      window.markTicketAsNew = async function(index) {
+          if (!window.gemsData.tickets[index]) return;
+          window.gemsData.tickets[index].status = "Nouveau";
+          window.renderTickets();
+          await saveData();
+          toast("ℹ️ Message marqué comme nouveau !");
+      };
+
+      window.deleteTicket = async function(index) {
+          if (!confirm("Supprimer définitivement ce message ?")) return;
+          window.gemsData.tickets.splice(index, 1);
+          window.renderTickets();
+          await saveData();
+          toast("✅ Message supprimé !");
+      };
+
+      window.toggleManualTicketBox = function() {
+          const box = document.getElementById("manual-ticket-box");
+          if (!box) return;
+          box.style.display = box.style.display === "none" ? "block" : "none";
+      };
+
+      window.addManualTicket = async function() {
+          const name = document.getElementById("manual-ticket-name")?.value || "";
+          const email = document.getElementById("manual-ticket-email")?.value || "";
+          const phone = document.getElementById("manual-ticket-phone")?.value || "";
+          const subject = document.getElementById("manual-ticket-subject")?.value || "Message consigné";
+          const contactType = document.getElementById("manual-ticket-type")?.value || "Partenariat";
+          const message = document.getElementById("manual-ticket-message")?.value || "";
+
+          if (!name && !message) {
+              toast("⚠️ Renseigne au moins un nom ou des notes.");
+              return;
+          }
+
+          const now = new Date();
+          const newTicket = {
+              id: Date.now(),
+              name: name || "Contact direct",
+              email: email,
+              phone: phone,
+              subject: subject,
+              contactType: contactType,
+              message: message,
+              status: "Nouveau",
+              date: now.toLocaleDateString("fr-FR"),
+              time: now.toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" })
+          };
+
+          if (!Array.isArray(window.gemsData.tickets)) {
+              window.gemsData.tickets = [];
+          }
+
+          window.gemsData.tickets.unshift(newTicket);
+          window.renderTickets();
+          window.toggleManualTicketBox();
+
+          // Réinitialiser les champs
+          document.getElementById("manual-ticket-name").value = "";
+          document.getElementById("manual-ticket-email").value = "";
+          document.getElementById("manual-ticket-phone").value = "";
+          document.getElementById("manual-ticket-subject").value = "";
+          document.getElementById("manual-ticket-message").value = "";
+
+          await saveData();
+          toast("✅ Message enregistré dans l'intranet !");
+      };
+
+      // --- GLOBAL RENDER & INIT ---
     function renderAll() {
         // Stats
         setValue("stat-victoires", window.gemsData.stats.victoires);
