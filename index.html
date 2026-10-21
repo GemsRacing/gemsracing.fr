@@ -47,23 +47,55 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Person",
-  "@id": "https://gemsracing.fr/#gems-marechal",
-  "name": "Gems Maréchal",
-  "alternateName": "Gems Racing",
-  "url": "https://gemsracing.fr/",
-  "image": "https://gemsracing.fr/assets/images/gems-portrait.jpg",
-  "jobTitle": "Pilote de karting SWS",
-  "description": "Gems Maréchal est un jeune pilote français engagé dans les compétitions de karting SWS.",
-  "sport": "Karting",
-  "nationality": "France",
-  "homeLocation": {
-    "@type": "Place",
-    "name": "Nantes, Vendée et Pays de la Loire"
-  },
-  "sameAs": [
-    "https://www.instagram.com/gems.kartracing/",
-    "https://www.sodiwseries.com/fr-fr/drivers/marechal-gems-168448.html"
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://gemsracing.fr/#website",
+      "url": "https://gemsracing.fr/",
+      "name": "Gems Racing",
+      "alternateName": "Gems Kart Racing",
+      "description": "Site officiel de Gems Racing et du pilote de karting SWS Gems Maréchal.",
+      "publisher": {
+        "@type": "SportsOrganization",
+        "@id": "https://gemsracing.fr/association.html#organization",
+        "name": "GEMS Karting Access"
+      },
+      "about": {
+        "@id": "https://gemsracing.fr/#gems-marechal"
+      },
+      "inLanguage": "fr-FR"
+    },
+    {
+      "@type": "Athlete",
+      "@id": "https://gemsracing.fr/#gems-marechal",
+      "name": "Gems Maréchal",
+      "alternateName": "Gems Racing",
+      "birthDate": "2009",
+      "gender": "Male",
+      "url": "https://gemsracing.fr/",
+      "image": "https://gemsracing.fr/assets/images/gems-portrait.jpg",
+      "jobTitle": "Pilote de karting SWS",
+      "description": "Gems Maréchal est un jeune pilote français engagé dans les compétitions de karting SWS et 2T Rotax Max en Pays de la Loire et Vendée.",
+      "sport": "Karting",
+      "nationality": {
+        "@type": "Country",
+        "name": "France"
+      },
+      "homeLocation": {
+        "@type": "Place",
+        "name": "Nantes, Vendée et Pays de la Loire"
+      },
+      "memberOf": {
+        "@type": "SportsOrganization",
+        "@id": "https://gemsracing.fr/association.html#organization",
+        "name": "GEMS Karting Access"
+      },
+      "sameAs": [
+        "https://www.instagram.com/gems.kartracing/",
+        "https://www.tiktok.com/@gems.kartracing",
+        "https://www.sodiwseries.com/fr-fr/drivers/marechal-gems-168448.html"
+      ]
+    }
   ]
 }
 </script>
@@ -259,7 +291,7 @@
          href="https://www.vrtueux.fr/"
          target="_blank"
          rel="noopener noreferrer">
-        <img src="assets/partners/vrtueux.webp" alt="VRtueux">
+        <img src="assets/partners/vrtueux.webp" alt="VRtueux" width="100" height="60" loading="lazy">
         <span class="gems-partner-name">VRtueux</span>
       </a>
 
@@ -267,7 +299,7 @@
          href="https://www.jovikart.com/"
          target="_blank"
          rel="noopener noreferrer">
-        <img src="assets/partners/jovikart.webp" alt="Jovikart">
+        <img src="assets/partners/jovikart.webp" alt="Jovikart" width="100" height="60" loading="lazy">
         <span class="gems-partner-name">Jovikart</span>
       </a>
 
@@ -275,7 +307,7 @@
          href="https://www.normalstores.com/fr/"
          target="_blank"
          rel="noopener noreferrer">
-        <img src="assets/partners/normal.png" alt="Normal">
+        <img src="assets/partners/normal.png" alt="Normal" width="100" height="60" loading="lazy">
         <span class="gems-partner-name">Normal</span>
       </a>
 
@@ -283,7 +315,7 @@
          href="https://www.apollo3s.com/"
          target="_blank"
          rel="noopener noreferrer">
-        <img src="assets/partners/apollo3s.jpg" alt="Apollo 3S">
+        <img src="assets/partners/apollo3s.jpg" alt="Apollo 3S" width="100" height="60" loading="lazy">
         <span class="gems-partner-name">Apollo 3S</span>
       </a>
 
@@ -291,7 +323,7 @@
          href="https://arrierecour42.fr/"
          target="_blank"
          rel="noopener noreferrer">
-        <img src="assets/partners/arrierecour.png" alt="Arrière-Cour">
+        <img src="assets/partners/arrierecour.png" alt="Arrière-Cour" width="100" height="60" loading="lazy">
         <span class="gems-partner-name">Arrière-Cour</span>
       </a>
 
@@ -304,7 +336,7 @@
          href="https://www.vrtueux.fr/"
          target="_blank"
          rel="noopener noreferrer">
-        <img src="assets/partners/vrtueux.webp" alt="VRtueux">
+        <img src="assets/partners/vrtueux.webp" alt="VRtueux" width="100" height="60" loading="lazy">
         <span class="gems-partner-name">VRtueux</span>
       </a>
 
@@ -312,7 +344,7 @@
          href="https://www.jovikart.com/"
          target="_blank"
          rel="noopener noreferrer">
-        <img src="assets/partners/jovikart.webp" alt="Jovikart">
+        <img src="assets/partners/jovikart.webp" alt="Jovikart" width="100" height="60" loading="lazy">
         <span class="gems-partner-name">Jovikart</span>
       </a>
 
@@ -320,7 +352,7 @@
          href="https://www.normalstores.com/fr/"
          target="_blank"
          rel="noopener noreferrer">
-        <img src="assets/partners/normal.png" alt="Normal">
+        <img src="assets/partners/normal.png" alt="Normal" width="100" height="60" loading="lazy">
         <span class="gems-partner-name">Normal</span>
       </a>
 
@@ -328,7 +360,7 @@
          href="https://www.apollo3s.com/"
          target="_blank"
          rel="noopener noreferrer">
-        <img src="assets/partners/apollo3s.jpg" alt="Apollo 3S">
+        <img src="assets/partners/apollo3s.jpg" alt="Apollo 3S" width="100" height="60" loading="lazy">
         <span class="gems-partner-name">Apollo 3S</span>
       </a>
 
@@ -336,7 +368,7 @@
          href="https://arrierecour42.fr/"
          target="_blank"
          rel="noopener noreferrer">
-        <img src="assets/partners/arrierecour.png" alt="Arrière-Cour">
+        <img src="assets/partners/arrierecour.png" alt="Arrière-Cour" width="100" height="60" loading="lazy">
         <span class="gems-partner-name">Arrière-Cour</span>
       </a>
 
