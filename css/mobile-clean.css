@@ -74,6 +74,12 @@ header.top nav.menu.is-open {
     display: flex; /* Affiche le menu */
 }
 
+/* --- PARTENAIRES : RETIRER LE NOIR ET BLANC --- */
+.gems-partners-section .gems-partner-card img {
+    filter: none; /* Retire le filtre noir et blanc */
+}
+
+
 /* Styles pour les écrans mobiles (max-width: 820px) */
 @media (max-width: 820px) {
     body {
