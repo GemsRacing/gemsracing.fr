@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Gems Maréchal | Pilote de Karting SWS Nantes &amp; Vendée</title>
-  <meta name="description" content="Découvrez le parcours de Gems Maréchal, jeune pilote de karting SWS en Pays de la Loire (Nantes, Vendée). Ambition, formation automobile et projet sportif.">
+  <meta name="description" content="Découvrez le parcours de Gems Maréchal, jeune pilote de karting SWS en Pays de la Loire (Nantes, Vendée). Ambition sportive, formation mécanique et palmarès.">
 
   <link rel="icon" type="image/png" sizes="192x192" href="assets/images/favicon-gems.png?v=4">
   <link rel="apple-touch-icon" href="assets/images/favicon-gems.png?v=4">
@@ -43,7 +43,7 @@
   <meta name="twitter:image" content="https://gemsracing.fr/assets/images/gems-social-preview.jpg">
   <meta name="twitter:image:alt" content="Gems Maréchal - Gems Racing">
 
-  <!-- Données structurées JSON-LD (Schema.org) -->
+  <!-- Données structurées JSON-LD (Schema.org) enrichies -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -53,14 +53,27 @@
         "@id": "https://gemsracing.fr/#gems-marechal",
         "name": "Gems Maréchal",
         "alternateName": "Gems Racing",
+        "birthDate": "2009",
         "gender": "Male",
         "jobTitle": "Pilote de karting SWS",
-        "description": "Gems Maréchal est un jeune pilote français de karting SWS originaire de la région nantaise et de Vendée.",
+        "description": "Gems Maréchal est un jeune pilote français de karting SWS né en 2009, originaire de la région nantaise et de Vendée, élève en Bac Pro Maintenance des Véhicules Automobiles au lycée Saint-François d'Assise.",
         "sport": "Karting",
-        "nationality": "France",
+        "nationality": {
+          "@type": "Country",
+          "name": "France"
+        },
         "homeLocation": {
           "@type": "Place",
           "name": "Nantes, Vendée et Pays de la Loire"
+        },
+        "alumniOf": {
+          "@type": "EducationalOrganization",
+          "name": "Lycée Saint-François d'Assise"
+        },
+        "memberOf": {
+          "@type": "SportsOrganization",
+          "@id": "https://gemsracing.fr/association.html#organization",
+          "name": "GEMS Karting Access"
         },
         "url": "https://gemsracing.fr/a-propos.html",
         "image": "https://gemsracing.fr/assets/images/gems-portrait.jpg",
@@ -92,21 +105,17 @@
   </script>
 </head>
 <body>
+
 <header class="top">
   <div class="wrap nav">
     <a class="logo" href="index.html">GEMS <span>KART RACING</span></a>
-    <button
-      class="menu-toggle"
-      type="button"
-      aria-label="Ouvrir le menu"
-      aria-expanded="false">
-      ☰
-    </button>
+    <button class="menu-toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false">☰</button>
     <nav class="menu">
       <a href="index.html">ACCUEIL</a>
       <a href="a-propos.html" class="active">À PROPOS</a>
       <a href="resultats.html">RÉSULTATS &amp; ACTUS</a>
       <a href="association.html">ASSOCIATION</a>
+      <a href="faq.html">FAQ</a>
       <a href="contact.html">CONTACT &amp; SPONSORS</a>
       <a href="galerie.html">GALERIE</a>
     </nav>
@@ -126,25 +135,38 @@
     <div class="wrap">
       <div class="gems-about-intro">
         <div class="gems-about-copy">
-          <h2>Un parcours guidé par la passion</h2>
-          <p>Tout a commencé en juillet 2023, lors d'une première session sur le circuit Alain Prost au Mans en 270cc, suivie d'un stage de pilotage chez <strong>Jovikart au Bignon (44)</strong>. À 12 ans et demi, ce monde inconnu est devenu une évidence venant des tripes.</p>
-          <p>Après un début timide et un premier cours sous l'orage, le véritable déclic survient en <strong>juillet 2024</strong> : une prise de conscience de son potentiel et la volonté farouche d'aller le plus loin possible. Résultat : une première victoire en <em>Jovikart Cup</em>.</p>
-          <h3>Au quotidien : études et détermination</h3>
-          <p>Élève en <strong>1ère BAC PRO Maintenance des Véhicules Automobiles</strong>, Gems allie sa culture technique à sa pratique sportive. Sur la piste, il se définit comme un pilote <em>attentif, observateur, patient et incisif</em> sur la moindre opportunité.</p>
+          <h2>Un parcours guidé par la passion automobile</h2>
+          <p>Né en 2009 et originaire des Pays de la Loire, <strong>Gems Maréchal</strong> découvre le sport automobile sur le tard mais avec une intensité fulgurante. Tout a débuté en juillet 2023 lors d'une première session de découverte sur le circuit Alain Prost au Mans en kart 270cc, immédiatement suivie d'un stage de pilotage intensif chez <strong>Jovikart au Bignon (44)</strong>. À 12 ans et demi, cet univers mécanique est devenu bien plus qu'un loisir : une véritable vocation.</p>
+          <p>Après des débuts studieux et une progression méthodique sous toutes les conditions météo, le déclic décisif s'opère en <strong>juillet 2024</strong>. Fort d'une prise de conscience de son potentiel en peloton et d'une régularité grandissante, Gems décroche sa toute première victoire lors de la <em>Jovikart Cup</em>. Dès lors, son engagement dans le championnat international <strong>Sodi World Series (SWS Sprint)</strong> s'accélère à l'échelle régionale et nationale.</p>
+
+          <h3>Double discipline : Compétition SWS 4T et maîtrise du 2T Rotax</h3>
+          <p>En compétition officielle, Gems concourt sur des karts 4 Temps (Sodi 270cc et 390cc) dans le cadre des courses SWS Sprint. Cette catégorie particulièrement disputée exige une science tactique du dépassement, une précision millimétrique des trajectoires et une gestion sans faille de la pression en course, comme en témoignent ses <a href="resultats.html" style="color:#f28c28; font-weight:700;">statistiques et résultats de la saison 2026</a>.</p>
+          <p>En parallèle, afin de développer son explosivité physique et sa sensibilité aux hautes vitesses, Gems s'entraîne sur kart de compétition <strong>2 Temps (2T Rotax Max)</strong>, notamment sur le tracé technique de <em>Solokart à Plessé (44)</em>. Avec près de 30 chevaux pour moins de 85 kg, le pilotage en 2T renforce sa capacité d'adaptation et son agressivité positive dans les phases de freinage appuyé. Découvrez ces sessions intenses dans la <a href="galerie.html" style="color:#f28c28; font-weight:700;">galerie photos officielle</a>.</p>
+
+          <h3>Au quotidien : culture mécanique et rigueur sportive</h3>
+          <p>Gems est actuellement scolarisé en <strong>1ère BAC PRO Maintenance des Véhicules Automobiles (MVA)</strong> au <em>Lycée Saint-François d'Assise</em>. Ce cursus technique est un atout stratégique majeur sur la piste : comprendre le comportement d'un châssis, analyser les pressions de pneumatiques, anticiper l'adhérence selon l'usure de la gomme et dialoguer techniquement avec les mécaniciens permet d'ajuster les réglages avec une grande pertinence.</p>
+          <p>Sur la piste, Gems se définit comme un pilote <em>attentif, observateur, patient et redoutablement incisif</em> dès que l'ouverture se présente. Sa régularité et son esprit sportif constituent les piliers de sa progression sportive soutenue par l'<a href="association.html" style="color:#f28c28; font-weight:700;">association sportive GEMS Karting Access</a>.</p>
+
           <div class="gems-about-message">
-            <h3>Le message de Gems aux jeunes pilotes</h3>
-            <p><em>« C’est un sport difficile, mais ça vaut le coup de se battre pour sa passion. Il faut savoir faire des sacrifices. »</em></p>
+            <h3 style="margin-top:0;">La philosophie de course de Gems</h3>
+            <p><em>« Le karting de compétition est une discipline exigeante où chaque dixième de seconde se gagne par le travail, la remise en question et le respect des adversaires. Pour performer, il faut savoir faire des sacrifices et transformer chaque erreur en apprentissage. »</em></p>
           </div>
+
+          <p style="margin-top:20px;">Pour accompagner cette dynamique sportive, financer les déplacements et équiper le pilote au plus haut niveau, les entreprises et passionnés peuvent <a href="contact.html" style="color:#f28c28; font-weight:700;">rejoindre l'aventure en tant que partenaire ou sponsor</a> et bénéficier des déductions fiscales liées au mécénat sportif.</p>
         </div>
+
         <div class="gems-about-visual">
-          <img class="gems-profile-photo" src="assets/images/gems-portrait.jpg" alt="Portrait de Gems Maréchal, pilote de karting SWS" width="480" height="600" fetchpriority="high">
+          <img alt="Portrait de Gems Maréchal, pilote de karting SWS" class="gems-profile-photo" fetchpriority="high" height="600" src="assets/images/gems-portrait.jpg" width="480">
           <span class="gems-about-caption">Gems Maréchal · Kart Racing</span>
         </div>
       </div>
+
       <h3 class="gems-press-title">Dans la presse</h3>
-      <p>Retrouvez l'article consacré à Gems Maréchal dans <strong>Ouest-France</strong> (décembre 2025) soulignant son ascension précoce.</p>
+      <p>Retrouvez l'article consacré à Gems Maréchal dans <strong>Ouest-France</strong> (décembre 2025) soulignant son ascension précoce sur les circuits de l'Ouest.</p>
       <p class="press-link">
-        <a href="https://www.ouest-france.fr/pays-de-la-loire/montaigu-vendee-85600/a-15-ans-ce-jeune-vendeen-prodige-du-karting-performe-sur-les-circuits-265e62b4-c133-11f0-989f-7065bd4a8ace" target="_blank" rel="noopener noreferrer">Lire l'article complet dans Ouest-France</a>
+        <a href="https://www.ouest-france.fr/pays-de-la-loire/montaigu-vendee-85600/a-15-ans-ce-jeune-vendeen-prodige-du-karting-performe-sur-les-circuits-265e62b4-c133-11f0-989f-7065bd4a8ace" rel="noopener noreferrer" target="_blank">
+          Lire l'article complet dans Ouest-France
+        </a>
       </p>
     </div>
   </section>
@@ -153,10 +175,7 @@
 <section class="gems-partners-section" id="partenaires">
   <div class="wrap">
     <h2>Partenaires officiels</h2>
-    <p class="gems-partners-intro">
-      Ils accompagnent Gems dans son projet sportif.
-    </p>
-
+    <p class="gems-partners-intro">Ils accompagnent Gems dans son projet sportif.</p>
     <div class="gems-partners-container">
       <div class="gems-partners-track">
         <a class="gems-partner-card" href="https://www.vrtueux.fr/" target="_blank" rel="noopener noreferrer">
@@ -206,27 +225,18 @@
   </div>
 </section>
 
-<script src="js/menu-clean.js?v=m5"></script>
-<script src="js/sticky-header.js"></script>
-
 <footer class="footer">
   <div class="wrap">
     <div class="footer-main">
       <div class="footer-brand">
-        <div class="logo">
-          GEMS
-          <span>KART RACING</span>
-        </div>
-        <p class="footer-slogan">
-          Passion · Ambition · Combatif
-        </p>
+        <div class="logo">GEMS <span>KART RACING</span></div>
+        <p class="footer-slogan">Passion · Ambition · Combatif</p>
       </div>
-
       <div class="footer-navigation">
         <h3 class="footer-title">Navigation</h3>
         <ul class="footer-links">
           <li><a href="index.html">Accueil</a></li>
-          <li><a href="a-propos.html">À propos de Gems</a></li>
+          <li><a href="a-propos.html" class="active">À propos de Gems</a></li>
           <li><a href="resultats.html">Résultats &amp; actualités</a></li>
           <li><a href="association.html">Association</a></li>
           <li><a href="faq.html">FAQ</a></li>
@@ -234,41 +244,21 @@
           <li><a href="intranet.html">Intranet</a></li>
         </ul>
       </div>
-
       <div class="footer-contact">
         <h3 class="footer-title">Contact</h3>
-        <p class="footer-social">
-          <a href="https://www.instagram.com/gems.kartracing/" target="_blank" rel="noopener noreferrer">
-            Instagram @gems.kartracing
-          </a>
-        </p>
-        <p class="footer-social">
-          <a href="contact.html">
-            Contacter l'équipe Gems Racing
-          </a>
-        </p>
-        <p class="footer-social">
-          <a href="mentions-legales.html">
-            Mentions légales
-          </a>
-        </p>
+        <p class="footer-social"><a href="https://www.instagram.com/gems.kartracing/" target="_blank" rel="noopener noreferrer">Instagram @gems.kartracing</a></p>
+        <p class="footer-social"><a href="contact.html">Contacter l'équipe Gems Racing</a></p>
+        <p class="footer-social"><a href="mentions-legales.html">Mentions légales</a></p>
       </div>
     </div>
-
     <div class="footer-bottom">
-      <p>
-        © 2026 Gems Racing — Association GEMS Karting Access.
-      </p>
-      <p class="footer-developer">
-        Site développé par
-        <a href="https://www.vrtueux.fr/" target="_blank" rel="noopener noreferrer">
-          VRtueux
-        </a>
-      </p>
+      <p>© 2026 Gems Racing — Association GEMS Karting Access.</p>
+      <p class="footer-developer">Site développé par <a href="https://www.vrtueux.fr/" target="_blank" rel="noopener noreferrer">VRtueux</a></p>
     </div>
   </div>
 </footer>
 
-<script src="js/site-sync.js?v=15"></script>
+<script src="js/menu-clean.js?v=m6"></script>
+<script src="js/sticky-header.js"></script>
 </body>
 </html>
