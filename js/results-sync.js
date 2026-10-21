@@ -1,4 +1,4 @@
-﻿(function () {
+(function () {
   function escapeHtml(value) {
     return String(value ?? "")
       .replace(/&/g, "&amp;")
@@ -117,12 +117,12 @@
 
         <p>
           ${escapeHtml(race.circuit || "")}
-          ${race.city ? ` Â· ${escapeHtml(race.city)}` : ""}
+          ${race.city ? ` · ${escapeHtml(race.city)}` : ""}
         </p>
 
         <p class="public-race-status">
           <strong>${escapeHtml(race.status || "ProgrammÃ©")}</strong>
-          ${race.result ? ` Â· ${escapeHtml(race.result)}` : ""}
+          ${race.result ? ` · ${escapeHtml(race.result)}` : ""}
         </p>
 
         ${
