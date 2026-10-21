@@ -1,23 +1,13 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="fr">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Galerie Photos Karting SWS France | Gems Racing Nantes, Vendée</title>
-  <meta name="description" content="Découvrez les photos de Gems Maréchal en course, dans les paddocks et sur les circuits de karting en France. Basé à Nantes, en Vendée et dans les Pays de la Loire.">
-  
-  
-  
-  
-  
-  
-  
-  
+  <meta name="description" content="Découvrez les photos de Gems Maréchal en course, dans les paddocks et sur les circuits de karting en France. Basé à Nantes, en Vendée et Pays de la Loire.">
 
-
-<link rel="icon" type="image/png" sizes="192x192" href="assets/images/favicon-gems.png?v=2">
-<link rel="apple-touch-icon" href="assets/images/favicon-gems.png?v=2">
-
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/images/favicon-gems.png?v=4">
+  <link rel="apple-touch-icon" href="assets/images/favicon-gems.png?v=4">
 
   <link rel="stylesheet" href="css/style.css?v=restored">
   <link rel="stylesheet" href="css/gems-textures.css">
@@ -27,20 +17,16 @@
   <link rel="stylesheet" href="css/gallery.css">
   <link rel="stylesheet" href="css/equipment.css">
   <link rel="stylesheet" href="css/sticky-header.css">
-<link rel="stylesheet" href="css/partners-global.css?v=2">
+  <link rel="stylesheet" href="css/partners-global.css?v=p5">
+  <link rel="stylesheet" href="css/footer-final.css?v=1">
+  <link rel="stylesheet" href="css/widgets-rounded.css?v=1">
+  <link rel="stylesheet" href="css/rounded-final.css?v=2">
+  <link rel="stylesheet" href="css/scoring-circuit.css?v=1">
+  <link rel="stylesheet" href="css/pagehead-honeycomb.css?v=200">
 
-
-<link rel="stylesheet" href="css/footer-final.css?v=1">
-<link rel="stylesheet" href="css/widgets-rounded.css?v=1">
-<link rel="stylesheet" href="css/rounded-final.css?v=2">
-<link rel="stylesheet" href="css/scoring-circuit.css?v=1">
-
-
-
-
-<link rel="stylesheet" href="css/pagehead-reference-fix.css?v=1">
   <link rel="canonical" href="https://gemsracing.fr/galerie.html">
 
+  <!-- Open Graph / Réseaux sociaux -->
   <meta property="og:locale" content="fr_FR">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Galerie Photos Karting SWS France | Gems Racing Nantes, Vendée">
@@ -48,33 +34,60 @@
   <meta property="og:url" content="https://gemsracing.fr/galerie.html">
   <meta property="og:site_name" content="Gems Racing">
   <meta property="og:image" content="https://gemsracing.fr/assets/images/gems-social-preview.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
 
+  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Galerie Photos Karting SWS France | Gems Racing">
   <meta name="twitter:description" content="Photos de Gems Maréchal en compétition SWS en France.">
   <meta name="twitter:image" content="https://gemsracing.fr/assets/images/gems-social-preview.jpg">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "ImageGallery",
-  "@id": "https://gemsracing.fr/galerie.html#gallery",
-  "url": "https://gemsracing.fr/galerie.html",
-  "name": "Galerie Photos Karting SWS France | Gems Racing",
-  "description": "Photos des courses de karting de Gems Maréchal en SWS France.",
-  "image": [
-    "https://gemsracing.fr/assets/images/gems-course-01.jpg",
-    "https://gemsracing.fr/assets/images/gems-paddock.jpg"
-  ],
-  "about": {
-    "@type": "Person",
-    "name": "Gems Maréchal",
-    "url": "https://gemsracing.fr/a-propos.html"
+
+  <!-- Données structurées Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "ImageGallery",
+        "@id": "https://gemsracing.fr/galerie.html#gallery",
+        "url": "https://gemsracing.fr/galerie.html",
+        "name": "Galerie Photos Karting SWS France | Gems Racing",
+        "description": "Photos des courses de karting de Gems Maréchal en SWS France et compétitions régionales.",
+        "image": [
+          "https://gemsracing.fr/assets/images/gems-portrait.jpg",
+          "https://gemsracing.fr/assets/images/gems-social-preview.jpg"
+        ],
+        "about": {
+          "@type": "Athlete",
+          "@id": "https://gemsracing.fr/#gems-marechal",
+          "name": "Gems Maréchal"
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://gemsracing.fr/galerie.html#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Accueil",
+            "item": "https://gemsracing.fr/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Galerie",
+            "item": "https://gemsracing.fr/galerie.html"
+          }
+        ]
+      }
+    ]
   }
-}
-</script>
-  <link rel="stylesheet" href="css/gallery-header-final.css?v=1">
+  </script>
 </head>
-<body class="pagehead-reference-fix" class="gallery-reference-page">
+
+<body class="pagehead-reference-fix gallery-reference-page">
 
 <header class="top">
   <div class="wrap nav">
@@ -89,10 +102,10 @@
     <nav class="menu">
       <a href="index.html">ACCUEIL</a>
       <a href="a-propos.html">À PROPOS</a>
-      <a href="resultats.html">RÉSULTATS & ACTUS</a>
-      <a href="galerie.html" class="active">GALERIE</a>
+      <a href="resultats.html">RÉSULTATS &amp; ACTUS</a>
       <a href="association.html">ASSOCIATION</a>
-      <a href="contact.html">CONTACT & SPONSORS</a>
+      <a href="contact.html">CONTACT &amp; SPONSORS</a>
+      <a href="galerie.html" class="active">GALERIE</a>
     </nav>
     <a class="btn" href="contact.html">DEVENIR PARTENAIRE</a>
   </div>
@@ -106,14 +119,14 @@
     </div>
   </section>
 
-  <section class="gems-gallery-section">
+  <section class="gems-gallery-section" style="padding: 40px 0 60px;">
     <div class="wrap">
-      <p class="gems-gallery-intro">
+      <p class="gems-gallery-intro" style="text-align:center; max-width:700px; margin:0 auto 30px; color:rgba(255,255,255,0.8);">
         Retrouvez les moments forts de Gems en compétition,
         dans le paddock et autour de son projet sportif.
       </p>
 
-      <div class="gems-gallery-grid" id="gems-dynamic-gallery-grid"></div>
+      <div class="gems-gallery-grid" id="gems-dynamic-gallery-grid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:24px;"></div>
     </div>
   </section>
 </main>
@@ -125,122 +138,70 @@
       Ils accompagnent Gems dans son projet sportif.
     </p>
 
-        <div class="gems-partners-container">
+    <div class="gems-partners-container">
       <div class="gems-partners-track">
-
-
-      <a class="gems-partner-card"
-         href="https://www.vrtueux.fr/"
-         target="_blank"
-         rel="noopener noreferrer">
-        <img src="assets/partners/vrtueux.png" alt="VRtueux">
-        <span class="gems-partner-name">VRtueux</span>
-      </a>
-
-      <a class="gems-partner-card"
-         href="https://www.jovikart.com/"
-         target="_blank"
-         rel="noopener noreferrer">
-        <img src="assets/partners/jovikart.webp" alt="Jovikart">
-        <span class="gems-partner-name">Jovikart</span>
-      </a>
-
-      <a class="gems-partner-card"
-         href="https://www.normalstores.com/fr/"
-         target="_blank"
-         rel="noopener noreferrer">
-        <img src="assets/partners/normal.png" alt="Normal">
-        <span class="gems-partner-name">Normal</span>
-      </a>
-
-      <a class="gems-partner-card"
-         href="https://www.apollo3s.com/"
-         target="_blank"
-         rel="noopener noreferrer">
-        <img src="assets/partners/apollo3s.jpg" alt="Apollo 3S">
-        <span class="gems-partner-name">Apollo 3S</span>
-      </a>
-
-      <a class="gems-partner-card"
-         href="https://arrierecour42.fr/"
-         target="_blank"
-         rel="noopener noreferrer">
-        <img src="assets/partners/arrierecour.png" alt="Arrière-Cour">
-        <span class="gems-partner-name">Arrière-Cour</span>
-      </a>
-
-    
+        <a class="gems-partner-card" href="https://www.vrtueux.fr/" target="_blank" rel="noopener noreferrer">
+          <img src="assets/partners/vrtueux.png" alt="VRtueux" width="100" height="60" loading="lazy">
+          <span class="gems-partner-name">VRtueux</span>
+        </a>
+        <a class="gems-partner-card" href="https://www.jovikart.com/" target="_blank" rel="noopener noreferrer">
+          <img src="assets/partners/jovikart.webp" alt="Jovikart" width="100" height="60" loading="lazy">
+          <span class="gems-partner-name">Jovikart</span>
+        </a>
+        <a class="gems-partner-card" href="https://www.normalstores.com/fr/" target="_blank" rel="noopener noreferrer">
+          <img src="assets/partners/normal.png" alt="Normal" width="100" height="60" loading="lazy">
+          <span class="gems-partner-name">Normal</span>
+        </a>
+        <a class="gems-partner-card" href="https://www.apollo3s.com/" target="_blank" rel="noopener noreferrer">
+          <img src="assets/partners/apollo3s.jpg" alt="Apollo 3S" width="100" height="60" loading="lazy">
+          <span class="gems-partner-name">Apollo 3S</span>
+        </a>
+        <a class="gems-partner-card" href="https://arrierecour42.fr/" target="_blank" rel="noopener noreferrer">
+          <img src="assets/partners/arrierecour.png" alt="Arrière-Cour" width="100" height="60" loading="lazy">
+          <span class="gems-partner-name">Arrière-Cour</span>
+        </a>
       </div>
+
       <div class="gems-partners-track">
-
-
-      <a class="gems-partner-card"
-         href="https://www.vrtueux.fr/"
-         target="_blank"
-         rel="noopener noreferrer">
-        <img src="assets/partners/vrtueux.png" alt="VRtueux">
-        <span class="gems-partner-name">VRtueux</span>
-      </a>
-
-      <a class="gems-partner-card"
-         href="https://www.jovikart.com/"
-         target="_blank"
-         rel="noopener noreferrer">
-        <img src="assets/partners/jovikart.webp" alt="Jovikart">
-        <span class="gems-partner-name">Jovikart</span>
-      </a>
-
-      <a class="gems-partner-card"
-         href="https://www.normalstores.com/fr/"
-         target="_blank"
-         rel="noopener noreferrer">
-        <img src="assets/partners/normal.png" alt="Normal">
-        <span class="gems-partner-name">Normal</span>
-      </a>
-
-      <a class="gems-partner-card"
-         href="https://www.apollo3s.com/"
-         target="_blank"
-         rel="noopener noreferrer">
-        <img src="assets/partners/apollo3s.jpg" alt="Apollo 3S">
-        <span class="gems-partner-name">Apollo 3S</span>
-      </a>
-
-      <a class="gems-partner-card"
-         href="https://arrierecour42.fr/"
-         target="_blank"
-         rel="noopener noreferrer">
-        <img src="assets/partners/arrierecour.png" alt="Arrière-Cour">
-        <span class="gems-partner-name">Arrière-Cour</span>
-      </a>
-
-    
+        <a class="gems-partner-card" href="https://www.vrtueux.fr/" target="_blank" rel="noopener noreferrer">
+          <img src="assets/partners/vrtueux.png" alt="VRtueux" width="100" height="60" loading="lazy">
+          <span class="gems-partner-name">VRtueux</span>
+        </a>
+        <a class="gems-partner-card" href="https://www.jovikart.com/" target="_blank" rel="noopener noreferrer">
+          <img src="assets/partners/jovikart.webp" alt="Jovikart" width="100" height="60" loading="lazy">
+          <span class="gems-partner-name">Jovikart</span>
+        </a>
+        <a class="gems-partner-card" href="https://www.normalstores.com/fr/" target="_blank" rel="noopener noreferrer">
+          <img src="assets/partners/normal.png" alt="Normal" width="100" height="60" loading="lazy">
+          <span class="gems-partner-name">Normal</span>
+        </a>
+        <a class="gems-partner-card" href="https://www.apollo3s.com/" target="_blank" rel="noopener noreferrer">
+          <img src="assets/partners/apollo3s.jpg" alt="Apollo 3S" width="100" height="60" loading="lazy">
+          <span class="gems-partner-name">Apollo 3S</span>
+        </a>
+        <a class="gems-partner-card" href="https://arrierecour42.fr/" target="_blank" rel="noopener noreferrer">
+          <img src="assets/partners/arrierecour.png" alt="Arrière-Cour" width="100" height="60" loading="lazy">
+          <span class="gems-partner-name">Arrière-Cour</span>
+        </a>
       </div>
     </div>
   </div>
 </section>
 
-
-<div class="gems-gallery-lightbox" id="gems-lightbox">
-  <button class="gems-gallery-close" type="button" aria-label="Fermer">×</button>
-  <img id="gems-lightbox-image" src="" alt="">
+<!-- Lightbox pour affichage grand format -->
+<div class="gems-gallery-lightbox" id="gems-lightbox" style="display:none; position:fixed; z-index:99999; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.92); align-items:center; justify-content:center;">
+  <button class="gems-gallery-close" type="button" aria-label="Fermer" style="position:absolute; top:20px; right:25px; font-size:36px; color:#fff; background:none; border:none; cursor:pointer;">&times;</button>
+  <img id="gems-lightbox-image" src="" alt="Agrandissement photo" style="max-width:90%; max-height:85vh; border-radius:8px; box-shadow:0 10px 40px rgba(0,0,0,0.8); object-fit:contain;">
 </div>
 
-
-<script src="js/menu-clean.js"></script>
-<script src="js/sticky-header.js"></script>
-<script src="js/gallery-final.js?v=1"></script>
 <footer class="footer">
   <div class="wrap">
-
     <div class="footer-main">
-
       <div class="footer-brand">
         <div class="logo">
           GEMS
           <span>KART RACING</span>
         </div>
-
         <p class="footer-slogan">
           Passion · Ambition · Combatif
         </p>
@@ -248,7 +209,6 @@
 
       <div class="footer-navigation">
         <h3 class="footer-title">Navigation</h3>
-
         <ul class="footer-links">
           <li><a href="index.html">Accueil</a></li>
           <li><a href="a-propos.html">À propos de Gems</a></li>
@@ -261,77 +221,40 @@
 
       <div class="footer-contact">
         <h3 class="footer-title">Contact</h3>
-
         <p class="footer-social">
-          <a href="https://www.instagram.com/gems.kartracing/"
-             target="_blank"
-             rel="noopener noreferrer">
+          <a href="https://www.instagram.com/gems.kartracing/" target="_blank" rel="noopener noreferrer">
             Instagram @gems.kartracing
           </a>
         </p>
-
         <p class="footer-social">
           <a href="contact.html">
             Contacter l'équipe Gems Racing
           </a>
         </p>
-
         <p class="footer-social">
           <a href="mentions-legales.html">
             Mentions légales
           </a>
         </p>
       </div>
-
     </div>
 
     <div class="footer-bottom">
-      <p>
-        © 2026 Gems Racing — Association GEMS Karting Access.
-      </p>
-
+      <p>© 2026 Gems Racing — Association GEMS Karting Access.</p>
       <p class="footer-developer">
         Site développé par
-        <a href="https://www.vrtueux.fr/"
-           target="_blank"
-           rel="noopener noreferrer">
+        <a href="https://www.vrtueux.fr/" target="_blank" rel="noopener noreferrer">
           VRtueux
         </a>
       </p>
     </div>
-
   </div>
 </footer>
 
-
-
-
+<!-- Scripts uniques et ordonnés sans doublon -->
+<script src="js/menu-clean.js?v=m6"></script>
+<script src="js/sticky-header.js"></script>
+<script src="js/gallery-final.js?v=2"></script>
 <script src="js/site-sync.js?v=20"></script>
-<script>
-/* GEMS_MOBILE_MENU_SCRIPT */
-document.addEventListener("DOMContentLoaded", function () {
-  const toggle = document.querySelector(".menu-toggle");
-  const menu = document.querySelector(".menu");
-
-  if (!toggle || !menu) return;
-
-  toggle.addEventListener("click", function () {
-    const isOpen = menu.classList.toggle("is-open");
-
-    toggle.setAttribute("aria-expanded", String(isOpen));
-    toggle.textContent = isOpen ? "✕" : "☰";
-  });
-
-  menu.querySelectorAll("a").forEach(function (link) {
-    link.addEventListener("click", function () {
-      menu.classList.remove("is-open");
-      toggle.setAttribute("aria-expanded", "false");
-      toggle.textContent = "☰";
-    });
-  });
-});
-</script>
 </body>
 </html>
-
-

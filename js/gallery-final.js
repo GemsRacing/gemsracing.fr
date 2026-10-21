@@ -1,77 +1,104 @@
 ﻿document.addEventListener("DOMContentLoaded", function () {
-  const lightbox = document.getElementById("gems-lightbox");
-  const image = document.getElementById("gems-lightbox-image");
-  const items = Array.from(document.querySelectorAll("[data-gallery-image]"));
+    const grid = document.getElementById("gems-dynamic-gallery-grid");
+    const lightbox = document.getElementById("gems-lightbox");
+    const lightboxImg = document.getElementById("gems-lightbox-image");
+    const closeBtn = document.querySelector(".gems-gallery-close");
 
-  if (!lightbox || !image || !items.length) return;
+    if (!grid) return;
 
-  let index = 0;
+    // Photos officielles de Gems (garanties d'affichage)
+    const defaultPhotos = [
+        {
+            src: "assets/images/gems-portrait.jpg",
+            title: "Gems Maréchal",
+            caption: "Portrait officiel en tenue de pilote"
+        },
+        {
+            src: "assets/images/gems-social-preview.jpg",
+            title: "En piste",
+            caption: "Session karting SWS en compétition"
+        },
+        {
+            src: "assets/images/gems-course-01.jpg",
+            title: "Course SWS",
+            caption: "Bataille pour la victoire sur le circuit"
+        },
+        {
+            src: "assets/images/gems-paddock.jpg",
+            title: "Paddock & Préparation",
+            caption: "Concentration avant le départ"
+        }
+    ];
 
-  const close = document.querySelector(".gems-gallery-close");
+    // Récupération des photos depuis l'intranet (si existantes) ou fallback
+    let photos = defaultPhotos;
+    try {
+        const stored = localStorage.getItem("gems_gallery_photos");
+        if (stored) {
+            const parsed = JSON.parse(stored);
+            if (Array.isArray(parsed) && parsed.length > 0) {
+                photos = parsed;
+            }
+        }
+    } catch (e) {
+        console.warn("Utilisation des photos par défaut", e);
+    }
 
-  const previous = document.createElement("button");
-  previous.className = "gems-gallery-prev";
-  previous.type = "button";
-  previous.setAttribute("aria-label", "Photo précédente");
-  previous.textContent = "‹";
+    // Génération de la galerie
+    grid.innerHTML = "";
+    photos.forEach(function (photo) {
+        const card = document.createElement("div");
+        card.className = "gems-gallery-item";
+        card.style.cursor = "pointer";
 
-  const next = document.createElement("button");
-  next.className = "gems-gallery-next";
-  next.type = "button";
-  next.setAttribute("aria-label", "Photo suivante");
-  next.textContent = "›";
+        card.innerHTML = `
+            <div class="gems-gallery-thumb" style="overflow:hidden; border-radius:12px; position:relative; background:#071b35;">
+                <img src="${photo.src}" 
+                     alt="${photo.title || 'Photo Gems Racing'}" 
+                     loading="lazy" 
+                     style="width:100%; height:260px; object-fit:cover; display:block; transition:transform 0.3s ease;"
+                     onerror="this.onerror=null; this.src='assets/images/gems-portrait.jpg';">
+                <div class="gems-gallery-overlay" style="position:absolute; bottom:0; left:0; right:0; padding:15px; background:linear-gradient(to top, rgba(5,19,38,0.95), transparent); color:#fff;">
+                    <strong style="display:block; font-size:15px; color:#f28c28;">${photo.title || ''}</strong>
+                    <span style="font-size:12px; opacity:0.85;">${photo.caption || ''}</span>
+                </div>
+            </div>
+        `;
 
-  lightbox.appendChild(previous);
-  lightbox.appendChild(next);
+        // Effet de zoom au survol
+        const img = card.querySelector("img");
+        card.addEventListener("mouseenter", () => { img.style.transform = "scale(1.05)"; });
+        card.addEventListener("mouseleave", () => { img.style.transform = "scale(1)"; });
 
-  function showPhoto(number) {
-    if (number < 0) number = items.length - 1;
-    if (number >= items.length) number = 0;
+        // Ouverture dans la lightbox
+        card.addEventListener("click", function () {
+            if (lightbox && lightboxImg) {
+                lightboxImg.src = photo.src;
+                lightboxImg.alt = photo.title || "Photo agrandie";
+                lightbox.classList.add("is-active");
+                lightbox.style.display = "flex";
+            }
+        });
 
-    index = number;
-    image.src = items[index].dataset.galleryImage;
-    image.alt = items[index].getAttribute("aria-label") || "";
-    lightbox.classList.add("is-open");
-  }
-
-  items.forEach(function (item, number) {
-    item.addEventListener("click", function (event) {
-      event.preventDefault();
-      showPhoto(number);
+        grid.appendChild(card);
     });
-  });
 
-  previous.addEventListener("click", function (event) {
-    event.stopPropagation();
-    showPhoto(index - 1);
-  });
+    // Fermeture de la lightbox
+    if (lightbox) {
+        function closeLightbox() {
+            lightbox.classList.remove("is-active");
+            lightbox.style.display = "none";
+            if (lightboxImg) lightboxImg.src = "";
+        }
 
-  next.addEventListener("click", function (event) {
-    event.stopPropagation();
-    showPhoto(index + 1);
-  });
-
-  close.addEventListener("click", function () {
-    lightbox.classList.remove("is-open");
-    image.src = "";
-  });
-
-  lightbox.addEventListener("click", function (event) {
-    if (event.target === lightbox) {
-      lightbox.classList.remove("is-open");
-      image.src = "";
+        if (closeBtn) closeBtn.addEventListener("click", closeLightbox);
+        lightbox.addEventListener("click", function (e) {
+            if (e.target === lightbox || e.target === closeBtn) {
+                closeLightbox();
+            }
+        });
+        document.addEventListener("keydown", function (e) {
+            if (e.key === "Escape") closeLightbox();
+        });
     }
-  });
-
-  document.addEventListener("keydown", function (event) {
-    if (!lightbox.classList.contains("is-open")) return;
-
-    if (event.key === "ArrowLeft") showPhoto(index - 1);
-    if (event.key === "ArrowRight") showPhoto(index + 1);
-
-    if (event.key === "Escape") {
-      lightbox.classList.remove("is-open");
-      image.src = "";
-    }
-  });
 });
