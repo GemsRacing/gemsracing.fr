@@ -1,6 +1,26 @@
 ﻿/* ============================================================
-   FIX PARTENAIRES : RESPONSIVE + VITESSE (GEMS RACING)
+   PARTNERS GLOBAL - GEMS RACING (FIX FINAL)
+   Styles pour l'affichage des partenaires sur le site public.
+   Ce fichier remplace le contenu existant.
    ============================================================ */
+
+.gems-partners-section {
+    background: #051326;
+    padding: 60px 0;
+    text-align: center;
+}
+
+.gems-partners-section h2 {
+    color: #ffffff;
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.gems-partners-section .gems-partners-intro {
+    color: rgba(255,255,255,0.7);
+    font-size: 16px;
+    margin-bottom: 40px;
+}
 
 .gems-partners-container {
     width: 100%;
@@ -8,14 +28,15 @@
     padding: 20px 0;
     position: relative;
     display: flex;
+    justify-content: center; /* Centrer les partenaires */
 }
 
 .gems-partners-track {
     display: flex;
     width: max-content;
-    /* VITESSE : On passe de 40s à 20s pour que ce soit plus dynamique */
-    animation: scroll 20s linear infinite;
+    animation: scroll 20s linear infinite; /* Vitesse de défilement */
     gap: 40px; /* Espace entre les logos */
+    align-items: center;
 }
 
 .gems-partner-card {
@@ -32,12 +53,12 @@
     width: 100px; /* Taille du logo */
     height: 60px;
     object-fit: contain; /* GARANTIT que le logo n'est pas déformé */
-    filter: grayscale(1) brightness(2);
+    filter: none; /* RETIRE LE FILTRE NOIR ET BLANC */
     transition: all 0.3s ease;
 }
 
 .gems-partner-card:hover img {
-    filter: grayscale(0) brightness(1);
+    filter: none; /* Reste en couleur au survol */
     transform: scale(1.1);
 }
 
@@ -56,17 +77,41 @@
     100% { transform: translateX(-50%); }
 }
 
-/* AJUSTEMENT MOBILE */
+/* --- RESPONSIVE PARTENAIRES --- */
 @media (max-width: 820px) {
+    .gems-partners-section {
+        padding: 40px 0;
+    }
+    .gems-partners-section h2 {
+        font-size: 24px;
+    }
+    .gems-partners-section .gems-partners-intro {
+        font-size: 14px;
+        margin-bottom: 30px;
+    }
     .gems-partners-track {
-        gap: 30px;
-        animation-duration: 15s; /* Encore plus rapide sur mobile car l'écran est petit */
+        gap: 25px;
+        animation-duration: 15s; /* Plus rapide sur mobile */
     }
     .gems-partner-card {
-        width: 110px;
+        width: 100px;
     }
     .gems-partner-card img {
+        width: 70px;
+        height: 45px;
+    }
+}
+
+@media (max-width: 480px) {
+    .gems-partners-track {
+        gap: 20px;
+        animation-duration: 10s; /* Encore plus rapide sur petits écrans */
+    }
+    .gems-partner-card {
         width: 80px;
-        height: 50px;
+    }
+    .gems-partner-card img {
+        width: 60px;
+        height: 40px;
     }
 }
