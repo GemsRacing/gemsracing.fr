@@ -2,11 +2,7 @@
     const toggle = document.querySelector(".menu-toggle");
     const menu = document.querySelector("header.top nav.menu");
 
-    if (!toggle || !menu) {
-        console.warn("Menu public introuvable.");
-        return;
-    }
-
+    if (!toggle || !menu) return;
     if (toggle.dataset.menuReady === "true") return;
     toggle.dataset.menuReady = "true";
 
@@ -15,12 +11,8 @@
         event.stopPropagation();
 
         const opened = menu.classList.toggle("is-open");
-
         toggle.setAttribute("aria-expanded", String(opened));
-        toggle.setAttribute(
-            "aria-label",
-            opened ? "Fermer le menu" : "Ouvrir le menu"
-        );
+        toggle.setAttribute("aria-label", opened ? "Fermer le menu" : "Ouvrir le menu");
         toggle.textContent = opened ? "✕" : "☰";
     });
 
