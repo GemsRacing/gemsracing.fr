@@ -92,7 +92,7 @@
         moreButton.hidden = archives.length <= 2;
         moreButton.textContent = expanded
           ? "RÃ‰DUIRE"
-          : "VOIR PLUS Dâ€™ACTUALITÃ‰S";
+          : "VOIR PLUS D'ACTUALITÉS";
       }
     }
 
