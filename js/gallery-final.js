@@ -1,104 +1,178 @@
-﻿document.addEventListener("DOMContentLoaded", function () {
-    const grid = document.getElementById("gems-dynamic-gallery-grid");
-    const lightbox = document.getElementById("gems-lightbox");
-    const lightboxImg = document.getElementById("gems-lightbox-image");
-    const closeBtn = document.querySelector(".gems-gallery-close");
+/* ============================================================
+   MOTEUR DYNAMIQUE GALERIE & LIGHTBOX AVEC DÉFILEMENT
+   (Connecté aux données Intranet /api/data)
+   ============================================================ */
+document.addEventListener("DOMContentLoaded", function () {
+  let galleryItems = [];
+  let currentIndex = 0;
 
-    if (!grid) return;
+  const grid = document.getElementById("gems-dynamic-gallery-grid");
+  const lightbox = document.getElementById("gems-lightbox");
+  const lbImage = document.getElementById("gems-lightbox-image");
+  const lbCaption = document.getElementById("gems-lightbox-caption");
+  const lbCounter = document.getElementById("gems-lightbox-counter");
+  const btnClose = document.getElementById("gems-lightbox-close");
+  const btnPrev = document.getElementById("gems-lightbox-prev");
+  const btnNext = document.getElementById("gems-lightbox-next");
+  const backdrop = document.querySelector(".gems-lightbox-backdrop");
 
-    // Photos officielles de Gems (garanties d'affichage)
-    const defaultPhotos = [
-        {
-            src: "assets/images/gems-portrait.jpg",
-            title: "Gems Maréchal",
-            caption: "Portrait officiel en tenue de pilote"
-        },
-        {
-            src: "assets/images/gems-social-preview.jpg",
-            title: "En piste",
-            caption: "Session karting SWS en compétition"
-        },
-        {
-            src: "assets/images/gems-course-01.jpg",
-            title: "Course SWS",
-            caption: "Bataille pour la victoire sur le circuit"
-        },
-        {
-            src: "assets/images/gems-paddock.jpg",
-            title: "Paddock & Préparation",
-            caption: "Concentration avant le départ"
-        }
-    ];
+  if (!grid) return;
 
-    // Récupération des photos depuis l'intranet (si existantes) ou fallback
-    let photos = defaultPhotos;
+  function escapeHtml(str) {
+    if (!str) return "";
+    return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  }
+
+  // Chargement des photos depuis /api/data ou le localStorage
+  async function loadPhotos() {
     try {
-        const stored = localStorage.getItem("gems_gallery_photos");
-        if (stored) {
-            const parsed = JSON.parse(stored);
-            if (Array.isArray(parsed) && parsed.length > 0) {
-                photos = parsed;
-            }
+      const response = await fetch("/api/data", { cache: "no-store" });
+      if (response.ok) {
+        const data = await response.json();
+        if (data && Array.isArray(data.gallery) && data.gallery.length > 0) {
+          return data.gallery;
         }
+      }
     } catch (e) {
-        console.warn("Utilisation des photos par défaut", e);
+      console.warn("Échec lecture /api/data, tentative localStorage...");
     }
 
-    // Génération de la galerie
-    grid.innerHTML = "";
-    photos.forEach(function (photo) {
-        const card = document.createElement("div");
-        card.className = "gems-gallery-item";
-        card.style.cursor = "pointer";
-
-        card.innerHTML = `
-            <div class="gems-gallery-thumb" style="overflow:hidden; border-radius:12px; position:relative; background:#071b35;">
-                <img src="${photo.src}" 
-                     alt="${photo.title || 'Photo Gems Racing'}" 
-                     loading="lazy" 
-                     style="width:100%; height:260px; object-fit:cover; display:block; transition:transform 0.3s ease;"
-                     onerror="this.onerror=null; this.src='assets/images/gems-portrait.jpg';">
-                <div class="gems-gallery-overlay" style="position:absolute; bottom:0; left:0; right:0; padding:15px; background:linear-gradient(to top, rgba(5,19,38,0.95), transparent); color:#fff;">
-                    <strong style="display:block; font-size:15px; color:#f28c28;">${photo.title || ''}</strong>
-                    <span style="font-size:12px; opacity:0.85;">${photo.caption || ''}</span>
-                </div>
-            </div>
-        `;
-
-        // Effet de zoom au survol
-        const img = card.querySelector("img");
-        card.addEventListener("mouseenter", () => { img.style.transform = "scale(1.05)"; });
-        card.addEventListener("mouseleave", () => { img.style.transform = "scale(1)"; });
-
-        // Ouverture dans la lightbox
-        card.addEventListener("click", function () {
-            if (lightbox && lightboxImg) {
-                lightboxImg.src = photo.src;
-                lightboxImg.alt = photo.title || "Photo agrandie";
-                lightbox.classList.add("is-active");
-                lightbox.style.display = "flex";
-            }
-        });
-
-        grid.appendChild(card);
-    });
-
-    // Fermeture de la lightbox
-    if (lightbox) {
-        function closeLightbox() {
-            lightbox.classList.remove("is-active");
-            lightbox.style.display = "none";
-            if (lightboxImg) lightboxImg.src = "";
+    try {
+      const local = localStorage.getItem("gemsData");
+      if (local) {
+        const parsed = JSON.parse(local);
+        if (parsed && Array.isArray(parsed.gallery) && parsed.gallery.length > 0) {
+          return parsed.gallery;
         }
+      }
+    } catch (e) {}
 
-        if (closeBtn) closeBtn.addEventListener("click", closeLightbox);
-        lightbox.addEventListener("click", function (e) {
-            if (e.target === lightbox || e.target === closeBtn) {
-                closeLightbox();
-            }
-        });
-        document.addEventListener("keydown", function (e) {
-            if (e.key === "Escape") closeLightbox();
-        });
+    // Fallback si aucune photo n'est retournée
+    return [
+      { image: "assets/images/gems-portrait.jpg", caption: "Gems Maréchal - Pilote SWS", rotation: 0 },
+      { image: "assets/images/gems-social-preview.jpg", caption: "Gems en compétition karting", rotation: 0 }
+    ];
+  }
+
+  function renderGrid(photos) {
+    galleryItems = photos;
+    grid.innerHTML = "";
+
+    photos.forEach((photo, index) => {
+      const card = document.createElement("div");
+      card.className = "gems-gallery-card";
+      card.setAttribute("role", "button");
+      card.setAttribute("tabindex", "0");
+
+      const rot = photo.rotation ? `transform: rotate(${photo.rotation}deg);` : "";
+      const imgSrc = photo.image || photo.src || "";
+      const captionText = photo.caption || "";
+
+      card.innerHTML = `
+        <img src="${imgSrc}" alt="${escapeHtml(captionText || 'Photo Gems Racing')}" loading="lazy" style="${rot}">
+        ${captionText ? `<div class="gems-gallery-card-caption">${escapeHtml(captionText)}</div>` : ""}
+      `;
+
+      card.addEventListener("click", () => openLightbox(index));
+      card.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          openLightbox(index);
+        }
+      });
+
+      grid.appendChild(card);
+    });
+  }
+
+  function updateLightboxView() {
+    if (!galleryItems.length) return;
+    const photo = galleryItems[currentIndex];
+    if (!photo) return;
+
+    if (lbImage) {
+      lbImage.src = photo.image || photo.src || "";
+      lbImage.alt = photo.caption || "Photo Gems Racing";
+      lbImage.style.transform = photo.rotation ? `rotate(${photo.rotation}deg)` : "";
     }
+
+    if (lbCaption) {
+      lbCaption.textContent = photo.caption || "";
+      lbCaption.style.display = photo.caption ? "block" : "none";
+    }
+
+    if (lbCounter) {
+      lbCounter.textContent = `${currentIndex + 1} / ${galleryItems.length}`;
+    }
+  }
+
+  function openLightbox(index) {
+    currentIndex = index;
+    updateLightboxView();
+    if (lightbox) {
+      lightbox.style.display = "flex";
+      document.body.style.overflow = "hidden";
+    }
+  }
+
+  function closeLightbox() {
+    if (lightbox) {
+      lightbox.style.display = "none";
+      document.body.style.overflow = "";
+    }
+  }
+
+  function showPrev() {
+    if (!galleryItems.length) return;
+    currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+    updateLightboxView();
+  }
+
+  function showNext() {
+    if (!galleryItems.length) return;
+    currentIndex = (currentIndex + 1) % galleryItems.length;
+    updateLightboxView();
+  }
+
+  // Événements boutons et backdrop
+  btnClose?.addEventListener("click", closeLightbox);
+  backdrop?.addEventListener("click", closeLightbox);
+  btnPrev?.addEventListener("click", (e) => { e.stopPropagation(); showPrev(); });
+  btnNext?.addEventListener("click", (e) => { e.stopPropagation(); showNext(); });
+
+  // Événements Clavier (Gauche / Droite / Échap)
+  document.addEventListener("keydown", function (e) {
+    if (!lightbox || lightbox.style.display === "none") return;
+
+    if (e.key === "ArrowLeft") {
+      showPrev();
+    } else if (e.key === "ArrowRight") {
+      showNext();
+    } else if (e.key === "Escape") {
+      closeLightbox();
+    }
+  });
+
+  // Swipe tactile mobile (Gauche / Droite)
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  lightbox?.addEventListener("touchstart", function (e) {
+    touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+
+  lightbox?.addEventListener("touchend", function (e) {
+    touchEndX = e.changedTouches[0].screenX;
+    const diff = touchEndX - touchStartX;
+    if (Math.abs(diff) > 40) {
+      if (diff > 0) {
+        showPrev(); // Glissement vers la droite = image précédente
+      } else {
+        showNext(); // Glissement vers la gauche = image suivante
+      }
+    }
+  }, { passive: true });
+
+  // Lancement du chargement
+  loadPhotos().then(renderGrid);
 });

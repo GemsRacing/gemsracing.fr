@@ -14,19 +14,17 @@
   <link rel="stylesheet" href="css/mobile-clean.css?v=m6">
   <link rel="stylesheet" href="css/visual-fix-final.css">
   <link rel="stylesheet" href="css/photo-optimized.css">
-  <link rel="stylesheet" href="css/gallery.css">
-  <link rel="stylesheet" href="css/equipment.css">
+  <link rel="stylesheet" href="css/gallery.css?v=3">
   <link rel="stylesheet" href="css/sticky-header.css">
   <link rel="stylesheet" href="css/partners-global.css?v=p5">
   <link rel="stylesheet" href="css/footer-final.css?v=1">
   <link rel="stylesheet" href="css/widgets-rounded.css?v=1">
   <link rel="stylesheet" href="css/rounded-final.css?v=2">
-  <link rel="stylesheet" href="css/scoring-circuit.css?v=1">
   <link rel="stylesheet" href="css/pagehead-honeycomb.css?v=200">
 
   <link rel="canonical" href="https://gemsracing.fr/galerie.html">
 
-  <!-- Open Graph / Réseaux sociaux -->
+  <!-- Open Graph -->
   <meta property="og:locale" content="fr_FR">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Galerie Photos Karting SWS France | Gems Racing Nantes, Vendée">
@@ -34,8 +32,6 @@
   <meta property="og:url" content="https://gemsracing.fr/galerie.html">
   <meta property="og:site_name" content="Gems Racing">
   <meta property="og:image" content="https://gemsracing.fr/assets/images/gems-social-preview.jpg">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
@@ -43,7 +39,7 @@
   <meta name="twitter:description" content="Photos de Gems Maréchal en compétition SWS en France.">
   <meta name="twitter:image" content="https://gemsracing.fr/assets/images/gems-social-preview.jpg">
 
-  <!-- Données structurées Schema.org JSON-LD -->
+  <!-- Schema.org JSON-LD -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -92,11 +88,7 @@
 <header class="top">
   <div class="wrap nav">
     <a class="logo" href="index.html">GEMS <span>KART RACING</span></a>
-    <button
-      class="menu-toggle"
-      type="button"
-      aria-label="Ouvrir le menu"
-      aria-expanded="false">
+    <button class="menu-toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false">
       ☰
     </button>
     <nav class="menu">
@@ -126,7 +118,7 @@
         dans le paddock et autour de son projet sportif.
       </p>
 
-      <div class="gems-gallery-grid" id="gems-dynamic-gallery-grid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:24px;"></div>
+      <div class="gems-gallery-grid" id="gems-dynamic-gallery-grid"></div>
     </div>
   </section>
 </main>
@@ -134,9 +126,7 @@
 <section class="gems-partners-section" id="partenaires">
   <div class="wrap">
     <h2>Partenaires officiels</h2>
-    <p class="gems-partners-intro">
-      Ils accompagnent Gems dans son projet sportif.
-    </p>
+    <p class="gems-partners-intro">Ils accompagnent Gems dans son projet sportif.</p>
 
     <div class="gems-partners-container">
       <div class="gems-partners-track">
@@ -161,7 +151,6 @@
           <span class="gems-partner-name">Arrière-Cour</span>
         </a>
       </div>
-
       <div class="gems-partners-track">
         <a class="gems-partner-card" href="https://www.vrtueux.fr/" target="_blank" rel="noopener noreferrer">
           <img src="assets/partners/vrtueux.png" alt="VRtueux" width="100" height="60" loading="lazy">
@@ -188,23 +177,31 @@
   </div>
 </section>
 
-<!-- Lightbox pour affichage grand format -->
-<div class="gems-gallery-lightbox" id="gems-lightbox" style="display:none; position:fixed; z-index:99999; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.92); align-items:center; justify-content:center;">
-  <button class="gems-gallery-close" type="button" aria-label="Fermer" style="position:absolute; top:20px; right:25px; font-size:36px; color:#fff; background:none; border:none; cursor:pointer;">&times;</button>
-  <img id="gems-lightbox-image" src="" alt="Agrandissement photo" style="max-width:90%; max-height:85vh; border-radius:8px; box-shadow:0 10px 40px rgba(0,0,0,0.8); object-fit:contain;">
+<!-- Lightbox complète avec navigation -->
+<div class="gems-gallery-lightbox" id="gems-lightbox" style="display:none;" role="dialog" aria-modal="true" aria-label="Agrandissement photo">
+  <div class="gems-lightbox-backdrop"></div>
+  
+  <div class="gems-lightbox-header">
+    <span class="gems-lightbox-counter" id="gems-lightbox-counter">1 / 1</span>
+    <button class="gems-lightbox-close" id="gems-lightbox-close" type="button" aria-label="Fermer la photo">✕</button>
+  </div>
+
+  <button class="gems-lightbox-nav gems-lightbox-prev" id="gems-lightbox-prev" type="button" aria-label="Photo précédente">❮</button>
+
+  <div class="gems-lightbox-content">
+    <img id="gems-lightbox-image" src="" alt="Agrandissement photo">
+    <div class="gems-lightbox-caption" id="gems-lightbox-caption"></div>
+  </div>
+
+  <button class="gems-lightbox-nav gems-lightbox-next" id="gems-lightbox-next" type="button" aria-label="Photo suivante">❯</button>
 </div>
 
 <footer class="footer">
   <div class="wrap">
     <div class="footer-main">
       <div class="footer-brand">
-        <div class="logo">
-          GEMS
-          <span>KART RACING</span>
-        </div>
-        <p class="footer-slogan">
-          Passion · Ambition · Combatif
-        </p>
+        <div class="logo">GEMS <span>KART RACING</span></div>
+        <p class="footer-slogan">Passion · Ambition · Combatif</p>
       </div>
 
       <div class="footer-navigation">
@@ -223,39 +220,23 @@
       <div class="footer-contact">
         <h3 class="footer-title">Contact</h3>
         <p class="footer-social">
-          <a href="https://www.instagram.com/gems.kartracing/" target="_blank" rel="noopener noreferrer">
-            Instagram @gems.kartracing
-          </a>
+          <a href="https://www.instagram.com/gems.kartracing/" target="_blank" rel="noopener noreferrer">Instagram @gems.kartracing</a>
         </p>
-        <p class="footer-social">
-          <a href="contact.html">
-            Contacter l'équipe Gems Racing
-          </a>
-        </p>
-        <p class="footer-social">
-          <a href="mentions-legales.html">
-            Mentions légales
-          </a>
-        </p>
+        <p class="footer-social"><a href="contact.html">Contacter l'équipe Gems Racing</a></p>
+        <p class="footer-social"><a href="mentions-legales.html">Mentions légales</a></p>
       </div>
     </div>
 
     <div class="footer-bottom">
       <p>© 2026 Gems Racing — Association GEMS Karting Access.</p>
-      <p class="footer-developer">
-        Site développé par
-        <a href="https://www.vrtueux.fr/" target="_blank" rel="noopener noreferrer">
-          VRtueux
-        </a>
-      </p>
+      <p class="footer-developer">Site développé par <a href="https://www.vrtueux.fr/" target="_blank" rel="noopener noreferrer">VRtueux</a></p>
     </div>
   </div>
 </footer>
 
-<!-- Scripts uniques et ordonnés sans doublon -->
 <script src="js/menu-clean.js?v=m6"></script>
 <script src="js/sticky-header.js"></script>
-<script src="js/gallery-final.js?v=2"></script>
+<script src="js/gallery-final.js?v=3"></script>
 <script src="js/site-sync.js?v=20"></script>
 </body>
 </html>
