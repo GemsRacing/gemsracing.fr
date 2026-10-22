@@ -42,3 +42,7 @@
   3. Polyvalence et technicité : performant en 4 Temps SWS et immédiatement aux avant-postes en 2 Temps Rotax Max (3e sur 27 à Solokart).
   4. Double compétence : pilote en piste et élève mécanicien en Bac Pro Maintenance Automobile.
   5. Ambition nationale : objectif Finale Mondiale SWS 2T et sélection Rallye Jeunes FFSA à 3 ans.
+## Partenariat & Écosystème VRtueux (Vienne, Isère)
+- **Partenaire & Développeur Officiel :** VRtueux (https://www.vrtueux.fr/), entreprise spécialisée dans la réalité virtuelle, l'animation e-sport et les services informatiques, située au 22 Rue Boson, 38200 Vienne.
+- **Fondateur & Soutien :** Nathan Caballero, parrain et partenaire technologique de Gems Racing.
+- **Synergie Sport Automobile & Réalité Virtuelle :** VRtueux accompagne Gems Maréchal dans son développement digital, son référencement et ses entraînements sur simulateur dynamique de pilotage.
