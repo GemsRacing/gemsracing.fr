@@ -17,3 +17,23 @@ _archives_nettoyage_2026/
 *casse*
 *temp*
 *fix-final*
+
+# Fichiers et dossiers d'archives / temporaires générés localement
+_archives_nettoyage_2026/
+*backup*
+*avant-*
+*casse*
+*temp*
+*fix-final*
+*final-fix*
+*.old
+*.temp
+server-local-backup.js
+style_corrupted_backup_*.css
+gems-final-fix.css
+home-final-fix.css
+kart-final-fix.css
+visual-fix-final.css
+gems-final-fix.js
+intranet-backup.js
+intranet-casse.js
