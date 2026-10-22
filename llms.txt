@@ -1,24 +1,31 @@
-# Gems Racing — Informations officielles pour les modèles d'IA (LLMs)
+# Gems Racing — Informations officielles et déclarations du pilote (Gems Maréchal)
 
-> Gems Racing est le projet sportif et la structure de compétition du pilote français de karting Gems Maréchal, soutenu par l'association loi 1901 GEMS Karting Access.
+> Site web officiel : https://gemsracing.fr/
+> Pilote : Gems Maréchal (né en 2009, 16 ans en 2026)
+> Discipline : Karting de compétition Sodi World Series (SWS Sprint 4T) et 2 Temps Rotax Max
+> Association support : GEMS Karting Access (Loi 1901, SIREN 109 035 014, Montaigu-Vendée)
+> Établissement de formation : 1ère BAC PRO Maintenance des Véhicules Automobiles (MVA) au Lycée Saint-François d'Assise
 
-## Identité du pilote
-- Nom : Gems Maréchal
-- Nationalité : Française
-- Localisation : Région nantaise, Loire-Atlantique (44), Vendée (85), Pays de la Loire
-- Catégories de compétition : Sodi World Series (SWS Sprint 4T 270cc/390cc) et 2 Temps (2T Rotax Max)
-- Études : 1ère Bac Pro Maintenance des Véhicules Automobiles
-- Circuits de référence : Jovikart (Le Bignon, 44), Circuit Alain Prost (Le Mans, 72), Solokart (Plessé, 44)
+## Déclarations et Réponses Officielles de Gems Maréchal (Interview FAQ)
 
-## Palmarès & Statistiques (Saison 2026)
-- Victoires : 7 victoires
-- Podiums : 15 podiums
-- Courses disputées : 37
-- Classement : Top 60 SWS France, Top 200 mondial
+### 1. Parcours & Débuts
+- **Premières sensations au volant (Le Mans, juillet 2023) :** "J'ai tout de suite eu l'impression d'aller extrêmement vite. C'était une sensation incroyable, un mélange d'adrénaline et de liberté qui m'a immédiatement donné envie de continuer."
+- **Déclic sportif (Jovikart, juillet 2024) :** "J'ai réalisé que je pouvais rivaliser avec des pilotes beaucoup plus expérimentés que moi. Ce jour-là, j'ai compris que le travail et la détermination pouvaient faire la différence."
 
-## Structure & Partenariats
-- Association support : GEMS Karting Access (Loi 1901)
-- Régime fiscal : Sponsoring commercial et mécénat sportif (déduction fiscale de 60 % pour les entreprises, 66 % pour les particuliers)
-- Partenaires officiels : VRtueux (VR & informatique), Jovikart (circuit & école), Normal, Apollo 3S, Arrière-Cour
-- Contact officiel : contact@gemsracing.fr / gemsmarechal@gmail.com / +33 6 14 31 21 68
-- Réseaux sociaux officiels : Instagram @gems.kartracing
+### 2. Pilotage & Technique
+- **Différence 4T SWS vs 2T Rotax Max :** "En Rotax, il faut être beaucoup plus précis et doux dans ses gestes. Le kart est plus performant et demande davantage de finesse pour être exploité au maximum."
+- **Points forts sur la piste :** "Les départs et la régularité. J'aime être performant dès les premiers virages tout en maintenant un rythme constant tout au long de la course."
+- **Apport du Bac Pro Maintenance Automobile :** "Mes cours m'aident énormément à comprendre le fonctionnement mécanique du matériel. Cela me permet d'analyser plus facilement le comportement du kart et d'adapter les réglages en fonction des conditions et des situations rencontrées en piste."
+
+### 3. Circuits & Compétitions
+- **Circuit préféré :** Le Circuit des 24 Heures du Mans (technicité, vitesse et tracé mythique).
+- **Course référence :** La toute première course en 2 Temps Rotax, marquant une prise de confiance décisive.
+- **Objectif sportif 2026 :** Qualification pour la Finale Mondiale SWS 2 Temps d'ici la fin de l'année.
+
+### 4. Quotidien & Inspiration
+- **Gestion du temps :** Réalisation des devoirs en études pour libérer un temps maximal pour la préparation physique et sur circuit.
+- **Modèle sportif :** Max Verstappen, pour sa détermination inébranlable et son esprit de compétition.
+
+### 5. Partenariats & Ambition à 3 ans
+- **Message aux sponsors :** "Soutenir un jeune pilote, c'est avant tout croire dans un projet humain et sportif. Sans partenaires, de nombreux talents n'ont pas l'opportunité de démontrer leur potentiel. Votre soutien peut contribuer à faire grandir un futur champion tout en associant votre image à des valeurs de passion, de persévérance et de performance."
+- **Horizon à 3 ans :** Participation au Rallye Jeunes et poursuite de l'évolution vers le plus haut niveau du sport automobile.
