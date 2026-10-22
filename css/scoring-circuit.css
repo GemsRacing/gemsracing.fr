@@ -1,30 +1,32 @@
 /* ============================================================
-   STATS & PISTE KARTING - DESIGN MOTORSPORT HIGH PERFORMANCE
+   STATS & PISTE KARTING - DESIGN BLEU NUIT & ORANGE RACING
    ============================================================ */
 
+/* Suppression de tout fond blanc parasite */
+section.stats.gems-home-stats,
 .gems-home-stats {
-    padding: 30px 0 20px;
-    position: relative;
-    z-index: 5;
+    background: transparent !important;
+    padding: 30px 0 15px !important;
+    box-shadow: none !important;
+    border: none !important;
 }
 
-/* Châssis principal style cockpit de course */
+/* Le cadre principal en bleu nuit officiel avec bordure orange */
 .gems-home-stats .wrap {
-    background: linear-gradient(135deg, rgba(8, 24, 50, 0.92) 0%, rgba(3, 12, 28, 0.96) 100%);
-    border: 1px solid rgba(242, 140, 40, 0.35);
-    border-radius: 16px;
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55), 
-                inset 0 1px 0 rgba(255, 255, 255, 0.12),
-                0 0 25px rgba(242, 140, 40, 0.12);
-    padding: 24px 28px 26px;
-    position: relative;
-    overflow: hidden;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    backdrop-filter: blur(12px);
+    background: #04132b !important;
+    border: 2px solid #f28c28 !important;
+    border-radius: 14px !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(4, 19, 43, 0.8) !important;
+    padding: 20px 24px 22px !important;
+    position: relative !important;
+    overflow: hidden !important;
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    max-width: 1180px !important;
+    margin: 0 auto !important;
 }
 
-/* Liseré supérieur inspiré des vibreurs de circuit */
+/* Liseré damier vibreur subtil en haut et en bas */
 .gems-home-stats .wrap::before {
     content: '';
     position: absolute;
@@ -33,219 +35,150 @@
     right: 0;
     height: 4px;
     background: repeating-linear-gradient(90deg, 
-        #f28c28 0, #f28c28 16px, 
-        #ffffff 16px, #ffffff 32px, 
-        #071b35 32px, #071b35 48px
+        #f28c28 0, #f28c28 14px, 
+        #ffffff 14px, #ffffff 28px, 
+        #051326 28px, #051326 42px
     );
-    opacity: 0.9;
+    opacity: 0.85;
 }
 
-/* Piste de karting animée */
+/* Piste de course */
 .scoring-kart-track {
-    grid-column: 1 / -1;
-    position: relative;
-    height: 46px;
-    margin-bottom: 22px;
-    background: rgba(2, 8, 18, 0.85);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.7);
+    grid-column: 1 / -1 !important;
+    position: relative !important;
+    height: 44px !important;
+    margin-bottom: 20px !important;
+    background: #020b18 !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 8px !important;
+    overflow: hidden !important;
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.8) !important;
 }
 
-/* Trajectoire médiane de course */
+/* Ligne orange de trajectoire */
 .scoring-kart-track::after {
     content: '';
     position: absolute;
     top: 50%;
-    left: 12px;
-    right: 48px;
+    left: 10px;
+    right: 44px;
     height: 2px;
-    background: linear-gradient(90deg, 
-        rgba(242, 140, 40, 0.2) 0%, 
-        rgba(242, 140, 40, 0.8) 50%, 
-        rgba(242, 140, 40, 0.3) 100%
-    );
+    background: #f28c28;
+    opacity: 0.6;
     transform: translateY(-50%);
 }
 
-/* Base des karts */
+/* Style des karts */
 .scoring-kart {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     width: 32px;
-    height: 24px;
-    border-radius: 5px;
+    height: 22px;
     z-index: 2;
-    will-change: left, transform;
+    will-change: left;
 }
 
-/* Kart Gems Maréchal (#7) : leader en bleu/orange avec pulsation */
+/* Kart Gems (#7) */
 .gems-kart.scoring-kart-1 {
-    background: linear-gradient(135deg, #09346b 0%, #f28c28 100%);
-    border: 1px solid #ffaa40;
-    box-shadow: 0 0 12px rgba(242, 140, 40, 0.65), 0 2px 6px rgba(0,0,0,0.5);
-    animation: gemsSurge 7s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    animation: gemsRace 8s ease-in-out infinite;
     display: flex;
     align-items: center;
     justify-content: center;
+    background: linear-gradient(135deg, #09346b, #f28c28);
+    border: 1px solid #ffaa40;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(242, 140, 40, 0.7);
 }
 
 .gems-kart .kart-number {
     font-size: 11px;
     font-weight: 900;
     color: #ffffff;
-    line-height: 1;
 }
 
-/* Karts rivaux en poursuite */
+/* Karts rivaux */
 .rival-kart {
-    opacity: 0.65;
-    background: #445166;
-    border: 1px solid rgba(255,255,255,0.2);
+    opacity: 0.7;
+    border-radius: 4px;
 }
+.rival-kart-2 { animation: rival2 8s ease-in-out infinite; background: #8b263e; width: 28px; height: 18px; }
+.rival-kart-3 { animation: rival3 8s ease-in-out infinite; background: #2b7a78; width: 28px; height: 18px; }
+.rival-kart-4 { animation: rival4 8s ease-in-out infinite; background: #c29d38; width: 28px; height: 18px; }
 
-.rival-kart-2 {
-    animation: rivalFollow2 7s ease-in-out infinite;
-    background: #8b263e;
-}
-.rival-kart-3 {
-    animation: rivalFollow3 7s ease-in-out infinite;
-    background: #2b7a78;
-}
-.rival-kart-4 {
-    animation: rivalFollow4 7s ease-in-out infinite;
-    background: #5c6274;
-}
-
-/* Drapeau à damier d'arrivée */
 .scoring-track-flag {
     position: absolute;
-    right: 14px;
+    right: 12px;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 20px;
-    filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.5));
-    animation: flagPulse 2s ease-in-out infinite;
+    font-size: 18px;
 }
 
-/* Animations de course réalistes (dépassements et vitesse) */
-@keyframes gemsSurge {
+/* Animations de course */
+@keyframes gemsRace {
     0%   { left: 15%; }
-    25%  { left: 45%; }
-    50%  { left: 68%; }
-    75%  { left: 82%; }
-    90%  { left: 85%; }
+    30%  { left: 48%; }
+    60%  { left: 72%; }
+    85%  { left: 84%; }
     100% { left: 15%; }
 }
+@keyframes rival2 { 0% { left: 10%; } 40% { left: 40%; } 75% { left: 62%; } 100% { left: 10%; } }
+@keyframes rival3 { 0% { left: 5%; } 45% { left: 28%; } 80% { left: 48%; } 100% { left: 5%; } }
+@keyframes rival4 { 0% { left: 2%; } 50% { left: 18%; } 85% { left: 35%; } 100% { left: 2%; } }
 
-@keyframes rivalFollow2 {
-    0%   { left: 10%; }
-    30%  { left: 35%; }
-    60%  { left: 52%; }
-    85%  { left: 66%; }
-    100% { left: 10%; }
-}
-
-@keyframes rivalFollow3 {
-    0%   { left: 5%; }
-    35%  { left: 24%; }
-    70%  { left: 42%; }
-    90%  { left: 55%; }
-    100% { left: 5%; }
-}
-
-@keyframes rivalFollow4 {
-    0%   { left: 2%; }
-    40%  { left: 15%; }
-    75%  { left: 30%; }
-    92%  { left: 45%; }
-    100% { left: 2%; }
-}
-
-@keyframes flagPulse {
-    0%, 100% { transform: translateY(-50%) scale(1); }
-    50%      { transform: translateY(-50%) scale(1.15); }
-}
-
-/* Blocs de statistiques */
+/* Les 4 blocs statistiques : 100% transparents sans carte blanche */
 .gems-home-stats .stat {
-    text-align: center;
-    padding: 10px 14px;
-    position: relative;
-    transition: transform 0.25s ease;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 6px 12px !important;
+    text-align: center !important;
+    position: relative !important;
 }
 
-.gems-home-stats .stat:hover {
-    transform: translateY(-3px);
-}
-
-/* Séparateurs verticaux élégants en dégradé */
+/* Séparateurs verticaux orange */
 .gems-home-stats .stat:not(:last-child)::after {
     content: '';
     position: absolute;
     right: 0;
-    top: 15%;
-    height: 70%;
+    top: 20%;
+    height: 60%;
     width: 1px;
-    background: linear-gradient(to bottom, 
-        transparent 0%, 
-        rgba(242, 140, 40, 0.45) 50%, 
-        transparent 100%
-    );
+    background: rgba(242, 140, 40, 0.35);
 }
 
-/* Chiffres clés */
+/* Les chiffres en blanc éclatant */
 .gems-home-stats .stat b {
-    display: block;
-    font-size: 42px;
-    font-weight: 900;
-    color: #ffffff;
-    line-height: 1.05;
-    letter-spacing: -0.5px;
-    text-shadow: 0 2px 14px rgba(242, 140, 40, 0.25);
+    display: block !important;
+    font-size: 38px !important;
+    font-weight: 900 !important;
+    color: #ffffff !important;
+    line-height: 1.1 !important;
+    letter-spacing: -0.5px !important;
 }
 
-/* Libellés sous les chiffres */
+/* Les libellés en orange Gems Racing */
 .gems-home-stats .stat small {
-    display: block;
-    font-size: 12px;
-    font-weight: 800;
-    color: #f28c28;
-    letter-spacing: 1.6px;
-    text-transform: uppercase;
-    margin-top: 8px;
+    display: block !important;
+    font-size: 12px !important;
+    font-weight: 800 !important;
+    color: #f28c28 !important;
+    letter-spacing: 1.5px !important;
+    text-transform: uppercase !important;
+    margin-top: 6px !important;
 }
 
-/* Responsive Tablette & Mobile */
+/* Responsive mobile */
 @media (max-width: 820px) {
     .gems-home-stats .wrap {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 16px 0;
-        padding: 20px 16px;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 16px 0 !important;
+        padding: 16px !important;
     }
     .gems-home-stats .stat b {
-        font-size: 34px;
-    }
-    .gems-home-stats .stat small {
-        font-size: 11px;
-        letter-spacing: 1px;
+        font-size: 30px !important;
     }
     .gems-home-stats .stat:nth-child(even)::after {
-        display: none; /* Supprime le séparateur droit sur 2 colonnes */
-    }
-}
-
-@media (max-width: 480px) {
-    .gems-home-stats .stat b {
-        font-size: 28px;
-    }
-    .scoring-kart-track {
-        height: 40px;
-    }
-    .scoring-kart {
-        width: 26px;
-        height: 20px;
+        display: none !important;
     }
 }
