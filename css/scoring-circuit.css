@@ -1,185 +1,251 @@
-/* =========================================================
-   SCORING - STYLE CIRCUIT / DRAPEAU À DAMIER
-   ========================================================= */
+/* ============================================================
+   STATS & PISTE KARTING - DESIGN MOTORSPORT HIGH PERFORMANCE
+   ============================================================ */
 
 .gems-home-stats {
-  position: relative !important;
-  isolation: isolate !important;
-  width: calc(100% - 64px) !important;
-  max-width: 1400px !important;
-  min-height: 142px !important;
-  margin: 28px auto !important;
-  padding: 18px 18px !important;
-  overflow: hidden !important;
-  background:
-    linear-gradient(
-      90deg,
-      rgba(242, 140, 40, .12),
-      transparent 18%,
-      transparent 82%,
-      rgba(242, 140, 40, .12)
-    ),
-    #071b35 !important;
-  border: 2px solid rgba(242, 140, 40, .9) !important;
-  border-radius: 22px !important;
-  box-shadow:
-    0 12px 28px rgba(0, 0, 0, .28),
-    inset 0 0 0 1px rgba(255,255,255,.08) !important;
+    padding: 30px 0 20px;
+    position: relative;
+    z-index: 5;
 }
 
-/* Ligne de piste intérieure */
-.gems-home-stats::before {
-  content: "" !important;
-  position: absolute !important;
-  z-index: -1 !important;
-  inset: 10px !important;
-  border: 2px dashed rgba(255,255,255,.32) !important;
-  border-radius: 16px !important;
-  pointer-events: none !important;
+/* Châssis principal style cockpit de course */
+.gems-home-stats .wrap {
+    background: linear-gradient(135deg, rgba(8, 24, 50, 0.92) 0%, rgba(3, 12, 28, 0.96) 100%);
+    border: 1px solid rgba(242, 140, 40, 0.35);
+    border-radius: 16px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55), 
+                inset 0 1px 0 rgba(255, 255, 255, 0.12),
+                0 0 25px rgba(242, 140, 40, 0.12);
+    padding: 24px 28px 26px;
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    backdrop-filter: blur(12px);
 }
 
-/* Bandeau damier supérieur */
-.gems-home-stats::after {
-  content: "" !important;
-  position: absolute !important;
-  z-index: 3 !important;
-  top: 0 !important;
-  right: 0 !important;
-  left: 0 !important;
-  height: 10px !important;
-  background:
-    conic-gradient(
-      #ffffff 25%,
-      #111827 0 50%,
-      #ffffff 0 75%,
-      #111827 0
-    ) 0 0 / 20px 20px !important;
-  opacity: .95 !important;
-  pointer-events: none !important;
+/* Liseré supérieur inspiré des vibreurs de circuit */
+.gems-home-stats .wrap::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: repeating-linear-gradient(90deg, 
+        #f28c28 0, #f28c28 16px, 
+        #ffffff 16px, #ffffff 32px, 
+        #071b35 32px, #071b35 48px
+    );
+    opacity: 0.9;
 }
 
-/* Le conteneur des statistiques */
-.gems-home-stats > .wrap {
-  position: relative !important;
-  z-index: 4 !important;
-  display: grid !important;
-  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
-  width: 100% !important;
-  max-width: none !important;
-  min-height: 102px !important;
-  margin: 0 !important;
-  padding: 12px 0 4px !important;
-  background: transparent !important;
+/* Piste de karting animée */
+.scoring-kart-track {
+    grid-column: 1 / -1;
+    position: relative;
+    height: 46px;
+    margin-bottom: 22px;
+    background: rgba(2, 8, 18, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.7);
 }
 
-/* Chaque indicateur */
+/* Trajectoire médiane de course */
+.scoring-kart-track::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    right: 48px;
+    height: 2px;
+    background: linear-gradient(90deg, 
+        rgba(242, 140, 40, 0.2) 0%, 
+        rgba(242, 140, 40, 0.8) 50%, 
+        rgba(242, 140, 40, 0.3) 100%
+    );
+    transform: translateY(-50%);
+}
+
+/* Base des karts */
+.scoring-kart {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 24px;
+    border-radius: 5px;
+    z-index: 2;
+    will-change: left, transform;
+}
+
+/* Kart Gems Maréchal (#7) : leader en bleu/orange avec pulsation */
+.gems-kart.scoring-kart-1 {
+    background: linear-gradient(135deg, #09346b 0%, #f28c28 100%);
+    border: 1px solid #ffaa40;
+    box-shadow: 0 0 12px rgba(242, 140, 40, 0.65), 0 2px 6px rgba(0,0,0,0.5);
+    animation: gemsSurge 7s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gems-kart .kart-number {
+    font-size: 11px;
+    font-weight: 900;
+    color: #ffffff;
+    line-height: 1;
+}
+
+/* Karts rivaux en poursuite */
+.rival-kart {
+    opacity: 0.65;
+    background: #445166;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.rival-kart-2 {
+    animation: rivalFollow2 7s ease-in-out infinite;
+    background: #8b263e;
+}
+.rival-kart-3 {
+    animation: rivalFollow3 7s ease-in-out infinite;
+    background: #2b7a78;
+}
+.rival-kart-4 {
+    animation: rivalFollow4 7s ease-in-out infinite;
+    background: #5c6274;
+}
+
+/* Drapeau à damier d'arrivée */
+.scoring-track-flag {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.5));
+    animation: flagPulse 2s ease-in-out infinite;
+}
+
+/* Animations de course réalistes (dépassements et vitesse) */
+@keyframes gemsSurge {
+    0%   { left: 15%; }
+    25%  { left: 45%; }
+    50%  { left: 68%; }
+    75%  { left: 82%; }
+    90%  { left: 85%; }
+    100% { left: 15%; }
+}
+
+@keyframes rivalFollow2 {
+    0%   { left: 10%; }
+    30%  { left: 35%; }
+    60%  { left: 52%; }
+    85%  { left: 66%; }
+    100% { left: 10%; }
+}
+
+@keyframes rivalFollow3 {
+    0%   { left: 5%; }
+    35%  { left: 24%; }
+    70%  { left: 42%; }
+    90%  { left: 55%; }
+    100% { left: 5%; }
+}
+
+@keyframes rivalFollow4 {
+    0%   { left: 2%; }
+    40%  { left: 15%; }
+    75%  { left: 30%; }
+    92%  { left: 45%; }
+    100% { left: 2%; }
+}
+
+@keyframes flagPulse {
+    0%, 100% { transform: translateY(-50%) scale(1); }
+    50%      { transform: translateY(-50%) scale(1.15); }
+}
+
+/* Blocs de statistiques */
 .gems-home-stats .stat {
-  position: relative !important;
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  justify-content: center !important;
-  min-width: 0 !important;
-  padding: 10px 14px !important;
-  color: #ffffff !important;
-  background: transparent !important;
-  border: 0 !important;
-  border-right: 1px solid rgba(242, 140, 40, .55) !important;
-  border-radius: 0 !important;
-  text-align: center !important;
+    text-align: center;
+    padding: 10px 14px;
+    position: relative;
+    transition: transform 0.25s ease;
 }
 
-/* Pas de séparateur sur le dernier bloc */
-.gems-home-stats .stat:last-child {
-  border-right: 0 !important;
+.gems-home-stats .stat:hover {
+    transform: translateY(-3px);
 }
 
-/* Petite ligne orange façon vibreur de circuit */
-.gems-home-stats .stat::before {
-  content: "" !important;
-  position: absolute !important;
-  top: 22px !important;
-  left: 12px !important;
-  width: 5px !important;
-  height: 32px !important;
-  background: #f28c28 !important;
-  border-radius: 5px !important;
-  opacity: .85 !important;
+/* Séparateurs verticaux élégants en dégradé */
+.gems-home-stats .stat:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 15%;
+    height: 70%;
+    width: 1px;
+    background: linear-gradient(to bottom, 
+        transparent 0%, 
+        rgba(242, 140, 40, 0.45) 50%, 
+        transparent 100%
+    );
 }
 
-/* Chiffres */
+/* Chiffres clés */
 .gems-home-stats .stat b {
-  display: block !important;
-  width: 100% !important;
-  color: #ffffff !important;
-  font-size: 34px !important;
-  font-weight: 900 !important;
-  line-height: 1 !important;
-  text-align: center !important;
-  text-shadow: 0 2px 8px rgba(0,0,0,.35) !important;
+    display: block;
+    font-size: 42px;
+    font-weight: 900;
+    color: #ffffff;
+    line-height: 1.05;
+    letter-spacing: -0.5px;
+    text-shadow: 0 2px 14px rgba(242, 140, 40, 0.25);
 }
 
-/* Libellés */
+/* Libellés sous les chiffres */
 .gems-home-stats .stat small {
-  display: block !important;
-  width: 100% !important;
-  margin-top: 9px !important;
-  color: #f28c28 !important;
-  font-size: 11px !important;
-  font-weight: 900 !important;
-  letter-spacing: .6px !important;
-  line-height: 1.2 !important;
-  text-align: center !important;
+    display: block;
+    font-size: 12px;
+    font-weight: 800;
+    color: #f28c28;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    margin-top: 8px;
 }
 
-/* Bandeau damier inférieur */
-.gems-home-stats > .wrap::after {
-  content: "" !important;
-  position: absolute !important;
-  right: 0 !important;
-  bottom: -4px !important;
-  left: 0 !important;
-  height: 8px !important;
-  background:
-    conic-gradient(
-      #ffffff 25%,
-      #111827 0 50%,
-      #ffffff 0 75%,
-      #111827 0
-    ) 0 0 / 16px 16px !important;
-  opacity: .85 !important;
-  pointer-events: none !important;
+/* Responsive Tablette & Mobile */
+@media (max-width: 820px) {
+    .gems-home-stats .wrap {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px 0;
+        padding: 20px 16px;
+    }
+    .gems-home-stats .stat b {
+        font-size: 34px;
+    }
+    .gems-home-stats .stat small {
+        font-size: 11px;
+        letter-spacing: 1px;
+    }
+    .gems-home-stats .stat:nth-child(even)::after {
+        display: none; /* Supprime le séparateur droit sur 2 colonnes */
+    }
 }
 
-@media (max-width: 800px) {
-  .gems-home-stats {
-    width: calc(100% - 28px) !important;
-    min-height: 0 !important;
-    margin: 18px auto !important;
-    padding: 16px 10px !important;
-    border-radius: 17px !important;
-  }
-
-  .gems-home-stats > .wrap {
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    gap: 8px !important;
-  }
-
-  .gems-home-stats .stat {
-    min-height: 72px !important;
-    border: 1px solid rgba(242, 140, 40, .4) !important;
-    border-radius: 9px !important;
-  }
-
-  .gems-home-stats .stat::before {
-    display: none !important;
-  }
-
-  .gems-home-stats .stat b {
-    font-size: 27px !important;
-  }
-
-  .gems-home-stats .stat small {
-    font-size: 10px !important;
-  }
+@media (max-width: 480px) {
+    .gems-home-stats .stat b {
+        font-size: 28px;
+    }
+    .scoring-kart-track {
+        height: 40px;
+    }
+    .scoring-kart {
+        width: 26px;
+        height: 20px;
+    }
 }
