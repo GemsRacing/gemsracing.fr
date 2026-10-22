@@ -1,5 +1,5 @@
 /* ============================================================
-   PARTENAIRES - MARQUEE ULTRA FLUIDE HAUTE PERFORMANCE
+   PARTENAIRES - DÉFILEMENT CONTINU SANS AUCUN TROU
    ============================================================ */
 
 .gems-partners-section {
@@ -29,8 +29,6 @@
     position: relative;
     display: flex;
     user-select: none;
-    gap: 40px;
-    /* Fondu progressif sur les bords */
     mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
     -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
 }
@@ -39,14 +37,14 @@
     display: flex;
     align-items: center;
     flex-shrink: 0;
-    gap: 40px;
-    min-width: 100%;
-    animation: gemsMarqueeScroll 26s linear infinite;
+    gap: 30px;
+    padding-right: 30px; /* Raccord parfait avec la bande suivante */
+    width: max-content;
+    animation: gemsMarqueeScroll 28s linear infinite;
     will-change: transform;
-    transform: translate3d(0, 0, 0); /* Accélération matérielle GPU */
+    transform: translate3d(0, 0, 0);
 }
 
-/* Pause au survol */
 .gems-partners-container:hover .gems-partners-track {
     animation-play-state: paused;
 }
@@ -99,7 +97,7 @@
         transform: translate3d(0, 0, 0);
     }
     100% {
-        transform: translate3d(calc(-100% - 40px), 0, 0);
+        transform: translate3d(-100%, 0, 0);
     }
 }
 
@@ -108,8 +106,9 @@
         padding: 40px 0;
     }
     .gems-partners-track {
-        gap: 24px;
-        animation-duration: 18s;
+        gap: 20px;
+        padding-right: 20px;
+        animation-duration: 20s;
     }
     .gems-partner-card {
         flex: 0 0 130px;
@@ -119,9 +118,5 @@
     .gems-partner-card img {
         width: 80px;
         height: 45px;
-    }
-    @keyframes gemsMarqueeScroll {
-        0% { transform: translate3d(0, 0, 0); }
-        100% { transform: translate3d(calc(-100% - 24px), 0, 0); }
     }
 }
