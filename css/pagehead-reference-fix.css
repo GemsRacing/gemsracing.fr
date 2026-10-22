@@ -1,10 +1,12 @@
-﻿/* Référence bannière À propos :
+/* Référence bannière À propos :
    texte sombre à gauche / nid d'abeille à droite */
+
 body.pagehead-reference-fix .pagehead {
   position: relative !important;
   isolation: isolate !important;
   overflow: hidden !important;
   min-height: 245px !important;
+
   background-image:
     linear-gradient(
       90deg,
@@ -12,10 +14,12 @@ body.pagehead-reference-fix .pagehead {
       #071d3c 48%,
       #155d88 100%
     ) !important;
+
   background-color: #041329 !important;
   background-repeat: no-repeat !important;
   background-size: cover !important;
 }
+
 /* Nid d'abeille limité à la partie droite */
 body.pagehead-reference-fix .pagehead::before {
   content: "" !important;
@@ -28,10 +32,12 @@ body.pagehead-reference-fix .pagehead::before {
   display: block !important;
   opacity: 0.72 !important;
   pointer-events: none !important;
+
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='92' height='106' viewBox='0 0 92 106'%3E%3Cg fill='none' stroke='%2399c8e5' stroke-width='1.35' opacity='.62'%3E%3Cpath d='M23 1 46 14v27L23 54 0 41V14Z'/%3E%3Cpath d='M69 1 92 14v27L69 54 46 41V14Z'/%3E%3Cpath d='M46 54 69 67v27L46 107 23 94V67Z'/%3E%3C/g%3E%3C/svg%3E") !important;
   background-repeat: repeat !important;
   background-size: 92px 106px !important;
   background-position: right center !important;
+
   -webkit-mask-image: linear-gradient(
     to right,
     transparent 0%,
@@ -39,6 +45,7 @@ body.pagehead-reference-fix .pagehead::before {
     #000 58%,
     #000 100%
   ) !important;
+
   mask-image: linear-gradient(
     to right,
     transparent 0%,
@@ -47,6 +54,7 @@ body.pagehead-reference-fix .pagehead::before {
     #000 100%
   ) !important;
 }
+
 /* Neutraliser les anciens effets */
 body.pagehead-reference-fix .pagehead::after,
 body.pagehead-reference-fix .pagehead h1::before,
@@ -54,34 +62,41 @@ body.pagehead-reference-fix .pagehead h1::after {
   content: none !important;
   display: none !important;
 }
+
 /* Texte au-dessus du décor */
 body.pagehead-reference-fix .pagehead .wrap {
   position: relative !important;
   z-index: 3 !important;
   padding-right: 40% !important;
 }
+
 /* Mobile */
-@med (max-width: 800px) {
+@media (max-width: 800px) {
   body.pagehead-reference-fix .pagehead {
     min-height: 220px !important;
   }
+
   body.pagehead-reference-fix .pagehead::before {
     left: 42% !important;
     opacity: 0.48 !important;
     background-size: 72px 83px !important;
   }
+
   body.pagehead-reference-fix .pagehead .wrap {
     padding-right: 24% !important;
   }
 }
-@med (max-width: 480px) {
+
+@media (max-width: 480px) {
   body.pagehead-reference-fix .pagehead {
     min-height: 205px !important;
   }
+
   body.pagehead-reference-fix .pagehead::before {
     left: 36% !important;
     opacity: 0.38 !important;
   }
+
   body.pagehead-reference-fix .pagehead .wrap {
     padding-right: 12% !important;
   }

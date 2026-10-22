@@ -1,6 +1,7 @@
-﻿/* =========================================================
+/* =========================================================
    GEMS RACING - ARRONDIS ET MISE EN AVANT DES WIDGETS
    ========================================================= */
+
 .card,
 .gems-home-cards .card,
 .gems-news-box,
@@ -11,6 +12,7 @@
   border-radius: 12px !important;
   overflow: hidden !important;
 }
+
 .card {
   border: 1px solid #f28c28 !important;
   box-shadow: 0 8px 24px rgba(0, 0, 0, .22) !important;
@@ -19,28 +21,35 @@
     box-shadow .2s ease,
     border-color .2s ease !important;
 }
+
 .card:hover {
   transform: translateY(-4px) !important;
   border-color: #ffb15c !important;
   box-shadow: 0 14px 30px rgba(0, 0, 0, .32) !important;
 }
+
 .gems-news-box {
   border: 1px solid rgba(242, 140, 40, .7) !important;
   box-shadow: 0 8px 24px rgba(0, 0, 0, .2) !important;
 }
+
 .gems-partner-card {
   border: 1px solid rgba(242, 140, 40, .45) !important;
 }
+
 .gems-partner-card:hover {
   border-color: #f28c28 !important;
 }
+
 .gems-gallery-item {
   border-radius: 10px !important;
 }
+
 .gems-home-stats {
   overflow: hidden !important;
 }
-@med (max-width: 700px) {
+
+@media (max-width: 700px) {
   .card,
   .gems-news-box,
   .gems-partner-card,

@@ -1,4 +1,4 @@
-﻿window.GEMS_DATA = {
+window.GEMS_DATA = {
   stats: {
     victoires: "7",
     podiums: "15",
@@ -6,7 +6,7 @@
     age: "16 ans"
   },
   latestNews: {
-    badge: "Sson 2026",
+    badge: "Saison 2026",
     title: "Gems termine 3e sur 27 en 2T Rotax à Solokart",
     summary: "Une nouvelle performance solide pour Gems Maréchal. Retrouvez le débrief et les photos sur Instagram.",
     linkUrl: "resultats.html",
@@ -20,7 +20,7 @@
     { id: 5, src: "assets/images/gems-casque-01.jpg", caption: "Le casque ZAMP", rotation: 0 },
     { id: 6, src: "assets/images/gems-casque-02.jpg", caption: "Prêt à prendre le départ", rotation: 0 },
     { id: 7, src: "assets/images/gems-course-05.jpg", caption: "La maîtrise du kart", rotation: 0 },
-    { id: 8, src: "assets/images/gems-portrt-02.jpg", caption: "Un pilote, une ambition", rotation: 0 },
+    { id: 8, src: "assets/images/gems-portrait-02.jpg", caption: "Un pilote, une ambition", rotation: 0 },
     { id: 9, src: "assets/images/gems-paddock.jpg", caption: "Dans les coulisses", rotation: 0 },
     { id: 10, src: "assets/images/gems-course-06.jpg", caption: "La passion jusqu'au dernier tour", rotation: 0 }
   ],

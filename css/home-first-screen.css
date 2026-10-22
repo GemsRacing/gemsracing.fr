@@ -1,4 +1,4 @@
-﻿@med (min-width: 801px) {
+﻿@media (min-width: 801px) {
   .hero {
     height: auto !important; min-height: 500px !important; max-height: none !important;
     padding: 35px 0 35px !important; overflow: visible !important;
@@ -39,7 +39,7 @@
     font-size: 11px !important; white-space: nowrap !important;
   }
 }
-@med (max-width: 800px) {
+@media (max-width: 800px) {
   .hero {
     height: auto !important; min-height: 0 !important; max-height: none !important;
     padding: 32px 18px 28px !important; overflow: visible !important;
@@ -66,4 +66,3 @@
   .stats .stat b { color: #071b35 !important; font-size: 25px !important; }
   .stats .stat small { color: #071b35 !important; font-size: 10px !important; }
 }
-

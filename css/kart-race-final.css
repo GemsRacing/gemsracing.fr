@@ -1,7 +1,8 @@
-﻿/* =========================================================
+/* =========================================================
    COURSE SWS - VERSION FINALE
    Vitesse rapide, aucun halo, victoire avec confettis
    ========================================================= */
+
 /* Suppression complète des halos et ombres */
 .scoring-kart-track,
 .scoring-kart-track::before,
@@ -14,16 +15,19 @@
   filter: none !important;
   text-shadow: none !important;
 }
+
 /* Suppression du label GEMS LEADER */
 .kart-leader-label {
   display: none !important;
 }
+
 /* Piste */
 .gems-home-stats,
 .gems-home-stats > .wrap {
   position: relative !important;
   overflow: visible !important;
 }
+
 .scoring-kart-track {
   position: absolute !important;
   left: 18px !important;
@@ -34,6 +38,7 @@
   overflow: visible !important;
   pointer-events: none !important;
 }
+
 /* Ligne orange simple */
 .scoring-kart-track::before {
   content: "" !important;
@@ -45,6 +50,7 @@
   background: #f28c28 !important;
   box-shadow: none !important;
 }
+
 /* Karts compacts */
 .scoring-kart {
   position: absolute !important;
@@ -59,6 +65,7 @@
   transform: none !important;
   opacity: 1 !important;
 }
+
 /* Cockpit */
 .scoring-kart::before {
   content: "" !important;
@@ -72,6 +79,7 @@
   border-radius: 6px 6px 0 0 !important;
   background: #07192e !important;
 }
+
 /* Roues */
 .scoring-kart::after {
   content: "" !important;
@@ -87,6 +95,7 @@
     0 0 0 1px #ffffff,
     19px 0 0 1px #ffffff !important;
 }
+
 /* Kart Gems bleu/orange */
 .gems-kart {
   background: linear-gradient(
@@ -99,6 +108,7 @@
     #d96f16 100%
   ) !important;
 }
+
 /* Concurrents */
 .rival-kart {
   width: 27px !important;
@@ -106,23 +116,28 @@
   top: 16px !important;
   opacity: 0.68 !important;
 }
+
 .rival-kart-2 {
   background: #687789 !important;
 }
+
 .rival-kart-3 {
   background: #a94455 !important;
 }
+
 .rival-kart-4 {
   background: #b08a2a !important;
 }
+
 /* Numéro de Gems */
 .kart-number {
   position: absolute !important;
   left: 11px !important;
   top: 1px !important;
   color: #ffffff !important;
-  font: 900 7px Arl, sans-serif !important;
+  font: 900 7px Arial, sans-serif !important;
 }
+
 /* Drapeau */
 .scoring-track-flag {
   position: absolute !important;
@@ -131,14 +146,17 @@
   font-size: 21px !important;
   line-height: 1 !important;
 }
+
 /* Les statistiques restent visibles */
 .gems-home-stats .stat {
   position: relative !important;
   z-index: 100 !important;
 }
+
 /* ---------------------------------------------------------
    Animation de victoire
    --------------------------------------------------------- */
+
 .gems-winner-announcement {
   position: fixed !important;
   top: 92px !important;
@@ -152,7 +170,7 @@
   border-radius: 8px !important;
   background: #07192e !important;
   color: #ffffff !important;
-  font: 900 15px Arl, sans-serif !important;
+  font: 900 15px Arial, sans-serif !important;
   white-space: nowrap !important;
   pointer-events: none !important;
   opacity: 0 !important;
@@ -160,12 +178,15 @@
   box-shadow: none !important;
   text-shadow: none !important;
 }
+
 .gems-winner-announcement.visible {
   animation: winnerAppear 1.8s ease-out forwards !important;
 }
+
 .gems-kart.winner-pulse {
   animation: winnerPulse 0.65s ease-in-out 2 !important;
 }
+
 .winner-confetti {
   position: fixed !important;
   inset: 0 !important;
@@ -173,6 +194,7 @@
   pointer-events: none !important;
   overflow: hidden !important;
 }
+
 .winner-confetti-piece {
   position: absolute !important;
   top: 112px !important;
@@ -183,35 +205,43 @@
   opacity: 0 !important;
   animation: confettiFall 1.4s ease-out var(--confetti-delay) forwards !important;
 }
+
 @keyframes winnerAppear {
   0% {
     opacity: 0;
     transform: translate(-50%, -15px) scale(0.85);
   }
+
   15% {
     opacity: 1;
     transform: translate(-50%, 0) scale(1.05);
   }
+
   75% {
     opacity: 1;
     transform: translate(-50%, 0) scale(1);
   }
+
   100% {
     opacity: 0;
     transform: translate(-50%, -6px) scale(0.95);
   }
 }
+
 @keyframes winnerPulse {
   0% {
     transform: scale(1);
   }
+
   50% {
     transform: scale(1.18);
   }
+
   100% {
     transform: scale(1);
   }
 }
+
 @keyframes confettiFall {
   0% {
     opacity: 1;
@@ -220,6 +250,7 @@
       translateX(var(--confetti-x))
       rotate(0deg);
   }
+
   100% {
     opacity: 0;
     transform:
@@ -228,11 +259,13 @@
       rotate(260deg);
   }
 }
-@med (max-width: 800px) {
+
+@media (max-width: 800px) {
   .scoring-kart-track {
     left: 10px !important;
     right: 10px !important;
   }
+
   .gems-winner-announcement {
     top: 75px !important;
     font-size: 11px !important;

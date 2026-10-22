@@ -1,15 +1,18 @@
-﻿/* =========================================================
+/* =========================================================
    ENCART DERNIERES NEWS - ACCUEIL
    ========================================================= */
+
 .gems-latest-news {
   width: 100%;
   padding: 24px 0 8px;
 }
+
 .gems-latest-news > .wrap {
   width: calc(100% - 40px);
   max-width: 1200px;
   margin: 0 auto;
 }
+
 .gems-news-box {
   display: grid;
   grid-template-columns: auto 1fr auto;
@@ -20,6 +23,7 @@
   border-left: 5px solid #f28c28;
   box-shadow: 0 8px 24px rgba(0, 0, 0, .16);
 }
+
 .gems-news-label {
   color: #f28c28;
   font-size: 12px;
@@ -28,21 +32,25 @@
   text-transform: uppercase;
   white-space: nowrap;
 }
+
 .gems-news-content {
   min-width: 0;
 }
+
 .gems-news-content h2 {
   margin: 0 0 5px;
   color: #ffffff;
   font-size: 21px;
   line-height: 1.2;
 }
+
 .gems-news-content p {
   margin: 0;
   color: rgba(255, 255, 255, .82);
   font-size: 14px;
   line-height: 1.45;
 }
+
 .gems-news-date {
   display: block;
   margin-bottom: 5px;
@@ -51,6 +59,7 @@
   font-weight: 700;
   text-transform: uppercase;
 }
+
 .gems-news-button {
   display: inline-flex !important;
   align-items: center !important;
@@ -66,25 +75,31 @@
   opacity: 1 !important; /* S'assurer qu'il est toujours opaque */
   visibility: visible !important; /* S'assurer qu'il est toujours visible */
 }
+
 .gems-news-button:hover {
   background: #d87417;
   transform: translateY(-1px);
 }
-@med (max-width: 760px) {
+
+@media (max-width: 760px) {
   .gems-latest-news {
     padding: 18px 0 4px;
   }
+
   .gems-latest-news > .wrap {
     width: calc(100% - 28px);
   }
+
   .gems-news-box {
     grid-template-columns: 1fr;
     gap: 10px;
     padding: 17px;
   }
+
   .gems-news-content h2 {
     font-size: 18px;
   }
+
   .gems-news-button {
     justify-self: start;
   }

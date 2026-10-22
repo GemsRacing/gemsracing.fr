@@ -1,7 +1,8 @@
-﻿/* =========================================================
-   BANDEAU INTERNE - STYLE GEMS RACING (Assoction)
+/* =========================================================
+   BANDEAU INTERNE - STYLE GEMS RACING (Association)
    Ce fichier gère le bandeau, le motif et le logo.
    ========================================================= */
+
 .pagehead {
   position: relative !important;
   isolation: isolate !important;
@@ -16,6 +17,7 @@
   border-bottom: 2px solid rgba(242, 140, 40, 0.3);
   padding-right: 220px !important; /* Espace pour le logo */
 }
+
 /* Motif nid d'abeille uniquement sur la droite */
 .pagehead::before {
   content: "" !important;
@@ -27,11 +29,13 @@
   z-index: 1 !important;
   pointer-events: none !important;
   opacity: 0.4 !important;
+
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='92' height='106' viewBox='0 0 92 106'%3E%3Cg fill='none' stroke='%23a8d1e7' stroke-width='1.35' opacity='.68'%3E%3Cpath d='M23 1 46 14v27L23 54 0 41V14Z'/%3E%3Cpath d='M69 1 92 14v27L69 54 46 41V14Z'/%3E%3Cpath d='M46 54 69 67v27L46 107 23 94V67Z'/%3E%3C/g%3E%3C/svg%3E") !important;
   background-repeat: repeat !important;
   background-size: 92px 106px !important;
   background-position: center, center !important;
-  /* Fondu pour que le motif n'lle pas sous le texte */
+
+  /* Fondu pour que le motif n'aille pas sous le texte */
   -webkit-mask-image: linear-gradient(
     90deg,
     transparent 0%,
@@ -39,6 +43,7 @@
     #000 34%,
     #000 100%
   ) !important;
+
   mask-image: linear-gradient(
     90deg,
     transparent 0%,
@@ -47,33 +52,37 @@
     #000 100%
   ) !important;
 }
+
 /* Le texte reste au premier plan */
 .pagehead .wrap {
   position: relative !important;
   z-index: 5 !important;
 }
-/* Positionnement du logo de l'assoction */
-.pagehead .assoction-logo-gems {
+
+/* Positionnement du logo de l'association */
+.pagehead .association-logo-gems {
   position: absolute !important;
   top: 50% !important;
   right: 20px !important; /* Ajuster la position à droite */
   transform: translateY(-50%) !important;
-  width: 170px !important; /* Tlle du logo */
+  width: 170px !important; /* Taille du logo */
   height: auto !important;
   z-index: 10 !important; /* Au-dessus de tout */
   pointer-events: none !important;
   background: transparent !important; /* Supprimer le fond blanc */
   text-align: right !important; /* Pour aligner l'image si elle est petite */
 }
-.pagehead .assoction-logo-gems img {
+
+.pagehead .association-logo-gems img {
   display: block !important;
   width: 100% !important;
   max-width: 170px !important;
   max-height: 90px !important; /* Hauteur max */
-  object-fit: contn !important;
+  object-fit: contain !important;
   margin: 0 0 0 auto !important; /* Aligner à droite si le conteneur est plus grand */
   opacity: 1 !important; /* Logo bien visible */
 }
+
 /* Suppression des anciens éléments décoratifs (slash orange, etc.) */
 .pagehead::after,
 .pagehead h1::before,
@@ -81,14 +90,16 @@
   content: none !important;
   display: none !important;
 }
+
 /* Accueil exclue (règle générale) */
 .gems-home-hero,
 .gems-home-hero::before,
 .gems-home-hero::after {
   background-image: none !important;
 }
+
 /* Mobile */
-@med (max-width: 800px) {
+@media (max-width: 800px) {
   .pagehead {
     padding-right: 110px !important; /* Espace pour le logo sur mobile */
   }
@@ -97,14 +108,15 @@
     opacity: 0.3 !important;
     background-size: 72px 83px !important;
   }
-  .pagehead .assoction-logo-gems {
+
+  .pagehead .association-logo-gems {
     right: 10px !important;
     top: auto !important;
     bottom: 10px !important;
     transform: none !important;
-    width: 80px !important; /* Tlle logo mobile */
+    width: 80px !important; /* Taille logo mobile */
   }
-  .pagehead .assoction-logo-gems img {
+  .pagehead .association-logo-gems img {
     max-height: 45px !important;
   }
 }

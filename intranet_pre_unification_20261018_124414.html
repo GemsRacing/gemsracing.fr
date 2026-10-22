@@ -1,8 +1,8 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="fr">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initl-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Gems Racing | Intranet</title>
   <link rel="icon" type="image/png" href="assets/images/favicon-gems.png?v=5">
   <link rel="stylesheet" href="css/intranet.css">
@@ -20,10 +20,12 @@
   align-items: stretch;
   margin-bottom: 20px;
 }
+
 .password-field input {
   flex: 1;
   margin-bottom: 0 !important;
 }
+
 .password-toggle {
   border: 1px solid #f28c28;
   background: transparent;
@@ -33,6 +35,7 @@
   cursor: pointer;
   font-weight: 700;
 }
+
 .password-toggle:hover {
   background: #f28c28;
   color: #071b35;
@@ -41,6 +44,7 @@
   <link rel="stylesheet" href="css/pagehead-honeycomb.css?v=200">
 </head>
 <body class="is-locked">
+
   <div id="login-overlay">
     <div class="login-card">
       <img src="assets/images/favicon-gems.png" style="width:60px; margin-bottom:15px;">
@@ -51,6 +55,7 @@
     id="pass-input"
     placeholder="Mot de passe"
     autocomplete="current-password">
+
   <button
     type="button"
     id="toggle-password"
@@ -61,6 +66,7 @@
       <button class="btn-primary" onclick="checkPass()" style="width:100%">SE CONNECTER</button>
     </div>
   </div>
+
   <header class="intra-header">
     <div class="intra-logo">GEMS <span>RACING INTRANET</span></div>
     <button class="btn-primary" onclick="saveAllData()">💾 ENREGISTRER & PUBLIER</button>      <button
@@ -71,15 +77,18 @@
         🔒 SE DÉCONNECTER
       </button>
   </header>
-  <div class="intra-contner">
+
+  <div class="intra-container">
     <nav class="intra-sidebar">
       <div class="intra-nav-item active" onclick="showTab('scoring', this)">📊 Scoring</div>
       <div class="intra-nav-item" onclick="showTab('news', this)">📰 Actus & Historique</div>
       <div class="intra-nav-item" onclick="showTab('gallery', this)">🖼️ Galerie</div>
       <div class="intra-nav-item" onclick="showTab('races', this)">📅 Agenda Courses</div>
-      <div class="intra-nav-item" onclick="showTab('partners', this)">🤝 Partenres</div>
+      <div class="intra-nav-item" onclick="showTab('partners', this)">🤝 Partenaires</div>
     </nav>
-    <mn class="intra-content">
+
+    <main class="intra-content">
+
       <section id="tab-scoring" class="tab-content">
         <div class="intra-card">
           <h2>📊 Statistiques Actuelles</h2>
@@ -91,6 +100,7 @@
           </div>
         </div>
       </section>
+
       <section id="tab-news" class="tab-content" hidden>
         <div class="intra-card">
           <h2>📰 Ajouter une Actualité</h2>
@@ -105,6 +115,7 @@
           <div id="news-list-admin"></div>
         </div>
       </section>
+
       <section id="tab-gallery" class="tab-content" hidden>
         <div class="intra-card">
           <h2>🖼️ Galerie Photos</h2>
@@ -116,6 +127,7 @@
           <div class="photo-admin-grid" id="gallery-grid"></div>
         </div>
       </section>
+
       <section id="tab-races" class="tab-content" hidden>
         <div class="intra-card">
           <h2>📅 Agenda & Résultats</h2>
@@ -133,6 +145,7 @@
               <label>Ville</label>
               <input type="text" id="race-city" placeholder="Ex: Vienne">
             </div>
+
             <div class="intra-field">
               <label>Statut</label>
               <select id="race-status">
@@ -141,6 +154,7 @@
                 <option value="Annulé">Annulé</option>
               </select>
             </div>
+
             <div class="intra-field">
               <label>Lien du débrief</label>
               <input type="text" id="race-link" placeholder="Lien Instagram ou site">
@@ -150,9 +164,10 @@
           <div id="races-list" style="margin-top:20px;"></div>
         </div>
       </section>
+
       <section id="tab-partners" class="tab-content" hidden>
         <div class="intra-card">
-          <h2>🤝 Partenres</h2>
+          <h2>🤝 Partenaires</h2>
           <div class="intra-grid-2">
             <input type="text" id="partner-name" placeholder="Nom">
             <input type="text" id="partner-url" placeholder="Lien">
@@ -162,34 +177,54 @@
           <div id="partners-list" style="margin-top:20px;"></div>
         </div>
       </section>
-    </mn>
+    </main>
   </div>
+
   <div id="toast" class="intra-toast">✅ Enregistré !</div>
+  
+  
+  
+  
+  
+
+
+
+
+
+
 <script src="js/intranet.js?v=4"></script>
 <script src="js/intranet-server-sync.js?v=4"></script>
 <script src="js/intranet-gallery-server-sync.js?v=4"></script>
 <script src="js/intranet-news-fix.js?v=4"></script>
 <script src="js/intranet-ui-fix.js?v=5"></script>
+
 <script>
 (function () {
   "use strict";
+
   const passwordInput = document.getElementById("pass-input");
   const toggleButton = document.getElementById("toggle-password");
+
   if (passwordInput && toggleButton) {
     toggleButton.addEventListener("click", function () {
       const isVisible = passwordInput.type === "text";
+
       passwordInput.type = isVisible ? "password" : "text";
       toggleButton.textContent = isVisible ? "Afficher" : "Masquer";
     });
   }
+
   window.addEventListener("load", function () {
     console.group("GEMS INTRANET - CONTROLE API");
+
     fetch("/api/site-data", { cache: "no-store" })
       .then(function (response) {
         console.log("Statut API /api/site-data :", response.status);
+
         if (!response.ok) {
           throw new Error("API inaccessible");
         }
+
         return response.json();
       })
       .then(function (data) {
@@ -197,11 +232,12 @@
         console.log("Actualités :", Array.isArray(data.news) ? data.news.length : "objet");
         console.log("Courses :", Array.isArray(data.races) ? data.races.length : 0);
         console.log("Galerie :", Array.isArray(data.gallery) ? data.gallery.length : 0);
-        console.log("Partenres :", Array.isArray(data.partners) ? data.partners.length : 0);
+        console.log("Partenaires :", Array.isArray(data.partners) ? data.partners.length : 0);
       })
       .catch(function (error) {
         console.error("API non disponible :", error);
       });
+
     console.groupEnd();
   });
 })();

@@ -1,21 +1,25 @@
 ﻿/* =========================================================
    ACCUEIL GEMS RACING - VERSION PROPRE
    ========================================================= */
+
 .gems-home-hero {
   min-height: 500px !important;
   height: auto !important;
   padding: 42px 0 !important;
   overflow: visible !important;
 }
+
 .gems-home-layout {
   display: grid !important;
   grid-template-columns: minmax(0, 1fr) minmax(360px, .8fr) !important;
   gap: 42px !important;
   align-items: center !important;
 }
+
 .gems-home-content {
   min-width: 0 !important;
 }
+
 .gems-home-content h1 {
   margin: 14px 0 22px !important;
   color: #ffffff !important;
@@ -23,18 +27,22 @@
   line-height: 1.02 !important;
   overflow: visible !important;
 }
+
 .gems-home-content h1 span {
   color: #f28c28 !important;
 }
+
 .gems-home-content p {
   max-width: 620px !important;
   color: #ffffff !important;
   font-size: 17px !important;
   line-height: 1.5 !important;
 }
+
 .gems-home-visual {
   min-width: 0 !important;
 }
+
 .gems-home-visual img {
   display: block !important;
   width: 100% !important;
@@ -46,66 +54,80 @@
   border: 3px solid #f28c28 !important;
   box-shadow: 0 12px 28px rgba(0,0,0,.35) !important;
 }
+
 .gems-home-stats {
   min-height: 118px !important;
   padding: 0 !important;
   background: #ffffff !important;
 }
+
 .gems-home-stats > .wrap {
   display: grid !important;
   grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
   align-items: center !important;
   min-height: 118px !important;
 }
+
 .gems-home-stats .stat {
   text-align: center !important;
   color: #071b35 !important;
 }
+
 .gems-home-stats .stat b,
 .gems-home-stats .stat small {
   color: #071b35 !important;
 }
+
 .gems-home-stats .stat b {
   display: block !important;
   font-size: 31px !important;
   line-height: 1 !important;
 }
+
 .gems-home-stats .stat small {
   display: block !important;
   margin-top: 10px !important;
   font-size: 11px !important;
   font-weight: 800 !important;
 }
+
 .gems-home-cards {
   padding-top: 48px !important;
 }
-@med (max-width: 800px) {
+
+@media (max-width: 800px) {
   .gems-home-hero {
     padding: 32px 18px !important;
   }
+
   .gems-home-layout {
     grid-template-columns: 1fr !important;
     gap: 24px !important;
   }
+
   .gems-home-content h1 {
     font-size: clamp(36px, 10vw, 58px) !important;
   }
+
   .gems-home-content p {
     font-size: 16px !important;
   }
+
   .gems-home-visual img {
     height: 320px !important;
   }
+
   .gems-home-stats {
     padding: 14px 8px !important;
   }
+
   .gems-home-stats > .wrap {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
     gap: 12px !important;
     min-height: 0 !important;
   }
+
   .gems-home-stats .stat {
     padding: 10px 4px !important;
   }
 }
-

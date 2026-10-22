@@ -1,6 +1,7 @@
 ﻿/* ============================================================
-   PARTENRES GEMS RACING - DEFILEMENT FLUIDE & COULEUR
+   PARTENAIRES GEMS RACING - DEFILEMENT FLUIDE & COULEUR
    ============================================================ */
+
 .gems-partners-section {
     background: #051326;
     padding: 50px 0;
@@ -9,17 +10,20 @@
     position: relative;
     width: 100%;
 }
+
 .gems-partners-section h2 {
     color: #ffffff;
     font-size: 28px;
     margin-bottom: 8px;
 }
+
 .gems-partners-section .gems-partners-intro {
     color: rgba(255,255,255,0.7);
     font-size: 15px;
     margin-bottom: 30px;
 }
-.gems-partners-contner {
+
+.gems-partners-container {
     width: 100%;
     overflow: hidden;
     position: relative;
@@ -28,6 +32,7 @@
     align-items: center;
     padding: 15px 0;
 }
+
 .gems-partners-track {
     display: flex;
     flex-shrink: 0;
@@ -37,9 +42,11 @@
     animation: gemsPartnersScroll 22s linear infinite;
     will-change: transform;
 }
-.gems-partners-contner:hover .gems-partners-track {
+
+.gems-partners-container:hover .gems-partners-track {
     animation-play-state: paused;
 }
+
 .gems-partner-card {
     flex: 0 0 auto;
     display: flex;
@@ -50,18 +57,21 @@
     width: 130px;
     transition: transform 0.3s ease;
 }
+
 .gems-partner-card:hover {
     transform: translateY(-3px);
 }
+
 .gems-partner-card img {
     width: 100px;
     height: 60px;
-    object-fit: contn;
+    object-fit: contain;
     filter: none !important;
     -webkit-filter: none !important;
     opacity: 1 !important;
     mix-blend-mode: normal !important;
 }
+
 .gems-partner-name {
     display: block;
     margin-top: 8px;
@@ -71,6 +81,7 @@
     text-transform: uppercase;
     letter-spacing: 1px;
 }
+
 @keyframes gemsPartnersScroll {
     0% {
         transform: translateX(0);
@@ -79,7 +90,8 @@
         transform: translateX(-100%);
     }
 }
-@med (max-width: 820px) {
+
+@media (max-width: 820px) {
     .gems-partners-section {
         padding: 35px 0;
     }
@@ -99,4 +111,3 @@
         height: 45px;
     }
 }
-

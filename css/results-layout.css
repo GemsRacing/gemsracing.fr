@@ -1,10 +1,11 @@
-﻿.results-columns {
+.results-columns {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 28px;
   margin-top: 40px;
   align-items: start;
 }
+
 .results-panel {
   min-width: 0;
   background: rgba(3, 20, 42, 0.92);
@@ -13,13 +14,16 @@
   padding: 22px;
   overflow: hidden;
 }
+
 .results-panel > h3 {
   margin: 0 0 18px;
   color: #f28c28;
 }
+
 .latest-news-card {
   overflow: hidden;
 }
+
 .latest-news-card img {
   display: block;
   width: 100%;
@@ -29,27 +33,32 @@
   border-radius: 10px;
   margin-bottom: 16px;
 }
+
 .latest-news-card h4,
 .archive-news-card h4,
 .public-race-card h4 {
   color: #ffffff;
   margin: 0 0 8px;
 }
+
 .latest-news-card p,
 .archive-news-card p,
 .public-race-card p {
   color: #e6e6e6;
   line-height: 1.5;
 }
+
 .results-archives {
   display: grid;
   gap: 12px;
   margin-top: 18px;
 }
+
 .archive-news-card {
   padding: 15px 0;
   border-top: 1px solid rgba(242, 140, 40, 0.45);
 }
+
 .archive-news-card img {
   display: block;
   width: 100%;
@@ -58,22 +67,26 @@
   border-radius: 8px;
   margin-bottom: 10px;
 }
+
 .public-race-card {
   border: 1px solid rgba(242, 140, 40, 0.45);
   border-radius: 10px;
   padding: 15px;
   margin-bottom: 12px;
 }
+
 .public-race-date {
   color: #f28c28;
   font-weight: 700;
   font-size: 0.9rem;
   margin-bottom: 7px;
 }
+
 .public-race-status {
   color: #ffffff;
   font-size: 0.9rem;
 }
+
 .results-more-button {
   display: block;
   width: 100%;
@@ -86,13 +99,16 @@
   font-weight: 700;
   cursor: pointer;
 }
+
 .results-more-button:hover {
   background: #ffad52;
 }
-@med (max-width: 800px) {
+
+@media (max-width: 800px) {
   .results-columns {
     grid-template-columns: 1fr;
   }
+
   .latest-news-card img {
     height: 185px;
     max-height: 185px;

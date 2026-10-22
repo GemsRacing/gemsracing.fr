@@ -1,6 +1,7 @@
 ﻿/* =========================================================
    CORRECTION SCORING ACCUEIL
    ========================================================= */
+
 .gems-home-stats {
   display: block !important;
   width: 100% !important;
@@ -10,6 +11,7 @@
   background: #ffffff !important;
   overflow: visible !important;
 }
+
 .gems-home-stats > .wrap {
   display: grid !important;
   grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
@@ -20,6 +22,7 @@
   margin: 0 auto !important;
   padding: 0 !important;
 }
+
 .gems-home-stats .stat {
   display: flex !important;
   flex-direction: column !important;
@@ -33,9 +36,11 @@
   border-right: 1px solid #d8dee6 !important;
   text-align: center !important;
 }
+
 .gems-home-stats .stat:last-child {
   border-right: 0 !important;
 }
+
 .gems-home-stats .stat b {
   display: block !important;
   width: 100% !important;
@@ -45,6 +50,7 @@
   line-height: 1 !important;
   text-align: center !important;
 }
+
 .gems-home-stats .stat small {
   display: block !important;
   width: 100% !important;
@@ -56,27 +62,31 @@
   text-align: center !important;
   white-space: normal !important;
 }
-@med (max-width: 800px) {
+
+@media (max-width: 800px) {
   .gems-home-stats {
     height: auto !important;
     min-height: 0 !important;
     padding: 12px 8px !important;
   }
+
   .gems-home-stats > .wrap {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
     height: auto !important;
     min-height: 0 !important;
     gap: 8px !important;
   }
+
   .gems-home-stats .stat {
     min-height: 78px !important;
     border: 1px solid #d8dee6 !important;
   }
+
   .gems-home-stats .stat b {
     font-size: 25px !important;
   }
+
   .gems-home-stats .stat small {
     font-size: 10px !important;
   }
 }
-

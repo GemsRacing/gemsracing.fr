@@ -1,12 +1,14 @@
-﻿/* =========================================================
+/* =========================================================
    BANDEAU INTERNE - BLOC DROIT NID D'ABEILLE
    ========================================================= */
+
 .pagehead {
   position: relative !important;
   isolation: isolate !important;
   overflow: hidden !important;
   background: #061a34 !important;
 }
+
 /* Bloc décoratif indépendant à droite */
 .pagehead::before {
   content: "" !important;
@@ -15,11 +17,14 @@
   right: 0 !important;
   bottom: 0 !important;
   left: 58% !important;
+
   z-index: 2 !important;
   display: block !important;
   opacity: 1 !important;
   pointer-events: none !important;
+
   background-color: #155b86 !important;
+
   background-image:
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='92' height='106' viewBox='0 0 92 106'%3E%3Cg fill='none' stroke='%23b8d7e8' stroke-width='1.4' opacity='.8'%3E%3Cpath d='M23 1 46 14v27L23 54 0 41V14Z'/%3E%3Cpath d='M69 1 92 14v27L69 54 46 41V14Z'/%3E%3Cpath d='M46 54 69 67v27L46 107 23 94V67Z'/%3E%3C/g%3E%3C/svg%3E"),
     linear-gradient(
@@ -28,10 +33,12 @@
       #155b86 52%,
       #247aa5 100%
     ) !important;
+
   background-repeat: repeat, no-repeat !important;
   background-size: 92px 106px, 100% 100% !important;
   background-position: right center, center !important;
 }
+
 /* Bloc gauche opaque : il couvre tout le motif à gauche */
 .pagehead::after {
   content: "" !important;
@@ -40,34 +47,40 @@
   left: 0 !important;
   bottom: 0 !important;
   width: 58% !important;
+
   z-index: 3 !important;
   display: block !important;
   pointer-events: none !important;
   background: #061a34 !important;
 }
+
 /* Texte au-dessus des deux blocs */
 .pagehead .wrap {
   position: relative !important;
   z-index: 10 !important;
 }
+
 /* Suppression des anciens éléments décoratifs */
 .pagehead h1::before,
 .pagehead h1::after {
   content: none !important;
   display: none !important;
 }
+
 /* Accueil exclue */
 .gems-home-hero,
 .gems-home-hero::before,
 .gems-home-hero::after {
   background-image: none !important;
 }
+
 /* Mobile */
-@med (max-width: 800px) {
+@media (max-width: 800px) {
   .pagehead::before {
     left: 48% !important;
     background-size: 72px 83px, 100% 100% !important;
   }
+
   .pagehead::after {
     width: 48% !important;
   }

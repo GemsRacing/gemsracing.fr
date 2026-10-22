@@ -1,4 +1,4 @@
-﻿(function () {
+(function () {
   const defaultData = {
     stats: { victoires: "7", podiums: "15", sws: "57e", age: "16 ans" },
     news: { title: "Gems termine 3e sur 27 en 2T Rotax à Solokart", summary: "Une nouvelle performance solide pour Gems Maréchal. Retrouvez le débrief et les photos sur Instagram.", link: "resultats.html", button: "VOIR LES RÉSULTATS", image: "", imageAlt: "" },
@@ -15,6 +15,7 @@
       { name: "Arrière-Cour", url: "https://arrierecour42.fr/", logo: "assets/partners/arrierecour.png" }
     ]
   };
+
   function escapeHtml(val) {
     return String(val || "")
       .replace(/&/g, "&amp;")
@@ -23,11 +24,12 @@
       .replace(/"/g, "&quot;")
       .replace(/'/g, "&#039;");
   }
+
   async function loadData() {
     try {
-      const response = awt fetch("/api/site-data", { cache: "no-store" });
+      const response = await fetch("/api/site-data", { cache: "no-store" });
       if (!response.ok) throw new Error("Erreur serveur");
-      const serverData = awt response.json();
+      const serverData = await response.json();
       return {
         ...defaultData,
         ...serverData,
@@ -40,9 +42,10 @@
       return defaultData;
     }
   }
+
   function renderPartners(partners) {
-    const contner = document.querySelector(".gems-partners-contner");
-    if (!contner) return;
+    const container = document.querySelector(".gems-partners-container");
+    if (!container) return;
     const list = Array.isArray(partners) && partners.length ? partners : defaultData.partners;
     const cardsHtml = list.map(p => `
       <a class="gems-partner-card" href="${escapeHtml(p.url || '#')}" target="_blank" rel="noopener noreferrer">
@@ -50,19 +53,21 @@
         <span class="gems-partner-name">${escapeHtml(p.name)}</span>
       </a>
     `).join("");
-    contner.innerHTML = `
+
+    container.innerHTML = `
       <div class="gems-partners-track">${cardsHtml}</div>
-      <div class="gems-partners-track" ar-hidden="true">${cardsHtml}</div>
+      <div class="gems-partners-track" aria-hidden="true">${cardsHtml}</div>
     `;
   }
+
   function renderLatestNews(news) {
-    const contner = document.getElementById("latest-news-content");
-    if (!contner) return;
+    const container = document.getElementById("latest-news-content");
+    if (!container) return;
     if (!news || (!news.title && !news.summary)) {
-      contner.innerHTML = "<p style='color:#ccc;'>Aucune actualité publiée pour le moment.</p>";
+      container.innerHTML = "<p style='color:#ccc;'>Aucune actualité publiée pour le moment.</p>";
       return;
     }
-    contner.innerHTML = `
+    container.innerHTML = `
       <div style="display:flex; gap:20px; flex-wrap:wrap; align-items:center;">
         ${news.image ? `<img src="${escapeHtml(news.image)}" alt="${escapeHtml(news.imageAlt || news.title)}" style="max-width:240px; border-radius:10px; object-fit:cover;">` : ''}
         <div style="flex:1; min-width:260px;">
@@ -73,15 +78,17 @@
       </div>
     `;
   }
+
   function renderRaces(races) {
-    const contner = document.getElementById("public-races-list");
-    if (!contner) return;
+    const container = document.getElementById("public-races-list");
+    if (!container) return;
     const raceList = Array.isArray(races) ? races : [];
     if (!raceList.length) {
-      contner.innerHTML = "<p style='color:#ccc;'>Aucune course programmée.</p>";
+      container.innerHTML = "<p style='color:#ccc;'>Aucune course programmée.</p>";
       return;
     }
-    contner.innerHTML = raceList.map(r => `
+
+    container.innerHTML = raceList.map(r => `
       <div style="border-bottom:1px solid rgba(242,140,40,0.3); padding:12px 0; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
         <div>
           <span style="color:#f28c28; font-weight:bold; font-size:0.9rem; display:block;">${escapeHtml(r.date)}</span>
@@ -97,8 +104,9 @@
       </div>
     `).join("");
   }
+
   document.addEventListener("DOMContentLoaded", async function () {
-    const data = awt loadData();
+    const data = await loadData();
     renderPartners(data.partners);
     renderLatestNews(data.news);
     renderRaces(data.races);

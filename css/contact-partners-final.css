@@ -1,6 +1,7 @@
 ﻿/* =========================================================
    GEMS RACING - BANNIERE CONTACT FIXE
    ========================================================= */
+
 .gems-contact-partners {
   position: sticky !important;
   top: var(--gems-header-height, 78px) !important;
@@ -16,6 +17,7 @@
   box-shadow: 0 3px 10px rgba(0,0,0,.25) !important;
   box-sizing: border-box !important;
 }
+
 .gems-contact-partners-title {
   display: flex !important;
   align-items: center !important;
@@ -26,20 +28,24 @@
   color: #ffffff !important;
   font-size: 11px !important;
 }
+
 .gems-contact-partners-title strong {
   color: #f28c28 !important;
   text-transform: uppercase !important;
 }
+
 .gems-contact-partners-title span {
   color: #c9d3df !important;
   font-size: 10px !important;
 }
+
 .gems-contact-partners-window {
   max-width: 1200px !important;
   height: 34px !important;
   margin: 0 auto !important;
   overflow: hidden !important;
 }
+
 .gems-contact-partners-track {
   display: flex !important;
   align-items: center !important;
@@ -48,9 +54,11 @@
   height: 34px !important;
   animation: contactPartnersMove 30s linear infinite !important;
 }
+
 .gems-contact-partners-track:hover {
   animation-play-state: paused !important;
 }
+
 .gems-contact-partners-track a {
   display: flex !important;
   align-items: center !important;
@@ -65,51 +73,61 @@
   box-sizing: border-box !important;
   text-decoration: none !important;
 }
+
 .gems-contact-partners-track img {
   width: 34px !important;
   height: 25px !important;
-  object-fit: contn !important;
+  object-fit: contain !important;
 }
+
 .gems-contact-partners-track span {
   font-size: 10px !important;
   font-weight: 800 !important;
   white-space: nowrap !important;
 }
+
 @keyframes contactPartnersMove {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
 }
+
 .contact-pagehead,
-.gems-contact-partners + mn .pagehead {
+.gems-contact-partners + main .pagehead {
   margin-top: 0 !important;
   padding-top: 36px !important;
 }
-@med (max-width: 700px) {
+
+@media (max-width: 700px) {
   .gems-contact-partners {
     height: 58px !important;
     min-height: 58px !important;
     padding: 5px 10px !important;
   }
+
   .gems-contact-partners-title {
     height: 14px !important;
     font-size: 9px !important;
   }
+
   .gems-contact-partners-window {
     height: 30px !important;
   }
+
   .gems-contact-partners-track {
     height: 30px !important;
   }
+
   .gems-contact-partners-track a {
     width: 108px !important;
     height: 28px !important;
   }
+
   .gems-contact-partners-track img {
     width: 28px !important;
     height: 21px !important;
   }
+
   .gems-contact-partners-track span {
     font-size: 9px !important;
   }
 }
-
