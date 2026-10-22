@@ -1,0 +1,215 @@
+﻿/* Gems Racing — interface finale professionnelle */
+
+:root {
+    --gems-navy: #061a33;
+    --gems-blue: #0b294b;
+    --gems-orange: #f28c28;
+    --gems-white: #ffffff;
+}
+
+/* Navigation desktop */
+header.top .wrap.nav {
+    position: relative;
+    z-index: 1000;
+}
+
+@media (min-width: 821px) {
+    header.top .menu-toggle {
+        display: none !important;
+    }
+
+    header.top nav.menu {
+        display: flex !important;
+        align-items: center !important;
+        gap: 22px !important;
+        position: static !important;
+        width: auto !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+    }
+}
+
+/* Navigation mobile */
+@media (max-width: 820px) {
+    html,
+    body {
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow-x: hidden !important;
+    }
+
+    header.top .wrap.nav {
+        min-height: 78px !important;
+        padding: 12px 16px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+    }
+
+    header.top .logo {
+        flex: 1 !important;
+        min-width: 0 !important;
+    }
+
+    header.top .menu-toggle {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 44px !important;
+        height: 42px !important;
+        padding: 0 !important;
+        border: 1px solid var(--gems-orange) !important;
+        border-radius: 8px !important;
+        background: var(--gems-orange) !important;
+        color: var(--gems-navy) !important;
+        font-size: 24px !important;
+        line-height: 1 !important;
+        cursor: pointer !important;
+        z-index: 3000 !important;
+    }
+
+    header.top nav.menu {
+        display: none !important;
+        position: absolute !important;
+        top: 100% !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        flex-direction: column !important;
+        gap: 0 !important;
+        padding: 10px 0 !important;
+        background: var(--gems-navy) !important;
+        border-top: 1px solid rgba(242,140,40,.45) !important;
+        border-bottom: 2px solid var(--gems-orange) !important;
+        box-shadow: 0 14px 30px rgba(0,0,0,.65) !important;
+        z-index: 2500 !important;
+    }
+
+    header.top nav.menu.is-open {
+        display: flex !important;
+    }
+
+    header.top nav.menu a {
+        display: block !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        padding: 15px 22px !important;
+        color: var(--gems-white) !important;
+        background: transparent !important;
+    }
+
+    header.top nav.menu a.active,
+    header.top nav.menu a:hover {
+        color: var(--gems-orange) !important;
+        background: rgba(242,140,40,.14) !important;
+    }
+
+    header.top > .wrap.nav > a.btn {
+        display: none !important;
+    }
+}
+
+/* Hero plus propre */
+.gems-home-hero {
+    overflow: hidden;
+}
+
+.gems-home-layout {
+    align-items: center !important;
+}
+
+.gems-home-visual img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+/* Statistiques */
+.gems-home-stats {
+    position: relative;
+    overflow: hidden;
+}
+
+.gems-home-stats .stat {
+    position: relative;
+    z-index: 3;
+}
+
+.gems-home-stats .stat b {
+    font-weight: 900 !important;
+    text-shadow: 0 3px 12px rgba(0,0,0,.35);
+}
+
+/* Partenaires en couleur et sans déformation */
+.gems-partner-card img,
+.gems-partners-section img {
+    filter: none !important;
+    -webkit-filter: none !important;
+    opacity: 1 !important;
+    mix-blend-mode: normal !important;
+    object-fit: contain !important;
+}
+
+/* Partenaires plus nets */
+.gems-partner-card {
+    min-width: 130px !important;
+    min-height: 110px !important;
+    justify-content: center !important;
+}
+
+.gems-partner-card img {
+    width: 92px !important;
+    height: 58px !important;
+}
+
+/* Mobile */
+@media (max-width: 820px) {
+    .gems-home-layout {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 28px !important;
+    }
+
+    .gems-home-content,
+    .gems-home-visual {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    .gems-home-hero h1 {
+        font-size: clamp(34px, 10vw, 58px) !important;
+        line-height: 1.02 !important;
+    }
+
+    .gems-home-hero p {
+        font-size: 16px !important;
+        line-height: 1.55 !important;
+    }
+
+    .gems-home-stats .wrap {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 12px !important;
+    }
+
+    .gems-latest-news .gems-news-box {
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    .gems-home-cards .grid.three {
+        grid-template-columns: 1fr !important;
+        gap: 18px !important;
+    }
+
+    .gems-partner-card {
+        min-width: 110px !important;
+        min-height: 96px !important;
+    }
+
+    .gems-partner-card img {
+        width: 76px !important;
+        height: 48px !important;
+    }
+}
