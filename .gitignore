@@ -9,3 +9,11 @@ backup-*/
 intranet-*.html
 js/intranet-backup-*.js
 js/intranet-casse.js
+
+# Archives et fichiers temporaires
+_archives_nettoyage_2026/
+*backup*
+*avant-*
+*casse*
+*temp*
+*fix-final*
