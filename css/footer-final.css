@@ -1,7 +1,6 @@
-/* =========================================================
+﻿/* =========================================================
    FOOTER FINAL - GEMS KART RACING
    ========================================================= */
-
 .footer {
   width: 100% !important;
   margin-top: 0 !important;
@@ -10,25 +9,21 @@
   color: #ffffff !important;
   border-top: 1px solid rgba(242, 140, 40, .28) !important;
 }
-
 .footer > .wrap {
   width: calc(100% - 40px) !important;
   max-width: 1200px !important;
   margin: 0 auto !important;
 }
-
-.footer-main {
+.footer-mn {
   display: grid !important;
   grid-template-columns: 1.2fr 1fr 1fr !important;
   gap: 42px !important;
   align-items: start !important;
   padding-bottom: 30px !important;
 }
-
 .footer-brand .logo {
   margin-bottom: 14px !important;
 }
-
 .footer-brand .logo span {
   display: block !important;
   margin-top: 4px !important;
@@ -36,14 +31,12 @@
   font-size: 13px !important;
   letter-spacing: 2px !important;
 }
-
 .footer-slogan {
   margin: 0 !important;
   color: #ffffff !important;
   font-size: 16px !important;
   line-height: 1.5 !important;
 }
-
 .footer-title {
   margin: 0 0 13px !important;
   color: #f28c28 !important;
@@ -52,7 +45,6 @@
   letter-spacing: 1px !important;
   text-transform: uppercase !important;
 }
-
 .footer-links {
   display: flex !important;
   flex-direction: column !important;
@@ -61,26 +53,22 @@
   padding: 0 !important;
   list-style: none !important;
 }
-
 .footer-links a,
-.footer-social a,
+.footer-socl a,
 .footer-developer a {
   color: #ffffff !important;
   text-decoration: none !important;
   transition: color .2s ease !important;
 }
-
 .footer-links a:hover,
-.footer-social a:hover,
+.footer-socl a:hover,
 .footer-developer a:hover {
   color: #f28c28 !important;
 }
-
-.footer-social {
+.footer-socl {
   margin: 0 !important;
   line-height: 1.7 !important;
 }
-
 .footer-bottom {
   display: flex !important;
   align-items: center !important;
@@ -91,41 +79,33 @@
   color: rgba(255, 255, 255, .72) !important;
   font-size: 12px !important;
 }
-
 .footer-bottom p {
   margin: 0 !important;
 }
-
 .footer-developer {
   margin: 0 !important;
   text-align: right !important;
 }
-
 .footer-developer a {
   color: #f28c28 !important;
   font-weight: 700 !important;
 }
-
-@media (max-width: 760px) {
+@med (max-width: 760px) {
   .footer {
     padding: 34px 0 22px !important;
   }
-
   .footer > .wrap {
     width: calc(100% - 28px) !important;
   }
-
-  .footer-main {
+  .footer-mn {
     grid-template-columns: 1fr !important;
     gap: 26px !important;
   }
-
   .footer-bottom {
     flex-direction: column !important;
     align-items: flex-start !important;
     gap: 10px !important;
   }
-
   .footer-developer {
     text-align: left !important;
   }

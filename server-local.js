@@ -1,14 +1,11 @@
 ﻿const http = require('http');
 const fs = require('fs');
 const path = require('path');
-
 const PORT = 5500;
 const DATA_FILE = path.join(__dirname, 'data', 'site-data.json');
-
 const server = http.createServer((req, res) => {
     // 1. Nettoyer l'URL (enlever les paramètres comme ?v=33)
     const cleanUrl = req.url.split('?')[0];
-
     // 2. Gérer l'API (Lecture/Écriture des données)
     if (cleanUrl === '/api/site-data') {
         if (req.method === 'GET') {
@@ -30,11 +27,9 @@ const server = http.createServer((req, res) => {
             return;
         }
     }
-
     // 3. Servir les fichiers statiques (HTML, JS, CSS, Images)
     let filePath = path.join(__dirname, cleanUrl === '/' ? 'index.html' : cleanUrl);
     const ext = path.extname(filePath).toLowerCase();
-    
     const mimeTypes = {
         '.html': 'text/html; charset=utf-8',
         '.js': 'text/javascript; charset=utf-8',
@@ -48,9 +43,7 @@ const server = http.createServer((req, res) => {
         '.svg': 'image/svg+xml',
         '.pdf': 'application/pdf'
     };
-
     const contentType = mimeTypes[ext] || 'application/octet-stream';
-
     fs.readFile(filePath, (error, content) => {
         if (error) {
             if (error.code === 'ENOENT') {
@@ -69,7 +62,6 @@ const server = http.createServer((req, res) => {
         }
     });
 });
-
 server.listen(PORT, () => {
     console.log(`
 🚀 Serveur GEMS RACING actif sur http://localhost:${PORT}`);
@@ -77,3 +69,4 @@ server.listen(PORT, () => {
     console.log(`👉 Ouvre l'intranet ici : http://localhost:${PORT}/intranet.html
 `);
 });
+

@@ -1,10 +1,11 @@
 ﻿.gems-equipment-grid { display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 24px !important; }
 .gems-equipment-item { padding: 22px !important; }
-.gems-equipment-item img { max-width: 320px !important; height: 220px !important; object-fit: contain !important; background: #f3f4f6 !important; }
+.gems-equipment-item img { max-width: 320px !important; height: 220px !important; object-fit: contn !important; background: #f3f4f6 !important; }
 .gems-equipment-name { font-size: 22px !important; }
-@media (max-width: 760px) {
+@med (max-width: 760px) {
   .gems-equipment-grid { grid-template-columns: 1fr !important; gap: 20px !important; }
   .gems-equipment-item { padding: 20px !important; }
   .gems-equipment-item img { height: 210px !important; }
 }
-@media (max-width: 480px) { .gems-equipment-item img { height: 180px !important; } .gems-equipment-name { font-size: 19px !important; } }
+@med (max-width: 480px) { .gems-equipment-item img { height: 180px !important; } .gems-equipment-name { font-size: 19px !important; } }
+

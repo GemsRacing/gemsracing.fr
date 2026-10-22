@@ -1,20 +1,18 @@
-:root {
+﻿:root {
   --gems-blue: #071b35;
   --gems-blue-light: #17477d;
   --gems-orange: #f28c28;
   --gems-white: #ffffff;
 }
-
 /* Texture générale bleu technique */
 body {
   background-color: var(--gems-blue);
   background-image:
-    radial-gradient(circle at 18% 22%, rgba(120,190,255,.22) 0 1px, transparent 2px),
-    radial-gradient(circle at 72% 38%, rgba(255,255,255,.14) 0 1px, transparent 2px),
+    radl-gradient(circle at 18% 22%, rgba(120,190,255,.22) 0 1px, transparent 2px),
+    radl-gradient(circle at 72% 38%, rgba(255,255,255,.14) 0 1px, transparent 2px),
     linear-gradient(135deg, #06172d 0%, #0d2c52 48%, #061326 100%);
   background-size: 24px 24px, 37px 37px, 100% 100%;
 }
-
 /* Motif nid d’abeille */
 body::before {
   content: "";
@@ -32,8 +30,7 @@ body::before {
   background-position: 0 0, 0 0, 16px 28px, 16px 28px;
   mix-blend-mode: screen;
 }
-
-/* Paillettes bleues très discrètes */
+/* Pllettes bleues très discrètes */
 body::after {
   content: "";
   position: fixed;
@@ -42,18 +39,16 @@ body::after {
   pointer-events: none;
   opacity: .13;
   background-image:
-    radial-gradient(circle, rgba(155,215,255,.9) 0 1px, transparent 1.5px),
-    radial-gradient(circle, rgba(255,255,255,.8) 0 1px, transparent 1.5px);
+    radl-gradient(circle, rgba(155,215,255,.9) 0 1px, transparent 1.5px),
+    radl-gradient(circle, rgba(255,255,255,.8) 0 1px, transparent 1.5px);
   background-size: 43px 43px, 79px 79px;
   background-position: 7px 12px, 31px 19px;
   animation: gems-sparkle 9s ease-in-out infinite;
 }
-
 @keyframes gems-sparkle {
   0%, 100% { opacity: .08; }
   50% { opacity: .20; }
 }
-
 /* Lignes sportives */
 .hero,
 .hero-section,
@@ -63,17 +58,14 @@ header,
   position: relative;
   overflow: hidden;
 }
-
-
 /* Sections blanches lisibles */
-main,
+mn,
 .content,
 .page-content,
 .card,
 .section-light {
   position: relative;
 }
-
 /* Accents orange */
 button,
 .btn,
@@ -83,16 +75,13 @@ a.btn {
   background-color: var(--gems-orange);
   border-color: var(--gems-orange);
 }
-
 /* CORRECTION GEMS RACING : MISE EN PAGE À GAUCHE + NID D'ABEILLE */
-
 :root {
   --gems-blue-dark: #06172d;
   --gems-blue: #0d2c52;
   --gems-blue-light: #1d75d1;
   --gems-orange: #f28c28;
 }
-
 /* Mise en page principale à gauche */
 .hero,
 .hero-section,
@@ -104,7 +93,6 @@ a.btn {
   justify-content: flex-start !important;
   align-items: flex-start !important;
 }
-
 .hero-content,
 .hero-inner,
 .banner-content,
@@ -112,7 +100,6 @@ a.btn {
   margin-left: 0 !important;
   margin-right: auto !important;
 }
-
 .hero h1,
 .hero h2,
 .hero p,
@@ -120,7 +107,6 @@ a.btn {
 .hero .hero-text {
   text-align: left !important;
 }
-
 /* Groupe des boutons aligné à gauche */
 .hero-actions,
 .hero-buttons,
@@ -131,7 +117,6 @@ a.btn {
   align-items: center !important;
   gap: 16px !important;
 }
-
 /* Motif nid d'abeille discret dans les CTA */
 button,
 .btn,
@@ -146,8 +131,7 @@ a.btn,
   background-color: var(--gems-orange);
   border-color: var(--gems-orange);
 }
-
-/* Hexagones visibles mais discrets */
+/* Hexagones visibles ms discrets */
 button::before,
 .btn::before,
 .cta-button::before,
@@ -169,8 +153,7 @@ a.btn::before,
   background-position: 0 0, 0 0, 9px 15px, 9px 15px;
   pointer-events: none;
 }
-
-/* Le texte reste parfaitement lisible */
+/* Le texte reste parftement lisible */
 button *,
 .btn *,
 .cta-button *,
@@ -181,7 +164,6 @@ a.btn *,
   position: relative;
   z-index: 2;
 }
-
 /* Second bouton : bleu avec nid d'abeille très léger */
 .hero a:nth-child(2),
 .hero .secondary,
@@ -191,7 +173,6 @@ a.btn *,
   background-color: var(--gems-blue-dark) !important;
   border: 1px solid rgba(255,255,255,.8) !important;
 }
-
 .hero a:nth-child(2)::before,
 .hero .secondary::before,
 .hero .btn-secondary::before,
@@ -199,7 +180,6 @@ a.btn *,
 .cta .secondary::before {
   opacity: .16;
 }
-
 /* Quelques touches de nid d'abeille dans les sections bleues */
 .hero,
 .hero-section,
@@ -209,8 +189,6 @@ a.btn *,
   position: relative;
   overflow: hidden;
 }
-
-
 /* Le contenu passe au-dessus de la texture */
 .hero > *,
 .hero-section > *,
@@ -220,9 +198,8 @@ a.btn *,
   position: relative;
   z-index: 1;
 }
-
 /* Responsive : boutons empilés sur mobile */
-@media (max-width: 700px) {
+@med (max-width: 700px) {
   .hero-actions,
   .hero-buttons,
   .cta-group,
@@ -230,7 +207,6 @@ a.btn *,
     flex-direction: column !important;
     align-items: flex-start !important;
   }
-
   .hero a,
   .hero button,
   .cta a,
@@ -239,22 +215,18 @@ a.btn *,
     max-width: 100%;
   }
 }
-
 /* =========================================
    GEMS RACING - CORRECTION DESIGN PROPRE
    ========================================= */
-
 /* On retire les textures trop présentes du fond */
 body::before {
   display: block !important;
   opacity: .10 !important;
 }
-
 body::after {
   display: block !important;
   opacity: .10 !important;
 }
-
 /* Hero propre et lisible */
 .hero,
 .hero-section,
@@ -265,10 +237,7 @@ body::after {
   background:
     linear-gradient(90deg, rgba(4,17,36,.98) 0%, rgba(7,28,55,.94) 52%, rgba(7,28,55,.72) 100%) !important;
 }
-
 /* Motif très discret uniquement dans un coin du hero */
-
-
 /* Contenu du hero aligné à gauche */
 .hero-content,
 .hero-inner,
@@ -285,7 +254,6 @@ body::after {
   align-items: flex-start !important;
   justify-content: flex-start !important;
 }
-
 /* Gros titre bien à gauche */
 .hero h1,
 .hero h2,
@@ -300,7 +268,6 @@ body::after {
   line-height: .94 !important;
   letter-spacing: -1px;
 }
-
 /* Évite un titre trop large ou centré */
 .hero h1 strong,
 .hero h2 strong,
@@ -309,7 +276,6 @@ body::after {
   display: block;
   text-align: left !important;
 }
-
 /* Sous-titre */
 .hero p,
 .hero-description,
@@ -321,7 +287,6 @@ body::after {
   margin-right: auto !important;
   text-align: left !important;
 }
-
 /* Groupe des boutons à gauche */
 .hero-actions,
 .hero-buttons,
@@ -334,7 +299,6 @@ body::after {
   gap: 14px !important;
   margin-left: 0 !important;
 }
-
 /* Boutons premium */
 button,
 .btn,
@@ -352,7 +316,6 @@ a.btn,
     box-shadow .25s ease,
     background-color .25s ease !important;
 }
-
 /* Motif nid d'abeille uniquement dans les boutons */
 button::before,
 .btn::before,
@@ -377,7 +340,6 @@ a.btn::before,
   transition: transform .35s ease, opacity .35s ease;
   pointer-events: none;
 }
-
 /* Animation au survol */
 button:hover,
 .btn:hover,
@@ -391,7 +353,6 @@ a.btn:hover,
     0 8px 18px rgba(0,0,0,.28),
     0 0 0 1px rgba(255,255,255,.24);
 }
-
 button:hover::before,
 .btn:hover::before,
 .cta-button:hover::before,
@@ -402,7 +363,6 @@ a.btn:hover::before,
   opacity: .42;
   transform: translateX(0);
 }
-
 /* Reflet orange au survol */
 button::after,
 .btn::after,
@@ -425,7 +385,6 @@ a.btn::after {
   transition: left .55s ease;
   pointer-events: none;
 }
-
 button:hover::after,
 .btn:hover::after,
 .cta-button:hover::after,
@@ -433,7 +392,6 @@ a.button:hover::after,
 a.btn:hover::after {
   left: 135%;
 }
-
 /* Boutons orange */
 .hero a:first-child,
 .hero .primary,
@@ -443,8 +401,7 @@ a.btn:hover::after {
   color: #ffffff !important;
   border-color: #f28c28 !important;
 }
-
-/* Boutons secondaires */
+/* Boutons secondres */
 .hero a:nth-child(2),
 .hero .secondary,
 .hero .btn-secondary,
@@ -454,7 +411,6 @@ a.btn:hover::after {
   color: #ffffff !important;
   border: 1px solid rgba(255,255,255,.8) !important;
 }
-
 /* Nid d'abeille discret sur les cartes statistiques */
 .stats-card:hover,
 .stat-card:hover,
@@ -468,9 +424,8 @@ a.btn:hover::after {
   transform: translateY(-3px);
   transition: transform .25s ease, background-image .25s ease;
 }
-
 /* Mobile */
-@media (max-width: 700px) {
+@med (max-width: 700px) {
   .hero h1,
   .hero h2,
   .hero-title,
@@ -478,7 +433,6 @@ a.btn:hover::after {
     font-size: clamp(42px, 13vw, 76px) !important;
     text-align: left !important;
   }
-
   .hero-actions,
   .hero-buttons,
   .cta-group,
@@ -487,5 +441,4 @@ a.btn:hover::after {
     align-items: flex-start !important;
   }
 }
-
 

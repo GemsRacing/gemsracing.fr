@@ -1,12 +1,11 @@
-
-:root{
+﻿:root{
   --navy:#020d1f; --navy2:#0b1e46; --blue:#0056c9; --orange:#ff6200;
   --white:#fff; --off:#f5f6f7; --ink:#101828; --muted:#667085;
 }
-*{box-sizing:border-box} body{margin:0;font-family:Montserrat,Arial,sans-serif;color:var(--ink);background:var(--off)}
+*{box-sizing:border-box} body{margin:0;font-family:Montserrat,Arl,sans-serif;color:var(--ink);background:var(--off)}
 body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.12;background-image:
- radial-gradient(circle at 15% 20%,#fff 0 1px,transparent 1.5px),
- radial-gradient(circle at 70% 55%,#8fc8ff 0 1px,transparent 1.5px);
+ radl-gradient(circle at 15% 20%,#fff 0 1px,transparent 1.5px),
+ radl-gradient(circle at 70% 55%,#8fc8ff 0 1px,transparent 1.5px);
  background-size:19px 19px,27px 27px;mix-blend-mode:screen}
 a{color:inherit;text-decoration:none}.wrap{max-width:1180px;margin:auto;padding:0 24px}
 .top{background:var(--navy);color:#fff;position:sticky;top:0;z-index:10;border-bottom:1px solid #17325f}
@@ -23,22 +22,17 @@ h2{font-size:40px;line-height:1.05;margin:0 0 16px;text-transform:uppercase;font
 .pagehead h1{position:relative;z-index:1;font-size:58px;margin:0;text-transform:uppercase;font-style:italic}.pagehead p{position:relative;z-index:1;max-width:650px;line-height:1.7}
 .table{width:100%;border-collapse:collapse;background:#fff}.table th,.table td{padding:14px;text-align:left;border-bottom:1px solid #e5e7eb}.table th{background:var(--navy);color:#fff}.badge{display:inline-block;padding:5px 8px;background:#e9f2ff;color:var(--blue);font-size:12px;font-weight:800}
 .footer{background:var(--navy);color:#fff;padding:35px 0}.footer small{color:#b7c7de}
-@media(max-width:800px){.menu{gap:10px;font-size:11px}.nav{height:auto;padding:14px 0;align-items:flex-start}.stats{grid-template-columns:repeat(2,1fr);gap:18px}.stat{border:0}.grid,.grid.two{grid-template-columns:1fr}.hero{min-height:560px}.pagehead h1{font-size:42px}}
-
-
-
+@med(max-width:800px){.menu{gap:10px;font-size:11px}.nav{height:auto;padding:14px 0;align-items:flex-start}.stats{grid-template-columns:repeat(2,1fr);gap:18px}.stat{border:0}.grid,.grid.two{grid-template-columns:1fr}.hero{min-height:560px}.pagehead h1{font-size:42px}}
 /* =========================================================
    ENTETES RACING - MOTIF NID D'ABEILLE
-   Accueil volontairement exclu
+   Accueil volontrement exclu
    ========================================================= */
-
 .pagehead {
   position: relative !important;
   isolation: isolate !important;
   overflow: hidden !important;
   background-color: #071b35 !important;
 }
-
 /* Motif hexagonal discret à droite */
 .pagehead::before {
   content: "" !important;
@@ -50,12 +44,10 @@ h2{font-size:40px;line-height:1.05;margin:0 0 16px;text-transform:uppercase;font
   z-index: -1 !important;
   opacity: 0.34 !important;
   pointer-events: none !important;
-
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width=' ninety' height='104' viewBox='0 0 90 104'%3E%3Cg fill='none' stroke='%2389a9c9' stroke-width='1.2' opacity='.52'%3E%3Cpath d='M22.5 1 45 14v26L22.5 53 0 40V14z'/%3E%3Cpath d='M67.5 1 90 14v26L67.5 53 45 40V14z'/%3E%3Cpath d='M45 53 67.5 66v26L45 105 22.5 92V66z'/%3E%3C/g%3E%3C/svg%3E") !important;
   background-size: 90px 104px !important;
   background-position: right center !important;
   background-repeat: repeat !important;
-
   mask-image: linear-gradient(
     to right,
     transparent 0%,
@@ -69,7 +61,6 @@ h2{font-size:40px;line-height:1.05;margin:0 0 16px;text-transform:uppercase;font
     black 100%
   ) !important;
 }
-
 /* Dégradé pour fondre le motif dans le bandeau */
 .pagehead::after {
   content: "" !important;
@@ -86,7 +77,6 @@ h2{font-size:40px;line-height:1.05;margin:0 0 16px;text-transform:uppercase;font
       rgba(7, 27, 53, 0.78) 100%
     ) !important;
 }
-
 /* Le texte reste au-dessus du motif */
 .pagehead .wrap,
 .pagehead h1,
@@ -94,7 +84,6 @@ h2{font-size:40px;line-height:1.05;margin:0 0 16px;text-transform:uppercase;font
   position: relative !important;
   z-index: 2 !important;
 }
-
 /* Petite signature racing conservée */
 .pagehead h1::before {
   content: "" !important;
@@ -106,31 +95,26 @@ h2{font-size:40px;line-height:1.05;margin:0 0 16px;text-transform:uppercase;font
   background: #f28c28 !important;
   transform: skewX(-18deg) !important;
 }
-
 /* Accueil exclu explicitement */
 .gems-home-hero::before,
 .gems-home-hero::after {
   display: none !important;
 }
-
-@media (max-width: 800px) {
+@med (max-width: 800px) {
   .pagehead::before {
     right: -90px !important;
     width: 72% !important;
     opacity: 0.24 !important;
   }
-
   .pagehead h1::before {
     width: 5px !important;
     margin-right: 10px !important;
   }
 }
-
 /* =========================================================
    ENTETES INTERNES - DEGRADE BLEU ET NID D'ABEILLE
    L'accueil n'est pas concerné
    ========================================================= */
-
 .pagehead {
   position: relative !important;
   isolation: isolate !important;
@@ -143,13 +127,11 @@ h2{font-size:40px;line-height:1.05;margin:0 0 16px;text-transform:uppercase;font
       #236b9f 100%
     ) !important;
 }
-
 /* Suppression complète de l'ancienne barre orange */
 .pagehead h1::before {
   content: none !important;
   display: none !important;
 }
-
 /* Motif hexagonal propre, principalement à droite */
 .pagehead::before {
   content: "" !important;
@@ -161,12 +143,10 @@ h2{font-size:40px;line-height:1.05;margin:0 0 16px;text-transform:uppercase;font
   z-index: 0 !important;
   pointer-events: none !important;
   opacity: 0.72 !important;
-
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='104' viewBox='0 0 90 104'%3E%3Cg fill='none' stroke='%2398c1dc' stroke-width='1.2' opacity='.58'%3E%3Cpath d='M22.5 1 45 14v26L22.5 53 0 40V14z'/%3E%3Cpath d='M67.5 1 90 14v26L67.5 53 45 40V14z'/%3E%3Cpath d='M45 53 67.5 66v26L45 105 22.5 92V66z'/%3E%3C/g%3E%3C/svg%3E") !important;
   background-size: 90px 104px !important;
   background-repeat: repeat !important;
   background-position: right center !important;
-
   -webkit-mask-image: linear-gradient(
     to right,
     transparent 0%,
@@ -174,7 +154,6 @@ h2{font-size:40px;line-height:1.05;margin:0 0 16px;text-transform:uppercase;font
     #000 58%,
     #000 100%
   ) !important;
-
   mask-image: linear-gradient(
     to right,
     transparent 0%,
@@ -183,7 +162,6 @@ h2{font-size:40px;line-height:1.05;margin:0 0 16px;text-transform:uppercase;font
     #000 100%
   ) !important;
 }
-
 /* Fondu bleu par-dessus le motif */
 .pagehead::after {
   content: "" !important;
@@ -199,28 +177,24 @@ h2{font-size:40px;line-height:1.05;margin:0 0 16px;text-transform:uppercase;font
     rgba(7,27,53,0.28) 100%
   ) !important;
 }
-
 /* Texte au-dessus du motif */
 .pagehead .wrap {
   position: relative !important;
   z-index: 2 !important;
 }
-
 /* L'accueil reste inchangé */
 .gems-home-hero,
 .gems-home-hero::before,
 .gems-home-hero::after {
   background-image: none !important;
 }
-
 /* Version mobile */
-@media (max-width: 800px) {
+@med (max-width: 800px) {
   .pagehead::before {
     width: 78% !important;
     opacity: 0.52 !important;
     background-size: 72px 84px !important;
   }
-
   .pagehead::after {
     background: linear-gradient(
       90deg,

@@ -1,14 +1,12 @@
 ﻿/* =========================================
    GEMS RACING - CORRECTION FINALE
    ========================================= */
-
 /* Désactiver l'ancien mouvement du kart */
 .gems-kart {
   animation: none !important;
   transform: translateX(0) !important;
   transition: transform .08s linear !important;
 }
-
 /* Zone de progression liée au scroll */
 .gems-scroll-progress {
   position: absolute;
@@ -20,7 +18,6 @@
   border-radius: 10px;
   z-index: 5;
 }
-
 .gems-scroll-progress::before {
   content: "";
   display: block;
@@ -30,7 +27,6 @@
   border-radius: 10px;
   transition: width .08s linear;
 }
-
 .gems-scroll-kart {
   position: absolute;
   left: 0;
@@ -42,13 +38,11 @@
   filter: drop-shadow(0 5px 4px rgba(0,0,0,.45));
   z-index: 6;
 }
-
 /* Le kart reste orienté vers l'avant */
 .gems-scroll-kart,
 .gems-scroll-kart span {
   transform-origin: center;
 }
-
 /* Piste décorative */
 .gems-scroll-progress::after {
   content: "";
@@ -58,7 +52,6 @@
   border-bottom: 1px dashed rgba(255,255,255,.25);
   pointer-events: none;
 }
-
 /* Hero */
 .hero,
 .hero-section,
@@ -67,7 +60,6 @@
   position: relative !important;
   overflow: hidden !important;
 }
-
 .hero-content,
 .hero-inner,
 .hero-copy,
@@ -82,7 +74,6 @@
   margin-left: 0 !important;
   margin-right: auto !important;
 }
-
 /* Gros titre */
 .hero h1,
 .hero h2,
@@ -95,7 +86,6 @@
   margin-right: auto !important;
   max-width: 900px !important;
 }
-
 /* Boutons correctement alignés */
 .hero-actions,
 .hero-buttons,
@@ -109,7 +99,6 @@
   gap: 12px !important;
   margin-left: 0 !important;
 }
-
 /* On évite que les boutons s'étirent */
 .hero-actions a,
 .hero-buttons a,
@@ -122,7 +111,6 @@
   min-width: 190px;
   text-align: center !important;
 }
-
 /* Chevron propre */
 .hero a::after,
 .cta a::after,
@@ -132,13 +120,11 @@
   position: static !important;
   transform: none !important;
 }
-
 /* Ne pas afficher de chevron sur les boutons sans classe */
 .hero a:not(.with-arrow)::after,
 .cta a:not(.with-arrow)::after {
   content: none !important;
 }
-
 /* Boutons */
 .hero a,
 .cta a,
@@ -149,7 +135,6 @@ button,
   z-index: 2;
   transition: transform .25s ease, box-shadow .25s ease !important;
 }
-
 .hero a:hover,
 .cta a:hover,
 button:hover,
@@ -157,7 +142,6 @@ button:hover,
   transform: translateY(-3px) !important;
   box-shadow: 0 8px 18px rgba(0,0,0,.28) !important;
 }
-
 /* Motif nid d'abeille uniquement dans les boutons */
 .hero a::before,
 .cta a::before,
@@ -174,7 +158,6 @@ button::before,
   background-size: 20px 34px;
   z-index: -1;
 }
-
 /* Menu hamburger */
 .gems-menu-toggle {
   display: none;
@@ -187,7 +170,6 @@ button::before,
   background: #071b35 !important;
   cursor: pointer;
 }
-
 .gems-menu-toggle span {
   display: block;
   height: 3px;
@@ -195,21 +177,17 @@ button::before,
   background: #f28c28;
   transition: .25s ease;
 }
-
 .gems-menu-toggle.active span:nth-child(1) {
   transform: translateY(8px) rotate(45deg);
 }
-
 .gems-menu-toggle.active span:nth-child(2) {
   opacity: 0;
 }
-
 .gems-menu-toggle.active span:nth-child(3) {
   transform: translateY(-8px) rotate(-45deg);
 }
-
 /* Mobile */
-@media (max-width: 800px) {
+@med (max-width: 800px) {
   header {
     position: relative !important;
     min-height: 78px !important;
@@ -218,16 +196,14 @@ button::before,
     align-items: center !important;
     justify-content: space-between !important;
   }
-
   .gems-menu-toggle {
     display: block !important;
     margin-left: auto !important;
   }
-
   header nav,
   header > nav,
   .site-nav,
-  .main-nav {
+  .mn-nav {
     position: absolute !important;
     top: 78px !important;
     left: 0 !important;
@@ -238,43 +214,38 @@ button::before,
     padding: 12px 18px !important;
     z-index: 1000 !important;
   }
-
   header nav.gems-mobile-open,
   header > nav.gems-mobile-open,
   .site-nav.gems-mobile-open,
-  .main-nav.gems-mobile-open {
+  .mn-nav.gems-mobile-open {
     display: block !important;
   }
-
   header nav ul,
   header > nav ul,
   .site-nav ul,
-  .main-nav ul {
+  .mn-nav ul {
     display: flex !important;
     flex-direction: column !important;
     gap: 0 !important;
     margin: 0 !important;
     padding: 0 !important;
   }
-
   header nav li,
   header > nav li,
   .site-nav li,
-  .main-nav li {
+  .mn-nav li {
     width: 100% !important;
   }
-
   header nav a,
   header > nav a,
   .site-nav a,
-  .main-nav a {
+  .mn-nav a {
     display: block !important;
     width: 100% !important;
     padding: 13px 8px !important;
     text-align: left !important;
     color: #fff !important;
   }
-
   .hero,
   .hero-section,
   .home-hero,
@@ -282,7 +253,6 @@ button::before,
     min-height: 680px !important;
     padding: 70px 22px 130px !important;
   }
-
   .hero h1,
   .hero h2,
   .hero-title,
@@ -294,7 +264,6 @@ button::before,
     overflow-wrap: normal !important;
     word-break: normal !important;
   }
-
   .hero-actions,
   .hero-buttons,
   .cta-group,
@@ -303,27 +272,23 @@ button::before,
     flex-direction: column !important;
     align-items: flex-start !important;
   }
-
   .hero-actions a,
   .hero-buttons a,
   .cta-group a,
   .button-group a {
     min-width: 210px !important;
   }
-
   .gems-scroll-progress {
     left: 8%;
     right: 8%;
     bottom: 22px;
   }
-
   .gems-scroll-kart {
     font-size: 29px;
     bottom: -19px;
   }
 }
-
-/* Désactivation temporaire des animations kart */
+/* Désactivation temporre des animations kart */
 .gems-motion-zone,
 .gems-racing-track,
 .gems-kart,

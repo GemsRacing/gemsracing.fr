@@ -1,8 +1,7 @@
 ﻿/* =========================================================
    GEMS RACING - ACCUEIL FINAL
    ========================================================= */
-
-@media (min-width: 801px) {
+@med (min-width: 801px) {
   .hero {
     height: auto !important;
     min-height: 500px !important;
@@ -10,7 +9,6 @@
     padding: 35px 0 35px !important;
     overflow: visible !important;
   }
-
   .hero > .wrap {
     display: grid !important;
     grid-template-columns: minmax(0, 1fr) minmax(360px, .78fr) !important;
@@ -19,14 +17,12 @@
     min-height: 440px !important;
     height: auto !important;
   }
-
   .hero .wrap > .eyebrow,
   .hero .wrap > h1,
   .hero .wrap > p,
   .hero .wrap > .button-group {
     grid-column: 1 !important;
   }
-
   .hero .wrap > h1 {
     margin: 10px 0 20px !important;
     max-width: 720px !important;
@@ -35,14 +31,12 @@
     white-space: normal !important;
     overflow: visible !important;
   }
-
   .hero .wrap > p {
     max-width: 580px !important;
     margin-bottom: 22px !important;
     font-size: 16px !important;
     line-height: 1.45 !important;
   }
-
   .hero .wrap > .gems-home-photo {
     grid-column: 2 !important;
     grid-row: 1 / span 4 !important;
@@ -56,7 +50,6 @@
     border: 3px solid #f28c28 !important;
     box-shadow: 0 10px 25px rgba(0,0,0,.35) !important;
   }
-
   .stats {
     position: relative !important;
     z-index: 2 !important;
@@ -66,7 +59,6 @@
     padding: 0 !important;
     background: #ffffff !important;
   }
-
   .stats > .wrap {
     display: grid !important;
     grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
@@ -74,19 +66,16 @@
     width: 100% !important;
     height: 100% !important;
   }
-
   .stats .stat {
     padding: 12px 14px !important;
     text-align: center !important;
   }
-
   .stats .stat b {
     display: block !important;
     color: #071b35 !important;
     font-size: 30px !important;
     line-height: 1 !important;
   }
-
   .stats .stat small {
     display: block !important;
     margin-top: 9px !important;
@@ -95,8 +84,7 @@
     white-space: nowrap !important;
   }
 }
-
-@media (max-width: 800px) {
+@med (max-width: 800px) {
   .hero {
     height: auto !important;
     min-height: 0 !important;
@@ -104,25 +92,21 @@
     padding: 32px 18px 28px !important;
     overflow: visible !important;
   }
-
   .hero .wrap {
     display: flex !important;
     flex-direction: column !important;
     height: auto !important;
   }
-
   .hero .wrap > h1 {
     font-size: clamp(35px, 10vw, 58px) !important;
     line-height: 1.03 !important;
     white-space: normal !important;
     overflow: visible !important;
   }
-
   .hero .wrap > p {
     font-size: 16px !important;
     line-height: 1.5 !important;
   }
-
   .hero .wrap > .gems-home-photo {
     order: 5 !important;
     width: 100% !important;
@@ -133,30 +117,26 @@
     object-position: center top !important;
     border: 3px solid #f28c28 !important;
   }
-
   .stats {
     height: auto !important;
     min-height: 0 !important;
     padding: 14px 8px !important;
   }
-
   .stats > .wrap {
     display: grid !important;
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
     gap: 10px !important;
   }
-
   .stats .stat {
     padding: 10px 4px !important;
   }
-
   .stats .stat b {
     color: #071b35 !important;
     font-size: 25px !important;
   }
-
   .stats .stat small {
     color: #071b35 !important;
     font-size: 10px !important;
   }
 }
+

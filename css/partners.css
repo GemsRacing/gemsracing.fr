@@ -2,13 +2,11 @@
   width: 100% !important;
   overflow: hidden !important;
 }
-
 .gems-partners-section .wrap {
   width: 100% !important;
   max-width: 1200px !important;
   overflow: hidden !important;
 }
-
 .gems-partners-grid {
   display: flex !important;
   flex-wrap: nowrap !important;
@@ -20,11 +18,9 @@
   animation: gems-partners-marquee 24s linear infinite !important;
   will-change: transform !important;
 }
-
 .gems-partners-grid:hover {
   animation-play-state: paused !important;
 }
-
 .gems-partner-card {
   flex: 0 0 235px !important;
   width: 235px !important;
@@ -39,67 +35,55 @@
   background: #ffffff !important;
   border: 2px solid rgba(242,140,40,.75) !important;
 }
-
 .gems-partner-card img {
   width: 160px !important;
   height: 110px !important;
-  object-fit: contain !important;
+  object-fit: contn !important;
   margin-bottom: 12px !important;
 }
-
 .gems-partner-name {
   color: #071b35 !important;
   font-weight: 800 !important;
   white-space: nowrap !important;
 }
-
 @keyframes gems-partners-marquee {
   from {
     transform: translateX(0);
   }
-
   to {
     transform: translateX(-50%);
   }
 }
-
-@media (max-width: 700px) {
+@med (max-width: 700px) {
   .gems-partner-card {
     flex-basis: 190px !important;
     width: 190px !important;
     min-width: 190px !important;
     height: 165px !important;
   }
-
   .gems-partner-card img {
     width: 130px !important;
     height: 85px !important;
   }
-
   .gems-partners-grid {
     animation-duration: 18s !important;
   }
 }
-
 /* =========================================================
-   GEMS RACING - PARTENAIRES STATIQUES (page Contact)
+   GEMS RACING - PARTENRES STATIQUES (page Contact)
    ========================================================= */
-
 .gems-static-partners {
   padding-top: 45px !important;
   padding-bottom: 70px !important;
   text-align: center !important;
   background: #071b35 !important;
 }
-
 .gems-static-partners h2 {
   margin-bottom: 10px !important;
 }
-
 .gems-static-partners .lead {
   margin-bottom: 35px !important;
 }
-
 .gems-static-partners-grid {
   display: grid !important;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
@@ -107,7 +91,6 @@
   justify-items: center !important;
   align-items: stretch !important;
 }
-
 .gems-partner-card-static {
   display: flex !important;
   flex-direction: column !important;
@@ -121,20 +104,17 @@
   min-height: 160px !important;
   box-sizing: border-box !important;
 }
-
 .gems-partner-card-static:hover {
   border-color: #f28c28 !important;
   transform: translateY(-3px) !important;
   box-shadow: 0 6px 15px rgba(0,0,0,.2) !important;
 }
-
 .gems-partner-card-static img {
   max-width: 140px !important;
   max-height: 90px !important;
-  object-fit: contain !important;
+  object-fit: contn !important;
   margin: 0 auto 10px auto !important;
 }
-
 .gems-partner-name-static {
   font-size: 14px !important;
   font-weight: 700 !important;
@@ -142,8 +122,7 @@
   text-transform: uppercase !important;
   white-space: nowrap !important;
 }
-
-@media (max-width: 768px) {
+@med (max-width: 768px) {
   .gems-static-partners-grid {
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)) !important;
     gap: 15px !important;
@@ -160,3 +139,4 @@
     font-size: 12px !important;
   }
 }
+

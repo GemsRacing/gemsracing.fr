@@ -1,7 +1,6 @@
-/* =========================================================
+﻿/* =========================================================
    SCORING - STYLE CIRCUIT / DRAPEAU À DAMIER
    ========================================================= */
-
 .gems-home-stats {
   position: relative !important;
   isolation: isolate !important;
@@ -26,7 +25,6 @@
     0 12px 28px rgba(0, 0, 0, .28),
     inset 0 0 0 1px rgba(255,255,255,.08) !important;
 }
-
 /* Ligne de piste intérieure */
 .gems-home-stats::before {
   content: "" !important;
@@ -37,7 +35,6 @@
   border-radius: 16px !important;
   pointer-events: none !important;
 }
-
 /* Bandeau damier supérieur */
 .gems-home-stats::after {
   content: "" !important;
@@ -57,7 +54,6 @@
   opacity: .95 !important;
   pointer-events: none !important;
 }
-
 /* Le conteneur des statistiques */
 .gems-home-stats > .wrap {
   position: relative !important;
@@ -71,7 +67,6 @@
   padding: 12px 0 4px !important;
   background: transparent !important;
 }
-
 /* Chaque indicateur */
 .gems-home-stats .stat {
   position: relative !important;
@@ -88,12 +83,10 @@
   border-radius: 0 !important;
   text-align: center !important;
 }
-
 /* Pas de séparateur sur le dernier bloc */
 .gems-home-stats .stat:last-child {
   border-right: 0 !important;
 }
-
 /* Petite ligne orange façon vibreur de circuit */
 .gems-home-stats .stat::before {
   content: "" !important;
@@ -106,7 +99,6 @@
   border-radius: 5px !important;
   opacity: .85 !important;
 }
-
 /* Chiffres */
 .gems-home-stats .stat b {
   display: block !important;
@@ -118,7 +110,6 @@
   text-align: center !important;
   text-shadow: 0 2px 8px rgba(0,0,0,.35) !important;
 }
-
 /* Libellés */
 .gems-home-stats .stat small {
   display: block !important;
@@ -131,7 +122,6 @@
   line-height: 1.2 !important;
   text-align: center !important;
 }
-
 /* Bandeau damier inférieur */
 .gems-home-stats > .wrap::after {
   content: "" !important;
@@ -150,8 +140,7 @@
   opacity: .85 !important;
   pointer-events: none !important;
 }
-
-@media (max-width: 800px) {
+@med (max-width: 800px) {
   .gems-home-stats {
     width: calc(100% - 28px) !important;
     min-height: 0 !important;
@@ -159,26 +148,21 @@
     padding: 16px 10px !important;
     border-radius: 17px !important;
   }
-
   .gems-home-stats > .wrap {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
     gap: 8px !important;
   }
-
   .gems-home-stats .stat {
     min-height: 72px !important;
     border: 1px solid rgba(242, 140, 40, .4) !important;
     border-radius: 9px !important;
   }
-
   .gems-home-stats .stat::before {
     display: none !important;
   }
-
   .gems-home-stats .stat b {
     font-size: 27px !important;
   }
-
   .gems-home-stats .stat small {
     font-size: 10px !important;
   }

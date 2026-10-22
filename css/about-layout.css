@@ -2,4 +2,5 @@
 .gems-about-visual .gems-profile-photo { width: 100% !important; max-width: 380px !important; height: 540px !important; object-fit: cover !important; object-position: center top !important; border: 3px solid #f28c28 !important; }
 .gems-about-message { margin-top: 24px !important; padding: 18px !important; background: rgba(4, 19, 43, .82) !important; border-left: 4px solid #f28c28 !important; }
 .press-link a { color: #f28c28 !important; font-weight: 800 !important; text-decoration: underline !important; }
-@media (max-width: 800px) { .gems-about-intro { grid-template-columns: 1fr !important; } .gems-about-visual { order: -1 !important; } }
+@med (max-width: 800px) { .gems-about-intro { grid-template-columns: 1fr !important; } .gems-about-visual { order: -1 !important; } }
+

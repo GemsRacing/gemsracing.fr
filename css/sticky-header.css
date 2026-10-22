@@ -7,10 +7,11 @@ header.top, header.top.fixed-header {
   background: #06172d !important; box-shadow: 0 3px 14px rgba(0,0,0,.35) !important;
 }
 header.top .wrap.nav { min-height: var(--gems-header-height) !important; }
-@media (max-width: 800px) {
+@med (max-width: 800px) {
   :root { --gems-header-height: 76px; }
   body { padding-top: var(--gems-header-height) !important; }
   header.top { min-height: var(--gems-header-height) !important; }
-  header.top nav.menu, header.top > nav.menu, header.top .site-nav, header.top .main-nav { top: var(--gems-header-height) !important; }
+  header.top nav.menu, header.top > nav.menu, header.top .site-nav, header.top .mn-nav { top: var(--gems-header-height) !important; }
   .gems-menu-toggle { z-index: 10001 !important; }
 }
+

@@ -1,24 +1,20 @@
-/* INTRANET GEMS RACING */
+﻿/* INTRANET GEMS RACING */
 * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
 body { background: #040f1e; color: #ffffff; min-height: 100vh; display: flex; flex-direction: column; }
-
 /* Topbar */
 .intra-header { background: #071b35; border-bottom: 2px solid #f28c28; padding: 16px 28px; display: flex; align-items: center; justify-content: space-between; }
 .intra-logo { font-size: 20px; font-weight: 900; letter-spacing: 1px; }
 .intra-logo span { color: #f28c28; }
 .intra-user { display: flex; align-items: center; gap: 12px; }
 .intra-avatar { width: 38px; height: 38px; border-radius: 50%; background: #f28c28; color: #071b35; display: flex; align-items: center; justify-content: center; font-weight: 800; }
-
-/* Main Layout */
-.intra-container { display: flex; flex: 1; }
+/* Mn Layout */
+.intra-contner { display: flex; flex: 1; }
 .intra-sidebar { width: 220px; background: #051326; border-right: 1px solid rgba(255,255,255,0.08); padding: 20px 0; flex-shrink: 0; }
 .intra-nav-item { display: flex; align-items: center; gap: 12px; padding: 14px 24px; color: rgba(255,255,255,0.7); text-decoration: none; font-weight: 600; font-size: 14px; cursor: pointer; transition: 0.2s; border-left: 4px solid transparent; }
 .intra-nav-item:hover, .intra-nav-item.active { background: rgba(242,140,40,0.12); color: #ffffff; border-left-color: #f28c28; }
-
 .intra-content { flex: 1; padding: 32px; max-width: 1200px; margin: 0 auto; width: 100%; }
 .intra-card { background: #071b35; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 24px; margin-bottom: 28px; box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
 .intra-card h2 { color: #f28c28; font-size: 18px; margin-bottom: 18px; display: flex; align-items: center; gap: 10px; }
-
 /* Forms & Inputs */
 .intra-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .intra-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
@@ -27,21 +23,18 @@ body { background: #040f1e; color: #ffffff; min-height: 100vh; display: flex; fl
 .intra-field label { font-size: 12px; font-weight: 700; text-transform: uppercase; color: rgba(255,255,255,0.8); letter-spacing: 0.5px; }
 .intra-field input, .intra-field textarea, .intra-field select { background: #040f1e; border: 1px solid rgba(255,255,255,0.2); border-radius: 6px; padding: 10px 14px; color: #ffffff; font-size: 14px; outline: none; transition: 0.2s; width: 100%; }
 .intra-field input:focus, .intra-field textarea:focus, .intra-field select:focus { border-color: #f28c28; box-shadow: 0 0 0 2px rgba(242,140,40,0.2); }
-
 /* Buttons */
 .btn-primary { background: #f28c28; color: #ffffff; border: none; padding: 10px 20px; border-radius: 6px; font-weight: 800; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; transition: 0.2s; font-size: 13px; }
 .btn-primary:hover { background: #d87417; transform: translateY(-1px); }
 .btn-danger { background: #e74c3c; color: #ffffff; border: none; padding: 6px 12px; border-radius: 4px; font-weight: 700; cursor: pointer; font-size: 12px; }
 .btn-icon { background: rgba(255,255,255,0.1); color: #fff; border: none; padding: 6px 10px; border-radius: 4px; cursor: pointer; transition: 0.2s; }
 .btn-icon:hover { background: #f28c28; }
-
 /* List Items (News, Races) */
 .list-item { background: #040f1e; border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; padding: 12px 18px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; gap: 20px; }
-.list-item-main strong { display: block; font-size: 16px; margin-bottom: 4px; color: #f28c28; }
-.list-item-main small { display: block; font-size: 12px; color: rgba(255,255,255,0.6); }
+.list-item-mn strong { display: block; font-size: 16px; margin-bottom: 4px; color: #f28c28; }
+.list-item-mn small { display: block; font-size: 12px; color: rgba(255,255,255,0.6); }
 .list-item-actions { display: flex; gap: 8px; }
 .list-item.is-editing { border-color: #f28c28; box-shadow: 0 0 0 2px rgba(242,140,40,0.2); }
-
 /* Photo Grid Admin */
 .photo-admin-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 18px; }
 .photo-admin-card { background: #040f1e; border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; overflow: hidden; display: flex; flex-direction: column; }
@@ -50,32 +43,27 @@ body { background: #040f1e; color: #ffffff; min-height: 100vh; display: flex; fl
 .photo-actions { padding: 12px; display: flex; flex-direction: column; gap: 8px; }
 .photo-actions input { width: 100%; padding: 8px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.2); background: #071b35; color: #fff; font-size: 13px; }
 .photo-tools { display: flex; gap: 6px; justify-content: space-between; margin-top: 5px; }
-
 /* Partner Grid Admin */
 .partner-admin-card { background: #040f1e; border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; padding: 12px 18px; margin-bottom: 12px; display: flex; align-items: center; gap: 15px; }
 .partner-admin-card.is-editing { border-color: #f28c28; box-shadow: 0 0 0 2px rgba(242,140,40,0.2); }
 .partner-logo-wrap { width: 50px; height: 50px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-.partner-logo { max-width: 100%; max-height: 100%; object-fit: contain; }
-.partner-details { flex-grow: 1; }
-.partner-details strong { display: block; font-size: 16px; margin-bottom: 2px; color: #f28c28; }
-.partner-details small { display: block; font-size: 12px; color: rgba(255,255,255,0.6); }
+.partner-logo { max-width: 100%; max-height: 100%; object-fit: contn; }
+.partner-detls { flex-grow: 1; }
+.partner-detls strong { display: block; font-size: 16px; margin-bottom: 2px; color: #f28c28; }
+.partner-detls small { display: block; font-size: 12px; color: rgba(255,255,255,0.6); }
 .partner-actions { display: flex; gap: 8px; flex-shrink: 0; }
-
 /* Partner Form adjustments */
 .partner-logo-preview-area { margin-top: 10px; display: flex; align-items: center; gap: 15px; background: #040f1e; border: 1px solid rgba(255,255,255,0.2); border-radius: 6px; padding: 10px; }
-.partner-logo-preview-area img { max-width: 80px; max-height: 80px; object-fit: contain; background: #000; padding: 5px; border-radius: 4px; }
+.partner-logo-preview-area img { max-width: 80px; max-height: 80px; object-fit: contn; background: #000; padding: 5px; border-radius: 4px; }
 .partner-logo-preview-area span { color: rgba(255,255,255,0.6); font-size: 14px; }
 .import-box { display: flex; align-items: flex-end; gap: 10px; margin-bottom: 15px; }
 .import-box input[type="file"] { flex-grow: 1; }
 .import-box input[type="text"] { flex-grow: 2; }
 .import-box button { flex-shrink: 0; }
-
-
 /* Status Toast */
 .intra-toast { position: fixed; bottom: 20px; right: 20px; background: #27ae60; color: #fff; padding: 12px 24px; border-radius: 6px; font-weight: 700; box-shadow: 0 4px 12px rgba(0,0,0,0.3); display: none; z-index: 9999; }
-
 /* Responsive adjustments */
-@media (max-width: 768px) {
+@med (max-width: 768px) {
   .intra-header { flex-direction: column; gap: 10px; padding: 12px 15px; }
   .intra-logo { font-size: 18px; }
   .intra-sidebar { width: 100%; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); padding: 10px 0; overflow-x: auto; white-space: nowrap; }
@@ -86,7 +74,6 @@ body { background: #040f1e; color: #ffffff; min-height: 100vh; display: flex; fl
   .photo-admin-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
   .import-box { flex-direction: column; align-items: stretch; }
 }
-
 /* --- PARAMÈTRES & SUPPORT --- */
 .intra-card-warning {
     background: rgba(231, 76, 60, 0.1);
@@ -94,20 +81,17 @@ body { background: #040f1e; color: #ffffff; min-height: 100vh; display: flex; fl
     padding: 15px;
     border-radius: 8px;
 }
-
 .intra-card-warning .card-warning-title {
     color: #e74c3c;
     margin-top: 0;
     font-size: 16px;
     margin-bottom: 5px;
 }
-
 .intra-card-warning .card-warning-text {
     font-size: 13px;
     color: rgba(255, 255, 255, 0.7);
     margin-bottom: 10px;
 }
-
 .intra-card-warning .card-warning-phone a {
     font-size: 20px; /* Plus grand pour l'urgence */
     color: #f28c28;
@@ -116,13 +100,11 @@ body { background: #040f1e; color: #ffffff; min-height: 100vh; display: flex; fl
     display: block;
     padding: 5px 0;
 }
-
 .intra-card-warning .card-warning-phone a:hover {
     text-decoration: underline;
 }
-
 /* Responsive pour la section Paramètres */
-@media (max-width: 768px) {
+@med (max-width: 768px) {
     .intra-grid-2 {
         grid-template-columns: 1fr; /* Une colonne sur mobile */
     }
@@ -130,41 +112,33 @@ body { background: #040f1e; color: #ffffff; min-height: 100vh; display: flex; fl
         font-size: 18px; /* Légèrement plus petit sur mobile */
     }
 }
-
 /* ============================================================
    GEMS RACING INTRANET — RESPONSIVE MOBILE COMPLET
    Patch ajouté sans modifier le HTML ni le JavaScript
    ============================================================ */
-
 html,
 body {
     max-width: 100%;
     overflow-x: hidden;
 }
-
 .intra-header {
     min-height: 70px;
     gap: 12px;
     flex-wrap: wrap;
 }
-
 .intra-header .intra-logo {
     flex: 1 1 auto;
 }
-
 .intra-header .btn-primary,
 .intra-header .btn-secondary {
     white-space: nowrap;
 }
-
 /* Tablettes et téléphones */
-@media (max-width: 820px) {
-
+@med (max-width: 820px) {
     body {
         min-width: 0;
         overflow-x: hidden;
     }
-
     .intra-header {
         display: flex;
         flex-direction: column;
@@ -173,14 +147,12 @@ body {
         padding: 14px 12px;
         gap: 10px;
     }
-
     .intra-header .intra-logo {
         width: 100%;
         text-align: center;
         font-size: 18px;
         line-height: 1.2;
     }
-
     .intra-header .btn-primary,
     .intra-header .btn-secondary {
         width: 100%;
@@ -189,13 +161,11 @@ body {
         margin-left: 0 !important;
         font-size: 12px;
     }
-
-    .intra-container {
+    .intra-contner {
         display: flex;
         flex-direction: column;
         width: 100%;
     }
-
     .intra-sidebar {
         width: 100%;
         max-width: 100%;
@@ -208,7 +178,6 @@ body {
         white-space: nowrap;
         scrollbar-width: thin;
     }
-
     .intra-nav-item {
         display: inline-flex;
         width: auto;
@@ -220,13 +189,11 @@ body {
         font-size: 12px;
         gap: 5px;
     }
-
     .intra-nav-item:hover,
     .intra-nav-item.active {
         border-left: none;
         border-bottom-color: #f28c28;
     }
-
     .intra-content {
         width: 100%;
         max-width: 100%;
@@ -234,7 +201,6 @@ body {
         margin: 0;
         box-sizing: border-box;
     }
-
     .intra-card {
         width: 100%;
         box-sizing: border-box;
@@ -242,12 +208,10 @@ body {
         margin-bottom: 16px;
         border-radius: 8px;
     }
-
     .intra-card h2 {
         font-size: 17px;
         line-height: 1.3;
     }
-
     .intra-grid-2,
     .intra-grid-3,
     .intra-grid-4 {
@@ -255,12 +219,10 @@ body {
         grid-template-columns: 1fr;
         gap: 10px;
     }
-
     .intra-field {
         width: 100%;
         min-width: 0;
     }
-
     .intra-field input,
     .intra-field textarea,
     .intra-field select {
@@ -269,64 +231,53 @@ body {
         box-sizing: border-box;
         font-size: 16px;
     }
-
     .import-box {
         display: flex;
         flex-direction: column;
         align-items: stretch;
         gap: 10px;
     }
-
     .import-box input,
     .import-box button {
         width: 100%;
         box-sizing: border-box;
     }
-
     .photo-admin-grid {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 10px;
     }
-
     .photo-admin-card {
         min-width: 0;
         width: 100%;
     }
-
     .photo-preview-wrap {
         aspect-ratio: 1 / 1;
     }
-
     .photo-preview-wrap img {
         max-width: 100%;
         height: 100%;
         object-fit: cover;
     }
-
     .photo-actions {
         padding: 8px;
     }
-
     .photo-actions input {
         min-width: 0;
         width: 100%;
         box-sizing: border-box;
         font-size: 13px;
     }
-
     .photo-tools {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
         gap: 4px;
     }
-
     .photo-tools button {
         min-width: 0;
         padding: 7px 3px;
         font-size: 11px;
     }
-
     .list-item {
         display: flex;
         flex-direction: column;
@@ -334,19 +285,16 @@ body {
         gap: 10px;
         padding: 12px;
     }
-
-    .list-item-main {
+    .list-item-mn {
         min-width: 0;
         overflow-wrap: anywhere;
     }
-
     .list-item-actions {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 8px;
         width: 100%;
     }
-
     .list-item-actions button,
     .list-item-actions a {
         width: 100%;
@@ -354,7 +302,6 @@ body {
         box-sizing: border-box;
         min-height: 40px;
     }
-
     .partner-admin-card {
         display: flex;
         flex-direction: column;
@@ -362,37 +309,30 @@ body {
         text-align: center;
         gap: 10px;
     }
-
     .partner-logo-wrap {
         width: 100%;
         height: 70px;
     }
-
-    .partner-details {
+    .partner-detls {
         min-width: 0;
         overflow-wrap: anywhere;
     }
-
     .partner-actions {
         display: grid;
         grid-template-columns: 1fr 1fr;
         width: 100%;
         gap: 8px;
     }
-
     .partner-actions button {
         width: 100%;
     }
-
     .partner-logo-preview-area {
         flex-direction: column !important;
         align-items: stretch !important;
     }
-
     .partner-logo-preview-area img {
         margin: auto;
     }
-
     .intra-toast {
         left: 10px;
         right: 10px;
@@ -400,12 +340,10 @@ body {
         text-align: center;
         box-sizing: border-box;
     }
-
     /* Paramètres */
     .intra-card-warning {
         overflow-wrap: anywhere;
     }
-
     .intra-card-warning .card-warning-phone a {
         display: block;
         width: 100%;
@@ -418,45 +356,37 @@ body {
         margin-top: 10px;
     }
 }
-
 /* Petits téléphones */
-@media (max-width: 480px) {
-
+@med (max-width: 480px) {
     .intra-logo {
         font-size: 16px !important;
     }
-
     .intra-nav-item {
         min-width: 92px;
         font-size: 11px;
         padding-left: 7px;
         padding-right: 7px;
     }
-
     .photo-admin-grid {
         grid-template-columns: 1fr;
     }
-
     .list-item-actions,
     .partner-actions {
         grid-template-columns: 1fr;
     }
-
     .intra-card {
         padding: 14px 10px;
     }
-
     .intra-card-warning .card-warning-phone a {
         font-size: 21px;
     }
 }
-
 /* PATCH RESPONSIVE FORCÉ */
-@media (max-width: 820px) {
+@med (max-width: 820px) {
     .intra-header { display: flex; flex-direction: column; padding: 15px !important; gap: 10px; }
     .intra-header .intra-logo { text-align: center; width: 100%; }
     .intra-header .btn-primary, .intra-header .btn-secondary { width: 100% !important; margin: 0 !important; justify-content: center; display: flex; }
-    .intra-container { flex-direction: column !important; }
+    .intra-contner { flex-direction: column !important; }
     .intra-sidebar { width: 100% !important; overflow-x: auto; display: flex !important; border-right: none !important; border-bottom: 1px solid rgba(255,255,255,0.1); }
     .intra-nav-item { min-width: 100px; justify-content: center; border-left: none !important; border-bottom: 4px solid transparent; }
     .intra-nav-item.active { border-bottom-color: #f28c28 !important; }
@@ -464,11 +394,9 @@ body {
     .intra-grid-4, .intra-grid-3, .intra-grid-2 { grid-template-columns: 1fr !important; }
     .photo-admin-grid { grid-template-columns: 1fr 1fr !important; gap: 10px; }
 }
-
 /*/* ============================================================
    MENU HAMBURGER MOBILE — INTRANET (FIX FINAL)
    ============================================================ */
-
 /* Style du bouton hamburger */
 .mobile-menu-toggle {
     display: none; /* Caché par défaut sur grand écran */
@@ -485,13 +413,11 @@ body {
     line-height: 1; /* Pour centrer le symbole */
     z-index: 1001; /* Au-dessus des autres éléments */
 }
-
 /* Styles spécifiques pour les écrans plus petits (mobile/tablette) */
-@media (max-width: 820px) {
+@med (max-width: 820px) {
     body {
         overflow-x: hidden; /* Empêche tout défilement horizontal */
     }
-
     /* Header sur mobile */
     .intra-header {
         position: relative;
@@ -502,19 +428,16 @@ body {
         gap: 10px;
         padding: 12px;
     }
-
     .intra-header .intra-logo {
         flex: 1 1 auto; /* Prend l'espace disponible */
         width: auto;
         text-align: left;
         font-size: 17px;
     }
-
     .mobile-menu-toggle {
         display: inline-flex; /* Affiché sur mobile */
         order: 2; /* Positionne le bouton après le logo */
     }
-
     /* Boutons "Ouvrir le site", "Enregistrer" et "Déconnexion" */
     .intra-header .btn-secondary,
     .intra-header .btn-primary {
@@ -524,18 +447,16 @@ body {
         min-height: 42px;
         order: 3; /* Positionne sous le logo et le bouton menu */
     }
-
     /* Conteneur principal */
-    .intra-container {
-        display: block; /* Important pour que le sidebar puisse se positionner en fixed */
+    .intra-contner {
+        display: block; 
         position: relative;
         width: 100%;
         overflow: hidden; /* Cache le contenu quand le menu est ouvert */
     }
-
     /* Barre latérale (menu) */
     .intra-sidebar {
-        position: fixed; /* Fixé à l'écran */
+        position: fixed; 
         z-index: 1000;
         top: 0;
         left: 0;
@@ -552,11 +473,9 @@ body {
         display: flex; /* Pour les éléments du menu */
         flex-direction: column; /* Menu vertical */
     }
-
     .intra-sidebar.is-open {
         transform: translateX(0); /* Le panneau s'ouvre */
     }
-
     /* Éléments du menu latéral */
     .intra-nav-item {
         display: flex;
@@ -569,13 +488,11 @@ body {
         justify-content: flex-start;
         font-size: 14px;
     }
-
     .intra-nav-item.active,
     .intra-nav-item:hover {
         border-left-color: #f28c28;
         border-bottom-color: transparent;
     }
-
     /* Contenu principal */
     .intra-content {
         width: 100%;
@@ -583,12 +500,10 @@ body {
         box-sizing: border-box;
         padding: 14px 10px 30px;
     }
-
     /* Empêche le défilement du contenu derrière le menu ouvert */
     body.mobile-menu-open {
         overflow: hidden;
     }
-
     /* Grilles et champs sur mobile */
     .intra-grid-2,
     .intra-grid-3,
@@ -605,7 +520,6 @@ body {
     .list-item-actions, .partner-actions {
         grid-template-columns: 1fr; /* Boutons en colonne */
     }
-
     /* Numéro d'urgence plus grand */
     .intra-card-warning .card-warning-phone a {
         font-size: 23px;
@@ -619,9 +533,8 @@ body {
         box-sizing: border-box;
     }
 }
-
 /* Ajustements pour très petits écrans (ex: iPhone SE) */
-@media (max-width: 480px) {
+@med (max-width: 480px) {
     .intra-header .intra-logo {
         font-size: 15px !important;
     }
@@ -635,9 +548,7 @@ body {
         font-size: 21px;
     }
 }
-
-@media (max-width: 820px) {
-
+@med (max-width: 820px) {
     .intra-header {
         position: relative;
         display: flex;
@@ -647,21 +558,18 @@ body {
         gap: 10px;
         padding: 12px;
     }
-
     .intra-header .intra-logo {
         flex: 1 1 auto;
         width: auto;
         text-align: left;
         font-size: 17px;
     }
-
     .mobile-menu-toggle {
         display: inline-flex;
         align-items: center;
         justify-content: center;
         order: 2;
     }
-
     .intra-header .btn-secondary,
     .intra-header .btn-primary {
         width: 100%;
@@ -670,12 +578,10 @@ body {
         min-height: 42px;
         order: 3;
     }
-
-    .intra-container {
+    .intra-contner {
         display: block;
         position: relative;
     }
-
     .intra-sidebar {
         position: fixed;
         z-index: 1000;
@@ -689,11 +595,9 @@ body {
         overflow-y: auto;
         box-shadow: 8px 0 25px rgba(0,0,0,0.45);
     }
-
     .intra-sidebar.is-open {
         transform: translateX(0);
     }
-
     .intra-nav-item {
         display: flex;
         width: 100%;
@@ -705,45 +609,35 @@ body {
         text-align: left;
         justify-content: flex-start;
     }
-
     .intra-nav-item.active,
     .intra-nav-item:hover {
         border-left-color: #f28c28;
         border-bottom-color: transparent;
     }
-
     .intra-content {
         width: 100%;
         max-width: 100%;
         box-sizing: border-box;
         padding: 14px 10px 30px;
     }
-
     body.mobile-menu-open {
         overflow: hidden;
     }
 }
-
-@media (max-width: 480px) {
+@med (max-width: 480px) {
     .intra-header .intra-logo {
         font-size: 15px;
     }
-
     .intra-card {
         padding: 14px 10px;
     }
-
     .intra-grid-2,
     .intra-grid-3,
     .intra-grid-4 {
         grid-template-columns: 1fr;
     }
 }
-
-
-
-/* Fix responsive header mobile intranet */
-@media (max-width: 768px) {
+@med (max-width: 768px) {
   .intra-header {
     flex-wrap: wrap;
     gap: 8px;

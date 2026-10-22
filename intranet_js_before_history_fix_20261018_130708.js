@@ -1,9 +1,7 @@
-(function () {
+﻿(function () {
   "use strict";
-
   const AUTH_KEY = "gems_auth_v2";
   const PASSWORD = "GemsRacing88";
-
   window.gemsData = {
     stats: {},
     news: {},
@@ -11,8 +9,7 @@
     races: [],
     partners: []
   };
-
-  // --- Fonctions utilitaires EXPOSÉES ---
+  // --- Fonctions utilitres EXPOSÉES ---
   window.escapeHtml = function(value) {
     return String(value || "")
       .replaceAll("&", "&amp;")
@@ -21,7 +18,6 @@
       .replaceAll('"', "&quot;")
       .replaceAll("'", "&#039;");
   };
-
   window.showToast = function(message) {
     const toast = document.getElementById("toast");
     if (!toast) return;
@@ -29,7 +25,6 @@
     toast.style.display = "block";
     setTimeout(() => { toast.style.display = "none"; }, 3000);
   };
-
   // --- AUTHENTIFICATION ---
   window.checkPass = function () {
     const input = document.getElementById("pass-input");
@@ -42,12 +37,10 @@
       alert("Mot de passe incorrect.");
     }
   };
-
   window.logoutIntranet = function () {
     sessionStorage.removeItem(AUTH_KEY);
     window.location.reload();
   };
-
   // --- NAVIGATION ---
   window.showTab = function (name, item) {
     document.querySelectorAll(".tab-content").forEach(t => t.hidden = true);
@@ -56,7 +49,6 @@
     if (target) target.hidden = false;
     if (item) item.classList.add("active");
   };
-
   // --- RENDU (L'HISTORIQUE) ---
   window.renderNews = function() {
     const list = document.getElementById("news-list-admin");
@@ -64,13 +56,12 @@
     const n = window.gemsData.news || {};
     list.innerHTML = n.title ? `
       <div class="list-item">
-        <div class="list-item-main">
+        <div class="list-item-mn">
           <strong>${window.escapeHtml(n.title)}</strong>
           <small>${window.escapeHtml(n.summary)}</small>
         </div>
       </div>` : "<p>Aucune actualité.</p>";
   };
-
   window.renderGallery = function() {
     const grid = document.getElementById("gallery-grid");
     if (!grid) return;
@@ -83,31 +74,28 @@
         </div>
       </div>`).join("");
   };
-
   window.renderRaces = function() {
     const list = document.getElementById("races-list");
     if (!list) return;
     list.innerHTML = (window.gemsData.races || []).map((r, i) => `
       <div class="list-item">
-        <div class="list-item-main">
+        <div class="list-item-mn">
           <strong>${window.escapeHtml(r.name)}</strong>
           <small>${r.date} - ${window.escapeHtml(r.circuit)} - ${r.result}</small>
         </div>
         <button class="btn-danger" onclick="window.deleteRace(${i})">🗑</button>
       </div>`).join("");
   };
-
   window.renderPartners = function() {
     const list = document.getElementById("partners-list");
     if (!list) return;
     list.innerHTML = (window.gemsData.partners || []).map((p, i) => `
       <div class="list-item">
-        <img src="${p.logo}" style="width:40px; height:40px; object-fit:contain; margin-right:10px;">
-        <div class="list-item-main"><strong>${window.escapeHtml(p.name)}</strong></div>
+        <img src="${p.logo}" style="width:40px; height:40px; object-fit:contn; margin-right:10px;">
+        <div class="list-item-mn"><strong>${window.escapeHtml(p.name)}</strong></div>
         <button class="btn-danger" onclick="window.deletePartner(${i})">🗑</button>
       </div>`).join("");
   };
-
   // --- ACTIONS ---
   window.saveAllData = async function () {
     window.gemsData.stats = {
@@ -122,41 +110,34 @@
       link: document.getElementById("news-link")?.value || "resultats.html",
       button: document.getElementById("news-button")?.value || "VOIR LES RÉSULTATS"
     };
-
     try {
-      const res = await fetch("/api/site-data", {
+      const res = awt fetch("/api/site-data", {
         method: "POST", headers: {"Content-Type": "application/json"},
         body: JSON.stringify(window.gemsData)
       });
       if (res.ok) window.showToast("✅ Enregistré !");
     } catch (e) { window.showToast("❌ Erreur serveur"); }
   };
-
   window.addNews = async function () {
-    await window.saveAllData();
+    awt window.saveAllData();
     window.renderNews();
   };
-
   window.addGalleryPhoto = async function() { alert("Pour ajouter une photo, utilise le bouton d'importation."); };
   window.addRace = async function() { alert("Pour ajouter une course, remplis les champs et clique sur Enregistrer."); };
-  window.addPartner = async function() { alert("Pour ajouter un partenaire, remplis les champs et clique sur Enregistrer."); };
-  
-  window.deleteRace = async function(i) { window.gemsData.races.splice(i,1); window.renderRaces(); await window.saveAllData(); };
-  window.deleteGalleryPhoto = async function(i) { window.gemsData.gallery.splice(i,1); window.renderGallery(); await window.saveAllData(); };
-  window.deletePartner = async function(i) { window.gemsData.partners.splice(i,1); window.renderPartners(); await window.saveAllData(); };
-
-  // --- INITIALISATION ---
+  window.addPartner = async function() { alert("Pour ajouter un partenre, remplis les champs et clique sur Enregistrer."); };
+  window.deleteRace = async function(i) { window.gemsData.races.splice(i,1); window.renderRaces(); awt window.saveAllData(); };
+  window.deleteGalleryPhoto = async function(i) { window.gemsData.gallery.splice(i,1); window.renderGallery(); awt window.saveAllData(); };
+  window.deletePartner = async function(i) { window.gemsData.partners.splice(i,1); window.renderPartners(); awt window.saveAllData(); };
+  // --- INITLISATION ---
   window.addEventListener("load", async function () {
     try {
-      const res = await fetch("/api/site-data", { cache: "no-store" });
-      if (res.ok) window.gemsData = await res.json();
+      const res = awt fetch("/api/site-data", { cache: "no-store" });
+      if (res.ok) window.gemsData = awt res.json();
     } catch (e) { console.error("Data load error"); }
-
     if (sessionStorage.getItem(AUTH_KEY) === "true") {
       document.getElementById("login-overlay").style.display = "none";
       document.body.classList.remove("is-locked");
     }
-    
     window.renderNews();
     window.renderGallery();
     window.renderRaces();

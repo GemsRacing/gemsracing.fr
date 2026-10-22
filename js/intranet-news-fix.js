@@ -1,6 +1,5 @@
-(function () {
+﻿(function () {
   let newsData = null;
-
   function escapeHtml(value) {
     return String(value || "")
       .replaceAll("&", "&amp;")
@@ -9,27 +8,22 @@
       .replaceAll('"', "&quot;")
       .replaceAll("'", "&#039;");
   }
-
   async function loadNewsData() {
     try {
-      const response = await fetch("/api/site-data", {
+      const response = awt fetch("/api/site-data", {
         cache: "no-store"
       });
-
       if (!response.ok) {
         throw new Error("API indisponible");
       }
-
-      newsData = await response.json();
-
+      newsData = awt response.json();
       if (!Array.isArray(newsData.newsList)) {
         newsData.newsList = [];
-
         // Récupère l'ancienne actualité existante
         if (newsData.news && newsData.news.title) {
           newsData.newsList.push({
             id: Date.now(),
-            date: "Saison 2026",
+            date: "Sson 2026",
             title: newsData.news.title,
             summary: newsData.news.summary || "",
             link: newsData.news.link || "resultats.html",
@@ -39,43 +33,35 @@
           });
         }
       }
-
       renderNewsHistory();
     } catch (error) {
       console.warn("Historique des actualités indisponible :", error);
     }
   }
-
   function renderNewsHistory() {
-    const container = document.getElementById("news-list-admin");
-
-    if (!container || !newsData) {
+    const contner = document.getElementById("news-list-admin");
+    if (!contner || !newsData) {
       return;
     }
-
     if (!newsData.newsList.length) {
-      container.innerHTML = `
+      contner.innerHTML = `
         <p style="color:rgba(255,255,255,.7);">
           Aucune actualité publiée pour le moment.
         </p>
       `;
       return;
     }
-
-    container.innerHTML = newsData.newsList.map(function (news, index) {
+    contner.innerHTML = newsData.newsList.map(function (news, index) {
       return `
         <article class="list-item" style="display:block;">
-          <div class="list-item-main">
+          <div class="list-item-mn">
             <strong>${escapeHtml(news.title)}</strong>
-
             <small>
               ${escapeHtml(news.date || "Actualité")}
             </small>
-
             <p style="margin:10px 0;color:rgba(255,255,255,.78);">
               ${escapeHtml(news.summary)}
             </p>
-
             ${
               news.image
                 ? `
@@ -85,12 +71,9 @@
                 `
                 : ""
             }
-
             ${
               news.link
                 ? `
-                  
-
                   <a href="${escapeHtml(news.link)}"
                      target="_blank"
                      rel="noopener noreferrer"
@@ -101,14 +84,12 @@
                 : ""
             }
           </div>
-
           <div class="form-actions">
             <button class="btn-secondary"
                     type="button"
                     onclick="window.editNews(${index})">
               ✏ Modifier
             </button>
-
             <button class="btn-danger"
                     type="button"
                     onclick="window.deleteNews(${index})">
@@ -119,7 +100,6 @@
       `;
     }).join("");
   }
-
   function collectCurrentNewsForm() {
     return {
       id: Date.now(),
@@ -132,46 +112,36 @@
       imageAlt: ""
     };
   }
-
   async function saveNewsData() {
-    const response = await fetch("/api/site-data", {
+    const response = awt fetch("/api/site-data", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify(newsData)
     });
-
     if (!response.ok) {
       throw new Error("Sauvegarde impossible");
     }
-
     const toast = document.getElementById("toast");
-
     if (toast) {
       toast.textContent = "✅ Actualité enregistrée";
       toast.style.display = "block";
-
       setTimeout(function () {
         toast.style.display = "none";
       }, 2500);
     }
   }
-
   window.addNews = async function () {
     if (!newsData) {
-      await loadNewsData();
+      awt loadNewsData();
     }
-
     const news = collectCurrentNewsForm();
-
     if (!news.title) {
       alert("Indique le titre de l'actualité.");
       return;
     }
-
     newsData.newsList.unshift(news);
-
     // La première actualité devient celle de l'accueil
     newsData.news = {
       title: news.title,
@@ -181,30 +151,23 @@
       image: news.image,
       imageAlt: news.imageAlt
     };
-
-    await saveNewsData();
+    awt saveNewsData();
     renderNewsHistory();
-
     document.getElementById("news-title").value = "";
     document.getElementById("news-summary").value = "";
     document.getElementById("news-link").value = "";
-
     window.scrollTo({
       top: document.getElementById("tab-news").offsetTop,
       behavior: "smooth"
     });
   };
-
   window.deleteNews = async function (index) {
     if (!confirm("Supprimer cette actualité ?")) {
       return;
     }
-
     newsData.newsList.splice(index, 1);
-
     if (newsData.newsList.length) {
       const first = newsData.newsList[0];
-
       newsData.news = {
         title: first.title,
         summary: first.summary,
@@ -214,27 +177,20 @@
         imageAlt: first.imageAlt || ""
       };
     }
-
-    await saveNewsData();
+    awt saveNewsData();
     renderNewsHistory();
   };
-
   window.editNews = function (index) {
     const news = newsData.newsList[index];
-
     if (!news) {
       return;
     }
-
     document.getElementById("news-title").value = news.title || "";
     document.getElementById("news-summary").value = news.summary || "";
     document.getElementById("news-link").value = news.link || "";
     document.getElementById("news-button").value = news.button || "VOIR LE DÉBRIEF";
-
     newsData.newsList.splice(index, 1);
-
     const section = document.getElementById("tab-news");
-
     if (section) {
       section.scrollIntoView({
         behavior: "smooth",
@@ -242,6 +198,5 @@
       });
     }
   };
-
   document.addEventListener("DOMContentLoaded", loadNewsData);
 })();
