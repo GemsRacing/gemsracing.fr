@@ -29,7 +29,7 @@ window.GEMS_DATA = {
     { id: 2, date: "2026-11-05", name: "Endurance SWS Jovikart", circuit: "Jovikart", city: "Le Bignon (44)", result: "À venir", status: "Programmé" }
   ],
   partners: [
-    { name: "VRtueux", logo: "assets/partners/vrtueux.png", url: "https://www.vrtueux.fr/" },
+    { name: "VRtueux", logo: "assets/partners/vrtueux.webp", url: "https://www.vrtueux.fr/" },
     { name: "Jovikart", logo: "assets/partners/jovikart.webp", url: "https://www.jovikart.com/" },
     { name: "Normal", logo: "assets/partners/normal.png", url: "https://www.normalstores.com/fr/" },
     { name: "Apollo 3S", logo: "assets/partners/apollo3s.jpg", url: "https://www.apollo3s.com/" },
