@@ -376,7 +376,7 @@
     if (!grid) return;
     grid.innerHTML = (window.gemsData.gallery || []).map((item, i) => `
       <div style="position:relative; background:#071b35; border-radius:8px; overflow:hidden; border:1px solid rgba(255,255,255,0.08);">
-        <img src="${item.src}" style="width:100%; height:130px; object-fit:cover;">
+        <img src="${item.image || item.src}" style="width:100%; height:130px; object-fit:cover;">
         <p style="padding:6px; margin:0; font-size:11px; color:#fff;">${item.caption || ""}</p>
         <button style="position:absolute; top:5px; right:5px; background:rgba(231,76,60,0.85); color:#fff; border:none; border-radius:4px; padding:4px 8px; cursor:pointer;" onclick="deleteGalleryPhoto(${i})">🗑️</button>
       </div>
@@ -390,6 +390,7 @@
     const src = await readImage(fi.files[0], 1200, 0.85);
     window.gemsData.gallery.unshift({
       id: Date.now(),
+      image: src,
       src: src,
       caption: value("gallery-caption")
     });

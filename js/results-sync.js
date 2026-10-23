@@ -23,7 +23,7 @@
     }
   }
 
-  function newsCardHtml(news) {
+  function newsCardHtml(news, large) {
     if (!news || !news.title) return "";
     var img = "";
     if (news.image) {
@@ -33,15 +33,56 @@
     }
     var btn = "";
     if (news.link) {
-      btn = '<a class="btn" href="' + escapeHtml(news.link) + '" style="display:inline-block; font-size:13px; padding:10px 18px;">' +
+      btn = '<a class="btn" href="' + escapeHtml(news.link)}" style="display:inline-block; font-size:13px; padding:10px 18px;">' +
             escapeHtml(news.button || "VOIR L'ACTUALITÉ") + '</a>';
     }
-    return '<article class="news-card" style="margin-bottom:25px;">' +
+    return '<article class="' + (large ? "news-card news-card-large" : "news-card") + '" style="margin-bottom:25px;">' +
            img +
            '<h4 style="margin:0 0 10px 0; color:#f28c28;">' + escapeHtml(news.title) + '</h4>' +
            '<p style="margin:0 0 15px 0; line-height:1.6;">' + escapeHtml(news.summary || "") + '</p>' +
            btn +
            '</article>';
+  }
+
+  function renderNews(data) {
+    const latestContainer = document.getElementById("results-latest-news-content");
+    const archivesContainer = document.getElementById("news-archives");
+    const moreButton = document.getElementById("results-news-more-button");
+    if (!latestContainer || !archivesContainer) return;
+
+    const news = data.news || {};
+    const archives = Array.isArray(data.newsArchive) ? data.newsArchive : (Array.isArray(data.newsArchives) ? data.newsArchives : []);
+    let expanded = false;
+
+    latestContainer.innerHTML = (news && news.title) ? newsCardHtml(news, true) : "<p>Aucune actualité publiée pour le moment.</p>";
+
+    function updateNewsView() {
+      if (!archives.length) {
+        archivesContainer.style.display = "none";
+        archivesContainer.innerHTML = "";
+        if (moreButton) moreButton.style.display = "none";
+        return;
+      }
+      if (moreButton) {
+        moreButton.style.display = "block";
+        moreButton.textContent = expanded ? "RÉDUIRE" : "VOIR PLUS D'ACTUALITÉS";
+      }
+      if (expanded) {
+        archivesContainer.style.display = "block";
+        archivesContainer.innerHTML = archives.map(item => newsCardHtml(item, false)).join("");
+      } else {
+        archivesContainer.style.display = "none";
+        archivesContainer.innerHTML = "";
+      }
+    }
+
+    if (moreButton) {
+      moreButton.onclick = function () {
+        expanded = !expanded;
+        updateNewsView();
+      };
+    }
+    updateNewsView();
   }
 
   function raceHtml(race) {
@@ -80,18 +121,55 @@
            '</article>';
   }
 
+  function renderRaces(data) {
+    const latestContainer = document.getElementById("results-public-races-list");
+    const archivesContainer = document.getElementById("race-archives");
+    const moreButton = document.getElementById("results-races-more-button");
+    if (!latestContainer || !archivesContainer) return;
+
+    const races = Array.isArray(data.races) ? data.races.slice() : [];
+    races.sort(function (a, b) {
+      return String(b.date || "").localeCompare(String(a.date || ""));
+    });
+
+    const latestRace = races[0];
+    const archives = races.slice(1);
+    let expanded = false;
+
+    latestContainer.innerHTML = latestRace ? raceHtml(latestRace) : "<p>Aucune course enregistrée pour le moment.</p>";
+
+    function updateArchivesView() {
+      if (!archives.length) {
+        archivesContainer.style.display = "none";
+        archivesContainer.innerHTML = "";
+        if (moreButton) moreButton.style.display = "none";
+        return;
+      }
+      if (moreButton) {
+        moreButton.style.display = "block";
+        moreButton.textContent = expanded ? "RÉDUIRE" : `VOIR PLUS DE COURSES (${archives.length})`;
+      }
+      if (expanded) {
+        archivesContainer.style.display = "block";
+        archivesContainer.innerHTML = archives.map(raceHtml).join("");
+      } else {
+        archivesContainer.style.display = "none";
+        archivesContainer.innerHTML = "";
+      }
+    }
+
+    if (moreButton) {
+      moreButton.onclick = function () {
+        expanded = !expanded;
+        updateArchivesView();
+      };
+    }
+    updateArchivesView();
+  }
+
   document.addEventListener("DOMContentLoaded", async function () {
     const data = await loadData();
-    const newsEl = document.getElementById("results-latest-news-content");
-    if (newsEl && data.news && data.news.title) {
-      newsEl.innerHTML = newsCardHtml(data.news);
-    }
-    const racesEl = document.getElementById("results-public-races-list");
-    if (racesEl && Array.isArray(data.races) && data.races.length > 0) {
-      var sorted = data.races.slice().sort(function (a, b) {
-        return String(b.date || "").localeCompare(String(a.date || ""));
-      });
-      racesEl.innerHTML = raceHtml(sorted[0]);
-    }
+    renderNews(data);
+    renderRaces(data);
   });
 })();
