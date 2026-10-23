@@ -11,8 +11,8 @@ function reply(res, status, data) {
 }
 
 async function callJsonBin(method, body) {
-  const url = method === "GET" ? `https://api.jsonbin.io/v3/b/${BIN_ID}/latest` : `https://api.jsonbin.io/v3/b/${BIN_ID}`;
-  const options = { method, headers: { "Content-Type": "application/json", "X-Master-Key": JSONBIN_KEY } };
+  const url = method === "GET" ? "https://api.jsonbin.io/v3/b/" + BIN_ID + "/latest" : "https://api.jsonbin.io/v3/b/" + BIN_ID;
+  const options = { method: method, headers: { "Content-Type": "application/json", "X-Master-Key": JSONBIN_KEY } };
   if (body) options.body = JSON.stringify(body);
   const response = await fetch(url, options);
   return await response.json();
@@ -28,8 +28,8 @@ module.exports = async function handler(req, res) {
       reply(res, 200, db);
     } else if (req.method === "POST") {
       const clientToken = req.headers["x-admin-token"];
-      const isAuthorized = clientToken === "GemsRacing88" || (ADMIN_TOKEN && clientToken === ADMIN_TOKEN);
-      if (!isAuthorized) {
+      const isAuth = clientToken === "GemsRacing88" || (ADMIN_TOKEN && clientToken === ADMIN_TOKEN);
+      if (!isAuth) {
         reply(res, 401, { error: "Accès refusé." });
         return;
       }
