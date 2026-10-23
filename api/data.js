@@ -15,7 +15,11 @@ async function callJsonBin(method, body) {
   const options = { method: method, headers: { "Content-Type": "application/json", "X-Master-Key": JSONBIN_KEY } };
   if (body) options.body = JSON.stringify(body);
   const response = await fetch(url, options);
-  return await response.json();
+  const json = await response.json();
+  if (!response.ok) {
+    throw new Error(json.message || ("Erreur JSONBin " + response.status));
+  }
+  return json;
 }
 
 module.exports = async function handler(req, res) {

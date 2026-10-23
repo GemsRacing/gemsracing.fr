@@ -282,7 +282,7 @@ Année : 2026</small></p>
         img.onload = function() {
           let w = img.width;
           let h = img.height;
-          const maxDim = 800; // 800px max, idéal pour le web mobile/desktop
+          const maxDim = 500; // 800px max, idéal pour le web mobile/desktop
           if (w > maxDim || h > maxDim) {
             if (w > h) { h = Math.round((h * maxDim) / w); w = maxDim; }
             else { w = Math.round((w * maxDim) / h); h = maxDim; }
@@ -293,7 +293,7 @@ Année : 2026</small></p>
           const ctx = canvas.getContext("2d");
           ctx.drawImage(img, 0, 0, w, h);
           // Conversion JPEG 0.72 = ~35 à 50 Ko seulement !
-          const compressedDataUrl = canvas.toDataURL("image/jpeg", 0.72);
+          const compressedDataUrl = canvas.toDataURL("image/jpeg", 0.65);
           if (urlInput) urlInput.value = compressedDataUrl;
           if (previewImg) {
             previewImg.src = compressedDataUrl;
@@ -336,6 +336,6 @@ Année : 2026</small></p>
     setupImagePreview("partner-logo-file", "partner-logo-preview", "partner-logo-preview-img");
   });
   </script>
-  <script src="js/intranet.js?v=25"></script>
+  <script src="js/intranet.js?v=30"></script>
 </body>
 </html>
