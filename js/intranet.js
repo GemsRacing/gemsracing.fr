@@ -405,115 +405,151 @@
     };
 
     // --- RACES MANAGEMENT ---
-    window.renderRaces = function () {
-        const list = document.getElementById("races-list");
-        if (!list) return;
-        const races = window.gemsData.races || [];
+  window.renderRaces = function () {
+      const list = document.getElementById("races-list");
+      if (!list) return;
+      const races = window.gemsData.races || [];
+      if (!races.length) {
+          list.innerHTML = "<p style='color:rgba(255,255,255,0.6); font-size:14px;'>Aucune course enregistrée.</p>";
+          return;
+      }
+      list.innerHTML = races.map((race, index) => `
+          <div class="list-item" style="display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px 16px; background:#071b35; border:1px solid rgba(255,255,255,0.08); border-radius:8px; margin-bottom:10px;">
+              <div style="display:flex; align-items:center; gap:14px; min-width:0; flex-grow:1;">
+                  ${race.image ? `<img src="${escapeHtml(race.image)}" alt="${escapeHtml(race.name || 'Course')}" style="width:52px; height:52px; object-fit:cover; border-radius:6px; flex-shrink:0; border:1px solid rgba(242,140,40,0.5);">` : ''}
+                  <div class="list-item-main" style="min-width:0;">
+                      <strong style="color:#fff; font-size:15px; display:block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${escapeHtml(race.name || "Course sans titre")}</strong>
+                      <small style="color:rgba(255,255,255,0.65); font-size:12px; display:block; margin-top:2px;">
+                          📅 ${escapeHtml(race.date || "Date à venir")}${race.time ? ' à ' + escapeHtml(race.time) : ''} · 📍 ${escapeHtml(race.circuit || race.city || "Circuit non précisé")} · <span style="color:#f28c28; font-weight:700;">${escapeHtml(race.status || "Programmé")}</span>${race.result ? ' · 🏆 ' + escapeHtml(race.result) : ''}
+                      </small>
+                  </div>
+              </div>
+              <div class="list-actions" style="display:flex; gap:8px; flex-shrink:0;">
+                  <button type="button" class="btn-secondary" style="font-size:12px; padding:6px 12px; border:1px solid #f28c28; color:#f28c28; background:transparent; border-radius:6px; cursor:pointer;" onclick="window.editRace(${index})">✏️ Modifier</button>
+                  <button type="button" class="btn-danger" style="font-size:12px; padding:6px 12px; background:#e74c3c; color:#fff; border:none; border-radius:6px; cursor:pointer;" onclick="window.deleteRace(${index})">🗑 Supprimer</button>
+              </div>
+          </div>
+      `).join('');
+  };
 
-        list.innerHTML = races.length
-            ? races.map((race, index) => `
-                <div class="list-item ${editingRaceIndex === index ? 'is-editing' : ''}">
-                    <div class="list-item-main">
-                        <strong>${escapeHtml(race.name || "Course sans nom")}</strong>
-                        <small>
-                            ${escapeHtml(race.date || "")} ${race.time ? ` à ${escapeHtml(race.time)}` : ''}
-                            · ${escapeHtml(race.circuit || "")} (${escapeHtml(race.city || "")})
-                            ${race.category ? ` · Cat: ${escapeHtml(race.category)}` : ''}
-                            ${race.pilots ? ` · ${escapeHtml(race.pilots)} pilotes` : ''}
-                            ${race.startPosition ? ` · Départ: ${escapeHtml(race.startPosition)}` : ''}
-                            ${race.bestLap ? ` · Meilleur tour: ${escapeHtml(race.bestLap)}` : ''}
-                        </small>
-                        <small>
-                            Statut : ${escapeHtml(race.status || "")}
-                            ${race.result ? ` · Résultat : ${escapeHtml(race.result)}` : ''}
-                        </small>
-                        ${race.comment ? `<p>${escapeHtml(race.comment)}</p>` : ''}
-                        ${race.link ? `<a href="${escapeHtml(race.link)}" target="_blank">Voir le débrief</a>` : ''}
-                    </div>
-                    <div class="list-item-actions">
-                        <button type="button" class="btn-primary" onclick="window.editRace(${index})">✏️ Modifier</button>
-                        <button type="button" class="btn-danger" onclick="window.deleteRace(${index})">🗑 Supprimer</button>
-                    </div>
-                </div>
-            `).join("")
-            : "<p>Aucune course enregistrée.</p>";
-    };
+  window.deleteRace = async function (index) {
+      if (!confirm("Supprimer cette course de l'agenda ?")) return;
+      window.gemsData.races.splice(index, 1);
+      window.renderRaces();
+      await saveData();
+      toast("✅ Course supprimée !");
+  };
 
-    window.addRace = async function () {
-        const race = {
-            date: value("race-date"),
-            time: value("race-time"),
-            name: value("race-name") || "Course sans nom",
-            circuit: value("race-circuit"),
-            result: value("race-result"),
-            city: value("race-city"),
-            status: document.getElementById("race-status").value || "Programmé",
-            category: value("race-category"),
-            pilots: value("race-pilots"),
-            startPosition: value("race-start-position"),
-            bestLap: value("race-best-lap"),
-            comment: value("race-comment"),
-            link: value("race-link")
-        };
+  window.addRace = async function () {
+      let imageUrl = value("race-image") || "";
+      const fileInput = document.getElementById("race-image-file");
+      if (fileInput && fileInput.files && fileInput.files[0]) {
+          try {
+              imageUrl = await readImage(fileInput.files[0]);
+          } catch(e) {
+              console.warn("Erreur lecture image course :", e);
+          }
+      }
 
-        if (editingRaceIndex !== null) {
-            window.gemsData.races[editingRaceIndex] = race;
-            editingRaceIndex = null;
-        } else {
-            window.gemsData.races.push(race);
-        }
+      const race = {
+          date: value("race-date"),
+          time: value("race-time"),
+          name: value("race-name"),
+          circuit: value("race-circuit"),
+          city: value("race-city"),
+          category: value("race-category"),
+          pilots: value("race-pilots"),
+          startPosition: value("race-start-position"),
+          result: value("race-result"),
+          bestLap: value("race-best-lap"),
+          comment: value("race-comment"),
+          status: value("race-status") || "Programmé",
+          link: value("race-link"),
+          image: imageUrl
+      };
 
-        window.renderRaces();
-        resetRaceForm();
-        await saveData();
-        toast("✅ Course enregistrée !");
-    };
+      if (!race.name && !race.circuit) {
+          toast("ℹ️ Indique au moins un nom ou un circuit.");
+          return;
+      }
 
-    window.editRace = function (index) {
-        editingRaceIndex = index;
-        const race = window.gemsData.races[index];
-        setValue("race-date", race.date);
-        setValue("race-time", race.time);
-        setValue("race-name", race.name);
-        setValue("race-circuit", race.circuit);
-        setValue("race-result", race.result);
-        setValue("race-city", race.city);
-        document.getElementById("race-status").value = race.status;
-        setValue("race-category", race.category);
-        setValue("race-pilots", race.pilots);
-        setValue("race-startPosition", race.startPosition); // Correction ici
-        setValue("race-bestLap", race.bestLap); // Correction ici
-        setValue("race-comment", race.comment);
-        setValue("race-link", race.link);
-        window.renderRaces(); // Re-render to show editing state
-    };
+      if (editingRaceIndex !== null) {
+          window.gemsData.races[editingRaceIndex] = race;
+          editingRaceIndex = null;
+          const addBtn = document.querySelector("#tab-races .btn-primary");
+          if (addBtn) addBtn.textContent = "➕ AJOUTER LA COURSE";
+      } else {
+          window.gemsData.races.unshift(race);
+      }
 
-    window.deleteRace = async function (index) {
-        if (!confirm("Supprimer cette course ?")) return;
-        window.gemsData.races.splice(index, 1);
-        window.renderRaces();
-        await saveData();
-        toast("✅ Course supprimée !");
-    };
+      window.renderRaces();
+      resetRaceForm();
+      await saveData();
+      toast("✅ Course enregistrée !");
+  };
 
-    function resetRaceForm() {
-        setValue("race-date", "");
-        setValue("race-time", "");
-        setValue("race-name", "");
-        setValue("race-circuit", "");
-        setValue("race-result", "");
-        setValue("race-city", "");
-        setValue("race-link", "");
-        document.getElementById("race-status").value = "Programmé";
-        setValue("race-category", "");
-        setValue("race-pilots", "");
-        setValue("race-start-position", "");
-        setValue("race-best-lap", "");
-        setValue("race-comment", "");
-        editingRaceIndex = null;
-    }
+  window.editRace = function (index) {
+      editingRaceIndex = index;
+      const race = window.gemsData.races[index];
+      if (!race) return;
 
-    // --- PARTNERS MANAGEMENT ---
+      setValue("race-date", race.date);
+      setValue("race-time", race.time);
+      setValue("race-name", race.name);
+      setValue("race-circuit", race.circuit);
+      setValue("race-city", race.city);
+      setValue("race-category", race.category);
+      setValue("race-pilots", race.pilots);
+      setValue("race-start-position", race.startPosition);
+      setValue("race-result", race.result);
+      setValue("race-best-lap", race.bestLap);
+      setValue("race-comment", race.comment);
+      setValue("race-status", race.status);
+      setValue("race-link", race.link);
+      setValue("race-image", race.image || "");
+
+      const imgPrev = document.getElementById("race-image-preview-img");
+      if (imgPrev) {
+          if (race.image) {
+              imgPrev.src = race.image;
+              imgPrev.style.display = "block";
+          } else {
+              imgPrev.style.display = "none";
+          }
+      }
+
+      const addBtn = document.querySelector("#tab-races .btn-primary");
+      if (addBtn) addBtn.textContent = "💾 METTRE À JOUR LA COURSE";
+
+      document.getElementById("tab-races")?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  function resetRaceForm() {
+      setValue("race-date", "");
+      setValue("race-time", "");
+      setValue("race-name", "");
+      setValue("race-circuit", "");
+      setValue("race-city", "");
+      setValue("race-category", "");
+      setValue("race-pilots", "");
+      setValue("race-start-position", "");
+      setValue("race-result", "");
+      setValue("race-best-lap", "");
+      setValue("race-comment", "");
+      setValue("race-status", "Programmé");
+      setValue("race-link", "");
+      setValue("race-image", "");
+
+      const fileInput = document.getElementById("race-image-file");
+      if (fileInput) fileInput.value = "";
+      const imgPrev = document.getElementById("race-image-preview-img");
+      if (imgPrev) imgPrev.style.display = "none";
+
+      editingRaceIndex = null;
+      const addBtn = document.querySelector("#tab-races .btn-primary");
+      if (addBtn) addBtn.textContent = "➕ AJOUTER LA COURSE";
+  }
+// --- PARTNERS MANAGEMENT ---
     window.renderPartners = function () {
         const list = document.getElementById("partners-list");
         if (!list) return;
