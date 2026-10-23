@@ -1,6 +1,6 @@
 const BIN_ID = process.env.JSONBIN_ID;
 const JSONBIN_KEY = process.env.JSONBIN_KEY;
-const ADMIN_TOKEN = process.env.ADMIN_TOKEN || "GemsRacing88";
+const ADMIN_TOKEN = process.env.ADMIN_TOKEN;
 
 function reply(res, status, data) {
   res.statusCode = status;
@@ -11,16 +11,8 @@ function reply(res, status, data) {
 }
 
 async function callJsonBin(method, body) {
-  const url = method === "GET" 
-    ? `https://api.jsonbin.io/v3/b/${BIN_ID}/latest` 
-    : `https://api.jsonbin.io/v3/b/${BIN_ID}`;
-  const options = { 
-    method, 
-    headers: { 
-      "Content-Type": "application/json", 
-      "X-Master-Key": JSONBIN_KEY 
-    } 
-  };
+  const url = method === "GET" ? `https://api.jsonbin.io/v3/b/${BIN_ID}/latest` : `https://api.jsonbin.io/v3/b/${BIN_ID}`;
+  const options = { method, headers: { "Content-Type": "application/json", "X-Master-Key": JSONBIN_KEY } };
   if (body) options.body = JSON.stringify(body);
   const response = await fetch(url, options);
   return await response.json();
@@ -32,14 +24,12 @@ module.exports = async function handler(req, res) {
     const data = await callJsonBin("GET");
     const db = data.record || data;
 
-    // GET /api/data -> Lecture publique
     if (req.method === "GET") {
       reply(res, 200, db);
-    }
-    // POST /api/data -> Mise à jour administrateur
-    else if (req.method === "POST") {
-      const token = req.headers["x-admin-token"];
-      if (token !== ADMIN_TOKEN && token !== "GemsRacing88") {
+    } else if (req.method === "POST") {
+      const clientToken = req.headers["x-admin-token"];
+      const isAuthorized = clientToken === "GemsRacing88" || (ADMIN_TOKEN && clientToken === ADMIN_TOKEN);
+      if (!isAuthorized) {
         reply(res, 401, { error: "Accès refusé." });
         return;
       }

@@ -5,7 +5,7 @@
       .replace(/</g, "&lt;")
       .replace(/>/g, "&gt;")
       .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#039;");
+      .replace(/'/g, "&#39;");
   }
 
   async function loadResultsData() {
@@ -27,20 +27,20 @@
   function newsCardHtml(news, large) {
     if (!news || !news.title) return "";
     return `
-      <article class="${large ? "latest-news-card" : "archive-news-card"}" style="margin-bottom:15px;">
+      <article class="news-card ${large ? "news-card-large" : ""}" style="margin-bottom: 25px;">
         ${
           news.image
-            ? `<div style="margin-bottom:12px; border-radius:8px; overflow:hidden; max-height:200px;">
-                 <img src="${escapeHtml(news.image)}" alt="${escapeHtml(news.title)}" style="width:100%; height:100%; object-fit:cover; display:block;" loading="lazy">
+            ? `<div class="news-image-wrap" style="margin-bottom:15px; border-radius:10px; overflow:hidden; border:1px solid rgba(242,140,40,0.3);">
+                <img src="${news.image}" alt="${escapeHtml(news.title)}" style="width:100%; max-height:260px; object-fit:cover; display:block;">
                </div>`
             : ""
         }
-        <h4 style="color:#fff; font-size:18px; margin:0 0 8px 0;">${escapeHtml(news.title)}</h4>
-        <p style="color:rgba(255,255,255,0.8); font-size:14px; margin:0 0 12px 0;">${escapeHtml(news.summary || "")}</p>
+        <h4 style="margin: 0 0 10px 0; color: #f28c28;">${escapeHtml(news.title)}</h4>
+        <p style="margin: 0 0 15px 0; line-height: 1.6;">${escapeHtml(news.summary || "")}</p>
         ${
           news.link
-            ? `<a class="btn" href="${escapeHtml(news.link)}" target="_blank" rel="noopener noreferrer" style="font-size:13px; padding:8px 16px;">
-                 ${escapeHtml(news.button || "VOIR L'ACTUALITÉ")}
+            ? `<a class="btn" href="${escapeHtml(news.link)}" style="display:inline-block; font-size:13px; padding:10px 18px;">
+                ${escapeHtml(news.button || "VOIR L'ACTUALITÉ")}
                </a>`
             : ""
         }
@@ -52,19 +52,13 @@
     const latestContainer = document.getElementById("results-latest-news-content");
     const archivesContainer = document.getElementById("news-archives");
     const moreButton = document.getElementById("results-news-more-button");
-
     if (!latestContainer || !archivesContainer) return;
 
     const news = data.news || {};
-    const archives = Array.isArray(data.newsArchive)
-      ? data.newsArchive
-      : (Array.isArray(data.newsArchives) ? data.newsArchives : []);
-
+    const archives = Array.isArray(data.newsArchive) ? data.newsArchive : (Array.isArray(data.newsArchives) ? data.newsArchives : []);
     let expanded = false;
 
-    latestContainer.innerHTML = (news && news.title)
-      ? newsCardHtml(news, true)
-      : "<p style='color:rgba(255,255,255,0.7);'>Aucune actualité publiée pour le moment.</p>";
+    latestContainer.innerHTML = (news && news.title) ? newsCardHtml(news, true) : "<p>Aucune actualité publiée pour le moment.</p>";
 
     function updateNewsView() {
       if (!archives.length) {
@@ -73,12 +67,10 @@
         if (moreButton) moreButton.style.display = "none";
         return;
       }
-
       if (moreButton) {
         moreButton.style.display = "block";
-        moreButton.textContent = expanded ? "R\u00C9DUIRE" : "VOIR PLUS D'ACTUALITÉS";
+        moreButton.textContent = expanded ? "RÉDUIRE" : "VOIR PLUS D'ACTUALITÉS";
       }
-
       if (expanded) {
         archivesContainer.style.display = "block";
         archivesContainer.innerHTML = archives.map(item => newsCardHtml(item, false)).join("");
@@ -94,49 +86,40 @@
         updateNewsView();
       };
     }
-
     updateNewsView();
   }
 
   function raceHtml(race) {
     if (!race) return "";
     return `
-      <article class="public-race-card" style="margin-bottom:15px; background:rgba(7,27,53,0.6); border:1px solid rgba(255,255,255,0.08); border-radius:10px; padding:18px;">
+      <article class="race-card" style="margin-bottom: 25px; padding: 20px; background: rgba(7,27,53,0.6); border-radius: 12px; border: 1px solid rgba(255,255,255,0.08);">
         ${
           race.image
-            ? `<div style="margin-bottom:12px; border-radius:8px; overflow:hidden; max-height:160px;">
-                 <img src="${escapeHtml(race.image)}" alt="${escapeHtml(race.name || "Course")}" style="width:100%; height:100%; object-fit:cover; display:block;" loading="lazy">
+            ? `<div class="race-image-wrap" style="margin-bottom:15px; border-radius:8px; overflow:hidden; border:1px solid rgba(242,140,40,0.3);">
+                <img src="${race.image}" alt="${escapeHtml(race.name)}" style="width:100%; max-height:240px; object-fit:cover; display:block;">
                </div>`
             : ""
         }
-        <div class="public-race-date" style="color:#f28c28; font-weight:700; font-size:14px; margin-bottom:6px;">
+        <div style="font-size: 13px; color: #f28c28; font-weight: 700; margin-bottom: 6px;">
           ${escapeHtml(race.date || "Date à venir")}${race.time ? ` · ${escapeHtml(race.time)}` : ""}
         </div>
-
-        <h4 style="color:#fff; font-size:18px; margin:0 0 8px 0;">${escapeHtml(race.name || "Course")}</h4>
-
-        <p style="color:rgba(255,255,255,0.8); font-size:14px; margin:0 0 8px 0;">
-          ${escapeHtml(race.circuit || "")}${race.city ? ` · ${escapeHtml(race.city)}` : ""}
-          ${race.category ? ` · <span style="color:#f28c28;">${escapeHtml(race.category)}</span>` : ""}
-        </p>
-
-        <p class="public-race-status" style="font-size:13px; margin:0 0 10px 0;">
-          <strong style="color:${race.status === "Terminé" ? "#2ecc71" : "#f28c28"};">${escapeHtml(race.status || "Programmé")}</strong>
-          ${race.result ? ` · <span style="color:#fff; font-weight:700;">Résultat : ${escapeHtml(race.result)}</span>` : ""}
-          ${race.bestLap ? ` · <span style="color:rgba(255,255,255,0.7);">Meilleur tour : ${escapeHtml(race.bestLap)}</span>` : ""}
-        </p>
-
+        <h4 style="margin: 0 0 8px 0; font-size: 18px; color: #ffffff;">${escapeHtml(race.name || "Course")}</h4>
+        <div style="font-size: 14px; opacity: 0.8; margin-bottom: 12px;">
+          ${escapeHtml(race.circuit || "")}${race.city ? ` · ${escapeHtml(race.city)}` : ""} ${race.category ? ` · ${escapeHtml(race.category)}` : ""}
+        </div>
+        <div style="font-size: 14px; margin-bottom: 12px;">
+          <strong style="color: #f28c28;">${escapeHtml(race.status || "Programmé")}</strong>
+          ${race.result ? ` · Résultat : ${escapeHtml(race.result)}` : ""}
+          ${race.bestLap ? ` · Meilleur tour : ${escapeHtml(race.bestLap)}` : ""}
+        </div>
         ${
           race.comment
-            ? `<p style="font-size:13px; color:rgba(255,255,255,0.7); font-style:italic; margin:0 0 10px 0;">${escapeHtml(race.comment)}</p>`
+            ? `<p style="margin: 0 0 12px 0; font-size: 14px; line-height: 1.5; opacity: 0.9;">${escapeHtml(race.comment)}</p>`
             : ""
         }
-
         ${
           race.link
-            ? `<a href="${escapeHtml(race.link)}" target="_blank" rel="noopener noreferrer" style="display:inline-block; font-size:13px; color:#f28c28; font-weight:700; text-decoration:none;">
-                 Voir le débrief →
-               </a>`
+            ? `<a href="${escapeHtml(race.link)}" target="_blank" rel="noopener noreferrer" style="color: #f28c28; font-weight: 700; font-size: 13px; text-decoration: none;">Voir le débrief →</a>`
             : ""
         }
       </article>
@@ -147,12 +130,9 @@
     const latestContainer = document.getElementById("results-public-races-list");
     const archivesContainer = document.getElementById("race-archives");
     const moreButton = document.getElementById("results-races-more-button");
-
     if (!latestContainer || !archivesContainer) return;
 
     const races = Array.isArray(data.races) ? data.races.slice() : [];
-
-    // Tri par date décroissante
     races.sort(function (a, b) {
       return String(b.date || "").localeCompare(String(a.date || ""));
     });
@@ -161,25 +141,19 @@
     const archives = races.slice(1);
     let expanded = false;
 
-    latestContainer.innerHTML = latestRace
-      ? raceHtml(latestRace)
-      : "<p style='color:rgba(255,255,255,0.7);'>Aucune course enregistrée pour le moment.</p>";
+    latestContainer.innerHTML = latestRace ? raceHtml(latestRace) : "<p>Aucune course enregistrée pour le moment.</p>";
 
     function updateArchivesView() {
-      // S'il n'y a pas d'autres courses, on masque proprement le bouton
       if (!archives.length) {
         archivesContainer.style.display = "none";
         archivesContainer.innerHTML = "";
         if (moreButton) moreButton.style.display = "none";
         return;
       }
-
-      // S'il y a d'autres courses, le bouton est visible
       if (moreButton) {
         moreButton.style.display = "block";
-        moreButton.textContent = expanded ? "R\u00C9DUIRE" : `VOIR PLUS DE COURSES (${archives.length})`;
+        moreButton.textContent = expanded ? "RÉDUIRE" : `VOIR PLUS DE COURSES (${archives.length})`;
       }
-
       if (expanded) {
         archivesContainer.style.display = "block";
         archivesContainer.innerHTML = archives.map(raceHtml).join("");
@@ -195,7 +169,6 @@
         updateArchivesView();
       };
     }
-
     updateArchivesView();
   }
 
