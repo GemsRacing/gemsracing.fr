@@ -759,3 +759,10 @@ body {
     margin-left: 0 !important;
   }
 }
+/* FIX TACTILE MOBILE ONGLETS INTRANET */
+.intra-nav-item {
+    cursor: pointer !important;
+    touch-action: manipulation !important;
+    -webkit-tap-highlight-color: rgba(242, 140, 40, 0.3) !important;
+    user-select: none !important;
+}

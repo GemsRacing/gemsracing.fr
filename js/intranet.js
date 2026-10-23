@@ -554,13 +554,35 @@
   };
 
   // --- NAVIGATION ---
-  window.showTab = function (tabName, el) {
-    document.querySelectorAll(".tab-content").forEach(s => s.hidden = true);
-    document.querySelectorAll(".intra-nav-item").forEach(n => n.classList.remove("active"));
-    const target = document.getElementById("tab-" + tabName);
-    if (target) target.hidden = false;
-    if (el) el.classList.add("active");
-  };
+    window.showTab = function (tabName, el) {
+      document.querySelectorAll(".tab-content").forEach(s => s.hidden = true);
+      document.querySelectorAll(".intra-nav-item").forEach(n => n.classList.remove("active"));
+      const target = document.getElementById("tab-" + tabName);
+      if (target) {
+        target.hidden = false;
+      }
+      if (el) el.classList.add("active");
+
+      // FERMETURE IMMÉDIATE DU MENU MOBILE AU CLIC
+      const sidebar = document.querySelector(".intra-sidebar");
+      if (sidebar) {
+        sidebar.classList.remove("is-open");
+      }
+      const toggle = document.getElementById("mobile-menu-toggle");
+      if (toggle) {
+        toggle.setAttribute("aria-expanded", "false");
+        toggle.textContent = "☰";
+      }
+
+      // Remonte en haut de page pour afficher l'onglet
+      window.scrollTo({ top: 0, behavior: "instant" });
+    };
+
+
+
+
+
+
 
   function renderAll() {
     renderScoring();
