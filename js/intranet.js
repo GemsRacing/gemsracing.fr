@@ -215,85 +215,119 @@
         };
     }
 
-    // --- NEWS MANAGEMENT ---
-    window.renderNews = function () {
-        const list = document.getElementById("news-list-admin");
-        if (!list) return;
-        const news = window.gemsData.news || {};
+      // --- NEWS MANAGEMENT (AVEC SUPPORT PHOTO) ---
+  window.renderNews = function () {
+      const list = document.getElementById("news-list-admin");
+      if (!list) return;
+      const news = window.gemsData.news;
+      if (!news || !news.title) {
+          list.innerHTML = "<p style='color:rgba(255,255,255,0.6); font-size:14px;'>Aucune actualité publiée actuellement.</p>";
+          return;
+      }
+      list.innerHTML = `
+          <div class="list-item" style="display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px 16px; background:#071b35; border:1px solid rgba(255,255,255,0.08); border-radius:8px; margin-top:15px;">
+              <div style="display:flex; align-items:center; gap:14px; min-width:0; flex-grow:1;">
+                  ${news.image ? `<img src="${escapeHtml(news.image)}" alt="${escapeHtml(news.title)}" style="width:52px; height:52px; object-fit:cover; border-radius:6px; flex-shrink:0; border:1px solid rgba(242,140,40,0.5);">` : ''}
+                  <div class="list-item-main" style="min-width:0;">
+                      <strong style="color:#fff; font-size:15px; display:block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${escapeHtml(news.title)}</strong>
+                      <small style="color:rgba(255,255,255,0.65); font-size:12px; display:block; margin-top:2px;">
+                          ${escapeHtml(news.summary || '')} · <span style="color:#f28c28;">${escapeHtml(news.link || '')}</span>
+                      </small>
+                  </div>
+              </div>
+              <div class="list-actions" style="display:flex; gap:8px; flex-shrink:0;">
+                  <button type="button" class="btn-secondary" style="font-size:12px; padding:6px 12px; border:1px solid #f28c28; color:#f28c28; background:transparent; border-radius:6px; cursor:pointer;" onclick="window.editNews()">✏️ Modifier</button>
+                  <button type="button" class="btn-danger" style="font-size:12px; padding:6px 12px; background:#e74c3c; color:#fff; border:none; border-radius:6px; cursor:pointer;" onclick="window.deleteNews()">🗑 Supprimer</button>
+              </div>
+          </div>
+      `;
+  };
 
-        list.innerHTML = news.title || news.summary
-            ? `
-                <div class="list-item ${editingNewsIndex !== null ? 'is-editing' : ''}">
-                    <div class="list-item-main">
-                        <strong>${escapeHtml(news.title || "Actualité sans titre")}</strong>
-                        <small>${escapeHtml(news.summary || "")}</small>
-                        <small>${escapeHtml(news.link || "")}</small>
-                    </div>
-                    <div class="list-item-actions">
-                        <button type="button" class="btn-primary" onclick="window.editNews()">✏️ Modifier</button>
-                        <button type="button" class="btn-danger" onclick="window.deleteNews()">🗑 Supprimer</button>
-                    </div>
-                </div>
-            `
-            : "<p>Aucune actualité enregistrée.</p>";
-    };
+  window.addNews = async function () {
+      let imageUrl = value("news-image") || "";
+      const fileInput = document.getElementById("news-image-file");
+      if (fileInput && fileInput.files && fileInput.files[0]) {
+          try {
+              imageUrl = await readImage(fileInput.files[0]);
+          } catch (e) {
+              console.warn("Erreur lecture image actu :", e);
+          }
+      }
 
-    window.editNews = function () {
-        editingNewsIndex = 0; // Only one news item
-        const news = window.gemsData.news;
-        setValue("news-title", news.title);
-        setValue("news-summary", news.summary);
-        setValue("news-link", news.link);
-        setValue("news-button", news.button);
-        window.renderNews(); // Re-render to show editing state
-    };
+      const title = value("news-title");
+      const summary = value("news-summary");
+      const link = value("news-link");
+      const button = value("news-button") || "VOIR LE DÉBRIEF";
 
-    window.saveNews = async function () {
-        collectForms();
-        try {
-            await saveData();
-            editingNewsIndex = null;
-            window.renderNews();
-            toast("✅ Actualité enregistrée !");
-        } catch (error) {
-            console.error(error);
-            toast("❌ Actualité non enregistrée.");
-        }
-    };
+      if (!title) {
+          toast("ℹ️ Indique au moins un titre d'actualité.");
+          return;
+      }
 
-    window.deleteNews = async function () {
-        if (!confirm("Supprimer cette actualité ?")) return;
-        window.gemsData.news = {}; // Clear news
-        try {
-            await saveData();
-            window.renderNews();
-            toast("✅ Actualité supprimée !");
-        } catch (error) {
-            console.error(error);
-            toast("❌ Suppression impossible.");
-        }
-    };
+      window.gemsData.news = {
+          title: title,
+          summary: summary,
+          link: link,
+          button: button,
+          image: imageUrl
+      };
 
-    window.addNews = async function () {
-        if (editingNewsIndex !== null) {
-            await window.saveNews();
-        } else {
-            collectForms();
-            if (!value("news-title") && !value("news-summary")) {
-                toast("ℹ️ Saisis un titre ou un résumé.");
-                return;
-            }
-            try {
-                await saveData();
-                renderAll();
-            } catch (error) {
-                console.error(error);
-                toast("❌ Actualité non enregistrée.");
-            }
-        }
-    };
-    
-    // --- GALLERY MANAGEMENT ---
+      window.renderNews();
+      resetNewsForm();
+      await saveData();
+      toast("✅ Actualité enregistrée !");
+  };
+
+  window.editNews = function () {
+      const news = window.gemsData.news || {};
+      setValue("news-title", news.title || "");
+      setValue("news-summary", news.summary || "");
+      setValue("news-link", news.link || "");
+      setValue("news-button", news.button || "VOIR LE DÉBRIEF");
+      setValue("news-image", news.image || "");
+
+      const imgPrev = document.getElementById("news-image-preview-img");
+      if (imgPrev) {
+          if (news.image) {
+              imgPrev.src = news.image;
+              imgPrev.style.display = "block";
+          } else {
+              imgPrev.style.display = "none";
+          }
+      }
+
+      const pubBtn = document.querySelector("#tab-news .btn-primary");
+      if (pubBtn) pubBtn.textContent = "💾 METTRE À JOUR L'ACTUALITÉ";
+
+      document.getElementById("tab-news")?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  function resetNewsForm() {
+      setValue("news-title", "");
+      setValue("news-summary", "");
+      setValue("news-link", "");
+      setValue("news-button", "VOIR LE DÉBRIEF");
+      setValue("news-image", "");
+
+      const fileInput = document.getElementById("news-image-file");
+      if (fileInput) fileInput.value = "";
+      const imgPrev = document.getElementById("news-image-preview-img");
+      if (imgPrev) imgPrev.style.display = "none";
+
+      const pubBtn = document.querySelector("#tab-news .btn-primary");
+      if (pubBtn) pubBtn.textContent = "➕ PUBLIER L'ACTUALITÉ";
+  }
+
+  window.deleteNews = async function () {
+      if (!confirm("Supprimer cette actualité ?")) return;
+      window.gemsData.news = {};
+      window.renderNews();
+      resetNewsForm();
+      await saveData();
+      toast("✅ Actualité supprimée !");
+  };
+
+  // --- GALLERY MANAGEMENT ---
     window.renderGallery = function () {
         const grid = document.getElementById("gallery-grid");
         if (!grid) return;
@@ -549,102 +583,121 @@
       const addBtn = document.querySelector("#tab-races .btn-primary");
       if (addBtn) addBtn.textContent = "➕ AJOUTER LA COURSE";
   }
-// --- PARTNERS MANAGEMENT ---
-    window.renderPartners = function () {
-        const list = document.getElementById("partners-list");
-        if (!list) return;
-        const partners = window.gemsData.partners || [];
+  // --- PARTNERS MANAGEMENT (LOGOS PROPRES & APERÇU) ---
+  window.renderPartners = function () {
+      const list = document.getElementById("partners-list");
+      if (!list) return;
+      const partners = window.gemsData.partners || [];
+      if (!partners.length) {
+          list.innerHTML = "<p style='color:rgba(255,255,255,0.6); font-size:14px;'>Aucun partenaire enregistré.</p>";
+          return;
+      }
+      list.innerHTML = partners.map((partner, index) => `
+          <div class="list-item" style="display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px 16px; background:#071b35; border:1px solid rgba(255,255,255,0.08); border-radius:8px; margin-bottom:10px;">
+              <div style="display:flex; align-items:center; gap:14px; min-width:0; flex-grow:1;">
+                  ${partner.logo ? `<img src="${escapeHtml(partner.logo)}" alt="${escapeHtml(partner.name)}" style="width:48px; height:48px; object-fit:contain; border-radius:6px; flex-shrink:0; background:rgba(0,0,0,0.5); padding:3px; border:1px solid rgba(242,140,40,0.4);">` : '<div style="width:48px; height:48px; border-radius:6px; background:rgba(255,255,255,0.05); display:flex; align-items:center; justify-content:center; color:#f28c28; font-size:20px; flex-shrink:0;">🤝</div>'}
+                  <div class="list-item-main" style="min-width:0;">
+                      <strong style="color:#fff; font-size:15px; display:block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${escapeHtml(partner.name || "Partenaire sans nom")}</strong>
+                      <small style="color:rgba(255,255,255,0.65); font-size:12px; display:block; margin-top:2px;">
+                          <a href="${escapeHtml(partner.url || '#')}" target="_blank" rel="noopener noreferrer" style="color:#f28c28; text-decoration:none;">${escapeHtml(partner.url || 'Aucun lien')}</a>
+                      </small>
+                  </div>
+              </div>
+              <div class="list-actions" style="display:flex; gap:8px; flex-shrink:0;">
+                  <button type="button" class="btn-secondary" style="font-size:12px; padding:6px 12px; border:1px solid #f28c28; color:#f28c28; background:transparent; border-radius:6px; cursor:pointer;" onclick="window.editPartner(${index})">✏️ Modifier</button>
+                  <button type="button" class="btn-danger" style="font-size:12px; padding:6px 12px; background:#e74c3c; color:#fff; border:none; border-radius:6px; cursor:pointer;" onclick="window.deletePartner(${index})">🗑 Supprimer</button>
+              </div>
+          </div>
+      `).join('');
+  };
 
-        if (!partners.length) {
-            list.innerHTML = "<p>Aucun partenaire enregistré.</p>";
-            return;
-        }
+  window.addPartner = async function () {
+      let logoUrl = value("partner-logo-preview") || "";
+      const fileInput = document.getElementById("partner-logo-file");
+      if (fileInput && fileInput.files && fileInput.files[0]) {
+          try {
+              logoUrl = await readImage(fileInput.files[0]);
+          } catch (e) {
+              console.warn("Erreur lecture logo partenaire :", e);
+          }
+      }
 
-        list.innerHTML = partners.map((partner, index) => `
-                <div class="partner-admin-card ${editingPartnerIndex === index ? 'is-editing' : ''}">
-                    ${
-                        partner.logo
-                            ? `<div class="partner-logo-wrap"><img class="partner-logo" src="${partner.logo}" alt="${escapeHtml(partner.name || "Partenaire")}"></div>`
-                            : ""
-                    }
-                    <div class="partner-details">
-                        <strong>${escapeHtml(partner.name || "Partenaire sans nom")}</strong>
-                        <small>${escapeHtml(partner.url || "")}</small>
-                    </div>
-                    <div class="partner-actions">
-                        <button type="button" class="btn-primary" onclick="window.editPartner(${index})">✏️ Modifier</button>
-                        <button type="button" class="btn-danger" onclick="window.deletePartner(${index})">🗑 Supprimer</button>
-                    </div>
-                </div>
-            `).join("");
-    };
+      const name = value("partner-name");
+      const url = value("partner-url");
 
-    window.addPartner = async function () {
-        const input = document.getElementById("partner-logo-file");
-        let logo = value("partner-logo-preview") || ""; // Use existing logo if editing and no new file
-        const partnerName = value("partner-name");
-        const partnerUrl = value("partner-url");
+      if (!name) {
+          toast("ℹ️ Indique au moins le nom du partenaire.");
+          return;
+      }
 
-        if (input && input.files && input.files.length) {
-            try {
-                logo = await readImage(input.files[0]);
-            } catch (error) {
-                console.error(error);
-                toast("❌ Impossible d'importer ce logo.");
-                return;
-            }
-        }
+      const partner = {
+          name: name,
+          url: url,
+          logo: logoUrl
+      };
 
-        const newPartner = {
-            name: partnerName || "Partenaire sans nom",
-            url: partnerUrl,
-            logo: logo
-        };
+      if (editingPartnerIndex !== null) {
+          window.gemsData.partners[editingPartnerIndex] = partner;
+          editingPartnerIndex = null;
+          const addBtn = document.querySelector("#tab-partners .btn-primary");
+          if (addBtn) addBtn.textContent = "➕ AJOUTER LE PARTENAIRE";
+      } else {
+          window.gemsData.partners.push(partner);
+      }
 
-        if (editingPartnerIndex !== null) {
-            window.gemsData.partners[editingPartnerIndex] = newPartner;
-            editingPartnerIndex = null;
-        } else {
-            window.gemsData.partners.push(newPartner);
-        }
+      window.renderPartners();
+      resetPartnerForm();
+      await saveData();
+      toast("✅ Partenaire enregistré !");
+  };
 
-        window.renderPartners();
-        resetPartnerForm();
-        await saveData();
-        toast("✅ Partenaire enregistré !");
-    };
+  window.editPartner = function (index) {
+      editingPartnerIndex = index;
+      const partner = window.gemsData.partners[index];
+      if (!partner) return;
 
-    window.editPartner = function (index) {
-        editingPartnerIndex = index;
-        const partner = window.gemsData.partners[index];
-        setValue("partner-name", partner.name);
-        setValue("partner-url", partner.url);
-        // Display current logo for editing
-        const logoPreview = document.getElementById("partner-logo-preview-img");
-        if (logoPreview) logoPreview.src = partner.logo || "";
-        setValue("partner-logo-preview", partner.logo || ""); // Store base64 or URL
+      setValue("partner-name", partner.name || "");
+      setValue("partner-url", partner.url || "");
+      setValue("partner-logo-preview", partner.logo || "");
 
-        window.renderPartners(); // Re-render to show editing state
-    };
+      const imgPrev = document.getElementById("partner-logo-preview-img");
+      if (imgPrev) {
+          if (partner.logo) {
+              imgPrev.src = partner.logo;
+              imgPrev.style.display = "block";
+          } else {
+              imgPrev.style.display = "none";
+          }
+      }
 
-    window.deletePartner = async function (index) {
-        if (!confirm("Supprimer ce partenaire ?")) return;
-        window.gemsData.partners.splice(index, 1);
-        window.renderPartners();
-        await saveData();
-        toast("✅ Partenaire supprimé !");
-    };
+      const addBtn = document.querySelector("#tab-partners .btn-primary");
+      if (addBtn) addBtn.textContent = "💾 METTRE À JOUR LE PARTENAIRE";
 
-    function resetPartnerForm() {
-        setValue("partner-name", "");
-        setValue("partner-url", "");
-        const partnerLogoFile = document.getElementById("partner-logo-file");
-        if (partnerLogoFile) partnerLogoFile.value = "";
-        const logoPreview = document.getElementById("partner-logo-preview-img");
-        if (logoPreview) logoPreview.src = "";
-        setValue("partner-logo-preview", "");
-        editingPartnerIndex = null;
-    }
+      document.getElementById("tab-partners")?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  function resetPartnerForm() {
+      setValue("partner-name", "");
+      setValue("partner-url", "");
+      setValue("partner-logo-preview", "");
+
+      const fileInput = document.getElementById("partner-logo-file");
+      if (fileInput) fileInput.value = "";
+      const imgPrev = document.getElementById("partner-logo-preview-img");
+      if (imgPrev) imgPrev.style.display = "none";
+
+      editingPartnerIndex = null;
+      const addBtn = document.querySelector("#tab-partners .btn-primary");
+      if (addBtn) addBtn.textContent = "➕ AJOUTER LE PARTENAIRE";
+  }
+
+  window.deletePartner = async function (index) {
+      if (!confirm("Supprimer ce partenaire ?")) return;
+      window.gemsData.partners.splice(index, 1);
+      window.renderPartners();
+      await saveData();
+      toast("✅ Partenaire supprimé !");
+  };
 
           // --- MESSAGES / TICKETS MANAGEMENT (AMÉLIORÉ) ---
       window.renderTickets = function() {

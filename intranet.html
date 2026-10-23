@@ -30,6 +30,7 @@
       <button class="btn-primary" onclick="checkPass()" style="width:100%">SE CONNECTER</button>
     </div>
   </div>
+
   <header class="intra-header">
     <div class="intra-logo">GEMS <span>RACING INTRANET</span></div>
     <button
@@ -50,6 +51,7 @@
     <button class="btn-primary" onclick="saveAllData()">💾 ENREGISTRER & PUBLIER</button>
     <button type="button" class="btn-secondary" onclick="logoutIntranet()" style="margin-left:10px;">🔒 SE DÉCONNECTER</button>
   </header>
+
   <div class="intra-container">
     <nav class="intra-sidebar">
       <div class="intra-nav-item active" onclick="showTab('scoring', this)">📊 Scoring</div>
@@ -60,7 +62,9 @@
       <div class="intra-nav-item" onclick="showTab('tickets', this)">🎫 Messages <span id="intra-badge-tickets" class="intra-nav-badge" style="display:none; background:#f28c28; color:#071b35; font-size:11px; font-weight:800; padding:2px 8px; border-radius:12px; margin-left:6px;">0</span></div>
       <div class="intra-nav-item" onclick="showTab('info', this)">ℹ️ Infos & Support</div>
     </nav>
+
     <main class="intra-content">
+      <!-- 1. SCORING -->
       <section id="tab-scoring" class="tab-content">
         <div class="intra-card">
           <h2>📊 Statistiques Actuelles</h2>
@@ -73,6 +77,7 @@
         </div>
       </section>
 
+      <!-- 2. ACTUS (AVEC SUPPORT PHOTO) -->
       <section id="tab-news" class="tab-content" hidden>
         <div class="intra-card">
           <h2>📰 Ajouter une Actualité</h2>
@@ -82,12 +87,21 @@
             <div class="intra-field"><label>Lien (Insta/Site)</label><input type="text" id="news-link"></div>
             <div class="intra-field"><label>Texte Bouton</label><input type="text" id="news-button" value="VOIR LE DÉBRIEF"></div>
           </div>
-          <button class="btn-primary" onclick="addNews()">➕ PUBLIER L'ACTUALITÉ</button>
+          <div class="intra-field" style="margin-top:15px; padding:15px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:8px;">
+            <label style="font-weight:700; color:#f28c28;">📸 Photo / Illustration de l'actualité (optionnel)</label>
+            <div style="display:flex; align-items:center; gap:12px; margin:8px 0;">
+              <img id="news-image-preview-img" src="" alt="Aperçu actualité" style="display:none; height:50px; width:75px; object-fit:cover; border-radius:6px; border:1px solid #f28c28; background:rgba(0,0,0,0.5);">
+              <input type="text" id="news-image" placeholder="URL directe (ou importer le fichier ci-dessous)" style="flex-grow:1; font-size:13px;">
+            </div>
+            <input type="file" id="news-image-file" accept="image/*" style="font-size:12px;">
+          </div>
+          <button class="btn-primary" onclick="addNews()" style="margin-top:15px;">➕ PUBLIER L'ACTUALITÉ</button>
           <hr style="margin:25px 0; opacity:0.1;">
           <div id="news-list-admin"></div>
         </div>
       </section>
 
+      <!-- 3. GALERIE -->
       <section id="tab-gallery" class="tab-content" hidden>
         <div class="intra-card">
           <h2>🖼️ Galerie Photos</h2>
@@ -100,6 +114,7 @@
         </div>
       </section>
 
+      <!-- 4. AGENDA COURSES (AVEC PHOTO) -->
       <section id="tab-races" class="tab-content" hidden>
         <div class="intra-card">
           <h2>📅 Agenda & Résultats</h2>
@@ -132,7 +147,6 @@
           </div>
           <div class="intra-field"><label>Lien du débrief</label><input type="text" id="race-link" placeholder="Lien Instagram ou site"></div>
 
-          <!-- AJOUT PHOTO / AFFICHE COURSE -->
           <div class="intra-field" style="margin-top:15px; padding:15px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:8px;">
             <label style="font-weight:700; color:#f28c28;">📸 Photo / Affiche de la course (optionnel)</label>
             <div style="display:flex; align-items:center; gap:12px; margin:8px 0;">
@@ -147,23 +161,36 @@
         </div>
       </section>
 
+      <!-- 5. PARTENAIRES (BUG CORRIGÉ : CHAMBS SOMBRES + APERÇU PROPRE SANS IMAGE BRISÉE) -->
       <section id="tab-partners" class="tab-content" hidden>
         <div class="intra-card">
           <h2>🤝 Partenaires</h2>
           <div class="intra-grid-2">
-            <input type="text" id="partner-name" placeholder="Nom">
-            <input type="text" id="partner-url" placeholder="Lien">
+            <div class="intra-field">
+              <label>Nom du partenaire</label>
+              <input type="text" id="partner-name" placeholder="Ex: VRtueux">
+            </div>
+            <div class="intra-field">
+              <label>Lien du site (ou Instagram)</label>
+              <input type="text" id="partner-url" placeholder="Ex: https://www.vrtueux.fr/">
+            </div>
           </div>
-          <div class="partner-logo-preview-area" style="margin-top:10px; display:flex; align-items:center; gap:10px; background:rgba(255,255,255,0.05); padding:8px; border-radius:5px;">
-            <img id="partner-logo-preview-img" src="" alt="Aperçu logo" style="height:40px; max-width:60px; object-fit:contain; background:rgba(0,0,0,0.5); padding:3px; border-radius:3px;">
-            <input type="text" id="partner-logo-preview" placeholder="URL du logo existant (base64 ou URL)" style="flex-grow:1; font-size:12px;">
+
+          <div class="intra-field" style="margin-top:15px; padding:15px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:8px;">
+            <label style="font-weight:700; color:#f28c28;">🖼️ Logo du partenaire</label>
+            <div style="display:flex; align-items:center; gap:12px; margin:8px 0;">
+              <img id="partner-logo-preview-img" src="" alt="Aperçu logo" style="display:none; height:45px; max-width:80px; object-fit:contain; border-radius:6px; border:1px solid #f28c28; background:rgba(0,0,0,0.5); padding:4px;">
+              <input type="text" id="partner-logo-preview" placeholder="URL du logo (ou importer un fichier ci-dessous)" style="flex-grow:1; font-size:13px;">
+            </div>
+            <input type="file" id="partner-logo-file" accept="image/*" style="font-size:12px;">
           </div>
-          <input type="file" id="partner-logo-file" accept="image/*" style="margin-top:10px;">
-          <button class="btn-primary" onclick="addPartner()" style="margin-top:10px;">➕ AJOUTER</button>
+
+          <button class="btn-primary" onclick="addPartner()" style="margin-top:15px;">➕ AJOUTER LE PARTENAIRE</button>
           <div id="partners-list" style="margin-top:20px;"></div>
         </div>
       </section>
 
+      <!-- 6. MESSAGES -->
       <section id="tab-tickets" class="tab-content" hidden>
         <div class="intra-card">
           <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:20px;">
@@ -195,6 +222,7 @@
         </div>
       </section>
 
+      <!-- 7. INFOS & SUPPORT -->
       <section id="tab-info" class="tab-content" hidden>
         <div class="intra-card">
           <h2>ℹ️ Infos & Support</h2>
@@ -233,7 +261,7 @@ Année : 2026</small></p>
     </main>
   </div>
   <div id="toast" class="intra-toast" style="display:none; position:fixed; bottom:20px; right:20px; background:#2ecc71; color:white; padding:10px 20px; border-radius:5px;">✅ Enregistré !</div>
-  
+
   <script>
   document.addEventListener("DOMContentLoaded", function () {
     const toggle = document.getElementById("mobile-menu-toggle");
@@ -245,37 +273,43 @@ Année : 2026</small></p>
       });
     }
 
-    // Gestion du preview image course
-    const raceFileInput = document.getElementById("race-image-file");
-    const raceUrlInput = document.getElementById("race-image");
-    const raceImgPreview = document.getElementById("race-image-preview-img");
+    // Gestion universelle des prévisualisations d'images
+    function setupImagePreview(fileInputId, urlInputId, previewImgId) {
+      const fileInput = document.getElementById(fileInputId);
+      const urlInput = document.getElementById(urlInputId);
+      const previewImg = document.getElementById(previewImgId);
 
-    if (raceFileInput) {
-      raceFileInput.addEventListener("change", function () {
-        if (this.files && this.files[0]) {
-          const reader = new FileReader();
-          reader.onload = function(e) {
-            if (raceUrlInput) raceUrlInput.value = e.target.result;
-            if (raceImgPreview) {
-              raceImgPreview.src = e.target.result;
-              raceImgPreview.style.display = "block";
-            }
-          };
-          reader.readAsDataURL(this.files[0]);
-        }
-      });
+      if (fileInput) {
+        fileInput.addEventListener("change", function () {
+          if (this.files && this.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+              if (urlInput) urlInput.value = e.target.result;
+              if (previewImg) {
+                previewImg.src = e.target.result;
+                previewImg.style.display = "block";
+              }
+            };
+            reader.readAsDataURL(this.files[0]);
+          }
+        });
+      }
+
+      if (urlInput) {
+        urlInput.addEventListener("input", function () {
+          if (this.value && previewImg) {
+            previewImg.src = this.value;
+            previewImg.style.display = "block";
+          } else if (previewImg) {
+            previewImg.style.display = "none";
+          }
+        });
+      }
     }
 
-    if (raceUrlInput) {
-      raceUrlInput.addEventListener("input", function () {
-        if (this.value && raceImgPreview) {
-          raceImgPreview.src = this.value;
-          raceImgPreview.style.display = "block";
-        } else if (raceImgPreview) {
-          raceImgPreview.style.display = "none";
-        }
-      });
-    }
+    setupImagePreview("race-image-file", "race-image", "race-image-preview-img");
+    setupImagePreview("news-image-file", "news-image", "news-image-preview-img");
+    setupImagePreview("partner-logo-file", "partner-logo-preview", "partner-logo-preview-img");
   });
   </script>
   <script src="js/intranet.js"></script>
