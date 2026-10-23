@@ -10,48 +10,37 @@
 
   async function loadResultsData() {
     try {
-      const response = await fetch("/api/data", {
-        cache: "no-store"
-      });
-
-      if (!response.ok) {
-        throw new Error("Impossible de charger les donnÃ©es.");
-      }
-
+      const response = await fetch("/api/data", { cache: "no-store" });
+      if (!response.ok) throw new Error("Erreur HTTP " + response.status);
       return await response.json();
     } catch (error) {
-      console.error("Erreur de chargement des rÃ©sultats :", error);
-      return {
-        news: {},
-        newsArchive: [],
-        newsArchives: [],
-        races: []
-      };
+      console.warn("Chargement distant échoué, essai local data/site-data.json :", error);
+      try {
+        const localRes = await fetch("data/site-data.json", { cache: "no-store" });
+        return await localRes.json();
+      } catch (e) {
+        return { news: {}, races: [] };
+      }
     }
   }
 
   function newsCardHtml(news, large) {
-    if (!news) return "";
-
+    if (!news || !news.title) return "";
     return `
-      <article class="${large ? "latest-news-card" : "archive-news-card"}">
+      <article class="${large ? "latest-news-card" : "archive-news-card"}" style="margin-bottom:15px;">
         ${
           news.image
-            ? `<img
-                 src="${escapeHtml(news.image)}"
-                 alt="${escapeHtml(news.imageAlt || news.title || "ActualitÃ© Gems Racing")}"
-                 loading="lazy">`
+            ? `<div style="margin-bottom:12px; border-radius:8px; overflow:hidden; max-height:200px;">
+                 <img src="${escapeHtml(news.image)}" alt="${escapeHtml(news.title)}" style="width:100%; height:100%; object-fit:cover; display:block;" loading="lazy">
+               </div>`
             : ""
         }
-
-        <h4>${escapeHtml(news.title || "ActualitÃ© Gems Racing")}</h4>
-
-        <p>${escapeHtml(news.summary || "")}</p>
-
+        <h4 style="color:#fff; font-size:18px; margin:0 0 8px 0;">${escapeHtml(news.title)}</h4>
+        <p style="color:rgba(255,255,255,0.8); font-size:14px; margin:0 0 12px 0;">${escapeHtml(news.summary || "")}</p>
         ${
           news.link
-            ? `<a class="btn" href="${escapeHtml(news.link)}">
-                 ${escapeHtml(news.button || "VOIR Lâ€™ACTUALITÃ‰")}
+            ? `<a class="btn" href="${escapeHtml(news.link)}" target="_blank" rel="noopener noreferrer" style="font-size:13px; padding:8px 16px;">
+                 ${escapeHtml(news.button || "VOIR L'ACTUALITÉ")}
                </a>`
             : ""
         }
@@ -66,72 +55,87 @@
 
     if (!latestContainer || !archivesContainer) return;
 
-    const latestNews = data.news || {};
+    const news = data.news || {};
     const archives = Array.isArray(data.newsArchive)
       ? data.newsArchive
-      : (
-          Array.isArray(data.newsArchives)
-            ? data.newsArchives
-            : []
-        );
+      : (Array.isArray(data.newsArchives) ? data.newsArchives : []);
 
     let expanded = false;
 
-    latestContainer.innerHTML = newsCardHtml(latestNews, true);
+    latestContainer.innerHTML = (news && news.title)
+      ? newsCardHtml(news, true)
+      : "<p style='color:rgba(255,255,255,0.7);'>Aucune actualité publiée pour le moment.</p>";
 
-    function drawArchives() {
-      const visibleArchives = expanded
-        ? archives
-        : archives.slice(0, 2);
-
-      archivesContainer.innerHTML = visibleArchives
-        .map(item => newsCardHtml(item, false))
-        .join("");
+    function updateNewsView() {
+      if (!archives.length) {
+        archivesContainer.style.display = "none";
+        archivesContainer.innerHTML = "";
+        if (moreButton) moreButton.style.display = "none";
+        return;
+      }
 
       if (moreButton) {
-        moreButton.hidden = archives.length <= 2;
-        moreButton.textContent = expanded
-          ? "R\u00C9DUIRE"
-          : "VOIR PLUS D'ACTUALITÉS";
+        moreButton.style.display = "block";
+        moreButton.textContent = expanded ? "R\u00C9DUIRE" : "VOIR PLUS D'ACTUALITÉS";
+      }
+
+      if (expanded) {
+        archivesContainer.style.display = "block";
+        archivesContainer.innerHTML = archives.map(item => newsCardHtml(item, false)).join("");
+      } else {
+        archivesContainer.style.display = "none";
+        archivesContainer.innerHTML = "";
       }
     }
 
     if (moreButton) {
       moreButton.onclick = function () {
         expanded = !expanded;
-        drawArchives();
+        updateNewsView();
       };
     }
 
-    drawArchives();
+    updateNewsView();
   }
 
   function raceHtml(race) {
+    if (!race) return "";
     return `
-      <article class="public-race-card">
-        <div class="public-race-date">
-          ${escapeHtml(race.date || "Date Ã  venir")}
+      <article class="public-race-card" style="margin-bottom:15px; background:rgba(7,27,53,0.6); border:1px solid rgba(255,255,255,0.08); border-radius:10px; padding:18px;">
+        ${
+          race.image
+            ? `<div style="margin-bottom:12px; border-radius:8px; overflow:hidden; max-height:160px;">
+                 <img src="${escapeHtml(race.image)}" alt="${escapeHtml(race.name || "Course")}" style="width:100%; height:100%; object-fit:cover; display:block;" loading="lazy">
+               </div>`
+            : ""
+        }
+        <div class="public-race-date" style="color:#f28c28; font-weight:700; font-size:14px; margin-bottom:6px;">
+          ${escapeHtml(race.date || "Date à venir")}${race.time ? ` · ${escapeHtml(race.time)}` : ""}
         </div>
 
-        <h4>${escapeHtml(race.name || "Course")}</h4>
+        <h4 style="color:#fff; font-size:18px; margin:0 0 8px 0;">${escapeHtml(race.name || "Course")}</h4>
 
-        <p>
-          ${escapeHtml(race.circuit || "")}
-          ${race.city ? ` · ${escapeHtml(race.city)}` : ""}
+        <p style="color:rgba(255,255,255,0.8); font-size:14px; margin:0 0 8px 0;">
+          ${escapeHtml(race.circuit || "")}${race.city ? ` · ${escapeHtml(race.city)}` : ""}
+          ${race.category ? ` · <span style="color:#f28c28;">${escapeHtml(race.category)}</span>` : ""}
         </p>
 
-        <p class="public-race-status">
-          <strong>${escapeHtml(race.status || "ProgrammÃ©")}</strong>
-          ${race.result ? ` · ${escapeHtml(race.result)}` : ""}
+        <p class="public-race-status" style="font-size:13px; margin:0 0 10px 0;">
+          <strong style="color:${race.status === "Terminé" ? "#2ecc71" : "#f28c28"};">${escapeHtml(race.status || "Programmé")}</strong>
+          ${race.result ? ` · <span style="color:#fff; font-weight:700;">Résultat : ${escapeHtml(race.result)}</span>` : ""}
+          ${race.bestLap ? ` · <span style="color:rgba(255,255,255,0.7);">Meilleur tour : ${escapeHtml(race.bestLap)}</span>` : ""}
         </p>
 
         ${
+          race.comment
+            ? `<p style="font-size:13px; color:rgba(255,255,255,0.7); font-style:italic; margin:0 0 10px 0;">${escapeHtml(race.comment)}</p>`
+            : ""
+        }
+
+        ${
           race.link
-            ? `<a
-                 href="${escapeHtml(race.link)}"
-                 target="_blank"
-                 rel="noopener noreferrer">
-                 Voir le dÃ©brief
+            ? `<a href="${escapeHtml(race.link)}" target="_blank" rel="noopener noreferrer" style="display:inline-block; font-size:13px; color:#f28c28; font-weight:700; text-decoration:none;">
+                 Voir le débrief →
                </a>`
             : ""
         }
@@ -146,57 +150,58 @@
 
     if (!latestContainer || !archivesContainer) return;
 
-    const races = Array.isArray(data.races)
-      ? data.races.slice()
-      : [];
+    const races = Array.isArray(data.races) ? data.races.slice() : [];
 
+    // Tri par date décroissante
     races.sort(function (a, b) {
-      return String(b.date || "").localeCompare(
-        String(a.date || "")
-      );
+      return String(b.date || "").localeCompare(String(a.date || ""));
     });
 
     const latestRace = races[0];
     const archives = races.slice(1);
-
     let expanded = false;
 
     latestContainer.innerHTML = latestRace
       ? raceHtml(latestRace)
-      : "<p>Aucune course enregistrÃ©e.</p>";
+      : "<p style='color:rgba(255,255,255,0.7);'>Aucune course enregistrée pour le moment.</p>";
 
-    function drawArchives() {
-      const visibleArchives = expanded
-        ? archives
-        : archives.slice(0, 2);
+    function updateArchivesView() {
+      // S'il n'y a pas d'autres courses, on masque proprement le bouton
+      if (!archives.length) {
+        archivesContainer.style.display = "none";
+        archivesContainer.innerHTML = "";
+        if (moreButton) moreButton.style.display = "none";
+        return;
+      }
 
-      archivesContainer.innerHTML = visibleArchives
-        .map(raceHtml)
-        .join("");
-
+      // S'il y a d'autres courses, le bouton est visible
       if (moreButton) {
-        moreButton.hidden = archives.length <= 2;
-        moreButton.textContent = expanded
-          ? "R\u00C9DUIRE"
-          : "VOIR PLUS DE COURSES";
+        moreButton.style.display = "block";
+        moreButton.textContent = expanded ? "R\u00C9DUIRE" : `VOIR PLUS DE COURSES (${archives.length})`;
+      }
+
+      if (expanded) {
+        archivesContainer.style.display = "block";
+        archivesContainer.innerHTML = archives.map(raceHtml).join("");
+      } else {
+        archivesContainer.style.display = "none";
+        archivesContainer.innerHTML = "";
       }
     }
 
     if (moreButton) {
       moreButton.onclick = function () {
         expanded = !expanded;
-        drawArchives();
+        updateArchivesView();
       };
     }
 
-    drawArchives();
+    updateArchivesView();
   }
 
   document.addEventListener("DOMContentLoaded", async function () {
     const data = await loadResultsData();
-
     renderNews(data);
     renderRaces(data);
   });
 })();
-
