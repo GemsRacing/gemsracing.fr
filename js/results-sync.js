@@ -1,4 +1,6 @@
-﻿(function () {
+(function () {
+  "use strict";
+
   function escapeHtml(val) {
     return String(val || "")
       .replace(/&/g, "&amp;")
@@ -14,6 +16,7 @@
       if (!res.ok) throw new Error("HTTP " + res.status);
       return await res.json();
     } catch (e) {
+      console.warn("API indisponible, chargement local data/site-data.json :", e);
       try {
         const local = await fetch("data/site-data.json", { cache: "no-store" });
         return await local.json();
@@ -33,8 +36,8 @@
     }
     var btn = "";
     if (news.link) {
-      btn = '<a class="btn" href="' + escapeHtml(news.link) + `"`" style="display:inline-block; font-size:13px; padding:10px 18px;">' +
-            escapeHtml(news.button || "VOIR L'ACTUALITÃ‰") + '</a>';
+      btn = '<a class="btn" href="' + escapeHtml(news.link) + '" style="display:inline-block; font-size:13px; padding:10px 18px;">' +
+            escapeHtml(news.button || "VOIR L'ACTUALITÉ") + '</a>';
     }
     return '<article class="' + (large ? "news-card news-card-large" : "news-card") + '" style="margin-bottom:25px;">' +
            img +
@@ -54,18 +57,22 @@
     const archives = Array.isArray(data.newsArchive) ? data.newsArchive : (Array.isArray(data.newsArchives) ? data.newsArchives : []);
     let expanded = false;
 
-    latestContainer.innerHTML = (news && news.title) ? newsCardHtml(news, true) : "<p>Aucune actualitÃ© publiÃ©e pour le moment.</p>";
+    latestContainer.innerHTML = (news && news.title) ? newsCardHtml(news, true) : "<p>Aucune actualité publiée pour le moment.</p>";
 
     function updateNewsView() {
       if (!archives.length) {
         archivesContainer.style.display = "none";
         archivesContainer.innerHTML = "";
-        if (moreButton) moreButton.style.display = "none";
+        if (moreButton) {
+          moreButton.hidden = true;
+          moreButton.style.display = "none";
+        }
         return;
       }
       if (moreButton) {
+        moreButton.hidden = false;
         moreButton.style.display = "block";
-        moreButton.textContent = expanded ? "RÃ‰DUIRE" : "VOIR PLUS D'ACTUALITÃ‰S";
+        moreButton.textContent = expanded ? "RÉDUIRE" : "VOIR PLUS D'ACTUALITÉS";
       }
       if (expanded) {
         archivesContainer.style.display = "block";
@@ -95,7 +102,7 @@
     }
     var debrief = "";
     if (race.link) {
-      debrief = '<a href="' + escapeHtml(race.link) + '" target="_blank" rel="noopener noreferrer" style="color:#f28c28; font-weight:700; font-size:13px; text-decoration:none;">Voir le dÃ©brief â†’</a>';
+      debrief = '<a href="' + escapeHtml(race.link) + '" target="_blank" rel="noopener noreferrer" style="color:#f28c28; font-weight:700; font-size:13px; text-decoration:none;">Voir le débrief →</a>';
     }
     var comment = "";
     if (race.comment) {
@@ -105,16 +112,16 @@
     return '<article class="race-card" style="margin-bottom:25px; padding:20px; background:rgba(7,27,53,0.6); border-radius:12px; border:1px solid rgba(255,255,255,0.08);">' +
            img +
            '<div style="font-size:13px; color:#f28c28; font-weight:700; margin-bottom:6px;">' +
-           escapeHtml(race.date || "Date Ã  venir") + (race.time ? " Â· " + escapeHtml(race.time) : "") +
+           escapeHtml(race.date || "Date à venir") + (race.time ? " · " + escapeHtml(race.time) : "") +
            '</div>' +
            '<h4 style="margin:0 0 8px 0; font-size:18px; color:#ffffff;">' + escapeHtml(race.name || "Course") + '</h4>' +
            '<div style="font-size:14px; opacity:0.8; margin-bottom:12px;">' +
-           escapeHtml(race.circuit || "") + (race.city ? " Â· " + escapeHtml(race.city) : "") + (race.category ? " Â· " + escapeHtml(race.category) : "") +
+           escapeHtml(race.circuit || "") + (race.city ? " · " + escapeHtml(race.city) : "") + (race.category ? " · " + escapeHtml(race.category) : "") +
            '</div>' +
            '<div style="font-size:14px; margin-bottom:12px;">' +
-           '<strong style="color:#f28c28;">' + escapeHtml(race.status || "ProgrammÃ©") + '</strong>' +
-           (race.result ? " Â· RÃ©sultat : " + escapeHtml(race.result) : "") +
-           (race.bestLap ? " Â· Meilleur tour : " + escapeHtml(race.bestLap) : "") +
+           '<strong style="color:#f28c28;">' + escapeHtml(race.status || "Programmé") + '</strong>' +
+           (race.result ? " · Résultat : " + escapeHtml(race.result) : "") +
+           (race.bestLap ? " · Meilleur tour : " + escapeHtml(race.bestLap) : "") +
            '</div>' +
            comment +
            debrief +
@@ -136,18 +143,22 @@
     const archives = races.slice(1);
     let expanded = false;
 
-    latestContainer.innerHTML = latestRace ? raceHtml(latestRace) : "<p>Aucune course enregistrÃ©e pour le moment.</p>";
+    latestContainer.innerHTML = latestRace ? raceHtml(latestRace) : "<p>Aucune course enregistrée pour le moment.</p>";
 
     function updateArchivesView() {
       if (!archives.length) {
         archivesContainer.style.display = "none";
         archivesContainer.innerHTML = "";
-        if (moreButton) moreButton.style.display = "none";
+        if (moreButton) {
+          moreButton.hidden = true;
+          moreButton.style.display = "none";
+        }
         return;
       }
       if (moreButton) {
+        moreButton.hidden = false;
         moreButton.style.display = "block";
-        moreButton.textContent = expanded ? "RÃ‰DUIRE" : `VOIR PLUS DE COURSES (${archives.length})`;
+        moreButton.textContent = expanded ? "RÉDUIRE" : ("VOIR PLUS DE COURSES (" + archives.length + ")");
       }
       if (expanded) {
         archivesContainer.style.display = "block";
