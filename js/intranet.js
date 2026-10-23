@@ -583,7 +583,7 @@
       const addBtn = document.querySelector("#tab-races .btn-primary");
       if (addBtn) addBtn.textContent = "➕ AJOUTER LA COURSE";
   }
-  // --- PARTNERS MANAGEMENT (LOGOS PROPRES & APERÇU) ---
+    // --- PARTNERS MANAGEMENT ---
   window.renderPartners = function () {
       const list = document.getElementById("partners-list");
       if (!list) return;
@@ -690,6 +690,14 @@
       const addBtn = document.querySelector("#tab-partners .btn-primary");
       if (addBtn) addBtn.textContent = "➕ AJOUTER LE PARTENAIRE";
   }
+
+  window.deletePartner = async function (index) {
+      if (!confirm("Supprimer ce partenaire ?")) return;
+      window.gemsData.partners.splice(index, 1);
+      window.renderPartners();
+      await saveData();
+      toast("✅ Partenaire supprimé !");
+  };
 
   window.deletePartner = async function (index) {
       if (!confirm("Supprimer ce partenaire ?")) return;
