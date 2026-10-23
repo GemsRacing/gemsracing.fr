@@ -112,7 +112,8 @@
                       "city":  "Vienne",
                       "status":  "Terminé",
                       "result":  "1er bien sur",
-                      "link":  ""
+                      "link":  "",
+                      "image":  "assets/images/gems-course-01.jpg"
                   },
                   {
                       "date":  "2026-12-10",
