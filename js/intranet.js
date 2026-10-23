@@ -100,7 +100,6 @@
     toast("⏳ Enregistrement et publication en direct...", "#f28c28");
     collectScoring();
 
-    // Cache local immédiat
     localStorage.setItem("gems_site_data", JSON.stringify(window.gemsData));
 
     try {
@@ -148,7 +147,7 @@
     setValue("stat-age", s.age || "");
   }
 
-  // --- ACTUS ---
+  // --- ACTUS (1 CLIC = UPLOAD DIRECT) ---
   window.renderNews = function () {
     const list = document.getElementById("news-list-admin");
     if (!list) return;
@@ -181,7 +180,7 @@
     let imageUrl = value("news-image");
     const fileInput = document.getElementById("news-image-file");
     if (fileInput && fileInput.files && fileInput.files[0]) {
-      toast("⏳ Traitement de l'image...", "#f28c28");
+      toast("⏳ Compression de l'image...", "#f28c28");
       imageUrl = await readImage(fileInput.files[0], 1000, 0.8);
     }
 
@@ -195,7 +194,7 @@
 
     resetNewsForm();
     window.renderNews();
-    await saveData(); // UPLOAD DIRECT EN 1 CLIC
+    await saveData(); // UPLOAD DIRECT EN 1 CLIC !
   };
 
   window.editNews = function () {
@@ -219,7 +218,7 @@
     window.gemsData.news = {};
     resetNewsForm();
     window.renderNews();
-    await saveData(); // UPLOAD DIRECT EN 1 CLIC
+    await saveData(); // UPLOAD DIRECT EN 1 CLIC !
   };
 
   function resetNewsForm() {
@@ -304,7 +303,7 @@
 
     resetRaceForm();
     window.renderRaces();
-    await saveData(); // UPLOAD DIRECT EN 1 CLIC
+    await saveData(); // UPLOAD DIRECT EN 1 CLIC !
   };
 
   window.editRace = function (i) {
@@ -336,7 +335,6 @@
     const btn = document.querySelector("#tab-races .btn-primary");
     if (btn) btn.textContent = "💾 METTRE À JOUR LA COURSE";
 
-    // Scroll doux vers le formulaire
     document.getElementById("tab-races")?.scrollIntoView({ behavior: "smooth" });
   };
 
@@ -345,7 +343,7 @@
     window.gemsData.races.splice(i, 1);
     resetRaceForm();
     window.renderRaces();
-    await saveData(); // UPLOAD DIRECT EN 1 CLIC
+    await saveData(); // UPLOAD DIRECT EN 1 CLIC !
   };
 
   function resetRaceForm() {
@@ -388,7 +386,7 @@
   window.addGalleryPhoto = async function () {
     const fi = document.getElementById("gallery-file");
     if (!fi || !fi.files || !fi.files[0]) { alert("Choisissez une photo."); return; }
-    toast("⏳ Traitement de la photo...", "#f28c28");
+    toast("⏳ Compression de la photo...", "#f28c28");
     const src = await readImage(fi.files[0], 1200, 0.85);
     window.gemsData.gallery.unshift({
       id: Date.now(),
@@ -398,14 +396,14 @@
     fi.value = "";
     setValue("gallery-caption", "");
     window.renderGallery();
-    await saveData(); // UPLOAD DIRECT EN 1 CLIC
+    await saveData(); // UPLOAD DIRECT EN 1 CLIC !
   };
 
   window.deleteGalleryPhoto = async function (i) {
     if (!confirm("Supprimer cette photo ?")) return;
     window.gemsData.gallery.splice(i, 1);
     window.renderGallery();
-    await saveData(); // UPLOAD DIRECT EN 1 CLIC
+    await saveData(); // UPLOAD DIRECT EN 1 CLIC !
   };
 
   // --- PARTENAIRES (1 CLIC = UPLOAD) ---
@@ -451,7 +449,7 @@
 
     resetPartnerForm();
     window.renderPartners();
-    await saveData(); // UPLOAD DIRECT EN 1 CLIC
+    await saveData(); // UPLOAD DIRECT EN 1 CLIC !
   };
 
   window.editPartner = function (i) {
@@ -475,7 +473,7 @@
     window.gemsData.partners.splice(i, 1);
     resetPartnerForm();
     window.renderPartners();
-    await saveData(); // UPLOAD DIRECT EN 1 CLIC
+    await saveData(); // UPLOAD DIRECT EN 1 CLIC !
   };
 
   function resetPartnerForm() {
