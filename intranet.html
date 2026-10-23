@@ -274,6 +274,37 @@ Année : 2026</small></p>
       });
     }
 
+        function compressAndSetImage(file, urlInput, previewImg) {
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const img = new Image();
+        img.onload = function() {
+          let w = img.width;
+          let h = img.height;
+          const maxDim = 800; // 800px max, idéal pour le web mobile/desktop
+          if (w > maxDim || h > maxDim) {
+            if (w > h) { h = Math.round((h * maxDim) / w); w = maxDim; }
+            else { w = Math.round((w * maxDim) / h); h = maxDim; }
+          }
+          const canvas = document.createElement("canvas");
+          canvas.width = w;
+          canvas.height = h;
+          const ctx = canvas.getContext("2d");
+          ctx.drawImage(img, 0, 0, w, h);
+          // Conversion JPEG 0.72 = ~35 à 50 Ko seulement !
+          const compressedDataUrl = canvas.toDataURL("image/jpeg", 0.72);
+          if (urlInput) urlInput.value = compressedDataUrl;
+          if (previewImg) {
+            previewImg.src = compressedDataUrl;
+            previewImg.style.display = "block";
+          }
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
     function setupImagePreview(fileInputId, urlInputId, previewImgId) {
       const fileInput = document.getElementById(fileInputId);
       const urlInput = document.getElementById(urlInputId);
@@ -282,15 +313,7 @@ Année : 2026</small></p>
       if (fileInput) {
         fileInput.addEventListener("change", function () {
           if (this.files && this.files[0]) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-              if (urlInput) urlInput.value = e.target.result;
-              if (previewImg) {
-                previewImg.src = e.target.result;
-                previewImg.style.display = "block";
-              }
-            };
-            reader.readAsDataURL(this.files[0]);
+            compressAndSetImage(this.files[0], urlInput, previewImg);
           }
         });
       }
@@ -306,12 +329,9 @@ Année : 2026</small></p>
         });
       }
     }
-
-    setupImagePreview("race-image-file", "race-image", "race-image-preview-img");
-    setupImagePreview("news-image-file", "news-image", "news-image-preview-img");
     setupImagePreview("partner-logo-file", "partner-logo-preview", "partner-logo-preview-img");
   });
   </script>
-  <script src="js/intranet.js"></script>
+  <script src="js/intranet.js?v=10"></script>
 </body>
 </html>
