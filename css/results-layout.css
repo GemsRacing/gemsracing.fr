@@ -114,3 +114,20 @@
     max-height: 185px;
   }
 }
+
+/* Harmonisation du bouton Voir plus / Réduire */
+.results-more-button,
+.results-more-button:hover,
+.results-more-button:focus,
+.results-more-button:active,
+.results-more-button.is-expanded,
+.results-more-button.active {
+    background: #f28c28 !important;
+    color: #ffffff !important;
+    border: none !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    outline: none !important;
+    box-shadow: 0 4px 12px rgba(242, 140, 40, 0.3) !important;
+}

@@ -91,7 +91,7 @@
       if (moreButton) {
         moreButton.hidden = archives.length <= 2;
         moreButton.textContent = expanded
-          ? "RÃ‰DUIRE"
+          ? "R\u00C9DUIRE"
           : "VOIR PLUS D'ACTUALITÉS";
       }
     }
@@ -177,7 +177,7 @@
       if (moreButton) {
         moreButton.hidden = archives.length <= 2;
         moreButton.textContent = expanded
-          ? "RÃ‰DUIRE"
+          ? "R\u00C9DUIRE"
           : "VOIR PLUS DE COURSES";
       }
     }
