@@ -10,7 +10,7 @@
 
   async function loadResultsData() {
     try {
-      const response = await fetch("/api/data", { cache: "no-store" });
+      const response = await fetch("/api/data?t=" + Date.now(), { cache: "no-store" });
       if (!response.ok) throw new Error("Erreur HTTP " + response.status);
       return await response.json();
     } catch (error) {

@@ -1,5 +1,5 @@
-﻿document.addEventListener("DOMContentLoaded", function() {
-    fetch("/api/data", { cache: "no-store" })
+document.addEventListener("DOMContentLoaded", function() {
+    fetch("/api/data?t=" + Date.now(), { cache: "no-store" })
     .then(response => {
         if (!response.ok) throw new Error("Erreur serveur " + response.status);
         return response.json();
