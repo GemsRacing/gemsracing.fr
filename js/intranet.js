@@ -37,7 +37,7 @@
     setTimeout(() => { t.style.display = "none"; }, 3500);
   }
 
-  function readImage(file, maxDim = 500, quality = 0.65) {
+  function readImage(file, maxDim = 450, quality = 0.60) {
     return new Promise((resolve) => {
       const reader = new FileReader();
       reader.onload = function (e) {
@@ -181,7 +181,7 @@
     const fileInput = document.getElementById("news-image-file");
     if (fileInput && fileInput.files && fileInput.files[0]) {
       toast("⏳ Compression de l'image...", "#f28c28");
-      imageUrl = await readImage(fileInput.files[0], 500, 0.65);
+      imageUrl = await readImage(fileInput.files[0], 450, 0.60);
     }
 
     window.gemsData.news = {
@@ -273,7 +273,7 @@
     const fileInput = document.getElementById("race-image-file");
     if (fileInput && fileInput.files && fileInput.files[0]) {
       toast("⏳ Compression de la photo de course...", "#f28c28");
-      imageUrl = await readImage(fileInput.files[0], 500, 0.65);
+      imageUrl = await readImage(fileInput.files[0], 450, 0.60);
     }
 
     const raceData = {
@@ -432,7 +432,7 @@
     let logoUrl = value("partner-logo-preview");
     const fileInput = document.getElementById("partner-logo-file");
     if (fileInput && fileInput.files && fileInput.files[0]) {
-      logoUrl = await readImage(fileInput.files[0], 600, 0.85);
+      logoUrl = await readImage(fileInput.files[0], 450, 0.60);
     }
 
     const partnerData = {
