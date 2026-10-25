@@ -106,34 +106,6 @@
                 ],
     "races":  [
                   {
-                      "date":  "2026-10-18",
-                      "name":  "Test",
-                      "circuit":  "VRtueux",
-                      "city":  "Vienne",
-                      "status":  "Terminé",
-                      "result":  "1er bien sur",
-                      "link":  "",
-                      "image":  "assets/images/gems-course-01.jpg"
-                  },
-                  {
-                      "date":  "2026-12-10",
-                      "name":  "Test",
-                      "circuit":  "Test",
-                      "city":  "Vienne",
-                      "status":  "Programmé",
-                      "result":  "Test",
-                      "link":  ""
-                  },
-                  {
-                      "date":  "",
-                      "name":  "Course sans nom",
-                      "circuit":  "",
-                      "result":  "",
-                      "city":  "",
-                      "status":  "Programmé",
-                      "link":  ""
-                  },
-                  {
                       "date":  "",
                       "name":  "test 2",
                       "circuit":  "",
