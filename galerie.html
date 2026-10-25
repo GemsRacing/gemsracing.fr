@@ -81,7 +81,8 @@
     ]
   }
   </script>
-</head>
+  <link rel="stylesheet" href="css/dropdown-nav.css">
+
 
 <body class="pagehead-reference-fix gallery-reference-page">
 
@@ -91,13 +92,51 @@
     <button class="menu-toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false">
       ☰
     </button>
-    <nav class="menu">
+        <nav class="menu">
       <a href="index.html">ACCUEIL</a>
-      <a href="a-propos.html">À PROPOS</a>
-      <a href="resultats.html">RÉSULTATS &amp; ACTUS</a>
-      <a href="association.html">ASSOCIATION</a>
-      <a href="contact.html">CONTACT &amp; SPONSORS</a>
-      <a href="galerie.html" class="active">GALERIE</a>
+
+      <div class="menu-dropdown">
+        <a href="a-propos.html" class="menu-dropdown-link">
+          À PROPOS <span class="menu-dropdown-arrow">▾</span>
+        </a>
+        <div class="dropdown-menu">
+          <a href="a-propos.html">Parcours &amp; Ambitions</a>
+          <a href="a-propos.html#formation">Formation Mécanique (MVA)</a>
+          <a href="faq.html">Foire Aux Questions (FAQ)</a>
+        </div>
+      </div>
+
+      <div class="menu-dropdown">
+        <a href="resultats.html" class="menu-dropdown-link">
+          COMPÉTITION <span class="menu-dropdown-arrow">▾</span>
+        </a>
+        <div class="dropdown-menu">
+          <a href="resultats.html">Résultats &amp; Palmarès 2026</a>
+          <a href="resultats.html#sws">Sodi World Series (SWS 4T)</a>
+          <a href="galerie.html">Galerie Photos &amp; Vidéos</a>
+        </div>
+      </div>
+
+      <div class="menu-dropdown">
+        <a href="association.html" class="menu-dropdown-link">
+          ASSOCIATION <span class="menu-dropdown-arrow">▾</span>
+        </a>
+        <div class="dropdown-menu">
+          <a href="association.html">GEMS Karting Access (Loi 1901)</a>
+          <a href="association.html#mission">Soutien au Sport Automobile</a>
+        </div>
+      </div>
+
+      <div class="menu-dropdown">
+        <a href="contact.html" class="menu-dropdown-link">
+          PARTENAIRES <span class="menu-dropdown-arrow">▾</span>
+        </a>
+        <div class="dropdown-menu">
+          <a href="contact.html">Devenir Partenaire / Sponsoring</a>
+          <a href="index.html#partenaires">Nos Partenaires Officiels</a>
+          <a href="contact.html">Contacter l'Équipe</a>
+        </div>
+      </div>
     </nav>
     <a class="btn" href="contact.html">DEVENIR PARTENAIRE</a>
   </div>
