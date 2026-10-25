@@ -174,3 +174,59 @@ header.top .menu {
     white-space: normal !important;
   }
 }
+/* Bouton Instagram mis en avant dans la barre de menu */
+.menu-instagram-highlight {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%) !important;
+  color: #ffffff !important;
+  padding: 6px 12px !important;
+  border-radius: 20px !important;
+  font-size: 11.5px !important;
+  font-weight: 800 !important;
+  text-decoration: none !important;
+  opacity: 1 !important;
+  box-shadow: 0 4px 12px rgba(220, 39, 67, 0.35) !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+.menu-instagram-highlight:hover {
+  transform: translateY(-2px) scale(1.03) !important;
+  box-shadow: 0 6px 18px rgba(220, 39, 67, 0.6) !important;
+  color: #ffffff !important;
+}
+
+@media (max-width: 800px) {
+  .menu-instagram-highlight {
+    margin-top: 10px !important;
+    padding: 10px 16px !important;
+    font-size: 13px !important;
+    justify-content: center !important;
+    width: fit-content !important;
+  }
+}
+
+/* Badge Instagram sur la page d'accueil */
+.hero-insta-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(7, 27, 53, 0.75);
+  border: 1px solid rgba(242, 140, 40, 0.5);
+  padding: 8px 16px;
+  border-radius: 30px;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 700;
+  margin-top: 16px;
+  transition: all 0.25s ease;
+}
+
+.hero-insta-badge:hover {
+  background: rgba(242, 140, 40, 0.2);
+  border-color: #f28c28;
+  color: #f28c28;
+  transform: translateX(4px);
+}
