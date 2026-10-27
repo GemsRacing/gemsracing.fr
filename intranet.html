@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="fr">
 <head>
   <meta charset="utf-8">
@@ -64,17 +64,29 @@
     </nav>
 
     <main class="intra-content">
-      <!-- 1. SCORING -->
+            <!-- 1. SCORING -->
       <section id="tab-scoring" class="tab-content">
         <div class="intra-card">
-          <h2>📊 Statistiques Actuelles</h2>
-          <div class="intra-grid-4">
-            <div class="intra-field"><label>Victoires</label><input type="text" id="stat-victoires"></div>
-            <div class="intra-field"><label>Podiums</label><input type="text" id="stat-podiums"></div>
-            <div class="intra-field"><label>SWS France</label><input type="text" id="stat-sws"></div>
-            <div class="intra-field"><label>Âge</label><input type="text" id="stat-age"></div>
+          <h2>📊 Statistiques & Palmarès Officiel 2026</h2>
+          <p style="font-size:13px; opacity:0.8; margin-top:-5px; margin-bottom:20px;">Ces chiffres mettent à jour automatiquement la page d'accueil et la grille des résultats.</p>
+          
+          <div class="intra-grid-3">
+            <div class="intra-field"><label>🏆 Victoires 2026</label><input type="text" id="stat-victoires" placeholder="Ex: 7"></div>
+            <div class="intra-field"><label>🥈 Podiums 2026</label><input type="text" id="stat-podiums" placeholder="Ex: 16"></div>
+            <div class="intra-field"><label>🏁 Courses disputées</label><input type="text" id="stat-courses-disputees" placeholder="Ex: 37"></div>
           </div>
-          <button class="btn-primary" onclick="saveScoring()" style="margin-top:15px;">💾 ENREGISTRER LE SCORING & PUBLIER</button>
+
+          <div class="intra-grid-3" style="margin-top:15px;">
+            <div class="intra-field"><label>🇫🇷 Classement SWS France</label><input type="text" id="stat-sws" placeholder="Ex: 57e"></div>
+            <div class="intra-field"><label>🌍 Classement SWS Mondial</label><input type="text" id="stat-sws-mondial" placeholder="Ex: 172e"></div>
+            <div class="intra-field"><label>⚡ Dernier résultat 2T Rotax</label><input type="text" id="stat-dernier-resultat" placeholder="Ex: 3e / 27"></div>
+          </div>
+
+          <div class="intra-grid-3" style="margin-top:15px;">
+            <div class="intra-field"><label>🎂 Âge du pilote</label><input type="text" id="stat-age" placeholder="Ex: 16 ans"></div>
+          </div>
+
+          <button class="btn-primary" onclick="saveScoring()" style="margin-top:20px;">💾 ENREGISTRER LE SCORING & PUBLIER</button>
         </div>
       </section>
 
