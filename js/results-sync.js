@@ -30,9 +30,10 @@
     if (!news || !news.title) return "";
     var img = "";
     if (news.image) {
-      img = '<div style="margin-bottom:15px; border-radius:10px; overflow:hidden; border:1px solid rgba(242,140,40,0.3);">' +
-            '<img src="' + news.image + '" alt="' + escapeHtml(news.title) + '" style="width:100%; max-height:260px; object-fit:cover; display:block;">' +
-            '</div>';
+      img = '<div style="margin-bottom:15px; border-radius:10px; overflow:hidden; border:1px solid rgba(242,140,40,0.3); background:#020b17; cursor:zoom-in;" onclick="window.openGemsRaceLightbox(this.querySelector(\'img\').src, this.querySelector(\'img\').alt)">' +
+      '<img src="' + news.image + '" alt="' + escapeHtml(news.title) + '" style="width:100%; height:auto; max-height:480px; object-fit:contain; display:block; margin:0 auto; transition:transform 0.2s;" onmouseover="this.style.transform=\'scale(1.01)\'" onmouseout="this.style.transform=\'scale(1)\'">' +
+      '<div style="text-align:center; padding:6px; font-size:11px; font-weight:700; color:#f28c28; background:rgba(7,27,53,0.95); border-top:1px solid rgba(242,140,40,0.2);">🔍 CLIQUER POUR AGRANDIR L''AFFICHE</div>' +
+      '</div>';
     }
     var btn = "";
     if (news.link) {
@@ -96,9 +97,10 @@
     if (!race) return "";
     var img = "";
     if (race.image) {
-      img = '<div style="margin-bottom:15px; border-radius:8px; overflow:hidden; border:1px solid rgba(242,140,40,0.3);">' +
-            '<img src="' + race.image + '" alt="' + escapeHtml(race.name) + '" style="width:100%; max-height:240px; object-fit:cover; display:block;">' +
-            '</div>';
+      img = '<div style="margin-bottom:15px; border-radius:8px; overflow:hidden; border:1px solid rgba(242,140,40,0.3); background:#020b17; cursor:zoom-in;" onclick="window.openGemsRaceLightbox(this.querySelector(\'img\').src, this.querySelector(\'img\').alt)">' +
+      '<img src="' + race.image + '" alt="' + escapeHtml(race.name) + '" style="width:100%; height:auto; max-height:480px; object-fit:contain; display:block; margin:0 auto; transition:transform 0.2s;" onmouseover="this.style.transform=\'scale(1.01)\'" onmouseout="this.style.transform=\'scale(1)\'">' +
+      '<div style="text-align:center; padding:6px; font-size:11px; font-weight:700; color:#f28c28; background:rgba(7,27,53,0.95); border-top:1px solid rgba(242,140,40,0.2);">🔍 CLIQUER POUR AGRANDIR L''AFFICHE</div>' +
+      '</div>';
     }
     var debrief = "";
     if (race.link) {
