@@ -55,10 +55,12 @@
   function newsCardHtml(news, large) {
     if (!news || !news.title) return "";
     var img = "";
-    if (news.image) {
-      img = '<div style="margin-bottom:15px; border-radius:10px; overflow:hidden; border:1px solid rgba(242,140,40,0.3); background:#020b17; cursor:zoom-in;" onclick="window.openGemsRaceLightbox(this.querySelector(\'img\').src, this.querySelector(\'img\').alt)">' +
-            '<img src="' + news.image + '" alt="' + escapeHtml(news.title) + '" style="width:100%; height:auto; max-height:480px; object-fit:contain; display:block; margin:0 auto;">' +
-            '<div style="text-align:center; padding:6px; font-size:11px; font-weight:700; color:#f28c28; background:rgba(7,27,53,0.95); border-top:1px solid rgba(242,140,40,0.2);">🔍 CLIQUER POUR AGRANDIR</div>' +
+        if (news.image) {
+      img = '<div style="position:relative; margin-bottom:15px; border-radius:12px; overflow:hidden; border:1px solid rgba(255,255,255,0.12); background:#020b17; cursor:zoom-in; transition:transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;" ' +
+            'onclick="window.openGemsRaceLightbox(this.querySelector(\'img\').src, this.querySelector(\'img\').alt)" ' +
+            'onmouseover="this.style.transform=\'translateY(-3px)\'; this.style.borderColor=\'rgba(242,140,40,0.7)\'; this.style.boxShadow=\'0 12px 30px rgba(0,0,0,0.6), 0 0 18px rgba(242,140,40,0.3)\'; this.querySelector(\'img\').style.transform=\'scale(1.04)\';" ' +
+            'onmouseout="this.style.transform=\'none\'; this.style.borderColor=\'rgba(255,255,255,0.12)\'; this.style.boxShadow=\'none\'; this.querySelector(\'img\').style.transform=\'scale(1)\';">' +
+            '<img src="' + news.image + '" alt="' + escapeHtml(news.title) + '" style="width:100%; height:auto; max-height:480px; object-fit:contain; display:block; margin:0 auto; transition:transform 0.35s ease;">' +
             '</div>';
     }
     var btn = "";
@@ -77,10 +79,12 @@
   function raceHtml(race) {
     if (!race) return "";
     var img = "";
-    if (race.image) {
-      img = '<div style="margin-bottom:15px; border-radius:8px; overflow:hidden; border:1px solid rgba(242,140,40,0.3); background:#020b17; cursor:zoom-in;" onclick="window.openGemsRaceLightbox(this.querySelector(\'img\').src, this.querySelector(\'img\').alt)">' +
-            '<img src="' + race.image + '" alt="' + escapeHtml(race.name) + '" style="width:100%; height:auto; max-height:480px; object-fit:contain; display:block; margin:0 auto;">' +
-            '<div style="text-align:center; padding:6px; font-size:11px; font-weight:700; color:#f28c28; background:rgba(7,27,53,0.95); border-top:1px solid rgba(242,140,40,0.2);">🔍 CLIQUER POUR AGRANDIR</div>' +
+        if (race.image) {
+      img = '<div style="position:relative; margin-bottom:15px; border-radius:12px; overflow:hidden; border:1px solid rgba(255,255,255,0.12); background:#020b17; cursor:zoom-in; transition:transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;" ' +
+            'onclick="window.openGemsRaceLightbox(this.querySelector(\'img\').src, this.querySelector(\'img\').alt)" ' +
+            'onmouseover="this.style.transform=\'translateY(-3px)\'; this.style.borderColor=\'rgba(242,140,40,0.7)\'; this.style.boxShadow=\'0 12px 30px rgba(0,0,0,0.6), 0 0 18px rgba(242,140,40,0.3)\'; this.querySelector(\'img\').style.transform=\'scale(1.04)\';" ' +
+            'onmouseout="this.style.transform=\'none\'; this.style.borderColor=\'rgba(255,255,255,0.12)\'; this.style.boxShadow=\'none\'; this.querySelector(\'img\').style.transform=\'scale(1)\';">' +
+            '<img src="' + race.image + '" alt="' + escapeHtml(race.name) + '" style="width:100%; height:auto; max-height:480px; object-fit:contain; display:block; margin:0 auto; transition:transform 0.35s ease;">' +
             '</div>';
     }
     var debrief = "";
