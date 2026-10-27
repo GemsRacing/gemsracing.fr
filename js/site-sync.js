@@ -52,4 +52,18 @@ document.addEventListener("DOMContentLoaded", async function() {
         safeSetText("latest-news-summary-display", data.news.summary);
         safeSetHref("latest-news-link-display", data.news.link);
     }
+    // --- SYNCHRONISATION PROCHAINE COURSE ACCUEIL ---
+    if (data.races && Array.isArray(data.races) && data.races.length > 0) {
+        const sorted = data.races.slice().sort((a,b) => String(b.date || "").localeCompare(String(a.date || "")));
+        const upcoming = sorted.find(r => r.status === "Programmé") || sorted[0];
+        if (upcoming) {
+            let dStr = upcoming.date || "Date à venir";
+            if (upcoming.circuit) dStr += " · " + upcoming.circuit;
+            if (upcoming.city) dStr += " (" + upcoming.city + ")";
+            safeSetText("home-next-race-date", dStr);
+            safeSetText("home-next-race-title", upcoming.name || "Course officielle");
+            let dDetails = (upcoming.category ? upcoming.category + " · " : "") + (upcoming.comment || "Suivez le déroulement de la course et les chronos sur Instagram.");
+            safeSetText("home-next-race-details", dDetails);
+        }
+    }
 });
