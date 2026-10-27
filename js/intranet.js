@@ -125,27 +125,34 @@
   window.saveAllData = saveData;
 
   // --- SCORING ---
-  function collectScoring() {
-    window.gemsData.stats = {
-      victoires: value("stat-victoires") || window.gemsData.stats.victoires || "7",
-      podiums: value("stat-podiums") || window.gemsData.stats.podiums || "15",
-      sws: value("stat-sws") || window.gemsData.stats.sws || "57e",
-      age: value("stat-age") || window.gemsData.stats.age || "16"
-    };
-  }
+      function collectScoring() {
+      if (!window.gemsData.stats) window.gemsData.stats = {};
+      window.gemsData.stats = {
+        victoires: value("stat-victoires") || window.gemsData.stats.victoires || "7",
+        podiums: value("stat-podiums") || window.gemsData.stats.podiums || "16",
+        coursesDisputees: value("stat-courses-disputees") || window.gemsData.stats.coursesDisputees || "37",
+        sws: value("stat-sws") || window.gemsData.stats.sws || "57e",
+        swsMondial: value("stat-sws-mondial") || window.gemsData.stats.swsMondial || "172e",
+        dernierResultat: value("stat-dernier-resultat") || window.gemsData.stats.dernierResultat || "3e / 27",
+        age: value("stat-age") || window.gemsData.stats.age || "16 ans"
+      };
+    }
 
   window.saveScoring = async function () {
     collectScoring();
     await saveData();
   };
 
-  function renderScoring() {
-    const s = window.gemsData.stats || {};
-    setValue("stat-victoires", s.victoires || "");
-    setValue("stat-podiums", s.podiums || "");
-    setValue("stat-sws", s.sws || "");
-    setValue("stat-age", s.age || "");
-  }
+      function renderScoring() {
+      const s = window.gemsData.stats || {};
+      setValue("stat-victoires", s.victoires || "7");
+      setValue("stat-podiums", s.podiums || "16");
+      setValue("stat-courses-disputees", s.coursesDisputees || "37");
+      setValue("stat-sws", s.sws || "57e");
+      setValue("stat-sws-mondial", s.swsMondial || "172e");
+      setValue("stat-dernier-resultat", s.dernierResultat || "3e / 27");
+      setValue("stat-age", s.age || "16 ans");
+    }
 
   // --- ACTUS (1 CLIC = UPLOAD DIRECT) ---
   window.renderNews = function () {
