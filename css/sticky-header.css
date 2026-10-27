@@ -1,4 +1,4 @@
-﻿:root { --gems-header-height: 78px; }
+:root { --gems-header-height: 78px; }
 html { scroll-padding-top: var(--gems-header-height) !important; }
 body { padding-top: var(--gems-header-height) !important; }
 header.top, header.top.fixed-header {
@@ -13,4 +13,15 @@ header.top .wrap.nav { min-height: var(--gems-header-height) !important; }
   header.top { min-height: var(--gems-header-height) !important; }
   header.top nav.menu, header.top > nav.menu, header.top .site-nav, header.top .main-nav { top: var(--gems-header-height) !important; }
   .gems-menu-toggle { z-index: 10001 !important; }
+}
+
+
+/* Défilement fluide et marge automatique sous la barre de navigation */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--gems-header-height, 97px) + 20px);
+}
+
+[id] {
+  scroll-margin-top: calc(var(--gems-header-height, 97px) + 20px);
 }
