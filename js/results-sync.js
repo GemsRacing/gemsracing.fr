@@ -18,7 +18,7 @@
     } catch (e) {
       console.warn("API indisponible, chargement local data/site-data.json :", e);
       try {
-        const local = await fetch("data/site-data.json", { cache: "no-store" });
+        const local = await fetch("data/site-data.json?t=" + Date.now(), { cache: "no-store" });
         return await local.json();
       } catch (err) {
         return { news: {}, races: [] };
@@ -26,25 +26,88 @@
     }
   }
 
+  // Visionneuse Lightbox plein écran universelle
+  window.openGemsRaceLightbox = function(src, caption) {
+    if (!src) return;
+    let lb = document.getElementById("race-news-lightbox");
+    if (!lb) {
+      lb = document.createElement("div");
+      lb.id = "race-news-lightbox";
+      lb.style.cssText = "position:fixed;inset:0;background:rgba(2,11,23,0.95);backdrop-filter:blur(8px);z-index:999999;display:flex;align-items:center;justify-content:center;padding:20px;cursor:zoom-out;";
+      lb.innerHTML = '<div style="position:relative;max-width:95vw;max-height:95vh;display:flex;flex-direction:column;align-items:center;">' +
+                     '<button type="button" style="position:absolute;top:-40px;right:0;background:none;border:none;color:#ffffff;font-size:32px;cursor:pointer;font-weight:700;line-height:1;" aria-label="Fermer">✕</button>' +
+                     '<img id="race-news-lightbox-img" src="" alt="" style="max-width:92vw;max-height:85vh;object-fit:contain;border-radius:10px;border:2px solid #f28c28;box-shadow:0 25px 60px rgba(0,0,0,0.85);">' +
+                     '<p id="race-news-lightbox-cap" style="color:#ffffff;margin-top:12px;font-size:14px;font-weight:700;text-align:center;"></p>' +
+                     '</div>';
+      lb.onclick = function() { lb.style.display = "none"; };
+      document.addEventListener("keydown", function(e) {
+        if (e.key === "Escape" && lb.style.display === "flex") lb.style.display = "none";
+      });
+      document.body.appendChild(lb);
+    }
+    const imgEl = document.getElementById("race-news-lightbox-img");
+    const capEl = document.getElementById("race-news-lightbox-cap");
+    if (imgEl) { imgEl.src = src; imgEl.alt = caption || "Affiche officielle"; }
+    if (capEl) { capEl.textContent = caption || ""; }
+    lb.style.display = "flex";
+  };
+
   function newsCardHtml(news, large) {
     if (!news || !news.title) return "";
     var img = "";
     if (news.image) {
       img = '<div style="margin-bottom:15px; border-radius:10px; overflow:hidden; border:1px solid rgba(242,140,40,0.3); background:#020b17; cursor:zoom-in;" onclick="window.openGemsRaceLightbox(this.querySelector(\'img\').src, this.querySelector(\'img\').alt)">' +
-      '<img src="' + news.image + '" alt="' + escapeHtml(news.title) + '" style="width:100%; height:auto; max-height:480px; object-fit:contain; display:block; margin:0 auto; transition:transform 0.2s;" onmouseover="this.style.transform=\'scale(1.01)\'" onmouseout="this.style.transform=\'scale(1)\'">' +
-      '<div style="text-align:center; padding:6px; font-size:11px; font-weight:700; color:#f28c28; background:rgba(7,27,53,0.95); border-top:1px solid rgba(242,140,40,0.2);">🔍 CLIQUER POUR AGRANDIR L''AFFICHE</div>' +
-      '</div>';
+            '<img src="' + news.image + '" alt="' + escapeHtml(news.title) + '" style="width:100%; height:auto; max-height:480px; object-fit:contain; display:block; margin:0 auto;">' +
+            '<div style="text-align:center; padding:6px; font-size:11px; font-weight:700; color:#f28c28; background:rgba(7,27,53,0.95); border-top:1px solid rgba(242,140,40,0.2);">🔍 CLIQUER POUR AGRANDIR</div>' +
+            '</div>';
     }
     var btn = "";
     if (news.link) {
       btn = '<a class="btn" href="' + escapeHtml(news.link) + '" style="display:inline-block; font-size:13px; padding:10px 18px;">' +
-            escapeHtml(news.button || "VOIR L'ACTUALITÉ") + '</a>';
+            escapeHtml(news.button || "VOIR L'ACTUALITE") + '</a>';
     }
     return '<article class="' + (large ? "news-card news-card-large" : "news-card") + '" style="margin-bottom:25px;">' +
            img +
            '<h4 style="margin:0 0 10px 0; color:#f28c28;">' + escapeHtml(news.title) + '</h4>' +
            '<p style="margin:0 0 15px 0; line-height:1.6;">' + escapeHtml(news.summary || "") + '</p>' +
            btn +
+           '</article>';
+  }
+
+  function raceHtml(race) {
+    if (!race) return "";
+    var img = "";
+    if (race.image) {
+      img = '<div style="margin-bottom:15px; border-radius:8px; overflow:hidden; border:1px solid rgba(242,140,40,0.3); background:#020b17; cursor:zoom-in;" onclick="window.openGemsRaceLightbox(this.querySelector(\'img\').src, this.querySelector(\'img\').alt)">' +
+            '<img src="' + race.image + '" alt="' + escapeHtml(race.name) + '" style="width:100%; height:auto; max-height:480px; object-fit:contain; display:block; margin:0 auto;">' +
+            '<div style="text-align:center; padding:6px; font-size:11px; font-weight:700; color:#f28c28; background:rgba(7,27,53,0.95); border-top:1px solid rgba(242,140,40,0.2);">🔍 CLIQUER POUR AGRANDIR</div>' +
+            '</div>';
+    }
+    var debrief = "";
+    if (race.link) {
+      debrief = '<a href="' + escapeHtml(race.link) + '" target="_blank" rel="noopener noreferrer" style="color:#f28c28; font-weight:700; font-size:13px; text-decoration:none;">Voir le debrief →</a>';
+    }
+    var comment = "";
+    if (race.comment) {
+      comment = '<p style="margin:0 0 12px 0; font-size:14px; line-height:1.5; opacity:0.9;">' + escapeHtml(race.comment) + '</p>';
+    }
+
+    return '<article class="race-card" style="margin-bottom:25px; padding:20px; background:rgba(7,27,53,0.6); border-radius:12px; border:1px solid rgba(255,255,255,0.08);">' +
+           img +
+           '<div style="font-size:13px; color:#f28c28; font-weight:700; margin-bottom:6px;">' +
+           escapeHtml(race.date || "Date a venir") + (race.time ? " · " + escapeHtml(race.time) : "") +
+           '</div>' +
+           '<h4 style="margin:0 0 8px 0; font-size:18px; color:#ffffff;">' + escapeHtml(race.name || "Course") + '</h4>' +
+           '<div style="font-size:14px; opacity:0.8; margin-bottom:12px;">' +
+           escapeHtml(race.circuit || "") + (race.city ? " · " + escapeHtml(race.city) : "") + (race.category ? " · " + escapeHtml(race.category) : "") +
+           '</div>' +
+           '<div style="font-size:14px; margin-bottom:12px;">' +
+           '<strong style="color:#f28c28;">' + escapeHtml(race.status || "Programme") + '</strong>' +
+           (race.result ? " · Resultat : " + escapeHtml(race.result) : "") +
+           (race.bestLap ? " · Meilleur tour : " + escapeHtml(race.bestLap) : "") +
+           '</div>' +
+           comment +
+           debrief +
            '</article>';
   }
 
@@ -58,7 +121,7 @@
     const archives = Array.isArray(data.newsArchive) ? data.newsArchive : (Array.isArray(data.newsArchives) ? data.newsArchives : []);
     let expanded = false;
 
-    latestContainer.innerHTML = (news && news.title) ? newsCardHtml(news, true) : "<p>Aucune actualité publiée pour le moment.</p>";
+    latestContainer.innerHTML = (news && news.title) ? newsCardHtml(news, true) : "<p>Aucune actualite publiee pour le moment.</p>";
 
     function updateNewsView() {
       if (!archives.length) {
@@ -73,7 +136,7 @@
       if (moreButton) {
         moreButton.hidden = false;
         moreButton.style.display = "block";
-        moreButton.textContent = expanded ? "RÉDUIRE" : "VOIR PLUS D'ACTUALITÉS";
+        moreButton.textContent = expanded ? "REDUIRE" : "VOIR PLUS D'ACTUALITES";
       }
       if (expanded) {
         archivesContainer.style.display = "block";
@@ -93,43 +156,6 @@
     updateNewsView();
   }
 
-  function raceHtml(race) {
-    if (!race) return "";
-    var img = "";
-    if (race.image) {
-      img = '<div style="margin-bottom:15px; border-radius:8px; overflow:hidden; border:1px solid rgba(242,140,40,0.3); background:#020b17; cursor:zoom-in;" onclick="window.openGemsRaceLightbox(this.querySelector(\'img\').src, this.querySelector(\'img\').alt)">' +
-      '<img src="' + race.image + '" alt="' + escapeHtml(race.name) + '" style="width:100%; height:auto; max-height:480px; object-fit:contain; display:block; margin:0 auto; transition:transform 0.2s;" onmouseover="this.style.transform=\'scale(1.01)\'" onmouseout="this.style.transform=\'scale(1)\'">' +
-      '<div style="text-align:center; padding:6px; font-size:11px; font-weight:700; color:#f28c28; background:rgba(7,27,53,0.95); border-top:1px solid rgba(242,140,40,0.2);">🔍 CLIQUER POUR AGRANDIR L''AFFICHE</div>' +
-      '</div>';
-    }
-    var debrief = "";
-    if (race.link) {
-      debrief = '<a href="' + escapeHtml(race.link) + '" target="_blank" rel="noopener noreferrer" style="color:#f28c28; font-weight:700; font-size:13px; text-decoration:none;">Voir le débrief →</a>';
-    }
-    var comment = "";
-    if (race.comment) {
-      comment = '<p style="margin:0 0 12px 0; font-size:14px; line-height:1.5; opacity:0.9;">' + escapeHtml(race.comment) + '</p>';
-    }
-
-    return '<article class="race-card" style="margin-bottom:25px; padding:20px; background:rgba(7,27,53,0.6); border-radius:12px; border:1px solid rgba(255,255,255,0.08);">' +
-           img +
-           '<div style="font-size:13px; color:#f28c28; font-weight:700; margin-bottom:6px;">' +
-           escapeHtml(race.date || "Date à venir") + (race.time ? " · " + escapeHtml(race.time) : "") +
-           '</div>' +
-           '<h4 style="margin:0 0 8px 0; font-size:18px; color:#ffffff;">' + escapeHtml(race.name || "Course") + '</h4>' +
-           '<div style="font-size:14px; opacity:0.8; margin-bottom:12px;">' +
-           escapeHtml(race.circuit || "") + (race.city ? " · " + escapeHtml(race.city) : "") + (race.category ? " · " + escapeHtml(race.category) : "") +
-           '</div>' +
-           '<div style="font-size:14px; margin-bottom:12px;">' +
-           '<strong style="color:#f28c28;">' + escapeHtml(race.status || "Programmé") + '</strong>' +
-           (race.result ? " · Résultat : " + escapeHtml(race.result) : "") +
-           (race.bestLap ? " · Meilleur tour : " + escapeHtml(race.bestLap) : "") +
-           '</div>' +
-           comment +
-           debrief +
-           '</article>';
-  }
-
   function renderRaces(data) {
     const latestContainer = document.getElementById("results-public-races-list");
     const archivesContainer = document.getElementById("race-archives");
@@ -145,7 +171,7 @@
     const archives = races.slice(1);
     let expanded = false;
 
-    latestContainer.innerHTML = latestRace ? raceHtml(latestRace) : "<p>Aucune course enregistrée pour le moment.</p>";
+    latestContainer.innerHTML = latestRace ? raceHtml(latestRace) : "<p>Aucune course enregistree pour le moment.</p>";
 
     function updateArchivesView() {
       if (!archives.length) {
@@ -160,7 +186,7 @@
       if (moreButton) {
         moreButton.hidden = false;
         moreButton.style.display = "block";
-        moreButton.textContent = expanded ? "RÉDUIRE" : ("VOIR PLUS DE COURSES (" + archives.length + ")");
+        moreButton.textContent = expanded ? "REDUIRE" : ("VOIR PLUS DE COURSES (" + archives.length + ")");
       }
       if (expanded) {
         archivesContainer.style.display = "block";
