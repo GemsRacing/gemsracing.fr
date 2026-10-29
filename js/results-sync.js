@@ -166,10 +166,20 @@
     const moreButton = document.getElementById("results-races-more-button");
     if (!latestContainer || !archivesContainer) return;
 
-    const races = Array.isArray(data.races) ? data.races.slice() : [];
-    races.sort(function (a, b) {
-      return String(b.date || "").localeCompare(String(a.date || ""));
-    });
+    const allRaces = Array.isArray(data.races) ? data.races.slice() : [];
+    const scheduled = allRaces
+      .filter(function (raceItem) { return (raceItem.status || "").toLowerCase().indexOf("programm") !== -1; })
+      .sort(function (a, b) {
+        return ((a.date || "") + " " + (a.time || "")).localeCompare((b.date || "") + " " + (b.time || ""));
+      });
+
+    const finished = allRaces
+      .filter(function (raceItem) { return (raceItem.status || "").toLowerCase().indexOf("programm") === -1; })
+      .sort(function (a, b) {
+        return ((b.date || "") + " " + (b.time || "")).localeCompare((a.date || "") + " " + (a.time || ""));
+      });
+
+    const races = scheduled.concat(finished);
 
     const latestRace = races[0];
     const archives = races.slice(1);

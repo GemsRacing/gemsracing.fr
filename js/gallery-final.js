@@ -23,10 +23,10 @@ document.addEventListener("DOMContentLoaded", function () {
     return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
   }
 
-  // Chargement des photos depuis /api/data ou le localStorage
+  // Chargement des photos depuis /api/data, fallback statique ou localStorage
   async function loadPhotos() {
     try {
-      const response = await fetch("/api/data", { cache: "no-store" });
+      const response = await fetch("/api/data?t=" + Date.now(), { cache: "no-store" });
       if (response.ok) {
         const data = await response.json();
         if (data && Array.isArray(data.gallery) && data.gallery.length > 0) {
@@ -34,20 +34,29 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       }
     } catch (e) {
-      console.warn("Échec lecture /api/data, tentative localStorage...");
+      console.warn("Échec lecture /api/data, tentative fallback local...");
     }
 
     try {
-      const local = localStorage.getItem("gemsData");
-      if (local) {
-        const parsed = JSON.parse(local);
+      const localResp = await fetch("data/site-data.json?t=" + Date.now(), { cache: "no-store" });
+      if (localResp.ok) {
+        const staticData = await localResp.json();
+        if (staticData && Array.isArray(staticData.gallery) && staticData.gallery.length > 0) {
+          return staticData.gallery;
+        }
+      }
+    } catch (e2) {}
+
+    try {
+      const raw = localStorage.getItem("gems_site_data") || localStorage.getItem("gemsData");
+      if (raw) {
+        const parsed = JSON.parse(raw);
         if (parsed && Array.isArray(parsed.gallery) && parsed.gallery.length > 0) {
           return parsed.gallery;
         }
       }
-    } catch (e) {}
+    } catch (e3) {}
 
-    // Fallback si aucune photo n'est retournée
     return [
       { image: "assets/images/gems-portrait.jpg", caption: "Gems Maréchal - Pilote SWS", rotation: 0 },
       { image: "assets/images/gems-social-preview.jpg", caption: "Gems en compétition karting", rotation: 0 }

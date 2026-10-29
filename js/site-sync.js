@@ -51,11 +51,25 @@ document.addEventListener("DOMContentLoaded", async function() {
         safeSetText("latest-news-title-display", data.news.title);
         safeSetText("latest-news-summary-display", data.news.summary);
         safeSetHref("latest-news-link-display", data.news.link);
+
+        const imgEl = document.getElementById("latest-news-image-display");
+        const imgWrap = document.getElementById("latest-news-image-container");
+        if (imgEl && data.news.image) {
+            imgEl.src = data.news.image;
+            imgEl.alt = data.news.title || "Actualité Gems Racing";
+            if (imgWrap) imgWrap.style.display = "block";
+        } else if (imgWrap) {
+            imgWrap.style.display = "none";
+        }
     }
     // --- SYNCHRONISATION PROCHAINE COURSE ACCUEIL ---
     if (data.races && Array.isArray(data.races) && data.races.length > 0) {
-        const sorted = data.races.slice().sort((a,b) => String(b.date || "").localeCompare(String(a.date || "")));
-        const upcoming = sorted.find(r => r.status === "Programmé") || sorted[0];
+        const scheduled = data.races
+            .filter(r => (r.status || "").toLowerCase().includes("programm"))
+            .sort((a, b) => ((a.date || "") + " " + (a.time || "")).localeCompare((b.date || "") + " " + (b.time || "")));
+
+        const upcoming = scheduled[0] || data.races.slice().sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")))[0];
+
         if (upcoming) {
             let dStr = upcoming.date || "Date à venir";
             if (upcoming.circuit) dStr += " · " + upcoming.circuit;

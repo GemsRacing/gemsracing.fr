@@ -1,4 +1,4 @@
-﻿{
+{
     "stats":  {
                   "victoires":  "7",
                   "podiums":  "16",
@@ -10,100 +10,100 @@
               },
     "news":  {
                  "title":  "Gems termine 3e sur 27 en 2T Rotax Ã  Solokart",
-                 "summary":  "Une nouvelle performance solide pour Gems MarÃ©chal.\r\n          Retrouvez le dÃ©brief et les photos sur Instagram.",
+                 "summary":  "Une nouvelle performance solide pour Gems Maréchal.\r\n          Retrouvez le dÃ©brief et les photos sur Instagram.",
                  "link":  "resultats.html",
                  "button":  "VOIR LES RÃ‰SULTATS"
              },
     "gallery":  [
                     {
                         "id":  "401e12ff-8b96-4c0f-af63-3181c1808134",
-                        "image":  "assets/images/gems-course-01.jpg",
+                        "image":  "https://i.ibb.co/wrzDwdjZ/gems-course-01.jpg",
                         "caption":  "Gems en pleine course",
-                        "alt":  "Gems MarÃ©chal en course",
+                        "alt":  "Gems Maréchal en course",
                         "rotation":  0
                     },
                     {
                         "id":  "08a41846-729d-4c4c-96f6-c498b8cad6af",
-                        "image":  "assets/images/gems-course-02.jpg",
-                        "caption":  "Concentration et prÃ©cision",
-                        "alt":  "Gems MarÃ©chal au volant",
+                        "image":  "https://i.ibb.co/TMbPTD0z/gems-course-02.jpg",
+                        "caption":  "Concentration et précision",
+                        "alt":  "Gems Maréchal au volant",
                         "rotation":  0
                     },
                     {
                         "id":  "43796780-82f2-46ab-90c5-2b1f118f3e01",
-                        "image":  "assets/images/gems-course-03.jpg",
-                        "caption":  "Une trajectoire maÃ®trisÃ©e",
-                        "alt":  "Gems MarÃ©chal en compÃ©tition",
+                        "image":  "https://i.ibb.co/PG1YTbnp/gems-course-03.jpg",
+                        "caption":  "Une trajectoire maîtrisée",
+                        "alt":  "Gems Maréchal en compÃ©tition",
                         "rotation":  0
                     },
                     {
                         "id":  "c51cd085-c000-4ab2-bc00-b85756e83938",
-                        "image":  "assets/images/gems-course-04.jpg",
+                        "image":  "https://i.ibb.co/mVjDb8gJ/gems-course-04.jpg",
                         "caption":  "La performance en action",
-                        "alt":  "Gems MarÃ©chal sur la piste",
+                        "alt":  "Gems Maréchal sur la piste",
                         "rotation":  0
                     },
                     {
                         "id":  "8369c873-1ffd-4887-8324-3bb17304096f",
-                        "image":  "assets/images/gems-casque-01.jpg",
+                        "image":  "https://i.ibb.co/B2xhvsyG/gems-casque-01.jpg",
                         "caption":  "Le casque ZAMP",
-                        "alt":  "Casque ZAMP de Gems MarÃ©chal",
+                        "alt":  "Casque ZAMP de Gems Maréchal",
                         "rotation":  0
                     },
                     {
                         "id":  "03f6abb6-0700-4c68-ac48-acda8a46ec5f",
-                        "image":  "assets/images/gems-casque-02.jpg",
-                        "caption":  "PrÃªt Ã  prendre le dÃ©part",
-                        "alt":  "Gems MarÃ©chal dans son kart",
+                        "image":  "https://i.ibb.co/7T5Scyj/gems-casque-02.jpg",
+                        "caption":  "Prêt à prendre le départ",
+                        "alt":  "Gems Maréchal dans son kart",
                         "rotation":  0
                     },
                     {
                         "id":  "528c2373-bae6-4bc5-85eb-a4bcf0b6e5d5",
-                        "image":  "assets/images/gems-course-05.jpg",
-                        "caption":  "La maÃ®trise du kart",
-                        "alt":  "Gems MarÃ©chal au volant",
+                        "image":  "https://i.ibb.co/zhtPxj9b/gems-course-05.jpg",
+                        "caption":  "La maîtrise du kart",
+                        "alt":  "Gems Maréchal au volant",
                         "rotation":  0
                     },
                     {
                         "id":  "f4ffd7a0-280a-4dbb-8900-1f56adffc667",
-                        "image":  "assets/images/gems-portrait-02.jpg",
+                        "image":  "https://i.ibb.co/23kSFfXZ/gems-portrait-02.jpg",
                         "caption":  "Un pilote, une ambition",
-                        "alt":  "Portrait de Gems MarÃ©chal",
+                        "alt":  "Portrait de Gems Maréchal",
                         "rotation":  0
                     },
                     {
                         "id":  "757ae80e-981b-4003-8474-3f9ade6a1462",
-                        "image":  "assets/images/gems-paddock.jpg",
+                        "image":  "https://i.ibb.co/yBZmFsTL/gems-paddock.jpg",
                         "caption":  "Dans les coulisses",
-                        "alt":  "Gems MarÃ©chal dans le paddock",
+                        "alt":  "Gems Maréchal dans le paddock",
                         "rotation":  0
                     },
                     {
                         "id":  "336a707d-8571-42f3-bea1-144ff806016d",
-                        "image":  "assets/images/gems-course-06.jpg",
+                        "image":  "https://i.ibb.co/679Mkh8C/gems-course-06.jpg",
                         "caption":  "La passion jusqu\u0027au dernier tour",
-                        "alt":  "Gems MarÃ©chal au coucher du soleil",
+                        "alt":  "Gems Maréchal au coucher du soleil",
                         "rotation":  0
                     },
                     {
                         "id":  "431f98ca-26c9-4506-8a5d-f3071f0a9512",
-                        "image":  "assets/images/gems-course-07.jpg",
-                        "caption":  "AccÃ©lÃ©rer, analyser, progresser",
-                        "alt":  "Gems MarÃ©chal au volant d\u0027un kart",
+                        "image":  "https://i.ibb.co/cpnB9Rt/gems-course-07.jpg",
+                        "caption":  "Accélérer, analyser, progresser",
+                        "alt":  "Gems Maréchal au volant d\u0027un kart",
                         "rotation":  0
                     },
                     {
                         "id":  "b839e28f-a1ce-4aa6-8626-e57150c81f60",
-                        "image":  "assets/images/gems-course-08.jpg",
-                        "caption":  "Une course tournÃ©e vers la performance",
-                        "alt":  "Gems MarÃ©chal en virage",
+                        "image":  "https://i.ibb.co/MYwQDwF/gems-course-08.jpg",
+                        "caption":  "Une course tournée vers la performance",
+                        "alt":  "Gems Maréchal en virage",
                         "rotation":  0
                     },
                     {
                         "id":  "1ce3053c-8e1e-48ce-a6b2-4017f1800328",
-                        "image":  "assets/images/gems-paddock-02.jpg",
+                        "image":  "https://i.ibb.co/xKGHPR81/gems-paddock-02.jpg",
                         "caption":  "Le travail en dehors de la piste",
-                        "alt":  "Gems MarÃ©chal autour du karting",
+                        "alt":  "Gems Maréchal autour du karting",
                         "rotation":  0
                     }
                 ],
@@ -140,7 +140,7 @@
                          "logo":  "assets/partners/apollo3s.jpg"
                      },
                      {
-                         "name":  "ArriÃ¨re-Cour",
+                         "name":  "Arrière-Cour",
                          "url":  "https://arrierecour42.fr/",
                          "logo":  "assets/partners/arrierecour.png"
                      }

@@ -37,7 +37,26 @@
     setTimeout(() => { t.style.display = "none"; }, 3500);
   }
 
-  function readImage(file, maxDim = 450, quality = 0.60) {
+  const IMGBB_KEY = "b8f78eee4f0dc127f4065f32784f1857";
+
+  async function uploadToImgBB(file) {
+    if (!IMGBB_KEY || IMGBB_KEY === "COLLE_TA_CLE_ICI") {
+      throw new Error("Clé API ImgBB manquante.");
+    }
+    const formData = new FormData();
+    formData.append("image", file);
+    const resp = await fetch("https://api.imgbb.com/1/upload?key=" + IMGBB_KEY, {
+      method: "POST",
+      body: formData
+    });
+    const res = await resp.json();
+    if (res.success && res.data && res.data.url) {
+      return res.data.url;
+    }
+    throw new Error(res.error ? res.error.message : "Échec upload ImgBB");
+  }
+
+  function readImage(file, maxDim = 1200, quality = 0.82) {
     return new Promise((resolve) => {
       const reader = new FileReader();
       reader.onload = function (e) {
@@ -100,13 +119,17 @@
     toast("⏳ Enregistrement et publication en direct...", "#f28c28");
     collectScoring();
 
-    localStorage.setItem("gems_site_data", JSON.stringify(window.gemsData));
+    try {
+      localStorage.setItem("gems_site_data", JSON.stringify(window.gemsData));
+    } catch (eStorage) {
+      console.warn("Quota LocalStorage atteint :", eStorage);
+    }
 
     try {
       const response = await fetch("/api/data", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/json; charset=utf-8",
           "X-Admin-Token": PASSWORD
         },
         body: JSON.stringify(window.gemsData)
@@ -187,8 +210,12 @@
     let imageUrl = value("news-image");
     const fileInput = document.getElementById("news-image-file");
     if (fileInput && fileInput.files && fileInput.files[0]) {
-      toast("⏳ Compression de l'image...", "#f28c28");
-      imageUrl = await readImage(fileInput.files[0], 450, 0.60);
+      try {
+        toast("⏳ Hébergement HD sur ImgBB...", "#f28c28");
+        imageUrl = await uploadToImgBB(fileInput.files[0]);
+      } catch (err) {
+        imageUrl = await readImage(fileInput.files[0], 1200, 0.82);
+      }
     }
 
     window.gemsData.news = {
@@ -246,6 +273,17 @@
   window.renderRaces = function () {
     const list = document.getElementById("races-list");
     if (!list) return;
+    if (Array.isArray(window.gemsData.races)) {
+      window.gemsData.races.sort(function (a, b) {
+        const isProgA = (a.status || "").toLowerCase().indexOf("programm") !== -1;
+        const isProgB = (b.status || "").toLowerCase().indexOf("programm") !== -1;
+        if (isProgA && !isProgB) return -1;
+        if (!isProgA && isProgB) return 1;
+        const da = (a.date || "") + " " + (a.time || "");
+        const db = (b.date || "") + " " + (b.time || "");
+        return isProgA ? da.localeCompare(db) : db.localeCompare(da);
+      });
+    }
     const races = window.gemsData.races || [];
     if (races.length === 0) {
       list.innerHTML = "<p style='color:rgba(255,255,255,0.4); font-size:13px;'>Aucune course enregistrée.</p>";
@@ -279,8 +317,12 @@
     let imageUrl = value("race-image");
     const fileInput = document.getElementById("race-image-file");
     if (fileInput && fileInput.files && fileInput.files[0]) {
-      toast("⏳ Compression de la photo de course...", "#f28c28");
-      imageUrl = await readImage(fileInput.files[0], 450, 0.60);
+      try {
+        toast("⏳ Hébergement HD sur ImgBB...", "#f28c28");
+        imageUrl = await uploadToImgBB(fileInput.files[0]);
+      } catch (err) {
+        imageUrl = await readImage(fileInput.files[0], 1200, 0.82);
+      }
     }
 
     const raceData = {
@@ -377,41 +419,80 @@
     if (btn) btn.textContent = "➕ AJOUTER LA COURSE";
   }
 
-  // --- GALERIE (1 CLIC = UPLOAD) ---
+  // --- GALERIE (RÉORGANISATION ⬅️ / ➡️ & UPLOAD OPTIMISÉ) ---
   window.renderGallery = function () {
     const grid = document.getElementById("gallery-grid");
     if (!grid) return;
-    grid.innerHTML = (window.gemsData.gallery || []).map((item, i) => `
-      <div style="position:relative; background:#071b35; border-radius:8px; overflow:hidden; border:1px solid rgba(255,255,255,0.08);">
-        <img src="${item.image || item.src}" style="width:100%; height:130px; object-fit:cover;">
-        <p style="padding:6px; margin:0; font-size:11px; color:#fff;">${item.caption || ""}</p>
-        <button style="position:absolute; top:5px; right:5px; background:rgba(231,76,60,0.85); color:#fff; border:none; border-radius:4px; padding:4px 8px; cursor:pointer;" onclick="deleteGalleryPhoto(${i})">🗑️</button>
+    const items = window.gemsData.gallery || [];
+    const total = items.length;
+
+    if (total === 0) {
+      grid.innerHTML = '<p style="color:rgba(255,255,255,0.4); font-size:13px; grid-column:1/-1;">Aucune photo dans la galerie.</p>';
+      return;
+    }
+
+    grid.innerHTML = items.map((item, i) => `
+      <div style="position:relative; background:#071b35; border-radius:8px; overflow:hidden; border:1px solid rgba(255,255,255,0.08); display:flex; flex-direction:column; justify-content:space-between;">
+        <div style="position:relative; width:100%; height:130px; background:#020b17;">
+          <img src="${item.image || item.src}" alt="${item.caption || 'Photo'}" style="width:100%; height:130px; object-fit:cover; display:block;">
+          <button type="button" title="Supprimer la photo" style="position:absolute; top:6px; right:6px; background:rgba(231,76,60,0.9); color:#fff; border:none; border-radius:4px; padding:4px 8px; cursor:pointer; font-size:12px; z-index:2;" onclick="deleteGalleryPhoto(${i})">🗑️</button>
+        </div>
+        <p style="padding:8px; margin:0; font-size:11px; color:#fff; line-height:1.3; flex:1; word-break:break-word;">${item.caption ? item.caption : '<em style="color:rgba(255,255,255,0.4);">Sans légende</em>'}</p>
+        <div style="display:flex; justify-content:space-between; align-items:center; padding:6px 8px; background:rgba(0,0,0,0.35); border-top:1px solid rgba(255,255,255,0.08);">
+          <span style="font-size:11px; color:rgba(255,255,255,0.5); font-weight:600;">#${i + 1}</span>
+          <div style="display:flex; gap:6px;">
+            <button type="button" title="Déplacer vers la gauche" style="background:#020b17; color:#fff; border:1px solid rgba(242,140,40,0.6); border-radius:4px; padding:3px 8px; cursor:pointer; font-size:12px; ${i === 0 ? 'opacity:0.25; cursor:not-allowed; pointer-events:none;' : ''}" onclick="moveGalleryPhoto(${i}, -1)">⬅️</button>
+            <button type="button" title="Déplacer vers la droite" style="background:#020b17; color:#fff; border:1px solid rgba(242,140,40,0.6); border-radius:4px; padding:3px 8px; cursor:pointer; font-size:12px; ${i === total - 1 ? 'opacity:0.25; cursor:not-allowed; pointer-events:none;' : ''}" onclick="moveGalleryPhoto(${i}, 1)">➡️</button>
+          </div>
+        </div>
       </div>
     `).join("");
+  };
+
+  window.moveGalleryPhoto = async function (index, direction) {
+    const gallery = window.gemsData.gallery;
+    if (!gallery || !gallery.length) return;
+    const targetIndex = index + direction;
+    if (targetIndex < 0 || targetIndex >= gallery.length) return;
+
+    const temp = gallery[index];
+    gallery[index] = gallery[targetIndex];
+    gallery[targetIndex] = temp;
+
+    window.renderGallery();
+    toast(direction < 0 ? "⬅️ Photo déplacée vers la gauche" : "➡️ Photo déplacée vers la droite", "#f28c28");
+    await saveData();
   };
 
   window.addGalleryPhoto = async function () {
     const fi = document.getElementById("gallery-file");
     if (!fi || !fi.files || !fi.files[0]) { alert("Choisissez une photo."); return; }
-    toast("⏳ Compression de la photo...", "#f28c28");
-    const src = await readImage(fi.files[0], 1200, 0.85);
+    let imgUrl = "";
+    try {
+      toast("⏳ Hébergement HD sur ImgBB en cours...", "#f28c28");
+      imgUrl = await uploadToImgBB(fi.files[0]);
+    } catch (err) {
+      console.warn("Secours compression locale :", err);
+      toast("⚠️ Secours local suite erreur ImgBB", "#f28c28");
+      imgUrl = await readImage(fi.files[0], 1000, 0.78);
+    }
     window.gemsData.gallery.unshift({
       id: Date.now(),
-      image: src,
-      src: src,
+      image: imgUrl,
       caption: value("gallery-caption")
     });
     fi.value = "";
     setValue("gallery-caption", "");
     window.renderGallery();
-    await saveData(); // UPLOAD DIRECT EN 1 CLIC !
+    await saveData();
+    toast("✅ Photo publiée sur le site et hébergée sur ImgBB !", "#2ecc71");
   };
 
   window.deleteGalleryPhoto = async function (i) {
     if (!confirm("Supprimer cette photo ?")) return;
     window.gemsData.gallery.splice(i, 1);
     window.renderGallery();
-    await saveData(); // UPLOAD DIRECT EN 1 CLIC !
+    await saveData();
   };
 
   // --- PARTENAIRES (1 CLIC = UPLOAD) ---
