@@ -3,6 +3,11 @@
   "trailingSlash": false,
   "redirects": [
     {
+      "source": "/.well-known/llms.txt",
+      "permanent": true,
+      "destination": "https://gemsracing.fr/llms.txt"
+    },
+    {
       "source": "/:path*",
       "has": [
         {

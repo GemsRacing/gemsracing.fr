@@ -1,3 +1,19 @@
 User-agent: *
 Allow: /
+
+# Moteurs IA & Agents conversationnels (GEO / AEO)
+User-agent: GPTBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
 Sitemap: https://gemsracing.fr/sitemap.xml
+# Documentation IA structurée
+# https://gemsracing.fr/llms.txt
