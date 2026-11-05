@@ -52,7 +52,7 @@
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": "SportsOrganization",
+        "@type": ["Organization", "SportsOrganization"],
         "@id": "https://gemsracing.fr/association#organization",
         "name": "GEMS Karting Access",
         "alternateName": "GEMS Karting Access - Handikart & Compétition",
@@ -64,7 +64,7 @@
         "areaServed": "Pays de la Loire, Vendée, France",
         "sport": "Karting, Handikart",
         "member": {
-          "@type": "Person",
+          "@type": ["Person", "Athlete"],
           "@id": "https://gemsracing.fr/#gems-marechal",
           "name": "Gems Maréchal"
         }
@@ -166,6 +166,9 @@
     }
   </style>
   <link rel="stylesheet" href="css/dropdown-nav.css">
+
+
+</head>
 
 
 <body class="association-page">
@@ -405,5 +408,7 @@
 <script src="js/menu-clean.js?v=m6"></script>
 <script src="js/sticky-header.js"></script>
   <script src="js/dropdown-nav.js"></script>
+
+</body>
 
 </html>
