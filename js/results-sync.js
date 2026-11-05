@@ -1,4 +1,25 @@
 (function () {
+  function cleanMojibake(str) {
+    if (!str) return "";
+    return String(str)
+      .replace(/Ã\s+/g, "\u00e0 ")
+      .replace(/Ã\u00a0/g, "\u00e0")
+      .replace(/Ã\u00a9/g, "\u00e9")
+      .replace(/Ã\u00a8/g, "\u00e8")
+      .replace(/Ã\u00aa/g, "\u00ea")
+      .replace(/Ã\u00ae/g, "\u00ee")
+      .replace(/Ã\u0089/g, "\u00c9")
+      .replace(/Ã©/g, "\u00e9")
+      .replace(/Ã¨/g, "\u00e8")
+      .replace(/Ãª/g, "\u00ea")
+      .replace(/Ã®/g, "\u00ee")
+      .replace(/Ã‰/g, "\u00c9")
+      .replace(/Ã§/g, "\u00e7")
+      .replace(/â€™/g, "'")
+      .replace(/RÃ[\s\S]?SULTATS/gi, "R\u00c9SULTATS")
+      .replace(/dÃ[\s\S]?brief/gi, "d\u00e9brief")
+      .replace(/ProgrammÃ[\s\S]?/gi, "Programm\u00e9");
+  }
   "use strict";
 
   function escapeHtml(val) {

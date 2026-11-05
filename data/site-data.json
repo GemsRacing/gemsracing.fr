@@ -10,9 +10,9 @@
               },
     "news":  {
                  "title":  "Gems termine 3e sur 27 en 2T Rotax Ã  Solokart",
-                 "summary":  "Une nouvelle performance solide pour Gems Maréchal.\r\n          Retrouvez le dÃ©brief et les photos sur Instagram.",
+                 "summary":  "Une nouvelle performance solide pour Gems Maréchal.\r\n          Retrouvez le débrief et les photos sur Instagram.",
                  "link":  "resultats.html",
-                 "button":  "VOIR LES RÃ‰SULTATS"
+                 "button":  "VOIR LES RÉSULTATS"
              },
     "gallery":  [
                     {
@@ -114,7 +114,7 @@
                       "circuit":  "",
                       "result":  "",
                       "city":  "",
-                      "status":  "ProgrammÃ©",
+                      "status":  "Programmé",
                       "link":  ""
                   }
               ],
