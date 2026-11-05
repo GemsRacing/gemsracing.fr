@@ -1,7 +1,3 @@
 User-agent: *
 Allow: /
-Disallow: /intranet.html
-Disallow: /api/
-Disallow: /_backups/
-
 Sitemap: https://gemsracing.fr/sitemap.xml
