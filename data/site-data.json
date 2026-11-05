@@ -9,10 +9,10 @@
                   "age":  "16 ans"
               },
     "news":  {
-                 "title":  "Gems termine 3e sur 27 en 2T Rotax Ã  Solokart",
-                 "summary":  "Une nouvelle performance solide pour Gems Maréchal.\r\n          Retrouvez le débrief et les photos sur Instagram.",
-                 "link":  "resultats.html",
-                 "button":  "VOIR LES RÉSULTATS"
+                 "title":  "Gems termine 3e sur 27 en 2T Rotax à Solokart",
+                 "summary":  "Une nouvelle performance solide pour Gems Maréchal. Retrouvez le débrief et les photos sur Instagram.",
+                 "link":  "https://www.instagram.com/gems.kartracing/",
+                 "button":  "VOIR LE DÉBRIEF"
              },
     "gallery":  [
                     {
@@ -109,13 +109,20 @@
                 ],
     "races":  [
                   {
-                      "date":  "",
-                      "name":  "test 2",
-                      "circuit":  "",
+                      "date":  "2026-10-24",
+                      "time":  "10:00",
+                      "name":  "Finale Boccokart",
+                      "circuit":  "RKC Paris",
+                      "city":  "Cormeilles-en-Vexin",
+                      "category":  "390 cc",
+                      "pilots":  "3",
+                      "startPosition":  "",
                       "result":  "",
-                      "city":  "",
+                      "bestLap":  "",
+                      "comment":  "Finale nationale de la BOCCOKART, une endurance de 6h en équipe où Gems fera partie de l\u0027équipe L2RT en compagnie de Louenn RONDEAU et Soane RONDEAU. 38 équipes en piste et 1 objectif : aller le plus haut possible...",
                       "status":  "Programmé",
-                      "link":  ""
+                      "link":  "https://www.instagram.com/gems.kartracing/",
+                      "image":  ""
                   }
               ],
     "partners":  [
