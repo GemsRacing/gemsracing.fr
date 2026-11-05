@@ -1,21 +1,19 @@
 function sanitizeCaption(str) {
   if (!str) return "";
   return str
-    .replace(/tourn[^\s\w]*e/gi, "tournée")
-    .replace(/tourn\?*e/gi, "tournée")
-    .replace(/tourne/gi, "tournée")
-    .replace(/Rien arrête/gi, "Rien n'arrête")
-    .replace(/Prt\s+prendre/gi, "Prêt à prendre")
-    .replace(/dpart/gi, "départ")
-    .replace(/Acclrer/gi, "Accélérer")
-    .replace(/matrise/gi, "maîtrise")
-    .replace(/prcision/gi, "précision")
-    .replace(/Marchal/gi, "Maréchal");
+    .replace(/tourn[^\s\w]*e/gi, "tourn\u00e9e")
+    .replace(/tourn\?*e/gi, "tourn\u00e9e")
+    .replace(/tourne\b/gi, "tourn\u00e9e")
+    .replace(/Rien arr\u00eate/gi, "Rien n'arr\u00eate")
+    .replace(/Rien n'arr\u00eate/gi, "Rien n'arr\u00eate")
+    .replace(/Prt\s+prendre/gi, "Pr\u00eat \u00e0 prendre")
+    .replace(/dpart/gi, "d\u00e9part")
+    .replace(/Acclrer/gi, "Acc\u00e9l\u00e9rer")
+    .replace(/matrise/gi, "ma\u00eetrise")
+    .replace(/prcision/gi, "pr\u00e9cision")
+    .replace(/Marchal/gi, "Mar\u00e9chal");
 }
-/* ============================================================
-   MOTEUR DYNAMIQUE GALERIE & LIGHTBOX AVEC DÉFILEMENT
-   (Connecté aux données Intranet /api/data)
-   ============================================================ */
+
 document.addEventListener("DOMContentLoaded", function () {
   let galleryItems = [];
   let currentIndex = 0;
@@ -37,7 +35,6 @@ document.addEventListener("DOMContentLoaded", function () {
     return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
   }
 
-  // Chargement des photos depuis /api/data, fallback statique ou localStorage
   async function loadPhotos() {
     try {
       const response = await fetch("/api/data?t=" + Date.now(), { cache: "no-store" });
@@ -48,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       }
     } catch (e) {
-      console.warn("Échec lecture /api/data, tentative fallback local...");
+      console.warn("API indisponible, bascule sur les donnees locales");
     }
 
     try {
@@ -71,10 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     } catch (e3) {}
 
-    return [
-      { image: "assets/images/gems-portrait.jpg", caption: "Gems Maréchal - Pilote SWS", rotation: 0 },
-      { image: "assets/images/gems-social-preview.jpg", caption: "Gems en compétition karting", rotation: 0 }
-    ];
+    return [];
   }
 
   function renderGrid(photos) {
@@ -89,10 +83,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const rot = photo.rotation ? `transform: rotate(${photo.rotation}deg);` : "";
       const imgSrc = photo.image || photo.src || "";
-      const captionText = photo.caption || "";
+      const captionText = sanitizeCaption(photo.caption || "");
 
       card.innerHTML = `
-        <img referrerpolicy="no-referrer" loading="lazy" src="${imgSrc}" alt="${escapeHtml(captionText || 'Photo Gems Racing')}" loading="lazy" style="${rot}">
+        <img referrerpolicy="no-referrer" loading="lazy" src="${imgSrc}" alt="${escapeHtml(captionText || 'Photo Gems Racing')}" style="${rot}">
         ${captionText ? `<div class="gems-gallery-card-caption">${escapeHtml(captionText)}</div>` : ""}
       `;
 
@@ -113,15 +107,17 @@ document.addEventListener("DOMContentLoaded", function () {
     const photo = galleryItems[currentIndex];
     if (!photo) return;
 
+    const caption = sanitizeCaption(photo.caption || "");
+
     if (lbImage) {
       lbImage.src = photo.image || photo.src || "";
-      lbImage.alt = photo.caption || "Photo Gems Racing";
+      lbImage.alt = caption || "Photo Gems Racing";
       lbImage.style.transform = photo.rotation ? `rotate(${photo.rotation}deg)` : "";
     }
 
     if (lbCaption) {
-      lbCaption.textContent = photo.caption || "";
-      lbCaption.style.display = photo.caption ? "block" : "none";
+      lbCaption.textContent = caption;
+      lbCaption.style.display = caption ? "block" : "none";
     }
 
     if (lbCounter) {
@@ -157,45 +153,17 @@ document.addEventListener("DOMContentLoaded", function () {
     updateLightboxView();
   }
 
-  // Événements boutons et backdrop
   btnClose?.addEventListener("click", closeLightbox);
   backdrop?.addEventListener("click", closeLightbox);
   btnPrev?.addEventListener("click", (e) => { e.stopPropagation(); showPrev(); });
   btnNext?.addEventListener("click", (e) => { e.stopPropagation(); showNext(); });
 
-  // Événements Clavier (Gauche / Droite / Échap)
   document.addEventListener("keydown", function (e) {
     if (!lightbox || lightbox.style.display === "none") return;
-
-    if (e.key === "ArrowLeft") {
-      showPrev();
-    } else if (e.key === "ArrowRight") {
-      showNext();
-    } else if (e.key === "Escape") {
-      closeLightbox();
-    }
+    if (e.key === "ArrowLeft") showPrev();
+    else if (e.key === "ArrowRight") showNext();
+    else if (e.key === "Escape") closeLightbox();
   });
 
-  // Swipe tactile mobile (Gauche / Droite)
-  let touchStartX = 0;
-  let touchEndX = 0;
-
-  lightbox?.addEventListener("touchstart", function (e) {
-    touchStartX = e.changedTouches[0].screenX;
-  }, { passive: true });
-
-  lightbox?.addEventListener("touchend", function (e) {
-    touchEndX = e.changedTouches[0].screenX;
-    const diff = touchEndX - touchStartX;
-    if (Math.abs(diff) > 40) {
-      if (diff > 0) {
-        showPrev(); // Glissement vers la droite = image précédente
-      } else {
-        showNext(); // Glissement vers la gauche = image suivante
-      }
-    }
-  }, { passive: true });
-
-  // Lancement du chargement
   loadPhotos().then(renderGrid);
 });
