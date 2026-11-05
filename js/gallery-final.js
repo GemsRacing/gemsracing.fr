@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const captionText = photo.caption || "";
 
       card.innerHTML = `
-        <img src="${imgSrc}" alt="${escapeHtml(captionText || 'Photo Gems Racing')}" loading="lazy" style="${rot}">
+        <img referrerpolicy="no-referrer" loading="lazy" src="${imgSrc}" alt="${escapeHtml(captionText || 'Photo Gems Racing')}" loading="lazy" style="${rot}">
         ${captionText ? `<div class="gems-gallery-card-caption">${escapeHtml(captionText)}</div>` : ""}
       `;
 
