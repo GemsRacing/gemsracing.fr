@@ -730,3 +730,20 @@
     loadData();
   });
 })();
+// Modification du titre d'une photo de la galerie
+window.editGalleryTitle = function(index) {
+  const currentItem = siteData.gallery[index];
+  if (!currentItem) return;
+  const currentTitle = typeof currentItem === "object" ? (currentItem.title || "") : "";
+  const newTitle = prompt("Modifier le titre / légende de la photo :", currentTitle);
+  if (newTitle !== null && newTitle.trim() !== currentTitle) {
+    if (typeof currentItem === "object") {
+      currentItem.title = newTitle.trim();
+    } else {
+      siteData.gallery[index] = { src: currentItem, title: newTitle.trim() };
+    }
+    renderGalleryAdmin();
+    saveData();
+    showNotification("Légende modifiée et enregistrée !", "success");
+  }
+};
