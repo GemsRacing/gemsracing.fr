@@ -1,3 +1,17 @@
+function sanitizeCaption(str) {
+  if (!str) return "";
+  return str
+    .replace(/tourn[^\s\w]*e/gi, "tournée")
+    .replace(/tourn\?*e/gi, "tournée")
+    .replace(/tourne/gi, "tournée")
+    .replace(/Rien arrête/gi, "Rien n'arrête")
+    .replace(/Prt\s+prendre/gi, "Prêt à prendre")
+    .replace(/dpart/gi, "départ")
+    .replace(/Acclrer/gi, "Accélérer")
+    .replace(/matrise/gi, "maîtrise")
+    .replace(/prcision/gi, "précision")
+    .replace(/Marchal/gi, "Maréchal");
+}
 /* ============================================================
    MOTEUR DYNAMIQUE GALERIE & LIGHTBOX AVEC DÉFILEMENT
    (Connecté aux données Intranet /api/data)
