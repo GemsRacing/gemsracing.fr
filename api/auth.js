@@ -59,7 +59,7 @@ function isAuthenticated(req) {
   const expiryText = parts[0];
   const nonce = parts[1];
   const suppliedSignature = parts[2];
-  if (!/^\\d+$/.test(expiryText)) return false;
+  if (!/^\d+$/.test(expiryText)) return false;
 
   const expiry = Number(expiryText);
   if (!Number.isSafeInteger(expiry) || expiry <= Date.now()) return false;
