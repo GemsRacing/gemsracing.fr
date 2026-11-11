@@ -1,1 +1,135 @@
-const crypto = require("crypto");const COOKIE_NAME = "gems_admin_session";const MAX_AGE_SECONDS = 8 * 60 * 60;function safeEqual(a, b) {  if (typeof a !== "string" || typeof b !== "string") return false;  const left = Buffer.from(a, "utf8");  const right = Buffer.from(b, "utf8");  if (left.length === 0 || left.length !== right.length) return false;  return crypto.timingSafeEqual(left, right);}function signature(payload, secret) {  return crypto.createHmac("sha256", secret).update(payload, "utf8").digest("hex");}function readCookie(req) {  const header = req.headers && req.headers.cookie;  if (!header) return "";  for (const part of String(header).split(";")) {    const splitAt = part.indexOf("=");    if (splitAt < 0) continue;    if (part.slice(0, splitAt).trim() === COOKIE_NAME) {      return part.slice(splitAt + 1).trim();    }  }  return "";}function isAuthenticated(req) {  const secret = process.env.SESSION_SECRET;  if (!secret || Buffer.byteLength(secret, "utf8") < 32) return false;  const parts = readCookie(req).split(".");  if (parts.length !== 3) return false;  const expiryText = parts[0];  const nonce = parts[1];  const suppliedSignature = parts[2];  if (!/^\d+$/.test(expiryText)) return false;  const expiry = Number(expiryText);  if (!Number.isSafeInteger(expiry) || expiry <= Date.now()) return false;  if (!/^[a-f0-9]{32}$/.test(nonce)) return false;  const payload = expiryText + "." + nonce;  return safeEqual(suppliedSignature, signature(payload, secret));}function respond(res, status, body) {  res.statusCode = status;  res.setHeader("Content-Type", "application/json; charset=utf-8");  res.setHeader("Cache-Control", "no-store");  res.setHeader("X-Content-Type-Options", "nosniff");  res.end(JSON.stringify(body));}function handler(req, res) {  res.setHeader("Cache-Control", "no-store");  if (req.method === "GET") {    return isAuthenticated(req)      ? respond(res, 200, { authenticated: true })      : respond(res, 401, { authenticated: false });  }  if (req.method === "DELETE") {    res.setHeader(      "Set-Cookie",      COOKIE_NAME + "=; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=0"    );    return respond(res, 200, { authenticated: false });  }  if (req.method !== "POST") {    res.setHeader("Allow", "GET, POST, DELETE");    return respond(res, 405, { error: "Method not allowed" });  }  const expectedPassword = process.env.ADMIN_PASSWORD;  const secret = process.env.SESSION_SECRET;  if (!expectedPassword || !secret || Buffer.byteLength(secret, "utf8") < 32) {    return respond(res, 503, { error: "Authentication is not configured" });  }  let body = req.body || {};  if (Buffer.isBuffer(body)) body = body.toString("utf8");  if (typeof body === "string") {    try {      body = JSON.parse(body);    } catch (error) {      return respond(res, 400, { error: "Invalid request" });    }  }  const suppliedPassword = body && typeof body.password === "string" ? body.password : "";  if (!safeEqual(suppliedPassword, expectedPassword)) {    return respond(res, 401, { error: "Invalid credentials" });  }  const expiryText = String(Date.now() + MAX_AGE_SECONDS * 1000);  const nonce = crypto.randomBytes(16).toString("hex");  const payload = expiryText + "." + nonce;  const token = payload + "." + signature(payload, secret);  res.setHeader(    "Set-Cookie",    COOKIE_NAME + "=" + token + "; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=" + MAX_AGE_SECONDS  );  return respond(res, 200, { authenticated: true });}handler.isAuthenticated = isAuthenticated;module.exports = handler;
+"use strict";
+
+const crypto = require("crypto");
+const COOKIE_NAME = "gems_admin_session";
+const MAX_AGE_SECONDS = 8 * 60 * 60;
+
+function safeEqual(a, b) {
+  if (typeof a !== "string" || typeof b !== "string") return false;
+  const left = Buffer.from(a, "utf8");
+  const right = Buffer.from(b, "utf8");
+  if (left.length === 0 || left.length !== right.length) return false;
+  return crypto.timingSafeEqual(left, right);
+}
+
+function getSessionSecret() {
+  const configured = process.env.SESSION_SECRET;
+  if (typeof configured === "string" && Buffer.byteLength(configured, "utf8") >= 32) {
+    return configured;
+  }
+
+  // Existing production configuration predates SESSION_SECRET and uses ADMIN_TOKEN.
+  // Derive a stable signing key without exposing or changing that stored secret.
+  const adminToken = process.env.ADMIN_TOKEN;
+  if (typeof adminToken !== "string" || !adminToken) return "";
+  return crypto
+    .createHash("sha256")
+    .update("gemsracing-admin-session-v1:", "utf8")
+    .update(adminToken, "utf8")
+    .digest("hex");
+}
+
+function getExpectedPassword() {
+  return process.env.ADMIN_PASSWORD || process.env.ADMIN_TOKEN || "";
+}
+
+function signature(payload, secret) {
+  return crypto.createHmac("sha256", secret).update(payload, "utf8").digest("hex");
+}
+
+function readCookie(req) {
+  const header = req.headers && req.headers.cookie;
+  if (!header) return "";
+  for (const part of String(header).split(";")) {
+    const splitAt = part.indexOf("=");
+    if (splitAt < 0) continue;
+    if (part.slice(0, splitAt).trim() === COOKIE_NAME) {
+      return part.slice(splitAt + 1).trim();
+    }
+  }
+  return "";
+}
+
+function isAuthenticated(req) {
+  const secret = getSessionSecret();
+  if (!secret) return false;
+
+  const parts = readCookie(req).split(".");
+  if (parts.length !== 3) return false;
+  const expiryText = parts[0];
+  const nonce = parts[1];
+  const suppliedSignature = parts[2];
+  if (!/^\\d+$/.test(expiryText)) return false;
+
+  const expiry = Number(expiryText);
+  if (!Number.isSafeInteger(expiry) || expiry <= Date.now()) return false;
+  if (!/^[a-f0-9]{32}$/.test(nonce)) return false;
+
+  const payload = expiryText + "." + nonce;
+  return safeEqual(suppliedSignature, signature(payload, secret));
+}
+
+function respond(res, status, body) {
+  res.statusCode = status;
+  res.setHeader("Content-Type", "application/json; charset=utf-8");
+  res.setHeader("Cache-Control", "no-store");
+  res.setHeader("X-Content-Type-Options", "nosniff");
+  res.end(JSON.stringify(body));
+}
+
+function handler(req, res) {
+  res.setHeader("Cache-Control", "no-store");
+
+  if (req.method === "GET") {
+    return isAuthenticated(req)
+      ? respond(res, 200, { authenticated: true })
+      : respond(res, 401, { authenticated: false });
+  }
+
+  if (req.method === "DELETE") {
+    res.setHeader(
+      "Set-Cookie",
+      COOKIE_NAME + "=; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=0"
+    );
+    return respond(res, 200, { authenticated: false });
+  }
+
+  if (req.method !== "POST") {
+    res.setHeader("Allow", "GET, POST, DELETE");
+    return respond(res, 405, { error: "Method not allowed" });
+  }
+
+  const expectedPassword = getExpectedPassword();
+  const secret = getSessionSecret();
+  if (!expectedPassword || !secret) {
+    return respond(res, 503, { error: "Authentication is not configured" });
+  }
+
+  let body = req.body || {};
+  if (Buffer.isBuffer(body)) body = body.toString("utf8");
+  if (typeof body === "string") {
+    try {
+      body = JSON.parse(body);
+    } catch (error) {
+      return respond(res, 400, { error: "Invalid request" });
+    }
+  }
+
+  const suppliedPassword = body && typeof body.password === "string" ? body.password : "";
+  if (!safeEqual(suppliedPassword, expectedPassword)) {
+    return respond(res, 401, { error: "Invalid credentials" });
+  }
+
+  const expiryText = String(Date.now() + MAX_AGE_SECONDS * 1000);
+  const nonce = crypto.randomBytes(16).toString("hex");
+  const payload = expiryText + "." + nonce;
+  const token = payload + "." + signature(payload, secret);
+  res.setHeader(
+    "Set-Cookie",
+    COOKIE_NAME + "=" + token + "; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=" + MAX_AGE_SECONDS
+  );
+  return respond(res, 200, { authenticated: true });
+}
+
+handler.isAuthenticated = isAuthenticated;
+module.exports = handler;
