@@ -40,3 +40,6 @@ intranet-casse.js
 
 # Fichiers temporaires de sauvegarde
 *.bak
+
+.vercel
+.env*

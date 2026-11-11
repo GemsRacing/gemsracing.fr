@@ -1,18 +1,19 @@
-{
+﻿{
     "stats":  {
                   "victoires":  "7",
-                  "podiums":  "16",
-                  "coursesDisputees":  "37",
-                  "sws":  "57e",
-                  "swsMondial":  "172e",
-                  "dernierResultat":  "3e / 27",
+                  "podiums":  "17",
+                  "coursesDisputees":  "43",
+                  "sws":  "66e",
+                  "swsMondial":  "211e",
+                  "dernierResultat":  "8e / 18",
                   "age":  "16 ans"
               },
     "news":  {
                  "title":  "Gems termine 3e sur 27 en 2T Rotax à Solokart",
                  "summary":  "Une nouvelle performance solide pour Gems Maréchal. Retrouvez le débrief et les photos sur Instagram.",
                  "link":  "https://www.instagram.com/gems.kartracing/",
-                 "button":  "VOIR LE DÉBRIEF"
+                 "button":  "VOIR LE DÉBRIEF",
+                 "buttonText":  "VOIR LE DÉBRIEF"
              },
     "gallery":  [
                     {

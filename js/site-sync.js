@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", async function() {
+﻿document.addEventListener("DOMContentLoaded", async function() {
     let data = null;
     try {
         const response = await fetch("/api/data?t=" + Date.now(), { cache: "no-store" });
@@ -33,18 +33,19 @@ document.addEventListener("DOMContentLoaded", async function() {
     // --- ACCUEIL & COMMUNS ---
     safeSetText("stat-victoires-display", s.victoires || "7");
     safeSetText("stat-victoires-kart", s.victoires || "7");
-    safeSetText("stat-podiums-display", s.podiums || "16");
-    safeSetText("stat-sws-display", s.sws || "57e");
+    safeSetText("stat-podiums-display", s.podiums || "17");
+    safeSetText("stat-sws-display", s.sws || "66e");
 
     let age = s.age || "16";
     age = age.toString().replace(" ans", "").replace("ans", "").trim();
     safeSetText("stat-age-display", age + " ans");
+safeSetText("home-stat-summary", (s.victoires || "7") + " victoires · " + (s.podiums || "17") + " podiums");
 
     // --- GRILLE DES 6 COMPTEURS (RESULTATS.HTML) ---
-    safeSetText("stat-sws-france-display", s.sws || "57e");
-    safeSetText("stat-courses-disputees-display", s.coursesDisputees || "37");
-    safeSetText("stat-sws-mondial-display", s.swsMondial || "172e");
-    safeSetText("stat-dernier-resultat-display", s.dernierResultat || "3e / 27");
+    safeSetText("stat-sws-france-display", s.sws || "66e");
+    safeSetText("stat-courses-disputees-display", s.coursesDisputees || "43");
+    safeSetText("stat-sws-mondial-display", s.swsMondial || "211e");
+    safeSetText("stat-dernier-resultat-display", s.dernierResultat || "8e / 18");
 
     // --- ACTUALITÉ ---
     if (data.news && data.news.title) {
@@ -54,12 +55,15 @@ document.addEventListener("DOMContentLoaded", async function() {
 
         const imgEl = document.getElementById("latest-news-image-display");
         const imgWrap = document.getElementById("latest-news-image-container");
-        if (imgEl && data.news.image) {
+        if (imgEl && data.news && data.news.image) {
             imgEl.src = data.news.image;
             imgEl.alt = data.news.title || "Actualité Gems Racing";
             if (imgWrap) imgWrap.style.display = "block";
         } else if (imgWrap) {
             imgWrap.style.display = "none";
+        }
+        if (data.news && data.news.date) {
+            safeSetText("latest-news-date-display", data.news.date);
         }
     }
     // --- SYNCHRONISATION PROCHAINE COURSE ACCUEIL ---

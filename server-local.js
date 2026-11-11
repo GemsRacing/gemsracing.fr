@@ -10,7 +10,26 @@ const server = http.createServer((req, res) => {
     const cleanUrl = req.url.split('?')[0];
 
     // 2. Gérer l'API (Lecture/Écriture des données)
-    if (cleanUrl === '/api/site-data') {
+        // 2b. Gérer l'upload en local (sauvegarde simulation base64)
+    if (cleanUrl === '/api/upload') {
+        if (req.method === 'POST') {
+            let body = '';
+            req.on('data', chunk => { body += chunk.toString(); });
+            req.on('end', () => {
+                try {
+                    const parsed = JSON.parse(body);
+                    const img = parsed.image || '';
+                    res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8', 'Access-Control-Allow-Origin': '*' });
+                    res.end(JSON.stringify({ success: true, data: { url: img } }));
+                } catch (e) {
+                    res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8', 'Access-Control-Allow-Origin': '*' });
+                    res.end(JSON.stringify({ error: 'JSON invalide' }));
+                }
+            });
+            return;
+        }
+    }
+    if (cleanUrl === '/api/site-data' || cleanUrl === '/api/data') {
         if (req.method === 'GET') {
             fs.readFile(DATA_FILE, 'utf8', (err, data) => {
                 res.writeHead(err ? 500 : 200, { 'Content-Type': 'application/json; charset=utf-8', 'Access-Control-Allow-Origin': '*' });

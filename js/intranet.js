@@ -1,8 +1,6 @@
 (function () {
   "use strict";
 
-  const PASSWORD = "GemsRacing88";
-  const AUTH_KEY = "gems_auth_status";
 
   window.gemsData = {
     stats: {},
@@ -37,23 +35,20 @@
     setTimeout(() => { t.style.display = "none"; }, 3500);
   }
 
-  const IMGBB_KEY = "b8f78eee4f0dc127f4065f32784f1857";
-
   async function uploadToImgBB(file) {
-    if (!IMGBB_KEY || IMGBB_KEY === "COLLE_TA_CLE_ICI") {
-      throw new Error("Clé API ImgBB manquante.");
-    }
-    const formData = new FormData();
-    formData.append("image", file);
-    const resp = await fetch("https://api.imgbb.com/1/upload?key=" + IMGBB_KEY, {
+    const imageData = await readImage(file, 1200, 0.82);
+    const response = await fetch("/api/upload", {
       method: "POST",
-      body: formData
+      credentials: "same-origin",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ image: imageData })
     });
-    const res = await resp.json();
-    if (res.success && res.data && res.data.url) {
-      return res.data.url;
+    let result;
+    try { result = await response.json(); } catch (_) { result = {}; }
+    if (!response.ok || !result.success || !result.data || !result.data.url) {
+      throw new Error(result.error || "Upload ImgBB echoue.");
     }
-    throw new Error(res.error ? res.error.message : "Échec upload ImgBB");
+    return result.data.url;
   }
 
   function readImage(file, maxDim = 1200, quality = 0.82) {
@@ -130,8 +125,7 @@
         method: "POST",
         headers: {
           "Content-Type": "application/json; charset=utf-8",
-          "X-Admin-Token": PASSWORD
-        },
+          },
         body: JSON.stringify(window.gemsData)
       });
 
@@ -152,11 +146,11 @@
       if (!window.gemsData.stats) window.gemsData.stats = {};
       window.gemsData.stats = {
         victoires: value("stat-victoires") || window.gemsData.stats.victoires || "7",
-        podiums: value("stat-podiums") || window.gemsData.stats.podiums || "16",
-        coursesDisputees: value("stat-courses-disputees") || window.gemsData.stats.coursesDisputees || "37",
-        sws: value("stat-sws") || window.gemsData.stats.sws || "57e",
-        swsMondial: value("stat-sws-mondial") || window.gemsData.stats.swsMondial || "172e",
-        dernierResultat: value("stat-dernier-resultat") || window.gemsData.stats.dernierResultat || "3e / 27",
+        podiums: value("stat-podiums") || window.gemsData.stats.podiums || "17",
+        coursesDisputees: value("stat-courses-disputees") || window.gemsData.stats.coursesDisputees || "43",
+        sws: value("stat-sws") || window.gemsData.stats.sws || "66e",
+        swsMondial: value("stat-sws-mondial") || window.gemsData.stats.swsMondial || "211e",
+        dernierResultat: value("stat-dernier-resultat") || window.gemsData.stats.dernierResultat || "8e / 18",
         age: value("stat-age") || window.gemsData.stats.age || "16 ans"
       };
     }
@@ -169,11 +163,11 @@
       function renderScoring() {
       const s = window.gemsData.stats || {};
       setValue("stat-victoires", s.victoires || "7");
-      setValue("stat-podiums", s.podiums || "16");
-      setValue("stat-courses-disputees", s.coursesDisputees || "37");
-      setValue("stat-sws", s.sws || "57e");
-      setValue("stat-sws-mondial", s.swsMondial || "172e");
-      setValue("stat-dernier-resultat", s.dernierResultat || "3e / 27");
+      setValue("stat-podiums", s.podiums || "17");
+      setValue("stat-courses-disputees", s.coursesDisputees || "43");
+      setValue("stat-sws", s.sws || "66e");
+      setValue("stat-sws-mondial", s.swsMondial || "211e");
+      setValue("stat-dernier-resultat", s.dernierResultat || "8e / 18");
       setValue("stat-age", s.age || "16 ans");
     }
 
@@ -236,7 +230,7 @@
     setValue("news-title", n.title);
     setValue("news-summary", n.summary);
     setValue("news-link", n.link);
-    setValue("news-button", n.buttonText);
+    setValue("news-button", n.button || n.buttonText || "VOIR LE DÉBRIEF");
     setValue("news-image", n.image);
     const prev = document.getElementById("news-image-preview-img");
     if (prev) {
@@ -420,6 +414,9 @@
   }
 
   // --- GALERIE (RÉORGANISATION ⬅️ / ➡️ & UPLOAD OPTIMISÉ) ---
+  function escapeGalleryHtml(value) {
+    return String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  }
   window.renderGallery = function () {
     const grid = document.getElementById("gallery-grid");
     if (!grid) return;
@@ -434,10 +431,10 @@
     grid.innerHTML = items.map((item, i) => `
       <div style="position:relative; background:#071b35; border-radius:8px; overflow:hidden; border:1px solid rgba(255,255,255,0.08); display:flex; flex-direction:column; justify-content:space-between;">
         <div style="position:relative; width:100%; height:130px; background:#020b17;">
-          <img src="${item.image || item.src}" alt="${item.caption || 'Photo'}" style="width:100%; height:130px; object-fit:cover; display:block;">
-          <button type="button" title="Supprimer la photo" style="position:absolute; top:6px; right:6px; background:rgba(231,76,60,0.9); color:#fff; border:none; border-radius:4px; padding:4px 8px; cursor:pointer; font-size:12px; z-index:2;" onclick="deleteGalleryPhoto(${i})">🗑️</button>
+          <img src="${escapeGalleryHtml(item.image || item.src)}" alt="${escapeGalleryHtml(item.caption || 'Photo')}" style="width:100%; height:130px; object-fit:cover; display:block;">
+          <button type="button" title="Modifier la legende" style="position:absolute; top:6px; right:44px; background:#f28c28; color:#fff; border:none; border-radius:4px; padding:4px 6px; cursor:pointer; font-size:12px; z-index:2;" onclick="editGalleryTitle(${i})">Modifier</button><button type="button" title="Supprimer la photo" style="position:absolute; top:6px; right:6px; background:rgba(231,76,60,0.9); color:#fff; border:none; border-radius:4px; padding:4px 8px; cursor:pointer; font-size:12px; z-index:2;" onclick="deleteGalleryPhoto(${i})">🗑️</button>
         </div>
-        <p style="padding:8px; margin:0; font-size:11px; color:#fff; line-height:1.3; flex:1; word-break:break-word;">${item.caption ? item.caption : '<em style="color:rgba(255,255,255,0.4);">Sans légende</em>'}</p>
+        <p style="padding:8px; margin:0; font-size:11px; color:#fff; line-height:1.3; flex:1; word-break:break-word;">${item.caption ? escapeGalleryHtml(item.caption) : '<em style="color:rgba(255,255,255,0.4);">Sans légende</em>'}</p>
         <div style="display:flex; justify-content:space-between; align-items:center; padding:6px 8px; background:rgba(0,0,0,0.35); border-top:1px solid rgba(255,255,255,0.08);">
           <span style="font-size:11px; color:rgba(255,255,255,0.5); font-weight:600;">#${i + 1}</span>
           <div style="display:flex; gap:6px;">
@@ -488,6 +485,23 @@
     toast("✅ Photo publiée sur le site et hébergée sur ImgBB !", "#2ecc71");
   };
 
+  window.editGalleryTitle = async function (index) {
+    const gallery = window.gemsData && window.gemsData.gallery;
+    if (!Array.isArray(gallery) || index < 0 || index >= gallery.length) return;
+    const item = gallery[index];
+    const currentCaption = item && typeof item === "object" ? (item.caption || "") : "";
+    const nextCaption = prompt("Modifier la l\u00E9gende de la photo :", currentCaption);
+    if (nextCaption === null) return;
+    const caption = nextCaption.trim();
+    if (item && typeof item === "object") {
+      item.caption = caption;
+    } else {
+      gallery[index] = { image: item, caption: caption };
+    }
+    window.renderGallery();
+    await saveData();
+    toast("L\u00E9gende modifi\u00E9e et enregistr\u00E9e !", "#2ecc71");
+  };
   window.deleteGalleryPhoto = async function (i) {
     if (!confirm("Supprimer cette photo ?")) return;
     window.gemsData.gallery.splice(i, 1);
@@ -682,32 +696,55 @@
   }
 
   // --- AUTHENTIFICATION ---
-  window.checkPass = function () {
+  window.checkPass = async function () {
     const input = document.getElementById("pass-input");
     const overlay = document.getElementById("login-overlay");
-    if ((input?.value || "").trim() !== PASSWORD) {
-      alert("Mot de passe incorrect.");
+    const password = input ? input.value : "";
+
+    if (!password) {
+      alert("Saisissez le mot de passe.");
       return;
     }
-    sessionStorage.setItem(AUTH_KEY, "true");
-    if (overlay) overlay.style.display = "none";
-    document.body.classList.remove("is-locked");
+
+    try {
+      const response = await fetch("/api/auth", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ password: password })
+      });
+
+      if (!response.ok) {
+        alert(response.status === 503
+          ? "La connexion sécurisée n’est pas encore configurée côté serveur."
+          : "Mot de passe incorrect.");
+        return;
+      }
+
+      if (input) input.value = "";
+      if (overlay) overlay.style.display = "none";
+      document.body.classList.remove("is-locked");
+    } catch (error) {
+      alert("Connexion au serveur impossible.");
+    }
   };
 
-  window.logoutIntranet = function () {
-    sessionStorage.removeItem(AUTH_KEY);
-    location.reload();
+  window.logoutIntranet = async function () {
+    try {
+      await fetch("/api/auth", { method: "DELETE" });
+    } catch (error) {
+      // La session serveur expirera automatiquement.
+    }
+    window.location.reload();
   };
-
   // --- INIT ---
   document.addEventListener("DOMContentLoaded", function () {
-    const isAuth = sessionStorage.getItem(AUTH_KEY);
-    const overlay = document.getElementById("login-overlay");
-    if (isAuth === "true" && overlay) {
-      overlay.style.display = "none";
-      document.body.classList.remove("is-locked");
-    }
-
+      const overlay = document.getElementById("login-overlay");
+      fetch("/api/auth", { cache: "no-store" }).then(function (response) {
+        if (response.ok && overlay) {
+          overlay.style.display = "none";
+          document.body.classList.remove("is-locked");
+        }
+      }).catch(function () {});
     const passInput = document.getElementById("pass-input");
     if (passInput) {
       passInput.addEventListener("keydown", function (e) {
@@ -730,20 +767,3 @@
     loadData();
   });
 })();
-// Modification du titre d'une photo de la galerie
-window.editGalleryTitle = function(index) {
-  const currentItem = siteData.gallery[index];
-  if (!currentItem) return;
-  const currentTitle = typeof currentItem === "object" ? (currentItem.title || "") : "";
-  const newTitle = prompt("Modifier le titre / légende de la photo :", currentTitle);
-  if (newTitle !== null && newTitle.trim() !== currentTitle) {
-    if (typeof currentItem === "object") {
-      currentItem.title = newTitle.trim();
-    } else {
-      siteData.gallery[index] = { src: currentItem, title: newTitle.trim() };
-    }
-    renderGalleryAdmin();
-    saveData();
-    showNotification("Légende modifiée et enregistrée !", "success");
-  }
-};

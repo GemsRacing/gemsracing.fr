@@ -1,12 +1,12 @@
 const BIN_ID = process.env.JSONBIN_ID;
 const JSONBIN_KEY = process.env.JSONBIN_KEY;
-const ADMIN_TOKEN = process.env.ADMIN_TOKEN;
+const auth = require("./auth");
 
 function reply(res, status, data) {
   res.statusCode = status;
   res.setHeader("Content-Type", "application/json; charset=utf-8");
   res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type, X-Admin-Token");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
   res.end(JSON.stringify(data));
 }
 
@@ -31,10 +31,8 @@ module.exports = async function handler(req, res) {
     if (req.method === "GET") {
       reply(res, 200, db);
     } else if (req.method === "POST") {
-      const clientToken = req.headers["x-admin-token"];
-      const isAuth = clientToken === "GemsRacing88" || (ADMIN_TOKEN && clientToken === ADMIN_TOKEN);
-      if (!isAuth) {
-        reply(res, 401, { error: "Accès refusé." });
+      if (!auth.isAuthenticated(req)) {
+        reply(res, 401, { error: "Unauthorized" });
         return;
       }
       let newBody = typeof req.body === "string" ? JSON.parse(req.body) : req.body;

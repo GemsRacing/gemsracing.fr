@@ -72,6 +72,40 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function renderGrid(photos) {
+    if (!Array.isArray(photos) || photos.length === 0) {
+      const staticEntries = Array.from(grid.querySelectorAll(".gems-gallery-card"))
+        .map((card) => {
+          const img = card.querySelector("img");
+          const caption = card.querySelector(".gems-gallery-card-caption");
+
+          return {
+            card: card,
+            photo: {
+              image: img ? (img.getAttribute("src") || img.currentSrc || "") : "",
+              caption: caption ? caption.textContent.trim() : (img ? img.alt : "")
+            }
+          };
+        })
+        .filter((entry) => entry.photo.image);
+
+      galleryItems = staticEntries.map((entry) => entry.photo);
+
+      staticEntries.forEach((entry, index) => {
+        const card = entry.card;
+        card.setAttribute("role", "button");
+        card.setAttribute("tabindex", "0");
+        card.addEventListener("click", () => openLightbox(index));
+        card.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            openLightbox(index);
+          }
+        });
+      });
+
+      return;
+    }
+
     galleryItems = photos;
     grid.innerHTML = "";
 
@@ -101,7 +135,6 @@ document.addEventListener("DOMContentLoaded", function () {
       grid.appendChild(card);
     });
   }
-
   function updateLightboxView() {
     if (!galleryItems.length) return;
     const photo = galleryItems[currentIndex];

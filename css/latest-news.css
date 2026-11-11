@@ -1,4 +1,4 @@
-/* =========================================================
+﻿/* =========================================================
    ENCART DERNIERES NEWS - ACCUEIL
    ========================================================= */
 
@@ -103,4 +103,29 @@
   .gems-news-button {
     justify-self: start;
   }
+}
+
+/* Vignette discrete photo actualite */
+.gems-news-thumb-wrapper {
+  display: none;
+  flex-shrink: 0;
+  width: 68px;
+  height: 68px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(242, 140, 40, 0.4);
+  background: #020b17;
+}
+
+.gems-news-thumb-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.gems-news-inner-flex {
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }

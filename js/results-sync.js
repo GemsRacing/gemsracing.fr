@@ -188,25 +188,22 @@
     if (!latestContainer || !archivesContainer) return;
 
     const allRaces = Array.isArray(data.races) ? data.races.slice() : [];
+    const now = new Date();
+    const pad = function (n) { return String(n).padStart(2, "0"); };
+    const todayKey = now.getFullYear() + "-" + pad(now.getMonth() + 1) + "-" + pad(now.getDate());
+    const isProgrammed = function (raceItem) { return (raceItem.status || "").toLowerCase().indexOf("programm") !== -1; };
     const scheduled = allRaces
-      .filter(function (raceItem) { return (raceItem.status || "").toLowerCase().indexOf("programm") !== -1; })
-      .sort(function (a, b) {
-        return ((a.date || "") + " " + (a.time || "")).localeCompare((b.date || "") + " " + (b.time || ""));
-      });
-
-    const finished = allRaces
-      .filter(function (raceItem) { return (raceItem.status || "").toLowerCase().indexOf("programm") === -1; })
-      .sort(function (a, b) {
-        return ((b.date || "") + " " + (b.time || "")).localeCompare((a.date || "") + " " + (a.time || ""));
-      });
-
-    const races = scheduled.concat(finished);
-
-    const latestRace = races[0];
-    const archives = races.slice(1);
+    .filter(function (raceItem) { return isProgrammed(raceItem) && String(raceItem.date || "") >= todayKey; })
+    .sort(function (a, b) { return ((a.date || "") + " " + (a.time || "")).localeCompare((b.date || "") + " " + (b.time || "")); });
+    const otherRaces = allRaces
+    .filter(function (raceItem) { return scheduled.indexOf(raceItem) === -1; })
+    .sort(function (a, b) { return ((b.date || "") + " " + (b.time || "")).localeCompare((a.date || "") + " " + (a.time || "")); });
+    const latestRace = scheduled.length ? scheduled[0] : otherRaces[0];
+    const mainRaces = scheduled.length ? scheduled : (latestRace ? [latestRace] : []);
+    const archives = scheduled.length ? otherRaces : otherRaces.slice(1);
     let expanded = false;
 
-    latestContainer.innerHTML = latestRace ? raceHtml(latestRace) : "<p>Aucune course enregistree pour le moment.</p>";
+    latestContainer.innerHTML = mainRaces.length ? mainRaces.map(raceHtml).join("") : "<p>Aucune course enregistree pour le moment.</p>";
 
     function updateArchivesView() {
       if (!archives.length) {
